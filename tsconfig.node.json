@@ -19,9 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Deprecation silencer */
-    "ignoreDeprecations": "6.0"
   },
   "include": [
     "vite.config.ts",
