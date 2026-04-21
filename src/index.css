@@ -1,0 +1,30 @@
+@import '@sealui/tokens/css/base';
+@import '@sealui/tokens/css/themes/arctic-dark';
+@import '@sealui/tokens/css/themes/arctic-light';
+@import '@sealui/tokens/css/themes/deep-ocean-dark';
+@import '@sealui/tokens/css/themes/deep-ocean-light';
+@import '@sealui/tokens/css/themes/nebula-dark';
+@import '@sealui/tokens/css/themes/nebula-light';
+@import '@sealui/tokens/css/themes/terminal-dark';
+@import '@sealui/tokens/css/themes/terminal-light';
+
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--seal-font-family-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--seal-surface-background, #0f0f1a);
+  color: var(--seal-text-primary, #f0ecf9);
+  font-family: var(--seal-font-family-sans, 'Inter'), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
