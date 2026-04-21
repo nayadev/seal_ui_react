@@ -40,8 +40,9 @@ const preview: Preview = {
     (Story, context) => {
       const theme = (context.globals['sealTheme'] as ThemeName | undefined) ?? 'nebula';
       const mode = (context.globals['sealMode'] as ThemeMode | undefined) ?? 'dark';
+      // key forces remount when theme/mode change so ThemeProvider re-initializes its state
       return (
-        <ThemeProvider theme={theme} mode={mode}>
+        <ThemeProvider key={`${theme}-${mode}`} theme={theme} mode={mode}>
           <div style={{ padding: '1rem' }}>
             <Story />
           </div>
