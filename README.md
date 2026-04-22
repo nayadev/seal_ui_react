@@ -199,6 +199,15 @@ Component stories live in `src/stories/`. Storybook is published automatically t
 
 The CI workflow (`.github/workflows/chromatic.yml`) picks the token from the `CHROMATIC_PROJECT_TOKEN` repository secret — never commit the token.
 
+### MCP Server
+
+[`@storybook/addon-mcp`](https://storybook.js.org/addons/@storybook/addon-mcp) exposes Storybook as an MCP server so AI tools can read component stories and docs.
+
+| Environment | URL |
+|---|---|
+| Local | `http://localhost:6006/mcp` |
+| Published | `https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/mcp` |
+
 ---
 
 ## License

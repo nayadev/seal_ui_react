@@ -9,9 +9,13 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-vitest',
     '@chromatic-com/storybook',
+    '@storybook/addon-mcp'
   ],
   framework: '@storybook/react-vite',
   docs: {},
+  features: {
+    componentsManifest: true,
+  },
 };
 
 export default config;
