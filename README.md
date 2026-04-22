@@ -185,6 +185,22 @@ seal_ui_react/
 
 ---
 
+## Storybook & Chromatic
+
+Component stories live in `src/stories/`. Storybook is published automatically to [Chromatic](https://www.chromatic.com/) on every push to `main` and on pull requests via GitHub Actions.
+
+**Live Storybook:** https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/
+
+| Command | Purpose |
+|---|---|
+| `npm run storybook` | Local Storybook on :6006 |
+| `npm run build-storybook` | Build static Storybook |
+| `npx chromatic` | Publish manually (requires `CHROMATIC_PROJECT_TOKEN`) |
+
+The CI workflow (`.github/workflows/chromatic.yml`) picks the token from the `CHROMATIC_PROJECT_TOKEN` repository secret — never commit the token.
+
+---
+
 ## License
 
 MIT
