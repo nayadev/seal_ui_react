@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/badge/license-MIT-32b88c)](./LICENSE)
 [![React](https://img.shields.io/badge/React-19-61dafb)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6)](https://typescriptlang.org)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nayadev_seal_ui_react&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nayadev_seal_ui_react)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=nayadev_seal_ui_react&metric=coverage)](https://sonarcloud.io/summary/new_code?id=nayadev_seal_ui_react)
 
 ---
 
@@ -137,19 +139,119 @@ Never hardcode token values — always reference a named CSS variable or JS cons
 
 ## Development
 
-| Command                   | Purpose                     |
-| ------------------------- | --------------------------- |
-| `npm run dev`             | Start dev server            |
-| `npm run storybook`       | Open Storybook              |
-| `npm run test`            | Run unit tests (watch)      |
-| `npm run test:coverage`   | Run tests with coverage     |
-| `npm run lint`            | Lint (zero warnings)        |
-| `npm run build`           | Type-check and build        |
-| `npm run build-storybook` | Build Storybook static site |
+| Command                   | Purpose                          |
+| ------------------------- | -------------------------------- |
+| `npm run dev`             | Start dev server                 |
+| `npm run storybook`       | Open Storybook on :6006          |
+| `npm run test`            | Run unit tests (watch)           |
+| `npm run test:coverage`   | Run tests with coverage report   |
+| `npm run lint`            | ESLint — zero warnings           |
+| `npm run format`          | Format all files with Prettier   |
+| `npm run format:check`    | Check formatting without writing |
+| `npm run build`           | Type-check and build             |
+| `npm run build-storybook` | Build Storybook static site      |
+| `npm run changeset`       | Create a new changeset entry     |
+| `npm run version`         | Bump versions from changesets    |
+| `npm run release`         | Publish to npm                   |
 
 ---
 
-## Architecture
+## Quality & Tooling
+
+### Formatting
+
+[Prettier](https://prettier.io/) enforces consistent formatting across all files. Configuration lives in `.prettierrc`. The pre-commit hook applies Prettier automatically — never format manually.
+
+### Linting
+
+ESLint is configured with strict rules targeting the `src/` tree:
+
+| Plugin                                              | Purpose                                               |
+| --------------------------------------------------- | ----------------------------------------------------- |
+| `typescript-eslint` (strict + stylistic)            | Full TypeScript type-safety                           |
+| `eslint-plugin-react` + `eslint-plugin-react-hooks` | React best practices                                  |
+| `eslint-plugin-jsx-a11y`                            | Accessibility                                         |
+| `eslint-plugin-jsdoc`                               | JSDoc on all public APIs (`publicOnly: true`)         |
+| `eslint-plugin-import`                              | Import ordering and no duplicates                     |
+| `eslint-plugin-sonarjs`                             | Cognitive complexity ≤ 15, no duplicate strings       |
+| `eslint-config-prettier`                            | Disables formatting rules that conflict with Prettier |
+
+The `any` type is forbidden (`no-explicit-any` + `no-unsafe-*`). Zero warnings are tolerated.
+
+### TypeScript
+
+`tsconfig.app.json` enables the strictest set of compiler options:
+
+```json
+{
+  "strict": true,
+  "noUncheckedIndexedAccess": true,
+  "exactOptionalPropertyTypes": true,
+  "noImplicitReturns": true,
+  "noFallthroughCasesInSwitch": true,
+  "forceConsistentCasingInFileNames": true
+}
+```
+
+### Pre-commit Hooks
+
+[Husky](https://typicode.github.io/husky/) runs two hooks on every commit:
+
+- **pre-commit** — [lint-staged](https://github.com/lint-staged/lint-staged) runs ESLint + Prettier on staged `.ts/.tsx` files and Prettier on `.json/.md/.css` files.
+- **commit-msg** — [commitlint](https://commitlint.js.org/) enforces [Conventional Commits](https://www.conventionalcommits.org/).
+
+Valid commit types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `revert`.
+
+### Test Coverage
+
+Vitest is configured with V8 coverage. Thresholds are enforced at **80%** for lines, functions, branches, and statements. Coverage output: `text` (terminal), `lcov` (for SonarCloud), `html` (for local inspection).
+
+### Versioning
+
+[Changesets](https://github.com/changesets/changesets) manages versioning and changelog generation:
+
+```bash
+npm run changeset   # describe what changed
+npm run version     # bump versions and update CHANGELOG
+npm run release     # publish to npm
+```
+
+---
+
+## CI/CD
+
+### Chromatic
+
+Component stories are published automatically to [Chromatic](https://www.chromatic.com/) on every push to `main` and on pull requests.
+
+**Live Storybook:** https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/
+
+Workflow: `.github/workflows/chromatic.yml` — uses `CHROMATIC_PROJECT_TOKEN` repository secret.
+
+### SonarCloud
+
+Every push to `main` and every pull request triggers a SonarCloud analysis that checks:
+
+- Code quality (cognitive complexity, duplication, code smells)
+- Test coverage (linked to LCOV report from `npm run test:coverage`)
+- Security hotspots
+
+Workflow: `.github/workflows/sonar.yml` — uses `SONAR_TOKEN` repository secret.
+
+**Dashboard:** https://sonarcloud.io/project/overview?id=nayadev_seal_ui_react
+
+### MCP Server
+
+[`@storybook/addon-mcp`](https://storybook.js.org/addons/@storybook/addon-mcp) exposes Storybook as an MCP server so AI tools can read component stories and docs.
+
+| Environment | URL                                                             |
+| ----------- | --------------------------------------------------------------- |
+| Local       | `http://localhost:6006/mcp`                                     |
+| Published   | `https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/mcp` |
+
+---
+
+## Project Structure
 
 ```
 seal_ui_react/
@@ -165,12 +267,20 @@ seal_ui_react/
 │   ├── main.ts              # Storybook config
 │   ├── preview.tsx          # Global decorators + theme toolbar
 │   └── themes/sealTheme.ts  # Custom Storybook UI theme
+├── .changeset/              # Changeset entries for versioning
+├── .github/workflows/       # chromatic.yml, sonar.yml
+├── .husky/                  # pre-commit, commit-msg hooks
+├── .editorconfig
+├── .prettierrc
+├── commitlint.config.js
+├── eslint.config.js
+├── sonar-project.properties
 ├── vite.config.ts
 ├── tailwind.config.ts
 ├── tsconfig.app.json
 ├── tsconfig.node.json
 ├── tsconfig.storybook.json
-└── eslint.config.js
+└── AGENTS.md                # Instructions for AI agents working on this repo
 ```
 
 **Dependency direction:** `@sealui/tokens → tokens/ → theme/ → components/` — no layer may depend on a higher layer.
@@ -183,31 +293,6 @@ seal_ui_react/
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [`seal_ui_tokens`](https://github.com/nayadev/seal_ui_tokens)   | Token source of truth — CSS variables, JS constants, Tailwind config, Flutter tokens |
 | [`seal_ui_flutter`](https://github.com/nayadev/seal_ui_flutter) | Flutter implementation of SealUI                                                     |
-
----
-
-## Storybook & Chromatic
-
-Component stories live in `src/stories/`. Storybook is published automatically to [Chromatic](https://www.chromatic.com/) on every push to `main` and on pull requests via GitHub Actions.
-
-**Live Storybook:** https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/
-
-| Command                   | Purpose                                               |
-| ------------------------- | ----------------------------------------------------- |
-| `npm run storybook`       | Local Storybook on :6006                              |
-| `npm run build-storybook` | Build static Storybook                                |
-| `npx chromatic`           | Publish manually (requires `CHROMATIC_PROJECT_TOKEN`) |
-
-The CI workflow (`.github/workflows/chromatic.yml`) picks the token from the `CHROMATIC_PROJECT_TOKEN` repository secret — never commit the token.
-
-### MCP Server
-
-[`@storybook/addon-mcp`](https://storybook.js.org/addons/@storybook/addon-mcp) exposes Storybook as an MCP server so AI tools can read component stories and docs.
-
-| Environment | URL                                                             |
-| ----------- | --------------------------------------------------------------- |
-| Local       | `http://localhost:6006/mcp`                                     |
-| Published   | `https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/mcp` |
 
 ---
 
