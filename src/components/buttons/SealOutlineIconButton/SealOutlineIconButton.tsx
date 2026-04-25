@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 import { useId } from 'react'
 
+import { parseGradientStopColors } from '../gradient-icon'
 import {
   ButtonContent,
   CURRENT_COLOR,
@@ -10,7 +11,6 @@ import {
   TOKEN_ACCENT,
   TOKEN_ACCENT_SECONDARY,
   TOKEN_BRAND_PRIMARY,
-  TOKEN_PRIMITIVE_WHITE,
   VARIANT_ACCENT_GRADIENT,
   VARIANT_CUSTOM,
   VARIANT_GRADIENT,
@@ -120,7 +120,10 @@ function getVariantStyle(
     case VARIANT_ACCENT_GRADIENT:
       return buildGradientBorderStyle(TOKEN_ACCENT)
     case VARIANT_CUSTOM:
-      if (gradient) return buildGradientBorderStyle(TOKEN_PRIMITIVE_WHITE)
+      if (gradient) {
+        const [firstColor] = parseGradientStopColors(gradient)
+        return buildGradientBorderStyle(firstColor)
+      }
       return buildSolidStyle(color ?? CURRENT_COLOR)
   }
 }
