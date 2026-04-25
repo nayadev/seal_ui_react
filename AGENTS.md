@@ -136,6 +136,17 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 
 ### Buttons — Implementation Notes
 
+**Icon props accept `LucideIcon` component references, not JSX**
+All `icon` props across Seal UI components accept a `LucideIcon` from `lucide-react` — the component reference, not rendered JSX. The component controls icon sizing via the `constantButtonIconSize` token. This mirrors how Flutter passes `IconData` (the type, not an instance).
+
+```tsx
+// ✅ correct
+<SealFilledButton icon={Rocket}>Launch</SealFilledButton>
+
+// ❌ wrong
+<SealFilledButton icon={<Rocket size={16} />}>Launch</SealFilledButton>
+```
+
 **Gradient backgrounds require inline `style`**
 Tailwind's `bg-[...]` maps to `background-color`, which does not accept CSS gradient values. Gradient variants (e.g. `var(--seal-gradient-primary)`) must be applied via `style={{ background: '...' }}`.
 
