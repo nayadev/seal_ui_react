@@ -2,8 +2,8 @@ import { constantButtonIconSize } from '@sealui/tokens'
 import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 
-import { BouncingDots } from '@/components/buttons/bouncing-dots'
 import { GradientIcon } from '@/components/buttons/gradient-icon'
+import { SealBouncingDots } from '@/components/feedback/SealBouncingDots'
 
 /** Common button variants for SealUI buttons. */
 export type SealButtonVariant =
@@ -111,7 +111,7 @@ export function ButtonContent({
           {children}
         </span>
         <span className="absolute inset-0 flex items-center justify-center">
-          <BouncingDots color={spinnerColor} />
+          <SealBouncingDots color={spinnerColor} />
         </span>
       </span>
     )

@@ -96,6 +96,7 @@ function ThemePicker() {
 | `SealIconButton`        | Buttons     | ✅     |
 | `SealFilledIconButton`  | Buttons     | ✅     |
 | `SealOutlineIconButton` | Buttons     | ✅     |
+| `SealBouncingDots`      | Feedback    | ✅     |
 | `SealAlert`             | Feedback    | 🔜     |
 | `SealLoader`            | Feedback    | 🔜     |
 | `SealProgress`          | Feedback    | 🔜     |

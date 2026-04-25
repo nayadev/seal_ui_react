@@ -133,6 +133,15 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | shadcn primitive                          | Seal wrappers                                                                                                                |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `Button` (`src/components/ui/button.tsx`) | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
+| None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
+
+### Feedback — Implementation Notes
+
+**SealBouncingDots is shared between Feedback and Buttons**
+`SealBouncingDots` lives in `src/components/feedback/` but is imported by `src/components/buttons/shared.tsx` for the button loading state. This cross-category dependency is intentional — it is the single source of truth for the bouncing animation. The internal `bouncing-dots.tsx` file that previously existed in `buttons/` has been removed.
+
+**Loading animation keyframe lives in `src/index.css`**
+The `@keyframes seal-bounce-dot` animation is defined globally in `src/index.css`. Any component using the bouncing dots animation relies on this keyframe being present in the stylesheet. Do not move or scope it.
 
 ### Buttons — Implementation Notes
 
