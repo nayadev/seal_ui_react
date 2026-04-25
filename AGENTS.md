@@ -144,9 +144,27 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 
 ## Coding Standards
 
+**Secrets are managed via GitHub Secrets** — never commit `.env` files or hardcode secrets.
+
+- CI/CD: GitHub Actions uses GitHub Secrets directly (`SONAR_TOKEN`, `CHROMATIC_PROJECT_TOKEN`)
+- If secrets management tooling is needed in the future, evaluate Infisical
+
+**Code quality is enforced automatically:**
+
+- ESLint with `--max-warnings 0` — zero warnings tolerated
+- `any` type is forbidden (`no-explicit-any` + `no-unsafe-*`)
+- Cognitive complexity capped at 15 (`sonarjs/cognitive-complexity`)
+- Public APIs require JSDoc documenting behavior and intent, not the obvious (`jsdoc/require-jsdoc` with `publicOnly: true`)
+- Private implementation details do not require documentation
+- All code and documentation must be written in English
+- Prettier handles formatting — never format manually
+- Commits must follow Conventional Commits and are validated by commitlint
+- Test coverage threshold: 80% lines, functions, branches, statements
+- The project is configured to pass SonarQube/SonarCloud analysis without issues
+
 ### TypeScript
 
-- Strict mode is enforced (`strict: true`, `noUncheckedIndexedAccess: true`).
+- Strict mode is enforced (`strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`).
 - Zero lint warnings allowed (`eslint --max-warnings 0`).
 - Always use `type` imports for type-only symbols: `import type { ThemeName } from './ThemeProvider'`.
 - No `any` — use proper types or `unknown`.
