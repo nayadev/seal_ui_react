@@ -78,23 +78,51 @@ export const Disabled: Story = {
 }
 
 export const AllVariants: Story = {
-  args: { icon: Share2 },
-  render: () => (
+  args: { icon: Share2, loading: false, disabled: false },
+  render: ({ loading = false, disabled = false }) => (
     <div className="flex gap-4 items-center">
-      <SealOutlineIconButton variant="primary" icon={Share2} tooltip="Primary" />
-      <SealOutlineIconButton variant="accent" icon={Bookmark} tooltip="Accent" />
+      <SealOutlineIconButton
+        variant="primary"
+        icon={Share2}
+        tooltip="Primary"
+        loading={loading}
+        disabled={disabled}
+      />
+      <SealOutlineIconButton
+        variant="accent"
+        icon={Bookmark}
+        tooltip="Accent"
+        loading={loading}
+        disabled={disabled}
+      />
       <SealOutlineIconButton
         variant="accent-secondary"
         icon={SlidersHorizontal}
         tooltip="Accent Secondary"
+        loading={loading}
+        disabled={disabled}
       />
-      <SealOutlineIconButton variant="gradient" icon={Sparkles} tooltip="Gradient" />
-      <SealOutlineIconButton variant="accent-gradient" icon={Zap} tooltip="Accent Gradient" />
+      <SealOutlineIconButton
+        variant="gradient"
+        icon={Sparkles}
+        tooltip="Gradient"
+        loading={loading}
+        disabled={disabled}
+      />
+      <SealOutlineIconButton
+        variant="accent-gradient"
+        icon={Zap}
+        tooltip="Accent Gradient"
+        loading={loading}
+        disabled={disabled}
+      />
       <SealOutlineIconButton
         variant="custom"
         color="#e53935"
         icon={TriangleAlert}
         tooltip="Custom"
+        loading={loading}
+        disabled={disabled}
       />
     </div>
   ),

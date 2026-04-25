@@ -81,18 +81,25 @@ export const Disabled: Story = {
 }
 
 export const AllVariants: Story = {
-  render: () => (
+  args: { loading: false, disabled: false },
+  render: ({ loading = false, disabled = false }) => (
     <div className="flex flex-wrap gap-3">
-      <SealTextButton variant="primary">Primary</SealTextButton>
-      <SealTextButton variant="accent">Accent</SealTextButton>
-      <SealTextButton variant="accent-secondary">Accent Secondary</SealTextButton>
-      <SealTextButton variant="gradient" icon={Telescope}>
+      <SealTextButton variant="primary" loading={loading} disabled={disabled}>
+        Primary
+      </SealTextButton>
+      <SealTextButton variant="accent" loading={loading} disabled={disabled}>
+        Accent
+      </SealTextButton>
+      <SealTextButton variant="accent-secondary" loading={loading} disabled={disabled}>
+        Accent Secondary
+      </SealTextButton>
+      <SealTextButton variant="gradient" icon={Telescope} loading={loading} disabled={disabled}>
         Gradient
       </SealTextButton>
-      <SealTextButton variant="accent-gradient" icon={Star}>
+      <SealTextButton variant="accent-gradient" icon={Star} loading={loading} disabled={disabled}>
         Accent Gradient
       </SealTextButton>
-      <SealTextButton variant="custom" color="#e53935">
+      <SealTextButton variant="custom" color="#e53935" loading={loading} disabled={disabled}>
         Custom
       </SealTextButton>
     </div>
@@ -100,18 +107,19 @@ export const AllVariants: Story = {
 }
 
 export const AllVariantsWithIcons: Story = {
-  render: () => (
+  args: { loading: false, disabled: false },
+  render: ({ loading = false, disabled = false }) => (
     <div className="flex flex-wrap gap-3">
-      <SealTextButton variant="primary" icon={ArrowRight}>
+      <SealTextButton variant="primary" icon={ArrowRight} loading={loading} disabled={disabled}>
         Primary
       </SealTextButton>
-      <SealTextButton variant="accent" icon={Settings}>
+      <SealTextButton variant="accent" icon={Settings} loading={loading} disabled={disabled}>
         Accent
       </SealTextButton>
-      <SealTextButton variant="gradient" icon={Telescope}>
+      <SealTextButton variant="gradient" icon={Telescope} loading={loading} disabled={disabled}>
         Gradient
       </SealTextButton>
-      <SealTextButton variant="accent-gradient" icon={Star}>
+      <SealTextButton variant="accent-gradient" icon={Star} loading={loading} disabled={disabled}>
         Accent Gradient
       </SealTextButton>
     </div>

@@ -81,18 +81,25 @@ export const Disabled: Story = {
 }
 
 export const AllVariants: Story = {
-  render: () => (
+  args: { loading: false, disabled: false },
+  render: ({ loading = false, disabled = false }) => (
     <div className="flex flex-wrap gap-3">
-      <SealFilledButton variant="primary">Primary</SealFilledButton>
-      <SealFilledButton variant="accent">Accent</SealFilledButton>
-      <SealFilledButton variant="accent-secondary">Accent Secondary</SealFilledButton>
-      <SealFilledButton variant="gradient" icon={Rocket}>
+      <SealFilledButton variant="primary" loading={loading} disabled={disabled}>
+        Primary
+      </SealFilledButton>
+      <SealFilledButton variant="accent" loading={loading} disabled={disabled}>
+        Accent
+      </SealFilledButton>
+      <SealFilledButton variant="accent-secondary" loading={loading} disabled={disabled}>
+        Accent Secondary
+      </SealFilledButton>
+      <SealFilledButton variant="gradient" icon={Rocket} loading={loading} disabled={disabled}>
         Gradient
       </SealFilledButton>
-      <SealFilledButton variant="accent-gradient" icon={Star}>
+      <SealFilledButton variant="accent-gradient" icon={Star} loading={loading} disabled={disabled}>
         Accent Gradient
       </SealFilledButton>
-      <SealFilledButton variant="custom" color="#e53935">
+      <SealFilledButton variant="custom" color="#e53935" loading={loading} disabled={disabled}>
         Custom
       </SealFilledButton>
     </div>
