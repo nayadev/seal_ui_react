@@ -83,7 +83,7 @@ interface IconVariantStyle {
 
 function buildSolidStyle(fg: string): IconVariantStyle {
   return {
-    className: `hover:bg-[var(${IB_HOVER})] active:opacity-[0.75]`,
+    className: 'hover:bg-[var(--seal-ib-hover)] active:opacity-[0.75]',
     buttonStyle: {
       color: fg,
       [IB_HOVER]: `color-mix(in srgb, ${fg} 8%, transparent)`,

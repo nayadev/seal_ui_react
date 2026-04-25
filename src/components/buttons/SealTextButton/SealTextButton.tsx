@@ -77,7 +77,7 @@ export interface SealTextButtonProps extends Omit<
 
 // CSS variable for the per-variant hover background color.
 const TB_HOVER = '--seal-tb-hover'
-const HOVER_ACTIVE = `hover:bg-[var(${TB_HOVER})] active:opacity-[0.75]`
+const HOVER_ACTIVE = 'hover:bg-[var(--seal-tb-hover)] active:opacity-[0.75]'
 
 // The gradient underline is built from two background layers on a <span>:
 // - layer 0: covers the text (background-clip: text)

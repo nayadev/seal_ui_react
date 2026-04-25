@@ -77,7 +77,7 @@ export interface SealOutlineButtonProps extends Omit<
 // Used as the value in `hover:bg-[var(--seal-ob-hover)]`.
 const OB_HOVER = '--seal-ob-hover'
 const OUTLINE_BASE = 'border bg-transparent'
-const HOVER_ACTIVE = `hover:bg-[var(${OB_HOVER})] active:opacity-[0.75]`
+const HOVER_ACTIVE = 'hover:bg-[var(--seal-ob-hover)] active:opacity-[0.75]'
 const GRADIENT_HOVER = 'hover:opacity-[0.85] active:opacity-[0.75]'
 
 const CLIP_TEXT: React.CSSProperties = {
