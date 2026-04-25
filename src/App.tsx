@@ -94,6 +94,7 @@ function ThemeSwitcher() {
   );
 }
 
+/** Root demo application — wraps the theme switcher in a ThemeProvider. */
 function App() {
   return (
     <ThemeProvider theme="nebula" mode="dark">

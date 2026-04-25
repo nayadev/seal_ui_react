@@ -5,9 +5,13 @@ import { deepOceanTheme } from './themes/deep_ocean';
 import { nebulaTheme } from './themes/nebula';
 import { terminalTheme } from './themes/terminal';
 
+/** Identifier for one of the available SealUI themes. */
 export type ThemeName = 'arctic' | 'deep_ocean' | 'nebula' | 'terminal';
+
+/** Active color-mode — `'dark'` is the primary experience. */
 export type ThemeMode = 'light' | 'dark';
 
+/** Shape of the value exposed by `ThemeContext`. */
 export interface ThemeContextValue {
   theme: ThemeName;
   mode: ThemeMode;
@@ -24,6 +28,7 @@ const themeMap = {
   terminal: terminalTheme,
 } as const;
 
+/** Props accepted by `ThemeProvider`. */
 export interface ThemeProviderProps {
   theme?: ThemeName;
   mode?: ThemeMode;

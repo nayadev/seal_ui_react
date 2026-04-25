@@ -189,6 +189,8 @@ style.background = 'var(--seal-surface-surface)';
 
 ### JSDoc
 
+All exported components, interfaces, hooks, and utility functions must have JSDoc. Private implementation details do not require documentation. The rule is enforced via `eslint-plugin-jsdoc` with `publicOnly: true`.
+
 All public APIs must have JSDoc:
 
 ```tsx

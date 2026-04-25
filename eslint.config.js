@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import jsdoc from 'eslint-plugin-jsdoc';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -19,6 +20,7 @@ export default defineConfig([
     ],
     plugins: {
       react: reactPlugin,
+      jsdoc,
     },
     languageOptions: {
       ecmaVersion: 2022,
@@ -39,6 +41,21 @@ export default defineConfig([
       'react/prop-types': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-import-type-side-effects': 'error',
+      'jsdoc/require-jsdoc': ['error', {
+        publicOnly: true,
+        require: {
+          FunctionDeclaration: true,
+          ArrowFunctionExpression: true,
+          FunctionExpression: true,
+        },
+        contexts: [
+          'TSInterfaceDeclaration',
+          'TSTypeAliasDeclaration',
+        ],
+      }],
+      'jsdoc/require-description': 'error',
+      'jsdoc/no-blank-block-descriptions': 'error',
+      'jsdoc/check-param-names': 'error',
     },
   },
   {
