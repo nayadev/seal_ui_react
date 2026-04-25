@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react'
-import { Star } from 'lucide-react'
+import { Star, Telescope } from 'lucide-react'
 
 import { renderWithTheme } from '../../../../test/utils'
 
@@ -20,6 +20,15 @@ describe('SealOutlineButton', () => {
     it('renders the leading icon when provided', () => {
       renderWithTheme(<SealOutlineButton icon={Star}>Favorite</SealOutlineButton>)
       expect(screen.getByText('Favorite')).toBeInTheDocument()
+      expect(document.querySelector('svg')).toBeInTheDocument()
+    })
+
+    it('renders a plain icon for non-gradient variants', () => {
+      renderWithTheme(
+        <SealOutlineButton variant="primary" icon={Star}>
+          Primary
+        </SealOutlineButton>,
+      )
       expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
@@ -157,6 +166,141 @@ describe('SealOutlineButton', () => {
     it('accepts an aria-label override', () => {
       renderWithTheme(<SealOutlineButton aria-label="Close the dialog">Cancel</SealOutlineButton>)
       expect(screen.getByRole('button', { name: 'Close the dialog' })).toBeInTheDocument()
+    })
+  })
+
+  describe('gradient icon', () => {
+    it('renders gradient icon wrapper for gradient variant with icon', () => {
+      renderWithTheme(
+        <SealOutlineButton variant="gradient" icon={Telescope}>
+          Explore
+        </SealOutlineButton>,
+      )
+      const svg = document.querySelector('svg')
+      expect(svg).toBeInTheDocument()
+    })
+
+    it('injects linearGradient with fallback diagonal coords in JSDOM environment', () => {
+      // In JSDOM, CSS custom properties from stylesheets are not resolved, so
+      // getComputedStyle returns '' for --seal-gradient-*. The component falls
+      // back to FALLBACK_COORDS (top-left→bottom-right diagonal) which is correct
+      // for the current token direction. In a real browser, MutationObserver
+      // picks up the theme class and recomputes the real angle from the CSS var.
+      renderWithTheme(
+        <SealOutlineButton variant="gradient" icon={Telescope}>
+          Explore
+        </SealOutlineButton>,
+      )
+      const grad = document.querySelector('linearGradient')
+      expect(grad).toBeInTheDocument()
+      expect(grad?.getAttribute('gradientUnits')).toBe('userSpaceOnUse')
+      expect(grad?.getAttribute('x1')).toBe('0')
+      expect(grad?.getAttribute('y1')).toBe('0')
+      expect(grad?.getAttribute('x2')).toBe('24')
+      expect(grad?.getAttribute('y2')).toBe('24')
+    })
+
+    it('resolves gradient direction from raw CSS string for custom variant icon', () => {
+      // For custom gradient, the direction is parsed from the raw string synchronously
+      // in the lazy useState initialiser — no CSS variable resolution needed.
+      renderWithTheme(
+        <SealOutlineButton
+          variant="custom"
+          gradient="linear-gradient(to right, #f00, #00f)"
+          icon={Star}
+        >
+          Custom
+        </SealOutlineButton>,
+      )
+      const grad = document.querySelector('linearGradient')
+      // "to right" = 90°: sin(90)=1, cos(90)=0 → x1=0, y1=12, x2=24, y2=12
+      expect(grad?.getAttribute('gradientUnits')).toBe('userSpaceOnUse')
+      expect(grad?.getAttribute('x1')).toBe('0')
+      expect(grad?.getAttribute('y1')).toBe('12')
+      expect(grad?.getAttribute('x2')).toBe('24')
+      expect(grad?.getAttribute('y2')).toBe('12')
+    })
+
+    it('parses diagonal "to bottom right" direction correctly', () => {
+      renderWithTheme(
+        <SealOutlineButton
+          variant="custom"
+          gradient="linear-gradient(to bottom right, #800, #008)"
+          icon={Star}
+        >
+          Custom
+        </SealOutlineButton>,
+      )
+      const grad = document.querySelector('linearGradient')
+      // "to bottom right" = 135°: non-zero x and y deltas
+      const x1 = Number.parseFloat(grad?.getAttribute('x1') ?? '0')
+      const y1 = Number.parseFloat(grad?.getAttribute('y1') ?? '0')
+      const x2 = Number.parseFloat(grad?.getAttribute('x2') ?? '24')
+      const y2 = Number.parseFloat(grad?.getAttribute('y2') ?? '24')
+      expect(x1).toBeCloseTo(3.515, 1)
+      expect(y1).toBeCloseTo(3.515, 1)
+      expect(x2).toBeCloseTo(20.485, 1)
+      expect(y2).toBeCloseTo(20.485, 1)
+    })
+
+    it('parses deg-based gradient direction', () => {
+      renderWithTheme(
+        <SealOutlineButton
+          variant="custom"
+          gradient="linear-gradient(90deg, #800, #008)"
+          icon={Star}
+        >
+          Custom
+        </SealOutlineButton>,
+      )
+      const grad = document.querySelector('linearGradient')
+      // 90deg = "to right": sin(90)=1 and cos(90) is near-zero (rounds to exactly 12 in float64)
+      // so all four coords are exact integers.
+      expect(grad?.getAttribute('x1')).toBe('0')
+      expect(grad?.getAttribute('y1')).toBe('12')
+      expect(grad?.getAttribute('x2')).toBe('24')
+      expect(grad?.getAttribute('y2')).toBe('12')
+    })
+
+    it('sets stroke to gradient url on the SVG element', () => {
+      renderWithTheme(
+        <SealOutlineButton variant="gradient" icon={Telescope}>
+          Explore
+        </SealOutlineButton>,
+      )
+      const svg = document.querySelector('svg')
+      // React renders stroke="url(#...)" as a prop override of Lucide's default,
+      // so the attribute is set declaratively — no reconciliation concerns.
+      expect(svg?.getAttribute('stroke')).toMatch(/^url\(#seal-ob-grad-/)
+    })
+
+    it('injects linearGradient into SVG for accent-gradient variant', () => {
+      renderWithTheme(
+        <SealOutlineButton variant="accent-gradient" icon={Star}>
+          Boost
+        </SealOutlineButton>,
+      )
+      const linearGradient = document.querySelector('linearGradient')
+      expect(linearGradient).toBeInTheDocument()
+    })
+
+    it('injects linearGradient for custom gradient variant with icon', () => {
+      renderWithTheme(
+        <SealOutlineButton
+          variant="custom"
+          gradient="linear-gradient(to right, #f00, #00f)"
+          icon={Star}
+        >
+          Custom
+        </SealOutlineButton>,
+      )
+      const svg = document.querySelector('svg')
+      expect(svg).toBeInTheDocument()
+    })
+
+    it('does not render gradient icon wrapper when no icon provided', () => {
+      renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
+      expect(document.querySelector('linearGradient')).not.toBeInTheDocument()
     })
   })
 })
