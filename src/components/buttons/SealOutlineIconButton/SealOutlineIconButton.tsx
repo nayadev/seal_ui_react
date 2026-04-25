@@ -2,7 +2,6 @@ import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 import { useId } from 'react'
 
-import { parseGradientStopColors } from '../gradient-icon'
 import {
   ButtonContent,
   CURRENT_COLOR,
@@ -11,6 +10,8 @@ import {
   TOKEN_ACCENT,
   TOKEN_ACCENT_SECONDARY,
   TOKEN_BRAND_PRIMARY,
+  TOKEN_GRADIENT_ACCENT,
+  TOKEN_GRADIENT_PRIMARY,
   VARIANT_ACCENT_GRADIENT,
   VARIANT_CUSTOM,
   VARIANT_GRADIENT,
@@ -36,8 +37,8 @@ export interface SealOutlineIconButtonProps extends Omit<
    * - `primary`: brand-color border and icon.
    * - `accent`: accent-color border and icon.
    * - `accent-secondary`: secondary-accent border and icon.
-   * - `gradient`: primary gradient icon with matching semi-transparent border.
-   * - `accent-gradient`: accent gradient icon with matching border.
+   * - `gradient`: primary gradient icon and matching gradient border.
+   * - `accent-gradient`: accent gradient icon and matching gradient border.
    * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
    */
   variant?: SealOutlineIconButtonVariant
@@ -61,7 +62,7 @@ export interface SealOutlineIconButtonProps extends Omit<
   color?: string
   /**
    * CSS gradient string for the `custom` variant.
-   * Applied to the icon via SVG gradient. Ignored for all other variants.
+   * Applied to both the icon via SVG gradient and the border. Ignored for all other variants.
    */
   gradient?: string
   /**
@@ -72,7 +73,6 @@ export interface SealOutlineIconButtonProps extends Omit<
   tooltip?: string
 }
 
-// CSS variable for the per-variant hover background color.
 const OIB_HOVER = '--seal-oib-hover'
 const OUTLINE_BASE = 'border bg-transparent'
 const HOVER_ACTIVE = 'hover:bg-[var(--seal-oib-hover)] active:opacity-[0.75]'
@@ -94,12 +94,12 @@ function buildSolidStyle(fg: string): OutlineIconVariantStyle {
   }
 }
 
-function buildGradientBorderStyle(borderBase: string): OutlineIconVariantStyle {
+// Gradient border rendered by a ::before pseudo-element with mask-composite,
+// keeping the button interior truly transparent regardless of the background behind it.
+function buildGradientBorderStyle(gradientValue: string): OutlineIconVariantStyle {
   return {
-    className: cn(OUTLINE_BASE, GRADIENT_HOVER),
-    style: {
-      borderColor: `color-mix(in srgb, ${borderBase} 50%, transparent)`,
-    },
+    className: cn('border-0 bg-transparent', GRADIENT_HOVER, 'seal-gradient-border'),
+    style: { '--seal-gb-gradient': gradientValue } as React.CSSProperties,
   }
 }
 
@@ -116,14 +116,11 @@ function getVariantStyle(
     case 'accent-secondary':
       return buildSolidStyle(TOKEN_ACCENT_SECONDARY)
     case VARIANT_GRADIENT:
-      return buildGradientBorderStyle(TOKEN_BRAND_PRIMARY)
+      return buildGradientBorderStyle(TOKEN_GRADIENT_PRIMARY)
     case VARIANT_ACCENT_GRADIENT:
-      return buildGradientBorderStyle(TOKEN_ACCENT)
+      return buildGradientBorderStyle(TOKEN_GRADIENT_ACCENT)
     case VARIANT_CUSTOM:
-      if (gradient) {
-        const [firstColor] = parseGradientStopColors(gradient)
-        return buildGradientBorderStyle(firstColor)
-      }
+      if (gradient) return buildGradientBorderStyle(gradient)
       return buildSolidStyle(color ?? CURRENT_COLOR)
   }
 }
@@ -138,8 +135,7 @@ function getSpinnerColor(variant: SealOutlineIconButtonVariant): string | undefi
  * A compact icon-only button with a transparent background and colored border.
  *
  * Use for secondary actions that need visual presence without a filled background.
- * Gradient variants apply the gradient to the icon via SVG fill; the border uses
- * a semi-transparent tint of the gradient base color.
+ * Gradient variants apply the gradient to both the icon via SVG fill and the border.
  * Always provide a `tooltip` or `title` for screen-reader accessibility.
  *
  * @example

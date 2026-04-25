@@ -5,6 +5,9 @@ import { renderWithTheme } from '../../../../test/utils'
 
 import { SealOutlineButton } from './SealOutlineButton'
 
+const GRADIENT_BORDER_CLASS = 'seal-gradient-border'
+const GRADIENT_CSS_VAR = '--seal-gb-gradient'
+
 describe('SealOutlineButton', () => {
   describe('rendering', () => {
     it('renders without errors', () => {
@@ -65,21 +68,42 @@ describe('SealOutlineButton', () => {
         </SealOutlineButton>,
       )
       const btn = screen.getByRole('button')
-      expect(btn).toHaveStyle({ background: 'linear-gradient(to right, #f00, #00f)' })
+      // Gradient border is rendered via ::before with mask-composite — the button itself is transparent
+      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
+      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe(
+        'linear-gradient(to right, #f00, #00f)',
+      )
     })
 
     it('applies primary gradient background token', () => {
       renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
-      expect(screen.getByRole('button')).toHaveStyle({
-        background: 'var(--seal-gradient-primary)',
-      })
+      const btn = screen.getByRole('button')
+      // Gradient border is rendered via ::before; CSS variable targets the primary gradient
+      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
+      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-primary)')
     })
 
     it('applies accent gradient background token', () => {
       renderWithTheme(<SealOutlineButton variant="accent-gradient">Boost</SealOutlineButton>)
-      expect(screen.getByRole('button')).toHaveStyle({
-        background: 'var(--seal-gradient-accent)',
-      })
+      const btn = screen.getByRole('button')
+      // Gradient border is rendered via ::before; CSS variable targets the accent gradient
+      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
+      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-accent)')
+    })
+
+    it('applies gradient clip-text style to label for gradient variant', () => {
+      renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
+      // The label is wrapped in a <span> with gradient text fill
+      const label = screen.getByText('Explore')
+      expect(label.tagName).toBe('SPAN')
+      expect(label).toHaveStyle({ background: 'var(--seal-gradient-primary)' })
+    })
+
+    it('applies gradient clip-text style to label for accent-gradient variant', () => {
+      renderWithTheme(<SealOutlineButton variant="accent-gradient">Boost</SealOutlineButton>)
+      const label = screen.getByText('Boost')
+      expect(label.tagName).toBe('SPAN')
+      expect(label).toHaveStyle({ background: 'var(--seal-gradient-accent)' })
     })
 
     it('applies primary foreground token for primary variant', () => {

@@ -2,7 +2,6 @@ import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 import { useId } from 'react'
 
-import { parseGradientStopColors } from '../gradient-icon'
 import {
   ButtonContent,
   CURRENT_COLOR,
@@ -38,8 +37,8 @@ export interface SealOutlineButtonProps extends Omit<
    * - `primary`: brand-color border and text — default secondary action.
    * - `accent`: accent-color border and text.
    * - `accent-secondary`: secondary-accent border and text.
-   * - `gradient`: primary gradient text and matching semi-transparent border.
-   * - `accent-gradient`: accent gradient text and matching border.
+   * - `gradient`: primary gradient text and matching gradient border.
+   * - `accent-gradient`: accent gradient text and matching gradient border.
    * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
    */
   variant?: SealOutlineButtonVariant
@@ -67,14 +66,12 @@ export interface SealOutlineButtonProps extends Omit<
   color?: string
   /**
    * CSS gradient string for the `custom` variant.
-   * Applied to the text via `background-clip: text`.
+   * Applied to both the border and text via CSS gradient techniques.
    * Ignored for all other variants.
    */
   gradient?: string
 }
 
-// Inline CSS variable for per-variant hover background color.
-// Used as the value in `hover:bg-[var(--seal-ob-hover)]`.
 const OB_HOVER = '--seal-ob-hover'
 const OUTLINE_BASE = 'border bg-transparent'
 const HOVER_ACTIVE = 'hover:bg-[var(--seal-ob-hover)] active:opacity-[0.75]'
@@ -89,6 +86,7 @@ const CLIP_TEXT: React.CSSProperties = {
 interface OutlineVariantStyle {
   className: string
   style: React.CSSProperties
+  labelStyle?: React.CSSProperties | undefined
 }
 
 function buildSolidStyle(fg: string): OutlineVariantStyle {
@@ -102,13 +100,15 @@ function buildSolidStyle(fg: string): OutlineVariantStyle {
   }
 }
 
-function buildGradientStyle(gradient: string, borderBase: string): OutlineVariantStyle {
+// Gradient border rendered by a ::before pseudo-element with mask-composite,
+// keeping the button interior truly transparent regardless of the background behind it.
+function buildGradientStyle(gradientValue: string): OutlineVariantStyle {
   return {
-    className: cn(OUTLINE_BASE, GRADIENT_HOVER),
-    style: {
-      background: gradient,
+    className: cn('border-0 bg-transparent', GRADIENT_HOVER, 'seal-gradient-border'),
+    style: { '--seal-gb-gradient': gradientValue } as React.CSSProperties,
+    labelStyle: {
+      background: gradientValue,
       ...CLIP_TEXT,
-      borderColor: `color-mix(in srgb, ${borderBase} 50%, transparent)`,
     },
   }
 }
@@ -126,14 +126,11 @@ function getVariantStyle(
     case 'accent-secondary':
       return buildSolidStyle(TOKEN_ACCENT_SECONDARY)
     case VARIANT_GRADIENT:
-      return buildGradientStyle(TOKEN_GRADIENT_PRIMARY, TOKEN_BRAND_PRIMARY)
+      return buildGradientStyle(TOKEN_GRADIENT_PRIMARY)
     case VARIANT_ACCENT_GRADIENT:
-      return buildGradientStyle(TOKEN_GRADIENT_ACCENT, TOKEN_ACCENT)
+      return buildGradientStyle(TOKEN_GRADIENT_ACCENT)
     case VARIANT_CUSTOM:
-      if (gradient) {
-        const [firstColor] = parseGradientStopColors(gradient)
-        return buildGradientStyle(gradient, firstColor)
-      }
+      if (gradient) return buildGradientStyle(gradient)
       return buildSolidStyle(color ?? CURRENT_COLOR)
   }
 }
@@ -148,8 +145,8 @@ function getSpinnerColor(variant: SealOutlineButtonVariant): string | undefined 
  * Outlined action button with token-driven border/text colors and gradient support.
  *
  * Wraps the shadcn `Button` primitive with Seal UI design tokens. The background
- * is always transparent; the foreground color controls the border and text.
- * Gradient variants apply the gradient to the text via CSS `background-clip: text`.
+ * matches the surface; the border and text follow the active gradient token.
+ * Gradient variants paint both the border and text with the same gradient.
  *
  * @example
  * <SealOutlineButton variant="primary" onClick={handleCancel}>
@@ -178,11 +175,16 @@ export function SealOutlineButton({
   style,
   ...props
 }: Readonly<SealOutlineButtonProps>) {
-  const { className: variantClass, style: variantStyle } = getVariantStyle(variant, color, gradient)
+  const {
+    className: variantClass,
+    style: variantStyle,
+    labelStyle,
+  } = getVariantStyle(variant, color, gradient)
   const spinnerColor = getSpinnerColor(variant)
   const uid = useId().replaceAll(':', '')
 
   const iconNode = renderIcon(IconEl, variant, gradient, uid, 'ob')
+  const labelNode = labelStyle != null ? <span style={labelStyle}>{children}</span> : undefined
 
   return (
     <Button
@@ -203,6 +205,7 @@ export function SealOutlineButton({
         iconNode={iconNode}
         iconEl={IconEl}
         spinnerColor={spinnerColor}
+        labelNode={labelNode}
       >
         {children}
       </ButtonContent>
