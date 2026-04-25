@@ -2,7 +2,7 @@ import { constantButtonIconSize } from '@sealui/tokens'
 import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 
-import { GradientIcon } from '@/components/buttons/gradient-icon'
+import { GradientIcon, parseGradientStopColors } from '@/components/buttons/gradient-icon'
 import { SealBouncingDots } from '@/components/feedback/SealBouncingDots'
 
 /** Common button variants for SealUI buttons. */
@@ -41,6 +41,9 @@ export function resolveIconGradientInfo(variant: string, gradient?: string) {
     iconColorEnd = TOKEN_ACCENT
     iconGradientSource = TOKEN_GRADIENT_ACCENT
   } else if (variant === VARIANT_CUSTOM && gradient) {
+    const [start, end] = parseGradientStopColors(gradient)
+    iconColorStart = start
+    iconColorEnd = end
     iconGradientSource = gradient
   }
 
