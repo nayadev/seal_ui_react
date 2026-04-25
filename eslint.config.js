@@ -1,12 +1,14 @@
 import js from '@eslint/js'
-import globals from 'globals'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import prettier from 'eslint-config-prettier'
+import importPlugin from 'eslint-plugin-import'
 import jsdoc from 'eslint-plugin-jsdoc'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+import sonarjs from 'eslint-plugin-sonarjs'
+import globals from 'globals'
 import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import prettier from 'eslint-config-prettier'
 
 export default defineConfig([
   globalIgnores(['dist', 'storybook-static', 'node_modules']),
@@ -40,8 +42,11 @@ export default defineConfig([
       ...reactPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react/self-closing-comp': 'error',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/prefer-nullish-coalescing': 'error',
+      '@typescript-eslint/prefer-optional-chain': 'error',
       'jsdoc/require-jsdoc': [
         'error',
         {
@@ -105,6 +110,33 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-redundant-type-constituents': 'off',
+    },
+  },
+
+  // Import order
+  {
+    plugins: { import: importPlugin },
+    rules: {
+      'import/no-duplicates': 'error',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc' },
+        },
+      ],
+    },
+  },
+
+  // SonarJS — code quality
+  {
+    plugins: { sonarjs },
+    rules: {
+      ...sonarjs.configs.recommended.rules,
+      'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
+      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/no-identical-functions': 'error',
     },
   },
 

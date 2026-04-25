@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const V_TEXT_PRIMARY = 'var(--seal-text-primary)'
+const V_TEXT_SECONDARY = 'var(--seal-text-secondary)'
+const V_BORDER = 'var(--seal-border-default)'
+const FONT_MONO = 'monospace'
+
 const TOKEN_VARS = [
   { name: 'brand-primary', label: 'Brand Primary' },
   { name: 'brand-primary-tint', label: 'Primary Tint' },
@@ -52,7 +57,13 @@ const TYPE_SCALE = [
   { label: 'Caption', size: '14px', weight: '400' },
 ] as const
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  readonly title: string
+  readonly children: React.ReactNode
+}) {
   return (
     <section style={{ marginBottom: '2rem' }}>
       <h2
@@ -61,10 +72,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
           fontWeight: 600,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: 'var(--seal-text-secondary)',
+          color: V_TEXT_SECONDARY,
           marginBottom: '1rem',
           paddingBottom: '0.5rem',
-          borderBottom: '1px solid var(--seal-border-default)',
+          borderBottom: `1px solid ${V_BORDER}`,
         }}
       >
         {title}
@@ -74,7 +85,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-function ColorSwatch({ name, label }: { name: string; label: string }) {
+function ColorSwatch({ name, label }: { readonly name: string; readonly label: string }) {
   const cssVar = `--seal-${name}`
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '120px' }}>
@@ -84,17 +95,15 @@ function ColorSwatch({ name, label }: { name: string; label: string }) {
           height: '48px',
           background: `var(${cssVar})`,
           borderRadius: '8px',
-          border: '1px solid var(--seal-border-default)',
+          border: `1px solid ${V_BORDER}`,
         }}
       />
-      <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--seal-text-primary)' }}>
-        {label}
-      </span>
+      <span style={{ fontSize: '12px', fontWeight: 500, color: V_TEXT_PRIMARY }}>{label}</span>
       <code
         style={{
           fontSize: '10px',
-          color: 'var(--seal-text-secondary)',
-          fontFamily: 'monospace',
+          color: V_TEXT_SECONDARY,
+          fontFamily: FONT_MONO,
           wordBreak: 'break-all',
         }}
       >
@@ -104,7 +113,7 @@ function ColorSwatch({ name, label }: { name: string; label: string }) {
   )
 }
 
-function GradientSwatch({ name, label }: { name: string; label: string }) {
+function GradientSwatch({ name, label }: { readonly name: string; readonly label: string }) {
   const cssVar = `--seal-gradient-${name}`
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '160px' }}>
@@ -114,17 +123,15 @@ function GradientSwatch({ name, label }: { name: string; label: string }) {
           height: '48px',
           background: `var(${cssVar})`,
           borderRadius: '8px',
-          border: '1px solid var(--seal-border-default)',
+          border: `1px solid ${V_BORDER}`,
         }}
       />
-      <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--seal-text-primary)' }}>
-        {label}
-      </span>
+      <span style={{ fontSize: '12px', fontWeight: 500, color: V_TEXT_PRIMARY }}>{label}</span>
     </div>
   )
 }
 
-function SpacingSwatch({ name, label }: { name: string; label: string }) {
+function SpacingSwatch({ name, label }: { readonly name: string; readonly label: string }) {
   const cssVar = `--seal-${name}`
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -132,8 +139,8 @@ function SpacingSwatch({ name, label }: { name: string; label: string }) {
         style={{
           minWidth: '40px',
           fontSize: '11px',
-          color: 'var(--seal-text-secondary)',
-          fontFamily: 'monospace',
+          color: V_TEXT_SECONDARY,
+          fontFamily: FONT_MONO,
         }}
       >
         {label}
@@ -147,9 +154,7 @@ function SpacingSwatch({ name, label }: { name: string; label: string }) {
           minWidth: '2px',
         }}
       />
-      <code
-        style={{ fontSize: '11px', color: 'var(--seal-text-secondary)', fontFamily: 'monospace' }}
-      >
+      <code style={{ fontSize: '11px', color: V_TEXT_SECONDARY, fontFamily: FONT_MONO }}>
         {cssVar}
       </code>
     </div>
@@ -162,10 +167,10 @@ function TokensShowcase() {
       style={{
         fontFamily: 'var(--seal-font-family-sans, Inter), sans-serif',
         background: 'var(--seal-surface-background)',
-        color: 'var(--seal-text-primary)',
+        color: V_TEXT_PRIMARY,
         padding: '2rem',
         borderRadius: '12px',
-        border: '1px solid var(--seal-border-default)',
+        border: `1px solid ${V_BORDER}`,
       }}
     >
       <h1
@@ -173,7 +178,7 @@ function TokensShowcase() {
           fontSize: '24px',
           fontWeight: 700,
           marginBottom: '2rem',
-          color: 'var(--seal-text-primary)',
+          color: V_TEXT_PRIMARY,
         }}
       >
         Design Tokens
@@ -210,7 +215,12 @@ function TokensShowcase() {
           {RADIUS_VARS.map(({ name, label }) => (
             <div
               key={name}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '6px',
+              }}
             >
               <div
                 style={{
@@ -223,8 +233,8 @@ function TokensShowcase() {
               <code
                 style={{
                   fontSize: '11px',
-                  color: 'var(--seal-text-secondary)',
-                  fontFamily: 'monospace',
+                  color: V_TEXT_SECONDARY,
+                  fontFamily: FONT_MONO,
                 }}
               >
                 {label}
@@ -242,8 +252,8 @@ function TokensShowcase() {
                 style={{
                   minWidth: '80px',
                   fontSize: '11px',
-                  color: 'var(--seal-text-secondary)',
-                  fontFamily: 'monospace',
+                  color: V_TEXT_SECONDARY,
+                  fontFamily: FONT_MONO,
                 }}
               >
                 {size} / {weight}
@@ -252,7 +262,7 @@ function TokensShowcase() {
                 style={{
                   fontSize: size,
                   fontWeight: weight,
-                  color: 'var(--seal-text-primary)',
+                  color: V_TEXT_PRIMARY,
                   lineHeight: 1.2,
                 }}
               >

@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss'
 import { sealTokensTailwind } from '@sealui/tokens/tailwind'
+import type { Config } from 'tailwindcss'
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],

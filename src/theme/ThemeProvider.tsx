@@ -1,5 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
+
 import { arcticTheme } from './themes/arctic'
 import { deepOceanTheme } from './themes/deep_ocean'
 import { nebulaTheme } from './themes/nebula'
@@ -30,9 +31,9 @@ const themeMap = {
 
 /** Props accepted by `ThemeProvider`. */
 export interface ThemeProviderProps {
-  theme?: ThemeName
-  mode?: ThemeMode
-  children: ReactNode
+  readonly theme?: ThemeName
+  readonly mode?: ThemeMode
+  readonly children: ReactNode
 }
 
 /**

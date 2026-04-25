@@ -1,6 +1,11 @@
 import { ThemeProvider } from './theme/ThemeProvider'
-import { useTheme } from './theme/useTheme'
 import type { ThemeName } from './theme/ThemeProvider'
+import { useTheme } from './theme/useTheme'
+
+const V_BRAND = 'var(--seal-brand-primary)'
+const V_TEXT = 'var(--seal-text-primary)'
+const V_BORDER = 'var(--seal-border-default)'
+const V_SURFACE = 'var(--seal-surface-surface)'
 
 const THEMES: { value: ThemeName; label: string }[] = [
   { value: 'nebula', label: 'Nebula' },
@@ -23,14 +28,14 @@ function ThemeSwitcher() {
         fontFamily: 'var(--seal-font-family-sans, Inter), sans-serif',
         minHeight: '100vh',
         background: 'var(--seal-surface-background)',
-        color: 'var(--seal-text-primary)',
+        color: V_TEXT,
       }}
     >
       <h1 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.4px', margin: 0 }}>
         SealUI React
       </h1>
       <p style={{ color: 'var(--seal-text-secondary)', margin: 0 }}>
-        Theme: <strong style={{ color: 'var(--seal-brand-primary)' }}>{theme}</strong> / {mode}
+        Theme: <strong style={{ color: V_BRAND }}>{theme}</strong> / {mode}
       </p>
 
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -43,11 +48,9 @@ function ThemeSwitcher() {
             style={{
               padding: '8px 20px',
               borderRadius: '8px',
-              border: `1px solid ${theme === t.value ? 'var(--seal-brand-primary)' : 'var(--seal-border-default)'}`,
-              background:
-                theme === t.value ? 'var(--seal-brand-primary)' : 'var(--seal-surface-surface)',
-              color:
-                theme === t.value ? 'var(--seal-accent-on-accent)' : 'var(--seal-text-primary)',
+              border: `1px solid ${theme === t.value ? V_BRAND : V_BORDER}`,
+              background: theme === t.value ? V_BRAND : V_SURFACE,
+              color: theme === t.value ? 'var(--seal-accent-on-accent)' : V_TEXT,
               cursor: 'pointer',
               fontSize: '14px',
               fontWeight: 500,
@@ -65,9 +68,9 @@ function ThemeSwitcher() {
         style={{
           padding: '8px 20px',
           borderRadius: '8px',
-          border: '1px solid var(--seal-border-default)',
-          background: 'var(--seal-surface-surface)',
-          color: 'var(--seal-text-primary)',
+          border: `1px solid ${V_BORDER}`,
+          background: V_SURFACE,
+          color: V_TEXT,
           cursor: 'pointer',
           fontSize: '14px',
         }}
@@ -102,7 +105,7 @@ function ThemeSwitcher() {
                 height: '40px',
                 borderRadius: '6px',
                 background: `var(--seal-${token})`,
-                border: '1px solid var(--seal-border-default)',
+                border: `1px solid ${V_BORDER}`,
               }}
             />
             <span style={{ fontSize: '11px', color: 'var(--seal-text-secondary)' }}>{token}</span>
