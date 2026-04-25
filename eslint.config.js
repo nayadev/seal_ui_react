@@ -1,11 +1,12 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import jsdoc from 'eslint-plugin-jsdoc';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import tseslint from 'typescript-eslint';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import js from '@eslint/js'
+import globals from 'globals'
+import jsdoc from 'eslint-plugin-jsdoc'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import prettier from 'eslint-config-prettier'
 
 export default defineConfig([
   globalIgnores(['dist', 'storybook-static', 'node_modules']),
@@ -41,18 +42,18 @@ export default defineConfig([
       'react/prop-types': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-import-type-side-effects': 'error',
-      'jsdoc/require-jsdoc': ['error', {
-        publicOnly: true,
-        require: {
-          FunctionDeclaration: true,
-          ArrowFunctionExpression: true,
-          FunctionExpression: true,
+      'jsdoc/require-jsdoc': [
+        'error',
+        {
+          publicOnly: true,
+          require: {
+            FunctionDeclaration: true,
+            ArrowFunctionExpression: true,
+            FunctionExpression: true,
+          },
+          contexts: ['TSInterfaceDeclaration', 'TSTypeAliasDeclaration'],
         },
-        contexts: [
-          'TSInterfaceDeclaration',
-          'TSTypeAliasDeclaration',
-        ],
-      }],
+      ],
       'jsdoc/require-description': 'error',
       'jsdoc/no-blank-block-descriptions': 'error',
       'jsdoc/check-param-names': 'error',
@@ -60,10 +61,7 @@ export default defineConfig([
   },
   {
     files: ['vite.config.ts', 'tailwind.config.ts', 'test/**/*.{ts,tsx}', 'vitest.shims.d.ts'],
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -109,4 +107,7 @@ export default defineConfig([
       '@typescript-eslint/no-redundant-type-constituents': 'off',
     },
   },
-]);
+
+  // Prettier — disables all rules that conflict with formatting
+  prettier,
+])

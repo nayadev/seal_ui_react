@@ -1,1 +1,1 @@
-export * from '@sealui/tokens';
+export * from '@sealui/tokens'

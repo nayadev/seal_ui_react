@@ -3,4 +3,4 @@ export const nebulaTheme = {
   label: 'Nebula',
   darkClass: 'nebula-dark',
   lightClass: 'nebula-light',
-} as const;
+} as const

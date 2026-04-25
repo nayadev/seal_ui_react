@@ -3,4 +3,4 @@ export const terminalTheme = {
   label: 'Terminal',
   darkClass: 'terminal-dark',
   lightClass: 'terminal-light',
-} as const;
+} as const

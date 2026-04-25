@@ -20,11 +20,11 @@ The codebase follows a strict **layered architecture**:
 
 **Dependency direction is strictly enforced — no layer may depend on a higher layer.**
 
-| Layer | Purpose | Path |
-|---|---|---|
-| **tokens** | Re-exports from `@sealui/tokens` | `src/tokens/` |
-| **theme** | ThemeProvider, useTheme, theme config | `src/theme/` |
-| **components** | Seal* wrappers over shadcn/ui primitives | `src/components/` |
+| Layer          | Purpose                                   | Path              |
+| -------------- | ----------------------------------------- | ----------------- |
+| **tokens**     | Re-exports from `@sealui/tokens`          | `src/tokens/`     |
+| **theme**      | ThemeProvider, useTheme, theme config     | `src/theme/`      |
+| **components** | Seal\* wrappers over shadcn/ui primitives | `src/components/` |
 
 ---
 
@@ -35,6 +35,7 @@ The codebase follows a strict **layered architecture**:
 ### Three Ways to Consume Tokens
 
 **1. CSS variables (preferred in component styles):**
+
 ```tsx
 // ✅ Good
 <div style={{ background: 'var(--seal-surface-surface)', color: 'var(--seal-text-primary)' }} />
@@ -47,17 +48,19 @@ The codebase follows a strict **layered architecture**:
 ```
 
 **2. TypeScript/JS constants (for logic, not styles):**
+
 ```ts
-import { dimensionMd, stateDisabledOpacity, styleBody } from '@sealui/tokens';
+import { dimensionMd, stateDisabledOpacity, styleBody } from '@sealui/tokens'
 
 // ✅ Good
-const GAP = dimensionMd; // '16px'
+const GAP = dimensionMd // '16px'
 
 // ❌ Bad
-const GAP = '16px';
+const GAP = '16px'
 ```
 
 **3. Tailwind (via sealTokensTailwind from @sealui/tokens/tailwind):**
+
 ```ts
 // tailwind.config.ts already extends with seal tokens — use Tailwind classes directly
 <button className="rounded-md text-sm font-medium" />
@@ -65,14 +68,14 @@ const GAP = '16px';
 
 ### Available Token Categories
 
-| Category | CSS prefix | Example |
-|---|---|---|
-| Colors (per theme) | `--seal-brand-*`, `--seal-surface-*`, `--seal-text-*` | `--seal-brand-primary` |
-| Semantic | `--seal-semantic-*` | `--seal-semantic-error` |
-| Gradients | `--seal-gradient-*` | `--seal-gradient-primary` |
-| Dimensions | `--seal-dimension-*` | `--seal-dimension-md` |
-| Radius | `--seal-radius-*` | `--seal-radius-md` |
-| Typography | `--seal-style-*-*` | `--seal-style-body-font-size` |
+| Category           | CSS prefix                                            | Example                       |
+| ------------------ | ----------------------------------------------------- | ----------------------------- |
+| Colors (per theme) | `--seal-brand-*`, `--seal-surface-*`, `--seal-text-*` | `--seal-brand-primary`        |
+| Semantic           | `--seal-semantic-*`                                   | `--seal-semantic-error`       |
+| Gradients          | `--seal-gradient-*`                                   | `--seal-gradient-primary`     |
+| Dimensions         | `--seal-dimension-*`                                  | `--seal-dimension-md`         |
+| Radius             | `--seal-radius-*`                                     | `--seal-radius-md`            |
+| Typography         | `--seal-style-*-*`                                    | `--seal-style-body-font-size` |
 
 ---
 
@@ -83,10 +86,10 @@ const GAP = '16px';
 `ThemeProvider` applies the active theme's CSS class to `<html>`, making all `--seal-*` variables available:
 
 ```tsx
-import { ThemeProvider } from '@sealui/react';
+import { ThemeProvider } from '@sealui/react'
 
 // Default: nebula dark
-<ThemeProvider theme="nebula" mode="dark">
+;<ThemeProvider theme="nebula" mode="dark">
   <App />
 </ThemeProvider>
 ```
@@ -94,10 +97,10 @@ import { ThemeProvider } from '@sealui/react';
 ### useTheme
 
 ```tsx
-import { useTheme } from '@sealui/react';
+import { useTheme } from '@sealui/react'
 
 function Component() {
-  const { theme, mode, setTheme, setMode } = useTheme();
+  const { theme, mode, setTheme, setMode } = useTheme()
 
   // Always use context — never read data-theme from the DOM directly
 }
@@ -105,12 +108,12 @@ function Component() {
 
 ### Themes × Modes
 
-| Theme | Dark CSS class | Light CSS class |
-|---|---|---|
-| `nebula` | `nebula-dark` | `nebula-light` |
-| `arctic` | `arctic-dark` | `arctic-light` |
+| Theme        | Dark CSS class    | Light CSS class    |
+| ------------ | ----------------- | ------------------ |
+| `nebula`     | `nebula-dark`     | `nebula-light`     |
+| `arctic`     | `arctic-dark`     | `arctic-light`     |
 | `deep_ocean` | `deep-ocean-dark` | `deep-ocean-light` |
-| `terminal` | `terminal-dark` | `terminal-light` |
+| `terminal`   | `terminal-dark`   | `terminal-light`   |
 
 ThemeProvider manages the active class on `<html>` automatically. Never apply theme classes manually.
 
@@ -159,16 +162,16 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 ```tsx
 // ✅ Good
 function Component({ disabled }: Props) {
-  if (disabled) return null;
-  return <div>...</div>;
+  if (disabled) return null
+  return <div>...</div>
 }
 
 // ❌ Bad
 function Component({ disabled }: Props) {
   if (!disabled) {
-    return <div>...</div>;
+    return <div>...</div>
   }
-  return null;
+  return null
 }
 ```
 
@@ -180,11 +183,11 @@ Write comments only when the **why** is non-obvious. Never comment what the code
 // ✅ Good — explains a subtle constraint
 // Fall back to nebula-dark when no ThemeProvider ancestor is found,
 // since dark is the primary experience.
-const theme = context ?? defaultNebulaTokens;
+const theme = context ?? defaultNebulaTokens
 
 // ❌ Bad — states the obvious
 // Set background color
-style.background = 'var(--seal-surface-surface)';
+style.background = 'var(--seal-surface-surface)'
 ```
 
 ### JSDoc
@@ -193,7 +196,7 @@ All exported components, interfaces, hooks, and utility functions must have JSDo
 
 All public APIs must have JSDoc:
 
-```tsx
+````tsx
 /**
  * Applies the selected SealUI theme and mode to the document root,
  * making all `--seal-*` CSS variables available to the subtree.
@@ -205,7 +208,7 @@ All public APIs must have JSDoc:
  * ```
  */
 export function ThemeProvider({ theme, mode, children }: ThemeProviderProps) { ... }
-```
+````
 
 ---
 
@@ -246,8 +249,8 @@ Stories live in `src/stories/<Category>/Seal<Name>.stories.tsx`. Categories mirr
 ### Structure
 
 ```tsx
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SealButton } from '@/components/buttons/seal-button';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { SealButton } from '@/components/buttons/seal-button'
 
 const meta: Meta<typeof SealButton> = {
   title: 'Buttons/SealButton',
@@ -257,12 +260,12 @@ const meta: Meta<typeof SealButton> = {
   argTypes: {
     variant: { control: 'select', options: ['primary', 'accent', 'outline'] },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = { args: { children: 'Button' } };
+export const Default: Story = { args: { children: 'Button' } }
 ```
 
 ### Theme Toolbar
@@ -278,57 +281,57 @@ The global toolbar (Theme + Mode) is wired in `preview.tsx`. Stories automatical
 Create a `renderWithTheme` helper in `test/utils.tsx`:
 
 ```tsx
-import { render } from '@testing-library/react';
-import { ThemeProvider } from '@/theme/ThemeProvider';
+import { render } from '@testing-library/react'
+import { ThemeProvider } from '@/theme/ThemeProvider'
 
 export function renderWithTheme(ui: React.ReactElement) {
   return render(
     <ThemeProvider theme="nebula" mode="dark">
       {ui}
-    </ThemeProvider>
-  );
+    </ThemeProvider>,
+  )
 }
 ```
 
 ### Coverage per Component
 
-| Scenario | Required |
-|---|---|
-| Renders without error | ✅ |
-| Applies correct CSS variable references | ✅ |
-| Click / change interaction | ✅ (if interactive) |
-| Disabled state | ✅ (if applicable) |
-| Accessible name / role | ✅ |
+| Scenario                                | Required            |
+| --------------------------------------- | ------------------- |
+| Renders without error                   | ✅                  |
+| Applies correct CSS variable references | ✅                  |
+| Click / change interaction              | ✅ (if interactive) |
+| Disabled state                          | ✅ (if applicable)  |
+| Accessible name / role                  | ✅                  |
 
 ---
 
 ## Project Commands
 
-| Command | Purpose |
-|---|---|
-| `npm run dev` | Start Vite dev server |
-| `npm run build` | TypeScript check + Vite production build |
-| `npm run lint` | ESLint strict — zero warnings |
-| `npm run test` | Vitest in watch mode |
-| `npm run test:coverage` | Vitest with coverage report |
-| `npm run storybook` | Storybook dev server on :6006 |
-| `npm run build-storybook` | Build Storybook static site |
+| Command                   | Purpose                                  |
+| ------------------------- | ---------------------------------------- |
+| `npm run dev`             | Start Vite dev server                    |
+| `npm run build`           | TypeScript check + Vite production build |
+| `npm run lint`            | ESLint strict — zero warnings            |
+| `npm run test`            | Vitest in watch mode                     |
+| `npm run test:coverage`   | Vitest with coverage report              |
+| `npm run storybook`       | Storybook dev server on :6006            |
+| `npm run build-storybook` | Build Storybook static site              |
 
 ---
 
 ## Key Dependencies
 
-| Package | Purpose |
-|---|---|
-| `@sealui/tokens` | Single source of truth for all design token values |
-| `react` + `react-dom` | UI framework |
-| `@vitejs/plugin-react` | Vite React plugin |
-| `@tailwindcss/vite` | Tailwind CSS v4 via Vite plugin |
-| `tailwindcss` | Utility-first CSS framework |
-| `clsx` + `tailwind-merge` | Conditional className utilities |
-| `class-variance-authority` | Variant-driven component styling |
-| `@radix-ui/react-slot` | Polymorphic component primitive |
-| `lucide-react` | Icon library |
-| `storybook` + `@storybook/react-vite` | Component catalog |
-| `vitest` + `@testing-library/react` | Unit testing |
-| `typescript-eslint` | Strict TypeScript linting |
+| Package                               | Purpose                                            |
+| ------------------------------------- | -------------------------------------------------- |
+| `@sealui/tokens`                      | Single source of truth for all design token values |
+| `react` + `react-dom`                 | UI framework                                       |
+| `@vitejs/plugin-react`                | Vite React plugin                                  |
+| `@tailwindcss/vite`                   | Tailwind CSS v4 via Vite plugin                    |
+| `tailwindcss`                         | Utility-first CSS framework                        |
+| `clsx` + `tailwind-merge`             | Conditional className utilities                    |
+| `class-variance-authority`            | Variant-driven component styling                   |
+| `@radix-ui/react-slot`                | Polymorphic component primitive                    |
+| `lucide-react`                        | Icon library                                       |
+| `storybook` + `@storybook/react-vite` | Component catalog                                  |
+| `vitest` + `@testing-library/react`   | Unit testing                                       |
+| `typescript-eslint`                   | Strict TypeScript linting                          |

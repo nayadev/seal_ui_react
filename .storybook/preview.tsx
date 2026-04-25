@@ -1,7 +1,7 @@
-import type { Preview } from '@storybook/react-vite';
-import '../src/index.css';
-import { ThemeProvider } from '../src/theme/ThemeProvider';
-import type { ThemeMode, ThemeName } from '../src/theme/ThemeProvider';
+import type { Preview } from '@storybook/react-vite'
+import '../src/index.css'
+import { ThemeProvider } from '../src/theme/ThemeProvider'
+import type { ThemeMode, ThemeName } from '../src/theme/ThemeProvider'
 
 const preview: Preview = {
   globalTypes: {
@@ -38,8 +38,8 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = (context.globals['sealTheme'] as ThemeName | undefined) ?? 'nebula';
-      const mode = (context.globals['sealMode'] as ThemeMode | undefined) ?? 'dark';
+      const theme = (context.globals['sealTheme'] as ThemeName | undefined) ?? 'nebula'
+      const mode = (context.globals['sealMode'] as ThemeMode | undefined) ?? 'dark'
       // key forces remount when theme/mode change so ThemeProvider re-initializes its state
       return (
         <ThemeProvider key={`${theme}-${mode}`} theme={theme} mode={mode}>
@@ -47,7 +47,7 @@ const preview: Preview = {
             <Story />
           </div>
         </ThemeProvider>
-      );
+      )
     },
   ],
   parameters: {
@@ -61,6 +61,6 @@ const preview: Preview = {
       test: 'todo',
     },
   },
-};
+}
 
-export default preview;
+export default preview

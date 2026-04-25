@@ -3,4 +3,4 @@ export const arcticTheme = {
   label: 'Arctic',
   darkClass: 'arctic-dark',
   lightClass: 'arctic-light',
-} as const;
+} as const

@@ -1,4 +1,4 @@
-import { create } from 'storybook/theming/create';
+import { create } from 'storybook/theming/create'
 
 export const sealTheme = create({
   base: 'dark',
@@ -41,4 +41,4 @@ export const sealTheme = create({
   buttonBorder: '#2e2e4a',
   booleanBg: '#252542',
   booleanSelectedBg: '#8055e0',
-});
+})

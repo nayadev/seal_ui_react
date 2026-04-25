@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
-import { sealTokensTailwind } from '@sealui/tokens/tailwind';
+import type { Config } from 'tailwindcss'
+import { sealTokensTailwind } from '@sealui/tokens/tailwind'
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
@@ -13,4 +13,4 @@ export default {
       fontWeight: sealTokensTailwind.fontWeight,
     },
   },
-} satisfies Config;
+} satisfies Config
