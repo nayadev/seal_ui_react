@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Bookmark, Share2, SlidersHorizontal, Sparkles, TriangleAlert, Zap } from 'lucide-react'
+import {
+  Bookmark,
+  Settings,
+  Share2,
+  SlidersHorizontal,
+  Sparkles,
+  TriangleAlert,
+  Zap,
+} from 'lucide-react'
 
 import { SealOutlineIconButton } from './SealOutlineIconButton'
 
-const meta: Meta<typeof SealOutlineIconButton> = {
+const meta = {
   title: 'Buttons/SealOutlineIconButton',
   component: SealOutlineIconButton,
   parameters: { layout: 'centered' },
@@ -15,23 +23,61 @@ const meta: Meta<typeof SealOutlineIconButton> = {
     },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    color: { control: 'color' },
-    gradient: { control: 'text' },
+    color: { control: 'color', if: { arg: 'variant', eq: 'custom' } },
+    gradient: { control: 'text', if: { arg: 'variant', eq: 'custom' } },
     tooltip: { control: 'text' },
   },
-}
+} satisfies Meta<typeof SealOutlineIconButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: { icon: Share2, tooltip: 'Share', variant: 'primary' },
+}
+
+export const Primary: Story = {
+  args: { icon: Share2, tooltip: 'Share', variant: 'primary' },
+}
+
+export const Accent: Story = {
+  args: { icon: Bookmark, tooltip: 'Save', variant: 'accent' },
+}
+
+export const AccentSecondary: Story = {
+  args: { icon: SlidersHorizontal, tooltip: 'Filter', variant: 'accent-secondary' },
+}
+
+export const Gradient: Story = {
+  args: { icon: Sparkles, tooltip: 'Magic', variant: 'gradient' },
+}
+
+export const AccentGradient: Story = {
+  args: { icon: Zap, tooltip: 'Boost', variant: 'accent-gradient' },
+}
+
+export const CustomColor: Story = {
+  args: { icon: TriangleAlert, variant: 'custom', color: '#e53935', tooltip: 'Warning' },
+}
+
+export const CustomGradient: Story = {
   args: {
-    icon: Share2,
-    tooltip: 'Share',
+    icon: Settings,
+    variant: 'custom',
+    gradient: 'linear-gradient(to right, #7b2ff7, #f107a3)',
+    tooltip: 'Custom',
   },
 }
 
-export const Variants: Story = {
+export const Loading: Story = {
+  args: { icon: Share2, variant: 'primary', loading: true, tooltip: 'Loading' },
+}
+
+export const Disabled: Story = {
+  args: { icon: Share2, variant: 'primary', disabled: true, tooltip: 'Disabled' },
+}
+
+export const AllVariants: Story = {
   render: () => (
     <div className="flex gap-4 items-center">
       <SealOutlineIconButton variant="primary" icon={Share2} tooltip="Primary" />
@@ -43,43 +89,12 @@ export const Variants: Story = {
       />
       <SealOutlineIconButton variant="gradient" icon={Sparkles} tooltip="Gradient" />
       <SealOutlineIconButton variant="accent-gradient" icon={Zap} tooltip="Accent Gradient" />
-    </div>
-  ),
-}
-
-export const CustomVariant: Story = {
-  render: () => (
-    <div className="flex gap-4 items-center">
       <SealOutlineIconButton
         variant="custom"
         color="#e53935"
         icon={TriangleAlert}
-        tooltip="Custom Solid Color"
-      />
-      <SealOutlineIconButton
-        variant="custom"
-        gradient="linear-gradient(to right, #00c6ff, #0072ff)"
-        icon={SlidersHorizontal}
-        tooltip="Custom Gradient"
+        tooltip="Custom"
       />
     </div>
   ),
-}
-
-export const Loading: Story = {
-  args: {
-    variant: 'primary',
-    icon: Share2,
-    loading: true,
-    tooltip: 'Loading',
-  },
-}
-
-export const Disabled: Story = {
-  args: {
-    variant: 'primary',
-    icon: Share2,
-    disabled: true,
-    tooltip: 'Disabled',
-  },
 }
