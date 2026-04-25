@@ -64,7 +64,6 @@ export default defineConfig({
             provider: playwright({}),
             instances: [{ browser: 'chromium' }],
           },
-          include: ['src/**/*.stories.{ts,tsx}'],
           exclude: ['node_modules'],
         },
       },
