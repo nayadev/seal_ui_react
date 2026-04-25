@@ -20,6 +20,17 @@
   box-sizing: border-box;
 }
 
+@keyframes seal-bounce-dot {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-100%);
+  }
+}
+
 body {
   margin: 0;
   background-color: var(--seal-surface-background, #0f0f1a);

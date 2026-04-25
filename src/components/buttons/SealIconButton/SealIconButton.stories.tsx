@@ -78,6 +78,7 @@ export const Disabled: Story = {
 }
 
 export const AllVariants: Story = {
+  args: { icon: Rocket },
   render: () => (
     <div className="flex gap-4 items-center">
       <SealIconButton variant="primary" icon={Rocket} tooltip="Primary" />

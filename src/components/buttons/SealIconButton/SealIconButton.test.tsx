@@ -46,8 +46,7 @@ describe('SealIconButton', () => {
     const button = screen.getByRole('button', { name: 'Loading' })
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute('aria-busy', 'true')
-    // The spinner SVG has the 'animate-spin' class
-    const spinner = button.querySelector('.animate-spin')
+    const spinner = button.querySelector('.seal-bouncing-dots')
     expect(spinner).toBeInTheDocument()
   })
 

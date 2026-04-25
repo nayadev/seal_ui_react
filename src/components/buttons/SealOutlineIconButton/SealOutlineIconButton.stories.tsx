@@ -78,6 +78,7 @@ export const Disabled: Story = {
 }
 
 export const AllVariants: Story = {
+  args: { icon: Share2 },
   render: () => (
     <div className="flex gap-4 items-center">
       <SealOutlineIconButton variant="primary" icon={Share2} tooltip="Primary" />
