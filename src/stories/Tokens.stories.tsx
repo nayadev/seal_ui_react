@@ -57,13 +57,7 @@ const TYPE_SCALE = [
   { label: 'Caption', size: '14px', weight: '400' },
 ] as const
 
-function Section({
-  title,
-  children,
-}: {
-  readonly title: string
-  readonly children: React.ReactNode
-}) {
+function Section({ title, children }: Readonly<{ title: string; children: React.ReactNode }>) {
   return (
     <section style={{ marginBottom: '2rem' }}>
       <h2
@@ -85,7 +79,7 @@ function Section({
   )
 }
 
-function ColorSwatch({ name, label }: { readonly name: string; readonly label: string }) {
+function ColorSwatch({ name, label }: Readonly<{ name: string; label: string }>) {
   const cssVar = `--seal-${name}`
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '120px' }}>
@@ -113,7 +107,7 @@ function ColorSwatch({ name, label }: { readonly name: string; readonly label: s
   )
 }
 
-function GradientSwatch({ name, label }: { readonly name: string; readonly label: string }) {
+function GradientSwatch({ name, label }: Readonly<{ name: string; label: string }>) {
   const cssVar = `--seal-gradient-${name}`
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '160px' }}>
@@ -131,7 +125,7 @@ function GradientSwatch({ name, label }: { readonly name: string; readonly label
   )
 }
 
-function SpacingSwatch({ name, label }: { readonly name: string; readonly label: string }) {
+function SpacingSwatch({ name, label }: Readonly<{ name: string; label: string }>) {
   const cssVar = `--seal-${name}`
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

@@ -50,7 +50,7 @@ export function ThemeProvider({
   theme: initialTheme = 'nebula',
   mode: initialMode = 'dark',
   children,
-}: ThemeProviderProps) {
+}: Readonly<ThemeProviderProps>) {
   const [theme, setTheme] = useState<ThemeName>(initialTheme)
   const [mode, setMode] = useState<ThemeMode>(initialMode)
 
@@ -65,8 +65,8 @@ export function ThemeProvider({
     })
 
     root.classList.add(activeClass)
-    root.setAttribute('data-theme', theme)
-    root.setAttribute('data-mode', mode)
+    root.dataset.theme = theme
+    root.dataset.mode = mode
   }, [theme, mode])
 
   const value = useMemo<ThemeContextValue>(
