@@ -21,6 +21,7 @@
     "lint": "eslint . --max-warnings 0",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+    "test:coverage:ci": "vitest run --coverage --project unit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "changeset": "changeset",
