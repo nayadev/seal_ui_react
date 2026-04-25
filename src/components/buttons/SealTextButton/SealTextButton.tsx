@@ -1,8 +1,9 @@
 import { constantButtonIconSize } from '@sealui/tokens'
 import { type LucideIcon, Loader2 } from 'lucide-react'
 import * as React from 'react'
-import { useEffect, useId, useState } from 'react'
+import { useId } from 'react'
 
+import { GradientIcon } from '@/components/buttons/gradient-icon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -168,105 +169,6 @@ function getSpinnerColor(variant: SealTextButtonVariant): string | undefined {
   if (variant === VARIANT_GRADIENT) return TOKEN_BRAND_PRIMARY
   if (variant === VARIANT_ACCENT_GRADIENT) return TOKEN_ACCENT
   return undefined
-}
-
-// --- Gradient icon (identical pattern to SealOutlineButton) ---
-
-interface GradientIconProps {
-  readonly icon: LucideIcon
-  readonly size: string | number
-  readonly gradientId: string
-  readonly colorStart: string
-  readonly colorEnd: string
-  readonly gradientSource: string
-}
-
-const VIEWBOX_SIZE = 24
-const FALLBACK_COORDS = { x1: '0', y1: '0', x2: '24', y2: '24' }
-
-function keywordsToAngle(d: string): number {
-  const b = d.includes('bottom')
-  const t = d.includes('top')
-  const r = d.includes('right')
-  const l = d.includes('left')
-  if (b && r) return 135
-  if (b && l) return 225
-  if (t && r) return 45
-  if (t && l) return 315
-  if (r) return 90
-  if (l) return 270
-  if (b) return 180
-  return 0
-}
-
-function parseSvgGradientCoords(gradientStr: string): typeof FALLBACK_COORDS {
-  // [^,)]+ is greedy — no backtracking risk.
-  const match = /linear-gradient\(([^,)]+)/.exec(gradientStr)
-  if (!match?.[1]) return FALLBACK_COORDS
-  const d = match[1].toLowerCase().trim()
-  const angleDeg = d.includes('deg') ? Number.parseFloat(d) : keywordsToAngle(d)
-  const rad = (angleDeg * Math.PI) / 180
-  const half = VIEWBOX_SIZE / 2
-  return {
-    x1: String(half - Math.sin(rad) * half),
-    y1: String(half + Math.cos(rad) * half),
-    x2: String(half + Math.sin(rad) * half),
-    y2: String(half - Math.cos(rad) * half),
-  }
-}
-
-function resolveGradientCoords(gradientSource: string): typeof FALLBACK_COORDS {
-  const str = gradientSource.startsWith('var(')
-    ? getComputedStyle(document.documentElement)
-        .getPropertyValue(gradientSource.slice(4, -1).trim())
-        .trim()
-    : gradientSource
-  if (!str) return FALLBACK_COORDS
-  return parseSvgGradientCoords(str)
-}
-
-function GradientIcon({
-  icon: IconEl,
-  size,
-  gradientId,
-  colorStart,
-  colorEnd,
-  gradientSource,
-}: GradientIconProps) {
-  const [coords, setCoords] = useState(() =>
-    gradientSource.startsWith('var(') ? FALLBACK_COORDS : resolveGradientCoords(gradientSource),
-  )
-
-  useEffect(() => {
-    const readCoords = () => {
-      setCoords(resolveGradientCoords(gradientSource))
-    }
-    const observer = new MutationObserver(readCoords)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    return () => {
-      observer.disconnect()
-    }
-  }, [gradientSource])
-
-  return (
-    <span aria-hidden style={{ display: 'inline-flex' }}>
-      <IconEl size={size} stroke={`url(#${gradientId})`}>
-        <defs>
-          <linearGradient
-            id={gradientId}
-            gradientUnits="userSpaceOnUse"
-            x1={coords.x1}
-            y1={coords.y1}
-            x2={coords.x2}
-            y2={coords.y2}
-          >
-            <stop offset="0%" stopColor={colorStart} />
-            <stop offset="100%" stopColor={colorEnd} />
-          </linearGradient>
-        </defs>
-      </IconEl>
-    </span>
-  )
 }
 
 /**

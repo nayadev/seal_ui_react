@@ -1,8 +1,9 @@
 import { constantButtonIconSize } from '@sealui/tokens'
 import { type LucideIcon, Loader2 } from 'lucide-react'
 import * as React from 'react'
-import { useEffect, useId, useState } from 'react'
+import { useId } from 'react'
 
+import { GradientIcon } from '@/components/buttons/gradient-icon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -71,72 +72,6 @@ const OUTLINE_BASE = 'border bg-transparent'
 const HOVER_ACTIVE = `hover:bg-[var(${OB_HOVER})] active:opacity-[0.75]`
 const GRADIENT_HOVER = 'hover:opacity-[0.85] active:opacity-[0.75]'
 
-/**
- * Renders a Lucide icon with its stroke painted by an SVG linearGradient.
- * This mirrors Flutter's ShaderMask approach, which covers both text and icon
- * with the same gradient shader.
- */
-interface GradientIconProps {
-  readonly icon: LucideIcon
-  readonly size: string | number
-  readonly gradientId: string
-  readonly colorStart: string
-  readonly colorEnd: string
-  /** CSS gradient variable (e.g. `var(--seal-gradient-primary)`) or raw gradient string.
-   * Used at runtime to resolve the direction so the SVG coords always match the token. */
-  readonly gradientSource: string
-}
-
-const VIEWBOX_SIZE = 24
-
-// Coords representing a top-left→bottom-right diagonal — matches the direction
-// of all current gradient tokens. Used as the initial value before the CSS
-// variable is resolved (JSDOM / first render before theme class is applied).
-const FALLBACK_COORDS = { x1: '0', y1: '0', x2: '24', y2: '24' }
-
-// Converts direction keywords ("to bottom right", "to right", etc.)
-// to a CSS gradient angle in degrees (0° = up, clockwise).
-function keywordsToAngle(d: string): number {
-  const b = d.includes('bottom')
-  const t = d.includes('top')
-  const r = d.includes('right')
-  const l = d.includes('left')
-  if (b && r) return 135
-  if (b && l) return 225
-  if (t && r) return 45
-  if (t && l) return 315
-  if (r) return 90
-  if (l) return 270
-  if (b) return 180
-  return 0
-}
-
-function parseSvgGradientCoords(gradientStr: string): typeof FALLBACK_COORDS {
-  // [^,)]+ is greedy and possessive — no backtracking risk.
-  const match = /linear-gradient\(([^,)]+)/.exec(gradientStr)
-  if (!match?.[1]) return FALLBACK_COORDS
-  const d = match[1].toLowerCase().trim()
-  const angleDeg = d.includes('deg') ? Number.parseFloat(d) : keywordsToAngle(d)
-  const rad = (angleDeg * Math.PI) / 180
-  const half = VIEWBOX_SIZE / 2
-  return {
-    x1: String(half - Math.sin(rad) * half),
-    y1: String(half + Math.cos(rad) * half),
-    x2: String(half + Math.sin(rad) * half),
-    y2: String(half - Math.cos(rad) * half),
-  }
-}
-
-function resolveGradientCoords(gradientSource: string): typeof FALLBACK_COORDS {
-  const str = gradientSource.startsWith('var(')
-    ? getComputedStyle(document.documentElement)
-        .getPropertyValue(gradientSource.slice(4, -1).trim())
-        .trim()
-    : gradientSource
-  if (!str) return FALLBACK_COORDS
-  return parseSvgGradientCoords(str)
-}
-
 const CLIP_TEXT: React.CSSProperties = {
   WebkitBackgroundClip: 'text',
   backgroundClip: 'text',
@@ -153,57 +88,6 @@ const VARIANT_GRADIENT = 'gradient' as const
 const VARIANT_ACCENT_GRADIENT = 'accent-gradient' as const
 const VARIANT_CUSTOM = 'custom' as const
 const CURRENT_COLOR = 'currentColor'
-
-function GradientIcon({
-  icon: IconEl,
-  size,
-  gradientId,
-  colorStart,
-  colorEnd,
-  gradientSource,
-}: GradientIconProps) {
-  // For raw gradient strings (custom variant), resolve on the spot during render.
-  // For CSS variable references, start with FALLBACK_COORDS and let the
-  // MutationObserver update coords once ThemeProvider applies the theme class.
-  const [coords, setCoords] = useState(() =>
-    gradientSource.startsWith('var(') ? FALLBACK_COORDS : resolveGradientCoords(gradientSource),
-  )
-
-  useEffect(() => {
-    // Re-read the CSS variable whenever the theme class on <html> changes.
-    // Calling setCoords inside a MutationObserver callback is an external system
-    // trigger — not synchronous in the effect body — so it avoids cascading-render
-    // concerns and aligns with React’s model for external state synchronization.
-    const readCoords = () => {
-      setCoords(resolveGradientCoords(gradientSource))
-    }
-    const observer = new MutationObserver(readCoords)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    return () => {
-      observer.disconnect()
-    }
-  }, [gradientSource])
-
-  return (
-    <span aria-hidden style={{ display: 'inline-flex' }}>
-      <IconEl size={size} stroke={`url(#${gradientId})`}>
-        <defs>
-          <linearGradient
-            id={gradientId}
-            gradientUnits="userSpaceOnUse"
-            x1={coords.x1}
-            y1={coords.y1}
-            x2={coords.x2}
-            y2={coords.y2}
-          >
-            <stop offset="0%" stopColor={colorStart} />
-            <stop offset="100%" stopColor={colorEnd} />
-          </linearGradient>
-        </defs>
-      </IconEl>
-    </span>
-  )
-}
 
 interface OutlineVariantStyle {
   className: string
