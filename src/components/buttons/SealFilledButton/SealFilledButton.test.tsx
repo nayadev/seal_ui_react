@@ -18,11 +18,9 @@ describe('SealFilledButton', () => {
     })
 
     it('renders the leading icon when provided', () => {
-      renderWithTheme(
-        <SealFilledButton icon={<Star data-testid="icon" size={16} />}>Favorite</SealFilledButton>,
-      )
-      expect(screen.getByTestId('icon')).toBeInTheDocument()
+      renderWithTheme(<SealFilledButton icon={Star}>Favorite</SealFilledButton>)
       expect(screen.getByText('Favorite')).toBeInTheDocument()
+      expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
     it('applies custom className', () => {
@@ -113,14 +111,14 @@ describe('SealFilledButton', () => {
       expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
     })
 
-    it('shows a spinner and hides the icon when loading', () => {
+    it('hides the icon inside an invisible wrapper when loading', () => {
       renderWithTheme(
-        <SealFilledButton loading icon={<Star data-testid="icon" size={16} />}>
+        <SealFilledButton loading icon={Star}>
           Wait
         </SealFilledButton>,
       )
-      const icon = screen.getByTestId('icon')
-      expect(icon.closest('.invisible')).not.toBeNull()
+      const svg = document.querySelector('.invisible svg')
+      expect(svg).toBeInTheDocument()
     })
 
     it('disables the button when loading', () => {

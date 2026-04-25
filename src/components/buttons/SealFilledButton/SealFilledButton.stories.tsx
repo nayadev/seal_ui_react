@@ -40,11 +40,11 @@ export const AccentSecondary: Story = {
 }
 
 export const Gradient: Story = {
-  args: { children: 'Launch', variant: 'gradient', icon: <Rocket size={16} /> },
+  args: { children: 'Launch', variant: 'gradient', icon: Rocket },
 }
 
 export const AccentGradient: Story = {
-  args: { children: 'Boost', variant: 'accent-gradient', icon: <Star size={16} /> },
+  args: { children: 'Boost', variant: 'accent-gradient', icon: Star },
 }
 
 export const CustomColor: Story = {
@@ -60,7 +60,7 @@ export const CustomGradient: Story = {
 }
 
 export const WithIcon: Story = {
-  args: { children: 'Settings', variant: 'primary', icon: <Settings size={16} /> },
+  args: { children: 'Settings', variant: 'primary', icon: Settings },
 }
 
 export const Loading: Story = {
@@ -72,7 +72,7 @@ export const LoadingWithIcon: Story = {
     children: 'Launching',
     variant: 'gradient',
     loading: true,
-    icon: <Rocket size={16} />,
+    icon: Rocket,
   },
 }
 
@@ -86,10 +86,10 @@ export const AllVariants: Story = {
       <SealFilledButton variant="primary">Primary</SealFilledButton>
       <SealFilledButton variant="accent">Accent</SealFilledButton>
       <SealFilledButton variant="accent-secondary">Accent Secondary</SealFilledButton>
-      <SealFilledButton variant="gradient" icon={<Rocket size={16} />}>
+      <SealFilledButton variant="gradient" icon={Rocket}>
         Gradient
       </SealFilledButton>
-      <SealFilledButton variant="accent-gradient" icon={<Star size={16} />}>
+      <SealFilledButton variant="accent-gradient" icon={Star}>
         Accent Gradient
       </SealFilledButton>
       <SealFilledButton variant="custom" color="#e53935">

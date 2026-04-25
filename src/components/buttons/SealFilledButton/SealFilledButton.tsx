@@ -1,4 +1,5 @@
-import { Loader2 } from 'lucide-react'
+import { constantButtonIconSize } from '@sealui/tokens'
+import { type LucideIcon, Loader2 } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -38,10 +39,16 @@ export interface SealFilledButtonProps extends Omit<
    */
   loading?: boolean
   /**
-   * Leading icon rendered before the label.
+   * Lucide icon component rendered as a leading icon before the label.
+   * Pass the component reference — the button controls its size using the
+   * `--seal-constant-button-icon-size` token.
    * Hidden automatically when `loading` is `true`.
+   *
+   * @example
+   * import { Rocket } from 'lucide-react'
+   * <SealFilledButton icon={Rocket}>Launch</SealFilledButton>
    */
-  icon?: React.ReactNode
+  icon?: LucideIcon
   /**
    * Solid CSS color for the `custom` variant.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
@@ -108,7 +115,7 @@ function resolveBackground(
  * </SealFilledButton>
  *
  * @example
- * <SealFilledButton variant="gradient" loading={isPending} icon={<Rocket size={16} />}>
+ * <SealFilledButton variant="gradient" loading={isPending} icon={Rocket}>
  *   Launch
  * </SealFilledButton>
  *
@@ -121,7 +128,7 @@ export function SealFilledButton({
   variant = 'primary',
   loading = false,
   disabled,
-  icon,
+  icon: IconEl,
   color,
   gradient,
   children,
@@ -148,7 +155,7 @@ export function SealFilledButton({
       {loading ? (
         <span className="relative flex items-center justify-center">
           <span aria-hidden className="invisible flex items-center gap-2">
-            {icon}
+            {IconEl && <IconEl size={constantButtonIconSize} />}
             {children}
           </span>
           <span className="absolute inset-0 flex items-center justify-center">
@@ -157,7 +164,7 @@ export function SealFilledButton({
         </span>
       ) : (
         <>
-          {icon}
+          {IconEl && <IconEl size={constantButtonIconSize} />}
           {children}
         </>
       )}
