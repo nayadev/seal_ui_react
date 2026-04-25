@@ -18,6 +18,25 @@ export default defineConfig({
     },
   },
   test: {
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov', 'html'],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
+      exclude: [
+        'node_modules/',
+        'dist/',
+        'storybook-static/',
+        '**/*.stories.tsx',
+        '**/*.config.*',
+        'src/index.ts',
+        'test/',
+      ],
+    },
     projects: [
       {
         extends: true,
