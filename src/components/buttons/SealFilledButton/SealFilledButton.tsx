@@ -1,18 +1,13 @@
-import { constantButtonIconSize } from '@sealui/tokens'
-import { type LucideIcon, Loader2 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
+
+import { ButtonContent, type SealButtonVariant } from '../shared'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 /** Visual style variants for `SealFilledButton`. */
-export type SealFilledButtonVariant =
-  | 'primary'
-  | 'accent'
-  | 'accent-secondary'
-  | 'gradient'
-  | 'accent-gradient'
-  | 'custom'
+export type SealFilledButtonVariant = SealButtonVariant
 
 /**
  * Props accepted by `SealFilledButton`.
@@ -152,22 +147,9 @@ export function SealFilledButton({
       style={{ ...backgroundStyle, ...style }}
       {...props}
     >
-      {loading ? (
-        <span className="relative flex items-center justify-center">
-          <span aria-hidden className="invisible flex items-center gap-2">
-            {IconEl && <IconEl size={constantButtonIconSize} />}
-            {children}
-          </span>
-          <span className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="h-[1em] w-[1em] animate-spin" />
-          </span>
-        </span>
-      ) : (
-        <>
-          {IconEl && <IconEl size={constantButtonIconSize} />}
-          {children}
-        </>
-      )}
+      <ButtonContent loading={loading} iconEl={IconEl}>
+        {children}
+      </ButtonContent>
     </Button>
   )
 }

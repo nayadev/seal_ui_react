@@ -1,20 +1,28 @@
-import { constantButtonIconSize } from '@sealui/tokens'
-import { type LucideIcon, Loader2 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 import { useId } from 'react'
 
-import { GradientIcon } from '@/components/buttons/gradient-icon'
+import {
+  ButtonContent,
+  CURRENT_COLOR,
+  renderIcon,
+  type SealButtonVariant,
+  TOKEN_ACCENT,
+  TOKEN_ACCENT_SECONDARY,
+  TOKEN_BRAND_PRIMARY,
+  TOKEN_GRADIENT_ACCENT,
+  TOKEN_GRADIENT_PRIMARY,
+  TOKEN_PRIMITIVE_WHITE,
+  VARIANT_ACCENT_GRADIENT,
+  VARIANT_CUSTOM,
+  VARIANT_GRADIENT,
+} from '../shared'
+
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 /** Visual style variants for `SealTextButton`. */
-export type SealTextButtonVariant =
-  | 'primary'
-  | 'accent'
-  | 'accent-secondary'
-  | 'gradient'
-  | 'accent-gradient'
-  | 'custom'
+export type SealTextButtonVariant = SealButtonVariant
 
 /**
  * Props accepted by `SealTextButton`.
@@ -70,18 +78,6 @@ export interface SealTextButtonProps extends Omit<
 // CSS variable for the per-variant hover background color.
 const TB_HOVER = '--seal-tb-hover'
 const HOVER_ACTIVE = `hover:bg-[var(${TB_HOVER})] active:opacity-[0.75]`
-
-const TOKEN_BRAND_PRIMARY = 'var(--seal-brand-primary)'
-const TOKEN_BRAND_SHADE = 'var(--seal-brand-primary-shade)'
-const TOKEN_ACCENT = 'var(--seal-accent-accent)'
-const TOKEN_ACCENT_SECONDARY = 'var(--seal-accent-accent-secondary)'
-const TOKEN_PRIMITIVE_WHITE = 'var(--seal-primitive-white)'
-const TOKEN_GRADIENT_PRIMARY = 'var(--seal-gradient-primary)'
-const TOKEN_GRADIENT_ACCENT = 'var(--seal-gradient-accent)'
-const VARIANT_GRADIENT = 'gradient' as const
-const VARIANT_ACCENT_GRADIENT = 'accent-gradient' as const
-const VARIANT_CUSTOM = 'custom' as const
-const CURRENT_COLOR = 'currentColor'
 
 // The gradient underline is built from two background layers on a <span>:
 // - layer 0: covers the text (background-clip: text)
@@ -213,43 +209,7 @@ export function SealTextButton({
   const spinnerColor = getSpinnerColor(variant)
   const uid = useId().replaceAll(':', '')
 
-  const isGradientVariant =
-    variant === VARIANT_GRADIENT ||
-    variant === VARIANT_ACCENT_GRADIENT ||
-    (variant === VARIANT_CUSTOM && !!gradient)
-
-  let iconColorStart = CURRENT_COLOR
-  let iconColorEnd = CURRENT_COLOR
-  let iconGradientSource = TOKEN_GRADIENT_PRIMARY
-  if (variant === VARIANT_GRADIENT) {
-    iconColorStart = TOKEN_BRAND_PRIMARY
-    iconColorEnd = TOKEN_ACCENT_SECONDARY
-    iconGradientSource = TOKEN_GRADIENT_PRIMARY
-  } else if (variant === VARIANT_ACCENT_GRADIENT) {
-    iconColorStart = TOKEN_BRAND_SHADE
-    iconColorEnd = TOKEN_ACCENT
-    iconGradientSource = TOKEN_GRADIENT_ACCENT
-  } else if (variant === VARIANT_CUSTOM && gradient) {
-    iconGradientSource = gradient
-  }
-
-  const gradientIconId = `seal-tb-grad-${uid}`
-
-  let iconNode: React.ReactNode = null
-  if (IconEl && isGradientVariant) {
-    iconNode = (
-      <GradientIcon
-        icon={IconEl}
-        size={constantButtonIconSize}
-        gradientId={gradientIconId}
-        colorStart={iconColorStart}
-        colorEnd={iconColorEnd}
-        gradientSource={iconGradientSource}
-      />
-    )
-  } else if (IconEl) {
-    iconNode = <IconEl size={constantButtonIconSize} />
-  }
+  const iconNode = renderIcon(IconEl, variant, gradient, uid, 'tb')
 
   const labelNode = wrapperStyle ? <span style={wrapperStyle}>{children}</span> : children
 
@@ -267,25 +227,15 @@ export function SealTextButton({
       style={{ ...buttonStyle, ...style }}
       {...props}
     >
-      {loading ? (
-        <span className="relative flex items-center justify-center">
-          <span aria-hidden className="invisible flex items-center gap-2">
-            {IconEl && <IconEl size={constantButtonIconSize} />}
-            {children}
-          </span>
-          <span className="absolute inset-0 flex items-center justify-center">
-            <Loader2
-              className="h-[1em] w-[1em] animate-spin"
-              style={spinnerColor ? { color: spinnerColor } : undefined}
-            />
-          </span>
-        </span>
-      ) : (
-        <>
-          {iconNode}
-          {labelNode}
-        </>
-      )}
+      <ButtonContent
+        loading={loading}
+        iconNode={iconNode}
+        iconEl={IconEl}
+        labelNode={labelNode}
+        spinnerColor={spinnerColor}
+      >
+        {children}
+      </ButtonContent>
     </Button>
   )
 }
