@@ -51,7 +51,7 @@ function extractGradientInner(gradientStr: string): string {
       }
     }
   }
-  return end !== -1 ? gradientStr.slice(start + GRADIENT_PREFIX.length, end) : ''
+  return end === -1 ? '' : gradientStr.slice(start + GRADIENT_PREFIX.length, end)
 }
 
 // Splits a string by top-level commas, ignoring commas inside nested parens.

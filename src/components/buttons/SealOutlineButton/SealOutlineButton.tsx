@@ -192,7 +192,7 @@ export function SealOutlineButton({
   const uid = useId().replaceAll(':', '')
 
   const iconNode = renderIcon(IconEl, variant, gradient, uid, 'ob')
-  const labelNode = labelStyle != null ? <span style={labelStyle}>{children}</span> : undefined
+  const labelNode = labelStyle == null ? undefined : <span style={labelStyle}>{children}</span>
 
   return (
     <Button
