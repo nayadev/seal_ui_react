@@ -7,6 +7,7 @@ import { SealOutlineButton } from './SealOutlineButton'
 
 const GRADIENT_BORDER_CLASS = 'seal-gradient-border'
 const GRADIENT_CSS_VAR = '--seal-gb-gradient'
+const OB_HOVER_VAR = '--seal-ob-hover'
 
 describe('SealOutlineButton', () => {
   describe('rendering', () => {
@@ -68,27 +69,36 @@ describe('SealOutlineButton', () => {
         </SealOutlineButton>,
       )
       const btn = screen.getByRole('button')
-      // Gradient border is rendered via ::before with mask-composite — the button itself is transparent
+      // Gradient border via ::before mask-composite; hover uses first stop at 8% opacity
       expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
       expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe(
         'linear-gradient(to right, #f00, #00f)',
+      )
+      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
+        'color-mix(in srgb, #f00 8%, transparent)',
       )
     })
 
     it('applies primary gradient background token', () => {
       renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
       const btn = screen.getByRole('button')
-      // Gradient border is rendered via ::before; CSS variable targets the primary gradient
+      // Gradient border via ::before; hover uses brand-primary at 8% opacity
       expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
       expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-primary)')
+      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
+        'color-mix(in srgb, var(--seal-brand-primary) 8%, transparent)',
+      )
     })
 
     it('applies accent gradient background token', () => {
       renderWithTheme(<SealOutlineButton variant="accent-gradient">Boost</SealOutlineButton>)
       const btn = screen.getByRole('button')
-      // Gradient border is rendered via ::before; CSS variable targets the accent gradient
+      // Gradient border via ::before; hover uses brand-primary-shade at 8% opacity
       expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
       expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-accent)')
+      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
+        'color-mix(in srgb, var(--seal-brand-primary-shade) 8%, transparent)',
+      )
     })
 
     it('applies gradient clip-text style to label for gradient variant', () => {

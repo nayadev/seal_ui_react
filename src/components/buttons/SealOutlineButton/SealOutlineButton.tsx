@@ -10,6 +10,7 @@ import {
   TOKEN_ACCENT,
   TOKEN_ACCENT_SECONDARY,
   TOKEN_BRAND_PRIMARY,
+  TOKEN_BRAND_SHADE,
   TOKEN_GRADIENT_ACCENT,
   TOKEN_GRADIENT_PRIMARY,
   VARIANT_ACCENT_GRADIENT,
@@ -17,6 +18,7 @@ import {
   VARIANT_GRADIENT,
 } from '../shared'
 
+import { parseGradientStopColors } from '@/components/buttons/gradient-icon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -75,7 +77,6 @@ export interface SealOutlineButtonProps extends Omit<
 const OB_HOVER = '--seal-ob-hover'
 const OUTLINE_BASE = 'border bg-transparent'
 const HOVER_ACTIVE = 'hover:bg-[var(--seal-ob-hover)] active:opacity-[0.75]'
-const GRADIENT_HOVER = 'hover:opacity-[0.85] active:opacity-[0.75]'
 
 const CLIP_TEXT: React.CSSProperties = {
   WebkitBackgroundClip: 'text',
@@ -100,12 +101,15 @@ function buildSolidStyle(fg: string): OutlineVariantStyle {
   }
 }
 
-// Gradient border rendered by a ::before pseudo-element with mask-composite,
-// keeping the button interior truly transparent regardless of the background behind it.
-function buildGradientStyle(gradientValue: string): OutlineVariantStyle {
+// Gradient border via ::before mask-composite. Hover uses the first gradient stop at 8%
+// opacity — same colour-mix formula as solid variants for visual consistency.
+function buildGradientStyle(gradientValue: string, hoverColor: string): OutlineVariantStyle {
   return {
-    className: cn('border-0 bg-transparent', GRADIENT_HOVER, 'seal-gradient-border'),
-    style: { '--seal-gb-gradient': gradientValue } as React.CSSProperties,
+    className: cn('border-0 bg-transparent', HOVER_ACTIVE, 'seal-gradient-border'),
+    style: {
+      '--seal-gb-gradient': gradientValue,
+      [OB_HOVER]: `color-mix(in srgb, ${hoverColor} 8%, transparent)`,
+    } as React.CSSProperties,
     labelStyle: {
       background: gradientValue,
       ...CLIP_TEXT,
@@ -126,12 +130,16 @@ function getVariantStyle(
     case 'accent-secondary':
       return buildSolidStyle(TOKEN_ACCENT_SECONDARY)
     case VARIANT_GRADIENT:
-      return buildGradientStyle(TOKEN_GRADIENT_PRIMARY)
+      return buildGradientStyle(TOKEN_GRADIENT_PRIMARY, TOKEN_BRAND_PRIMARY)
     case VARIANT_ACCENT_GRADIENT:
-      return buildGradientStyle(TOKEN_GRADIENT_ACCENT)
-    case VARIANT_CUSTOM:
-      if (gradient) return buildGradientStyle(gradient)
+      return buildGradientStyle(TOKEN_GRADIENT_ACCENT, TOKEN_BRAND_SHADE)
+    case VARIANT_CUSTOM: {
+      if (gradient) {
+        const [firstStop] = parseGradientStopColors(gradient)
+        return buildGradientStyle(gradient, firstStop)
+      }
       return buildSolidStyle(color ?? CURRENT_COLOR)
+    }
   }
 }
 
