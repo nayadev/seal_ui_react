@@ -69,7 +69,6 @@ export interface SealTextButtonProps extends Omit<
 // CSS variable for the per-variant hover background color.
 const TB_HOVER = '--seal-tb-hover'
 const HOVER_ACTIVE = `hover:bg-[var(${TB_HOVER})] active:opacity-[0.75]`
-const GRADIENT_HOVER = 'hover:opacity-[0.85] active:opacity-[0.75]'
 
 const TOKEN_BRAND_PRIMARY = 'var(--seal-brand-primary)'
 const TOKEN_BRAND_SHADE = 'var(--seal-brand-primary-shade)'
@@ -131,14 +130,12 @@ function buildSolidStyle(fg: string): TextVariantStyle {
 
 function buildGradientVariantStyle(gradient: string, isLoading: boolean): TextVariantStyle {
   return {
-    className: cn(GRADIENT_HOVER),
+    // Flutter uses white.withValues(alpha: 0.08) as the hover background overlay.
+    className: 'hover:bg-white/[0.08] active:opacity-[0.75]',
     wrapperStyle: buildGradientUnderlineStyle(gradient, isLoading),
     buttonStyle: {
-      background: gradient,
-      // background-clip and WebkitTextFillColor on the button itself
-      // are superseded by the wrapper span when not loading.
-      // When loading, the spinner is outside the wrapper, so the button
-      // must be transparent so the spinner color is controlled separately.
+      // Keep the button background transparent — the gradient is applied only
+      // to the text via background-clip: text on the wrapper span.
       color: TOKEN_PRIMITIVE_WHITE,
     },
   }
