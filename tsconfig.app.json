@@ -28,5 +28,5 @@
     /* Test globals — makes describe, it, expect, vi typed within src/ */
     "types": ["vitest/globals"]
   },
-  "include": ["src"]
+  "include": ["src", "test"]
 }

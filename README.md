@@ -86,17 +86,49 @@ function ThemePicker() {
 
 ## Components
 
-> **Note:** Component library is being built progressively across sessions.
+> Component library is being built progressively across sessions. ✅ = shipped · 🔜 = coming soon
 
-| Category         | Components                                                                    |
-| ---------------- | ----------------------------------------------------------------------------- |
-| **Buttons**      | `SealFilledButton`, `SealOutlineButton`, `SealTextButton` — _coming soon_     |
-| **Inputs**       | `SealTextField`, `SealTextarea`, `SealCheckbox`, `SealSwitch` — _coming soon_ |
-| **Feedback**     | `SealAlert`, `SealToast` — _coming soon_                                      |
-| **Overlay**      | `SealDialog`, `SealSheet`, `SealPopover` — _coming soon_                      |
-| **Navigation**   | `SealTabs`, `SealBreadcrumb`, `SealMenubar` — _coming soon_                   |
-| **Data Display** | `SealCard`, `SealTable`, `SealBadge`, `SealAvatar` — _coming soon_            |
-| **Layout**       | `SealSeparator`, `SealResizablePanelGroup` — _coming soon_                    |
+| Component               | Category    | Status |
+| ----------------------- | ----------- | ------ |
+| `SealFilledButton`      | Buttons     | ✅     |
+| `SealOutlineButton`     | Buttons     | 🔜     |
+| `SealTextButton`        | Buttons     | 🔜     |
+| `SealIconButton`        | Buttons     | 🔜     |
+| `SealFilledIconButton`  | Buttons     | 🔜     |
+| `SealOutlineIconButton` | Buttons     | 🔜     |
+| `SealAlert`             | Feedback    | 🔜     |
+| `SealLoader`            | Feedback    | 🔜     |
+| `SealProgress`          | Feedback    | 🔜     |
+| `SealToast`             | Feedback    | 🔜     |
+| `SealSonner`            | Feedback    | 🔜     |
+| `SealTextField`         | Inputs      | 🔜     |
+| `SealTextarea`          | Inputs      | 🔜     |
+| `SealCheckbox`          | Inputs      | 🔜     |
+| `SealRadioGroup`        | Inputs      | 🔜     |
+| `SealSelect`            | Inputs      | 🔜     |
+| `SealSlider`            | Inputs      | 🔜     |
+| `SealSwitch`            | Inputs      | 🔜     |
+| `SealCalendar`          | Inputs      | 🔜     |
+| `SealDatePicker`        | Inputs      | 🔜     |
+| `SealTimePicker`        | Inputs      | 🔜     |
+| `SealInputOtp`          | Inputs      | 🔜     |
+| `SealForm`              | Inputs      | 🔜     |
+| `SealTooltip`           | Interaction | 🔜     |
+| `SealAccordion`         | Layout      | 🔜     |
+| `SealAvatar`            | Layout      | 🔜     |
+| `SealBadge`             | Layout      | 🔜     |
+| `SealBreadcrumb`        | Layout      | 🔜     |
+| `SealCard`              | Layout      | 🔜     |
+| `SealContainer`         | Layout      | 🔜     |
+| `SealMenubar`           | Layout      | 🔜     |
+| `SealResizable`         | Layout      | 🔜     |
+| `SealSeparator`         | Layout      | 🔜     |
+| `SealTable`             | Layout      | 🔜     |
+| `SealTabs`              | Layout      | 🔜     |
+| `SealDialog`            | Overlay     | 🔜     |
+| `SealSheet`             | Overlay     | 🔜     |
+| `SealPopover`           | Overlay     | 🔜     |
+| `SealContextMenu`       | Overlay     | 🔜     |
 
 ---
 

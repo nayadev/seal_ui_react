@@ -128,7 +128,25 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 - Pass Seal design tokens (CSS variables) into the shadcn component's styling parameters.
 - When a shadcn component doesn't support the styling needed, wrap it with a standard HTML element.
 
-> The complete shadcn → Seal mapping table will be populated as components are built in subsequent sessions.
+### shadcn → Seal Component Mapping
+
+| shadcn primitive                          | Seal wrappers                                                                                                                |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Button` (`src/components/ui/button.tsx`) | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
+
+### Buttons — Implementation Notes
+
+**Gradient backgrounds require inline `style`**
+Tailwind's `bg-[...]` maps to `background-color`, which does not accept CSS gradient values. Gradient variants (e.g. `var(--seal-gradient-primary)`) must be applied via `style={{ background: '...' }}`.
+
+**Hover / active states use opacity**
+All button variants use `hover:opacity-[0.85] active:opacity-[0.75]` for interaction feedback instead of per-color hover overrides. This matches the Flutter implementation's `withValues(alpha: 0.85)` approach and keeps the code free of per-token hover classes.
+
+**Loading state preserves button dimensions**
+When `loading` is `true`, the label and icon are rendered as an invisible overlay (`aria-hidden + invisible` class) so the button keeps its natural size. The spinner is absolutely positioned on top. This mirrors Flutter's `maintainSize` stack.
+
+**Component file structure**
+Components are co-located with their tests and stories in `src/components/<category>/<ComponentName>/`. Stories are NOT in a separate `src/stories/` tree — both live in the component folder.
 
 ---
 
