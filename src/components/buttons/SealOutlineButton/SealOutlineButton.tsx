@@ -18,7 +18,7 @@ import {
   VARIANT_GRADIENT,
 } from '../shared'
 
-import { parseGradientStopColors } from '@/components/buttons/gradient-icon'
+import { parseGradientStopColors } from '@/components/buttons/gradientIcon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -200,7 +200,7 @@ export function SealOutlineButton({
       disabled={(disabled ?? false) || loading}
       aria-busy={loading || undefined}
       className={cn(
-        'rounded-[var(--seal-radius-sm)] font-medium',
+        'rounded-[var(--seal-radius-sm)] font-style-small',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         variantClass,
         className,

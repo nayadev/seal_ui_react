@@ -81,7 +81,7 @@ function getVariantClass(variant: SealFilledIconButtonVariant): string {
     case 'accent-gradient':
       return cn('text-[var(--seal-accent-on-accent)]', HOVER_ACTIVE)
     case 'custom':
-      return cn('text-white', HOVER_ACTIVE)
+      return cn('text-[var(--seal-primitive-white)]', HOVER_ACTIVE)
   }
 }
 
@@ -129,7 +129,6 @@ export function SealFilledIconButton({
 }: Readonly<SealFilledIconButtonProps>) {
   const backgroundStyle = resolveBackground(variant, color, gradient)
 
-  // Explicit title prop takes precedence, otherwise fallback to tooltip
   const finalTitle = title ?? tooltip
 
   return (

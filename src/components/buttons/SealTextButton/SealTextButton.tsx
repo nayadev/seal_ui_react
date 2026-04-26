@@ -102,7 +102,7 @@ function buildGradientUnderlineStyle(gradient: string, hide: boolean): React.CSS
     WebkitBackgroundClip: 'text, padding-box',
     backgroundClip: 'text, padding-box',
     WebkitTextFillColor: 'transparent',
-    paddingBottom: '2px',
+    paddingBottom: 'var(--seal-dimension-xxxs)',
   }
 }
 
@@ -128,7 +128,7 @@ function buildSolidStyle(fg: string): TextVariantStyle {
 function buildGradientVariantStyle(gradient: string, isLoading: boolean): TextVariantStyle {
   return {
     // Flutter uses white.withValues(alpha: 0.08) as the hover background overlay.
-    className: 'hover:bg-white/[0.08] active:opacity-[0.75]',
+    className: 'hover:bg-primitive-white/[0.08] active:opacity-[0.75]',
     wrapperStyle: buildGradientUnderlineStyle(gradient, isLoading),
     buttonStyle: {
       // Keep the button background transparent — the gradient is applied only
@@ -219,7 +219,7 @@ export function SealTextButton({
       disabled={(disabled ?? false) || loading}
       aria-busy={loading || undefined}
       className={cn(
-        'rounded-[var(--seal-radius-sm)] font-medium',
+        'rounded-[var(--seal-radius-sm)] font-style-small',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         variantClass,
         className,

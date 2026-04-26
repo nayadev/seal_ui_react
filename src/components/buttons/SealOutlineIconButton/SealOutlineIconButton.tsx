@@ -18,7 +18,7 @@ import {
   VARIANT_GRADIENT,
 } from '../shared'
 
-import { parseGradientStopColors } from '@/components/buttons/gradient-icon'
+import { parseGradientStopColors } from '@/components/buttons/gradientIcon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -177,7 +177,6 @@ export function SealOutlineIconButton({
 
   const iconNode = renderIcon(IconEl, variant, gradient, uid, 'oib')
 
-  // Explicit title prop takes precedence, otherwise fallback to tooltip
   const finalTitle = title ?? tooltip
 
   return (

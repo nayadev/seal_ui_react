@@ -2,7 +2,7 @@ import { constantButtonIconSize } from '@sealui/tokens'
 import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 
-import { GradientIcon, parseGradientStopColors } from '@/components/buttons/gradient-icon'
+import { GradientIcon, parseGradientStopColors } from '@/components/buttons/gradientIcon'
 import { SealBouncingDots } from '@/components/feedback/SealBouncingDots'
 
 /** Common button variants for SealUI buttons. */
@@ -109,7 +109,7 @@ export function ButtonContent({
   if (loading) {
     return (
       <span className="relative flex items-center justify-center">
-        <span aria-hidden className="invisible flex items-center gap-2">
+        <span aria-hidden className="invisible flex items-center gap-dimension-xs">
           {IconEl && <IconEl size={constantButtonIconSize} />}
           {children}
         </span>

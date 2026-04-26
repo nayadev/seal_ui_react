@@ -79,7 +79,7 @@ function getVariantClass(variant: SealFilledButtonVariant): string {
     case 'accent-gradient':
       return cn('text-[var(--seal-accent-on-accent)]', HOVER_ACTIVE)
     case 'custom':
-      return cn('text-white', HOVER_ACTIVE)
+      return cn('text-[var(--seal-primitive-white)]', HOVER_ACTIVE)
   }
 }
 
@@ -139,7 +139,7 @@ export function SealFilledButton({
       disabled={(disabled ?? false) || loading}
       aria-busy={loading || undefined}
       className={cn(
-        'rounded-[var(--seal-radius-sm)] font-medium',
+        'rounded-[var(--seal-radius-sm)] font-style-small',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         getVariantClass(variant),
         className,

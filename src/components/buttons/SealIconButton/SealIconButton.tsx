@@ -94,7 +94,7 @@ function buildSolidStyle(fg: string): IconVariantStyle {
 function buildGradientVariantStyle(): IconVariantStyle {
   return {
     // White overlay with 8% opacity for hover interaction feedback.
-    className: 'hover:bg-white/[0.08] active:opacity-[0.75]',
+    className: 'hover:bg-primitive-white/[0.08] active:opacity-[0.75]',
     buttonStyle: {
       color: TOKEN_PRIMITIVE_WHITE,
     },
@@ -162,7 +162,6 @@ export function SealIconButton({
 
   const iconNode = renderIcon(IconEl, variant, gradient, uid, 'ib')
 
-  // Explicit title prop takes precedence, otherwise fallback to tooltip
   const finalTitle = title ?? tooltip
 
   return (

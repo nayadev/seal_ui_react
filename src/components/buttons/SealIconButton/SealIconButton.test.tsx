@@ -1,19 +1,11 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Rocket } from 'lucide-react'
-import * as React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
+import { renderWithTheme } from '../../../../test/utils'
+
 import { SealIconButton } from './SealIconButton'
-
-import { ThemeProvider } from '@/theme/ThemeProvider'
-
-const renderWithTheme = (ui: React.ReactElement) =>
-  render(
-    <ThemeProvider theme="nebula" mode="dark">
-      {ui}
-    </ThemeProvider>,
-  )
 
 describe('SealIconButton', () => {
   it('renders without error with minimal props', () => {
