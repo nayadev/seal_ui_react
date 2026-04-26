@@ -90,9 +90,9 @@ export function SealAlert({ variant, title, description, className }: Readonly<S
       )}
       <AlertDescription
         className={cn(
-          title !== undefined
-            ? 'text-[var(--seal-text-secondary)]'
-            : 'text-[var(--seal-text-primary)]',
+          title === undefined
+            ? 'text-[var(--seal-text-primary)]'
+            : 'text-[var(--seal-text-secondary)]',
         )}
       >
         {description}
