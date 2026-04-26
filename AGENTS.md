@@ -142,9 +142,19 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | shadcn primitive                          | Seal wrappers                                                                                                                |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `Button` (`src/components/ui/button.tsx`) | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
+| `Alert` (`src/components/ui/alert.tsx`)   | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
 
 ### Feedback — Implementation Notes
+
+**SealAlert uses CSS `color-mix` for opacity-tinted surfaces**
+Background (8% opacity) and border (35% opacity) are derived from the semantic color token using `color-mix(in srgb, var(--seal-semantic-*) 8%, transparent)`. This avoids hardcoded alpha values and stays token-driven. Applying opacity via `style` prop rather than Tailwind because Tailwind's `bg-opacity` utilities do not apply to arbitrary CSS variable values.
+
+**SealAlert internal icon type**
+The `VARIANT_ICON` map uses `React.ComponentType<React.SVGAttributes<SVGElement> & { size?: number }>` — a broader internal type than the public `SealIcon`. This allows passing `style` and `aria-hidden` to lucide icons without widening the public API. The `SealIcon` type (used in public props) remains `{ size?, className? }` only.
+
+**SealAlert aria-live strategy**
+`error` variant uses `aria-live="assertive"` to interrupt screen reader flow for critical failures. All other variants use `polite` to avoid disrupting ongoing announcements.
 
 **SealBouncingDots is shared between Feedback and Buttons**
 `SealBouncingDots` lives in `src/components/feedback/` but is imported by `src/components/buttons/shared.tsx` for the button loading state. This cross-category dependency is intentional — it is the single source of truth for the bouncing animation. The internal `bouncing-dots.tsx` file that previously existed in `buttons/` has been removed.

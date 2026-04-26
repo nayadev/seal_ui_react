@@ -12,4 +12,5 @@ export * from './components/buttons/SealOutlineIconButton'
 export * from './components/buttons/SealTextButton'
 
 // Feedback
+export * from './components/feedback/SealAlert'
 export * from './components/feedback/SealBouncingDots'
