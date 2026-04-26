@@ -1,4 +1,3 @@
-import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 import { useId } from 'react'
 
@@ -20,6 +19,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import type { SealIcon } from '@/types/icon'
 
 /** Visual style variants for `SealTextButton`. */
 export type SealTextButtonVariant = SealButtonVariant
@@ -50,7 +50,7 @@ export interface SealTextButtonProps extends Omit<
    */
   loading?: boolean
   /**
-   * Lucide icon component rendered as a leading icon before the label.
+   * Icon component rendered as a leading icon before the label.
    * Pass the component reference — the button controls its size using the
    * `--seal-constant-button-icon-size` token.
    * Hidden automatically when `loading` is `true`.
@@ -59,7 +59,7 @@ export interface SealTextButtonProps extends Omit<
    * import { ArrowRight } from 'lucide-react'
    * <SealTextButton icon={ArrowRight}>Learn more</SealTextButton>
    */
-  icon?: LucideIcon
+  icon?: SealIcon
   /**
    * Solid CSS color for the `custom` variant.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).

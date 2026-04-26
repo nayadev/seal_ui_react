@@ -154,8 +154,19 @@ The `@keyframes seal-bounce-dot` animation is defined globally in `src/index.css
 
 ### Buttons — Implementation Notes
 
-**Icon props accept `LucideIcon` component references, not JSX**
-All `icon` props across Seal UI components accept a `LucideIcon` from `lucide-react` — the component reference, not rendered JSX. The component controls icon sizing via the `constantButtonIconSize` token. This mirrors how Flutter passes `IconData` (the type, not an instance).
+**Icon props accept a generic component reference, not a library-specific type:**
+
+```tsx
+// ✅ correct — library-agnostic
+icon?: SealIcon // React.ComponentType<{ size?: number; className?: string }>
+
+// ❌ wrong — coupled to lucide-react
+icon?: LucideIcon
+```
+
+Lucide React is the default icon library used in stories and examples, but component APIs must never reference it in type signatures.
+
+All `icon` props accept a `SealIcon` component reference, not rendered JSX. The component controls icon sizing via the `constantButtonIconSize` token. This mirrors how Flutter passes `IconData` (the type, not an instance).
 
 ```tsx
 // ✅ correct

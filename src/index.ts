@@ -1,3 +1,5 @@
+export type { SealIcon } from './types/icon'
+
 export * from './theme/ThemeProvider'
 export * from './theme/useTheme'
 

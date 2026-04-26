@@ -1,9 +1,9 @@
 import { constantButtonIconSize } from '@sealui/tokens'
-import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { GradientIcon, parseGradientStopColors } from '@/components/buttons/gradientIcon'
 import { SealBouncingDots } from '@/components/feedback/SealBouncingDots'
+import type { SealIcon } from '@/types/icon'
 
 /** Common button variants for SealUI buttons. */
 export type SealButtonVariant =
@@ -52,7 +52,7 @@ export function resolveIconGradientInfo(variant: string, gradient?: string) {
 
 /** Resolves and renders the appropriate icon node for the button variant. */
 export function renderIcon(
-  IconEl: LucideIcon | undefined,
+  IconEl: SealIcon | undefined,
   variant: string,
   gradient: string | undefined,
   uid: string,
@@ -91,7 +91,7 @@ export function renderIcon(
 export interface ButtonContentProps {
   loading: boolean
   iconNode?: React.ReactNode | undefined
-  iconEl?: LucideIcon | undefined
+  iconEl?: SealIcon | undefined
   children: React.ReactNode
   labelNode?: React.ReactNode | undefined
   spinnerColor?: string | undefined

@@ -1,10 +1,10 @@
-import type { LucideIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { ButtonContent, type SealButtonVariant } from '../shared'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import type { SealIcon } from '@/types/icon'
 
 /** Visual style variants for `SealFilledIconButton`. */
 export type SealFilledIconButtonVariant = SealButtonVariant
@@ -34,12 +34,12 @@ export interface SealFilledIconButtonProps extends Omit<
    */
   loading?: boolean
   /**
-   * Lucide icon component to display.
+   * Icon component to display.
    * Pass the component reference — the button controls its size using the
    * `--seal-constant-button-icon-size` token.
    * Hidden automatically when `loading` is `true`.
    */
-  icon: LucideIcon
+  icon: SealIcon
   /**
    * Solid CSS color for the `custom` variant.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).

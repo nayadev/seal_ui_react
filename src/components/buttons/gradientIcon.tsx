@@ -1,9 +1,10 @@
-import type { LucideIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-/** Props for the gradient-painted Lucide icon. */
+import type { SealIcon } from '@/types/icon'
+
+/** Props for the gradient-painted icon component. */
 export interface GradientIconProps {
-  readonly icon: LucideIcon
+  readonly icon: SealIcon
   readonly size: string | number
   readonly gradientId: string
   readonly colorStart: string
@@ -136,21 +137,31 @@ export function resolveGradientCoords(gradientSource: string): typeof GRADIENT_F
   return parseSvgGradientCoords(str)
 }
 
+// Lucide icons render as SVG elements and accept SVG-specific props for gradient painting.
+// This cast is intentional — the `stroke` and `children` usage is an internal rendering detail
+// not reflected in the public SealIcon contract.
+type SvgIcon = React.ComponentType<{
+  size?: number | string
+  stroke?: string
+  children?: React.ReactNode
+}>
+
 /**
- * Renders a Lucide icon with its stroke painted via an SVG linearGradient.
+ * Renders an icon with its stroke painted via an SVG linearGradient.
  *
  * Mirrors Flutter's `ShaderMask` approach: both text and icon are covered by the
  * same gradient shader. The linearGradient direction is kept in sync with the
  * active CSS gradient token via a `MutationObserver` on `<html class>`.
  */
 export function GradientIcon({
-  icon: IconEl,
+  icon,
   size,
   gradientId,
   colorStart,
   colorEnd,
   gradientSource,
 }: GradientIconProps) {
+  const IconEl = icon as SvgIcon
   // For raw gradient strings (custom variant), resolve on the spot during render.
   // For CSS variable references, start with GRADIENT_FALLBACK_COORDS and let the
   // MutationObserver update coords once ThemeProvider applies the theme class.
