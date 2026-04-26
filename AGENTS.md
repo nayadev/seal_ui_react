@@ -121,6 +121,15 @@ ThemeProvider manages the active class on `<html>` automatically. Never apply th
 
 ## shadcn/ui Integration
 
+`src/components/ui/` contains shadcn primitives installed via the shadcn CLI (`npx shadcn@latest add <component>`).
+**Never edit files in `src/components/ui/` manually** — they are managed by the CLI.
+**Never import from `src/components/ui/` in application code** — always use the `Seal*` wrappers.
+To add a new primitive: `npx shadcn@latest add <component-name>`
+
+After running `npx shadcn@latest add`, check the generated file against `npm run lint` — the CLI output may need minor import-order or type adjustments to satisfy the project's strict ESLint rules. Make those fixes directly in the generated file; they are not considered "manual edits" in the prohibited sense.
+
+The project config is in `components.json` at the repo root. Never delete or hand-edit that file.
+
 Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives:
 
 - **Never use raw shadcn components directly in consuming apps** — always use the `Seal*` wrappers.
