@@ -181,11 +181,19 @@ Components are co-located with their tests and stories in `src/components/<categ
 
 ## Naming Conventions
 
-- All public components use the `Seal` prefix: `SealButton`, `SealTextField`, `SealCard`.
-- File names use kebab-case: `seal-button.tsx`, `seal-text-field.tsx`.
-- Story files: `SealButton.stories.tsx` (PascalCase prefix).
-- Theme files: `deep_ocean.ts` (snake_case matching the theme name).
-- Type exports: PascalCase — `ThemeName`, `ThemeMode`, `ThemeContextValue`.
+| What                   | Convention                              | Example                              |
+| ---------------------- | --------------------------------------- | ------------------------------------ |
+| Component files        | PascalCase                              | `SealFilledButton.tsx`               |
+| Test files             | PascalCase                              | `SealFilledButton.test.tsx`          |
+| Story files            | PascalCase                              | `SealFilledButton.stories.tsx`       |
+| Component classes      | PascalCase with `Seal` prefix           | `SealFilledButton`                   |
+| Type / interface names | PascalCase                              | `SealFilledButtonProps`, `ThemeName` |
+| Hooks                  | camelCase                               | `useTheme.ts`, `useMediaQuery.ts`    |
+| Utilities and configs  | camelCase                               | `themeConfig.ts`, `cn.ts`            |
+| Theme files            | snake_case matching theme name          | `deep_ocean.ts`                      |
+| `src/components/ui/`   | shadcn CLI convention (lowercase/kebab) | `button.tsx`, `input-otp.tsx`        |
+
+**`src/components/ui/` is the only exception** — these files are managed by the shadcn CLI and must never be renamed.
 
 ---
 
@@ -281,18 +289,18 @@ export function ThemeProvider({ theme, mode, children }: ThemeProviderProps) { .
 
 When adding a new component to SealUI React, follow these steps in order:
 
-1. **Create the component file** in `src/components/<category>/seal-<name>.tsx`.
+1. **Create the component file** in `src/components/<category>/Seal<n>.tsx`.
    - Always wrap the nearest shadcn primitive — check `@/components/ui/` first.
    - Use CSS variables for all visual properties.
    - Add JSDoc to the component and all public props.
 
 2. **Export from the barrel** `src/index.ts` — keep alphabetical order within each category.
 
-3. **Write tests** in `src/components/<category>/seal-<name>.test.tsx`.
+3. **Write tests** in `ssrc/components/<category>/Seal<n>.test.tsx`.
    - Use `renderWithTheme()` helper (wraps in ThemeProvider).
    - Test: rendering, interaction, disabled state, variants.
 
-4. **Add a Storybook story** `src/stories/<Category>/Seal<Name>.stories.tsx`.
+4. **Add a Storybook story** `src/stories/<Category>/Seal<n>.stories.tsx`.
    - Use `autodocs`.
    - Add `argTypes` for all public props.
    - Include at least: Default, Variants, Disabled states.
