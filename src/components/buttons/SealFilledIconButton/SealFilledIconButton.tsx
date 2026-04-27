@@ -10,7 +10,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealFilledIconButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealFilledIconButton`.
+ * Props accepted by `SealFilledIconButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -20,12 +20,7 @@ export interface SealFilledIconButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand color fill.
-   * - `accent`: accent color fill.
-   * - `accent-secondary`: secondary-accent fill.
-   * - `gradient`: primary gradient background.
-   * - `accent-gradient`: accent gradient background.
-   * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
+   * Prefer compound sub-components (`SealFilledIconButton.Primary`, etc.) over this prop.
    */
   variant?: SealFilledIconButtonVariant
   /**
@@ -41,15 +36,13 @@ export interface SealFilledIconButtonProps extends Omit<
    */
   icon: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealFilledIconButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
+   * CSS gradient string for `SealFilledIconButton.Custom`.
    * Must be a valid CSS gradient string (e.g. `'linear-gradient(to right, #f00, #00f)'`).
-   * Ignored for all other variants.
    */
   gradient?: string
   /**
@@ -99,22 +92,7 @@ function resolveBackground(
   return {}
 }
 
-/**
- * A compact icon-only button with a filled background.
- *
- * Built on shadcn's default button. Designed for prominent actions in toolbars,
- * app bars, and FAB-like contexts. Always provide a `tooltip` or `title` for accessibility.
- *
- * @example
- * <SealFilledIconButton variant="primary" icon={Plus} tooltip="Add item" onClick={handleAdd} />
- *
- * @example
- * <SealFilledIconButton variant="gradient" icon={Rocket} tooltip="Launch" />
- *
- * @example
- * <SealFilledIconButton variant="custom" color="#e53935" icon={Trash} tooltip="Delete" />
- */
-export function SealFilledIconButton({
+function SealFilledIconButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -154,3 +132,70 @@ export function SealFilledIconButton({
     </Button>
   )
 }
+
+SealFilledIconButtonImpl.displayName = 'SealFilledIconButton'
+
+type BaseProps = Omit<SealFilledIconButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealFilledIconButtonProps, 'variant'>
+
+/** Filled icon button using the primary brand color. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealFilledIconButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealFilledIconButton.Primary'
+
+/** Filled icon button using the accent color. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealFilledIconButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealFilledIconButton.Accent'
+
+/** Filled icon button using the secondary accent color. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealFilledIconButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealFilledIconButton.AccentSecondary'
+
+/** Filled icon button with primary gradient background. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealFilledIconButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealFilledIconButton.Gradient'
+
+/** Filled icon button with accent gradient background. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealFilledIconButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealFilledIconButton.AccentGradient'
+
+/**
+ * Filled icon button with an arbitrary fill color or gradient.
+ * Pass `color` for a solid fill or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealFilledIconButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealFilledIconButton.Custom'
+
+/**
+ * Compact icon-only button with a filled background.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealFilledIconButton.Primary icon={Plus} tooltip="Add item" onClick={handleAdd} />
+ * <SealFilledIconButton.Gradient icon={Rocket} tooltip="Launch" />
+ * <SealFilledIconButton.Custom color="#e53935" icon={Trash} tooltip="Delete" />
+ * ```
+ *
+ * Always provide `tooltip` or `title` for screen-reader accessibility.
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealFilledIconButton = Object.assign(SealFilledIconButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

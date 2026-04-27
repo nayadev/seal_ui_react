@@ -131,6 +131,39 @@ function ThemePicker() {
 | `SealPopover`           | Overlay     | 🔜     |
 | `SealContextMenu`       | Overlay     | 🔜     |
 
+### Using Components — Compound Component API
+
+All Seal components use the **Compound Component** pattern. Sub-components pre-select the variant for a clean, discoverable API:
+
+```tsx
+import { SealFilledButton, SealOutlineButton, SealTextButton, SealAlert } from '@sealui/react'
+
+// Buttons — use sub-components for the preferred API
+<SealFilledButton.Primary onClick={handleClick}>Launch</SealFilledButton.Primary>
+<SealFilledButton.Accent icon={Rocket}>Go</SealFilledButton.Accent>
+<SealFilledButton.Gradient>Explore</SealFilledButton.Gradient>
+<SealFilledButton.Custom color="#e53935">Delete</SealFilledButton.Custom>
+
+<SealOutlineButton.Primary>Cancel</SealOutlineButton.Primary>
+<SealOutlineButton.AccentSecondary>Filter</SealOutlineButton.AccentSecondary>
+
+<SealTextButton.Accent>Learn more</SealTextButton.Accent>
+
+// Icon buttons
+<SealIconButton.Primary icon={Settings} tooltip="Settings" />
+<SealFilledIconButton.Gradient icon={Sparkles} tooltip="Magic" />
+<SealOutlineIconButton.AccentGradient icon={Zap} tooltip="Boost" />
+
+// Alerts
+<SealAlert.Info title="Heads up">Something to note.</SealAlert.Info>
+<SealAlert.Success title="Done">Your changes were saved.</SealAlert.Success>
+<SealAlert.Warning title="Caution">Review before continuing.</SealAlert.Warning>
+<SealAlert.Error title="Failed">Something went wrong.</SealAlert.Error>
+
+// Root with explicit variant — for programmatic/dynamic use
+<SealFilledButton variant={activeVariant}>Dynamic</SealFilledButton>
+```
+
 ---
 
 ## Token Integration

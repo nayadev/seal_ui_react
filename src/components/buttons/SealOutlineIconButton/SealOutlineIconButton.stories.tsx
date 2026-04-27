@@ -13,116 +13,186 @@ import { SealOutlineIconButton } from './SealOutlineIconButton'
 
 const meta = {
   title: 'Buttons/SealOutlineIconButton',
-  component: SealOutlineIconButton,
+  component: SealOutlineIconButton.Primary,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'accent', 'accent-secondary', 'gradient', 'accent-gradient', 'custom'],
-    },
+    icon: { table: { disable: true } },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    color: { control: 'color', if: { arg: 'variant', eq: 'custom' } },
-    gradient: { control: 'text', if: { arg: 'variant', eq: 'custom' } },
     tooltip: { control: 'text' },
   },
-} satisfies Meta<typeof SealOutlineIconButton>
+} satisfies Meta<typeof SealOutlineIconButton.Primary>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { icon: Share2, tooltip: 'Share', variant: 'primary' },
+  args: { icon: Share2, tooltip: 'Share' },
+  parameters: {
+    docs: { source: { code: `<SealOutlineIconButton.Primary icon={Share2} tooltip="Share" />` } },
+  },
+  render: () => <SealOutlineIconButton.Primary icon={Share2} tooltip="Share" />,
 }
 
 export const Primary: Story = {
-  args: { icon: Share2, tooltip: 'Share', variant: 'primary' },
+  args: { icon: Share2, tooltip: 'Share' },
+  parameters: {
+    docs: { source: { code: `<SealOutlineIconButton.Primary icon={Share2} tooltip="Share" />` } },
+  },
+  render: () => <SealOutlineIconButton.Primary icon={Share2} tooltip="Share" />,
 }
 
 export const Accent: Story = {
-  args: { icon: Bookmark, tooltip: 'Save', variant: 'accent' },
+  args: { icon: Bookmark, tooltip: 'Save' },
+  parameters: {
+    docs: { source: { code: `<SealOutlineIconButton.Accent icon={Bookmark} tooltip="Save" />` } },
+  },
+  render: () => <SealOutlineIconButton.Accent icon={Bookmark} tooltip="Save" />,
 }
 
 export const AccentSecondary: Story = {
-  args: { icon: SlidersHorizontal, tooltip: 'Filter', variant: 'accent-secondary' },
+  args: { icon: SlidersHorizontal, tooltip: 'Filter' },
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineIconButton.AccentSecondary icon={SlidersHorizontal} tooltip="Filter" />`,
+      },
+    },
+  },
+  render: () => <SealOutlineIconButton.AccentSecondary icon={SlidersHorizontal} tooltip="Filter" />,
 }
 
 export const Gradient: Story = {
-  args: { icon: Sparkles, tooltip: 'Magic', variant: 'gradient' },
+  args: { icon: Sparkles, tooltip: 'Magic' },
+  parameters: {
+    docs: {
+      source: { code: `<SealOutlineIconButton.Gradient icon={Sparkles} tooltip="Magic" />` },
+    },
+  },
+  render: () => <SealOutlineIconButton.Gradient icon={Sparkles} tooltip="Magic" />,
 }
 
 export const AccentGradient: Story = {
-  args: { icon: Zap, tooltip: 'Boost', variant: 'accent-gradient' },
+  args: { icon: Zap, tooltip: 'Boost' },
+  parameters: {
+    docs: {
+      source: { code: `<SealOutlineIconButton.AccentGradient icon={Zap} tooltip="Boost" />` },
+    },
+  },
+  render: () => <SealOutlineIconButton.AccentGradient icon={Zap} tooltip="Boost" />,
 }
 
 export const CustomColor: Story = {
-  args: { icon: TriangleAlert, variant: 'custom', color: '#e53935', tooltip: 'Warning' },
+  args: { icon: TriangleAlert, tooltip: 'Warning' },
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineIconButton.Custom color="#e53935" icon={TriangleAlert} tooltip="Warning" />`,
+      },
+    },
+  },
+  render: () => (
+    <SealOutlineIconButton.Custom color="#e53935" icon={TriangleAlert} tooltip="Warning" />
+  ),
 }
 
 export const CustomGradient: Story = {
-  args: {
-    icon: Settings,
-    variant: 'custom',
-    gradient: 'linear-gradient(to right, #7b2ff7, #f107a3)',
-    tooltip: 'Custom',
+  args: { icon: Settings, tooltip: 'Custom' },
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineIconButton.Custom
+  gradient="linear-gradient(to right, #7b2ff7, #f107a3)"
+  icon={Settings}
+  tooltip="Custom"
+/>`,
+      },
+    },
   },
+  render: () => (
+    <SealOutlineIconButton.Custom
+      gradient="linear-gradient(to right, #7b2ff7, #f107a3)"
+      icon={Settings}
+      tooltip="Custom"
+    />
+  ),
 }
 
 export const Loading: Story = {
-  args: { icon: Share2, variant: 'primary', loading: true, tooltip: 'Loading' },
+  args: { icon: Share2, tooltip: 'Loading', loading: true },
+  parameters: {
+    docs: {
+      source: { code: `<SealOutlineIconButton.Primary icon={Share2} tooltip="Loading" loading />` },
+    },
+  },
+  render: () => <SealOutlineIconButton.Primary icon={Share2} tooltip="Loading" loading />,
 }
 
 export const Disabled: Story = {
-  args: { icon: Share2, variant: 'primary', disabled: true, tooltip: 'Disabled' },
+  args: { icon: Share2, tooltip: 'Disabled', disabled: true },
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineIconButton.Primary icon={Share2} tooltip="Disabled" disabled />`,
+      },
+    },
+  },
+  render: () => <SealOutlineIconButton.Primary icon={Share2} tooltip="Disabled" disabled />,
 }
 
 export const AllVariants: Story = {
   args: { icon: Share2, loading: false, disabled: false },
-  render: ({ loading = false, disabled = false }) => (
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineIconButton.Primary icon={Share2} tooltip="Primary" />
+<SealOutlineIconButton.Accent icon={Bookmark} tooltip="Accent" />
+<SealOutlineIconButton.AccentSecondary icon={SlidersHorizontal} tooltip="Accent Secondary" />
+<SealOutlineIconButton.Gradient icon={Sparkles} tooltip="Gradient" />
+<SealOutlineIconButton.AccentGradient icon={Zap} tooltip="Accent Gradient" />
+<SealOutlineIconButton.Custom color="#e53935" icon={TriangleAlert} tooltip="Custom" />`,
+      },
+    },
+  },
+  render: ({ loading, disabled }) => (
     <div className="flex gap-4 items-center">
-      <SealOutlineIconButton
-        variant="primary"
+      <SealOutlineIconButton.Primary
         icon={Share2}
         tooltip="Primary"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
-      <SealOutlineIconButton
-        variant="accent"
+      <SealOutlineIconButton.Accent
         icon={Bookmark}
         tooltip="Accent"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
-      <SealOutlineIconButton
-        variant="accent-secondary"
+      <SealOutlineIconButton.AccentSecondary
         icon={SlidersHorizontal}
         tooltip="Accent Secondary"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
-      <SealOutlineIconButton
-        variant="gradient"
+      <SealOutlineIconButton.Gradient
         icon={Sparkles}
         tooltip="Gradient"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
-      <SealOutlineIconButton
-        variant="accent-gradient"
+      <SealOutlineIconButton.AccentGradient
         icon={Zap}
         tooltip="Accent Gradient"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
-      <SealOutlineIconButton
-        variant="custom"
+      <SealOutlineIconButton.Custom
         color="#e53935"
         icon={TriangleAlert}
         tooltip="Custom"
-        loading={loading}
-        disabled={disabled}
+        loading={loading ?? false}
+        disabled={disabled ?? false}
       />
     </div>
   ),

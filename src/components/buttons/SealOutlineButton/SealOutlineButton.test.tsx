@@ -12,64 +12,84 @@ const OB_HOVER_VAR = '--seal-ob-hover'
 describe('SealOutlineButton', () => {
   describe('rendering', () => {
     it('renders without errors', () => {
-      renderWithTheme(<SealOutlineButton>Cancel</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary>Cancel</SealOutlineButton.Primary>)
       expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument()
     })
 
     it('renders children as the button label', () => {
-      renderWithTheme(<SealOutlineButton>Learn More</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary>Learn More</SealOutlineButton.Primary>)
       expect(screen.getByText('Learn More')).toBeInTheDocument()
     })
 
     it('renders the leading icon when provided', () => {
-      renderWithTheme(<SealOutlineButton icon={Star}>Favorite</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary icon={Star}>Favorite</SealOutlineButton.Primary>)
       expect(screen.getByText('Favorite')).toBeInTheDocument()
       expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
-    it('renders a plain icon for non-gradient variants', () => {
-      renderWithTheme(
-        <SealOutlineButton variant="primary" icon={Star}>
-          Primary
-        </SealOutlineButton>,
-      )
+    it('renders a plain icon for non-gradient sub-components', () => {
+      renderWithTheme(<SealOutlineButton.Primary icon={Star}>Primary</SealOutlineButton.Primary>)
       expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
     it('applies custom className', () => {
-      renderWithTheme(<SealOutlineButton className="my-custom-class">Go</SealOutlineButton>)
+      renderWithTheme(
+        <SealOutlineButton.Primary className="my-custom-class">Go</SealOutlineButton.Primary>,
+      )
       expect(screen.getByRole('button')).toHaveClass('my-custom-class')
     })
   })
 
-  describe('variants', () => {
-    it.each(['primary', 'accent', 'accent-secondary', 'gradient', 'accent-gradient'] as const)(
-      'renders %s variant without errors',
-      (variant) => {
-        renderWithTheme(<SealOutlineButton variant={variant}>Label</SealOutlineButton>)
-        expect(screen.getByRole('button')).toBeInTheDocument()
-      },
-    )
+  describe('compound sub-components', () => {
+    it('renders Primary without errors', () => {
+      renderWithTheme(<SealOutlineButton.Primary>Label</SealOutlineButton.Primary>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
 
-    it('renders custom variant with a solid color', () => {
-      renderWithTheme(
-        <SealOutlineButton variant="custom" color="#e53935">
-          Retry
-        </SealOutlineButton>,
+    it('renders Accent without errors', () => {
+      renderWithTheme(<SealOutlineButton.Accent>Label</SealOutlineButton.Accent>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
+
+    it('renders AccentSecondary without errors', () => {
+      renderWithTheme(<SealOutlineButton.AccentSecondary>Label</SealOutlineButton.AccentSecondary>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
+
+    it('renders Gradient with gradient border token', () => {
+      renderWithTheme(<SealOutlineButton.Gradient>Explore</SealOutlineButton.Gradient>)
+      const btn = screen.getByRole('button')
+      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
+      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-primary)')
+      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
+        'color-mix(in srgb, var(--seal-brand-primary) 8%, transparent)',
       )
+    })
+
+    it('renders AccentGradient with accent gradient border token', () => {
+      renderWithTheme(<SealOutlineButton.AccentGradient>Boost</SealOutlineButton.AccentGradient>)
+      const btn = screen.getByRole('button')
+      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
+      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-accent)')
+      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
+        'color-mix(in srgb, var(--seal-brand-primary-shade) 8%, transparent)',
+      )
+    })
+
+    it('renders Custom with a solid color', () => {
+      renderWithTheme(<SealOutlineButton.Custom color="#e53935">Retry</SealOutlineButton.Custom>)
       const btn = screen.getByRole('button')
       expect(btn).toBeInTheDocument()
       expect(btn).toHaveStyle({ color: '#e53935' })
     })
 
-    it('renders custom variant with a gradient', () => {
+    it('renders Custom with a gradient border', () => {
       renderWithTheme(
-        <SealOutlineButton variant="custom" gradient="linear-gradient(to right, #f00, #00f)">
+        <SealOutlineButton.Custom gradient="linear-gradient(to right, #f00, #00f)">
           Custom
-        </SealOutlineButton>,
+        </SealOutlineButton.Custom>,
       )
       const btn = screen.getByRole('button')
-      // Gradient border via ::before mask-composite; hover uses first stop at 8% opacity
       expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
       expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe(
         'linear-gradient(to right, #f00, #00f)',
@@ -79,62 +99,39 @@ describe('SealOutlineButton', () => {
       )
     })
 
-    it('applies primary gradient background token', () => {
-      renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
-      const btn = screen.getByRole('button')
-      // Gradient border via ::before; hover uses brand-primary at 8% opacity
-      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
-      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-primary)')
-      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
-        'color-mix(in srgb, var(--seal-brand-primary) 8%, transparent)',
-      )
-    })
-
-    it('applies accent gradient background token', () => {
-      renderWithTheme(<SealOutlineButton variant="accent-gradient">Boost</SealOutlineButton>)
-      const btn = screen.getByRole('button')
-      // Gradient border via ::before; hover uses brand-primary-shade at 8% opacity
-      expect(btn).toHaveClass(GRADIENT_BORDER_CLASS)
-      expect(btn.style.getPropertyValue(GRADIENT_CSS_VAR)).toBe('var(--seal-gradient-accent)')
-      expect(btn.style.getPropertyValue(OB_HOVER_VAR)).toBe(
-        'color-mix(in srgb, var(--seal-brand-primary-shade) 8%, transparent)',
-      )
-    })
-
-    it('applies gradient clip-text style to label for gradient variant', () => {
-      renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
-      // The label is wrapped in a <span> with gradient text fill
+    it('applies gradient clip-text style to label for Gradient', () => {
+      renderWithTheme(<SealOutlineButton.Gradient>Explore</SealOutlineButton.Gradient>)
       const label = screen.getByText('Explore')
       expect(label.tagName).toBe('SPAN')
       expect(label).toHaveStyle({ background: 'var(--seal-gradient-primary)' })
     })
 
-    it('applies gradient clip-text style to label for accent-gradient variant', () => {
-      renderWithTheme(<SealOutlineButton variant="accent-gradient">Boost</SealOutlineButton>)
+    it('applies gradient clip-text style to label for AccentGradient', () => {
+      renderWithTheme(<SealOutlineButton.AccentGradient>Boost</SealOutlineButton.AccentGradient>)
       const label = screen.getByText('Boost')
       expect(label.tagName).toBe('SPAN')
       expect(label).toHaveStyle({ background: 'var(--seal-gradient-accent)' })
     })
 
-    it('applies primary foreground token for primary variant', () => {
-      renderWithTheme(<SealOutlineButton variant="primary">Primary</SealOutlineButton>)
+    it('applies primary foreground token for Primary', () => {
+      renderWithTheme(<SealOutlineButton.Primary>Primary</SealOutlineButton.Primary>)
       expect(screen.getByRole('button')).toHaveStyle({
         color: 'var(--seal-state-foreground-active)',
       })
     })
 
-    it('applies accent color token for accent variant', () => {
-      renderWithTheme(<SealOutlineButton variant="accent">Accent</SealOutlineButton>)
-      expect(screen.getByRole('button')).toHaveStyle({
-        color: 'var(--seal-accent-accent)',
-      })
+    it('applies accent color token for Accent', () => {
+      renderWithTheme(<SealOutlineButton.Accent>Accent</SealOutlineButton.Accent>)
+      expect(screen.getByRole('button')).toHaveStyle({ color: 'var(--seal-accent-accent)' })
     })
   })
 
   describe('interaction', () => {
     it('calls onClick when clicked', () => {
       const handleClick = vi.fn()
-      renderWithTheme(<SealOutlineButton onClick={handleClick}>Click me</SealOutlineButton>)
+      renderWithTheme(
+        <SealOutlineButton.Primary onClick={handleClick}>Click me</SealOutlineButton.Primary>,
+      )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
@@ -142,9 +139,9 @@ describe('SealOutlineButton', () => {
     it('does not call onClick when disabled', () => {
       const handleClick = vi.fn()
       renderWithTheme(
-        <SealOutlineButton disabled onClick={handleClick}>
+        <SealOutlineButton.Primary disabled onClick={handleClick}>
           Disabled
-        </SealOutlineButton>,
+        </SealOutlineButton.Primary>,
       )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).not.toHaveBeenCalled()
@@ -153,9 +150,9 @@ describe('SealOutlineButton', () => {
     it('does not call onClick when loading', () => {
       const handleClick = vi.fn()
       renderWithTheme(
-        <SealOutlineButton loading onClick={handleClick}>
+        <SealOutlineButton.Primary loading onClick={handleClick}>
           Loading
-        </SealOutlineButton>,
+        </SealOutlineButton.Primary>,
       )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).not.toHaveBeenCalled()
@@ -164,66 +161,59 @@ describe('SealOutlineButton', () => {
 
   describe('loading state', () => {
     it('sets aria-busy when loading', () => {
-      renderWithTheme(<SealOutlineButton loading>Wait</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary loading>Wait</SealOutlineButton.Primary>)
       expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
     })
 
     it('hides the icon inside an invisible wrapper when loading', () => {
       renderWithTheme(
-        <SealOutlineButton loading icon={Star}>
+        <SealOutlineButton.Primary loading icon={Star}>
           Wait
-        </SealOutlineButton>,
+        </SealOutlineButton.Primary>,
       )
       const svg = document.querySelector('.invisible svg')
       expect(svg).toBeInTheDocument()
     })
 
     it('disables the button when loading', () => {
-      renderWithTheme(<SealOutlineButton loading>Processing</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary loading>Processing</SealOutlineButton.Primary>)
       expect(screen.getByRole('button')).toBeDisabled()
     })
   })
 
   describe('disabled state', () => {
     it('marks the button as disabled', () => {
-      renderWithTheme(<SealOutlineButton disabled>Off</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary disabled>Off</SealOutlineButton.Primary>)
       expect(screen.getByRole('button')).toBeDisabled()
     })
   })
 
   describe('accessibility', () => {
     it('has an accessible name from its text content', () => {
-      renderWithTheme(<SealOutlineButton>Cancel action</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Primary>Cancel action</SealOutlineButton.Primary>)
       expect(screen.getByRole('button', { name: 'Cancel action' })).toBeInTheDocument()
     })
 
     it('accepts an aria-label override', () => {
-      renderWithTheme(<SealOutlineButton aria-label="Close the dialog">Cancel</SealOutlineButton>)
+      renderWithTheme(
+        <SealOutlineButton.Primary aria-label="Close the dialog">Cancel</SealOutlineButton.Primary>,
+      )
       expect(screen.getByRole('button', { name: 'Close the dialog' })).toBeInTheDocument()
     })
   })
 
   describe('gradient icon', () => {
-    it('renders gradient icon wrapper for gradient variant with icon', () => {
+    it('renders gradient icon wrapper for Gradient with icon', () => {
       renderWithTheme(
-        <SealOutlineButton variant="gradient" icon={Telescope}>
-          Explore
-        </SealOutlineButton>,
+        <SealOutlineButton.Gradient icon={Telescope}>Explore</SealOutlineButton.Gradient>,
       )
       const svg = document.querySelector('svg')
       expect(svg).toBeInTheDocument()
     })
 
     it('injects linearGradient with fallback diagonal coords in JSDOM environment', () => {
-      // In JSDOM, CSS custom properties from stylesheets are not resolved, so
-      // getComputedStyle returns '' for --seal-gradient-*. The component falls
-      // back to FALLBACK_COORDS (top-left→bottom-right diagonal) which is correct
-      // for the current token direction. In a real browser, MutationObserver
-      // picks up the theme class and recomputes the real angle from the CSS var.
       renderWithTheme(
-        <SealOutlineButton variant="gradient" icon={Telescope}>
-          Explore
-        </SealOutlineButton>,
+        <SealOutlineButton.Gradient icon={Telescope}>Explore</SealOutlineButton.Gradient>,
       )
       const grad = document.querySelector('linearGradient')
       expect(grad).toBeInTheDocument()
@@ -234,20 +224,13 @@ describe('SealOutlineButton', () => {
       expect(grad?.getAttribute('y2')).toBe('24')
     })
 
-    it('resolves gradient direction from raw CSS string for custom variant icon', () => {
-      // For custom gradient, the direction is parsed from the raw string synchronously
-      // in the lazy useState initialiser — no CSS variable resolution needed.
+    it('resolves gradient direction from raw CSS string for Custom icon', () => {
       renderWithTheme(
-        <SealOutlineButton
-          variant="custom"
-          gradient="linear-gradient(to right, #f00, #00f)"
-          icon={Star}
-        >
+        <SealOutlineButton.Custom gradient="linear-gradient(to right, #f00, #00f)" icon={Star}>
           Custom
-        </SealOutlineButton>,
+        </SealOutlineButton.Custom>,
       )
       const grad = document.querySelector('linearGradient')
-      // "to right" = 90°: sin(90)=1, cos(90)=0 → x1=0, y1=12, x2=24, y2=12
       expect(grad?.getAttribute('gradientUnits')).toBe('userSpaceOnUse')
       expect(grad?.getAttribute('x1')).toBe('0')
       expect(grad?.getAttribute('y1')).toBe('12')
@@ -257,16 +240,14 @@ describe('SealOutlineButton', () => {
 
     it('parses diagonal "to bottom right" direction correctly', () => {
       renderWithTheme(
-        <SealOutlineButton
-          variant="custom"
+        <SealOutlineButton.Custom
           gradient="linear-gradient(to bottom right, #800, #008)"
           icon={Star}
         >
           Custom
-        </SealOutlineButton>,
+        </SealOutlineButton.Custom>,
       )
       const grad = document.querySelector('linearGradient')
-      // "to bottom right" = 135°: non-zero x and y deltas
       const x1 = Number.parseFloat(grad?.getAttribute('x1') ?? '0')
       const y1 = Number.parseFloat(grad?.getAttribute('y1') ?? '0')
       const x2 = Number.parseFloat(grad?.getAttribute('x2') ?? '24')
@@ -279,17 +260,11 @@ describe('SealOutlineButton', () => {
 
     it('parses deg-based gradient direction', () => {
       renderWithTheme(
-        <SealOutlineButton
-          variant="custom"
-          gradient="linear-gradient(90deg, #800, #008)"
-          icon={Star}
-        >
+        <SealOutlineButton.Custom gradient="linear-gradient(90deg, #800, #008)" icon={Star}>
           Custom
-        </SealOutlineButton>,
+        </SealOutlineButton.Custom>,
       )
       const grad = document.querySelector('linearGradient')
-      // 90deg = "to right": sin(90)=1 and cos(90) is near-zero (rounds to exactly 12 in float64)
-      // so all four coords are exact integers.
       expect(grad?.getAttribute('x1')).toBe('0')
       expect(grad?.getAttribute('y1')).toBe('12')
       expect(grad?.getAttribute('x2')).toBe('24')
@@ -298,42 +273,32 @@ describe('SealOutlineButton', () => {
 
     it('sets stroke to gradient url on the SVG element', () => {
       renderWithTheme(
-        <SealOutlineButton variant="gradient" icon={Telescope}>
-          Explore
-        </SealOutlineButton>,
+        <SealOutlineButton.Gradient icon={Telescope}>Explore</SealOutlineButton.Gradient>,
       )
       const svg = document.querySelector('svg')
-      // React renders stroke="url(#...)" as a prop override of Lucide's default,
-      // so the attribute is set declaratively — no reconciliation concerns.
       expect(svg?.getAttribute('stroke')).toMatch(/^url\(#seal-ob-grad-/)
     })
 
-    it('injects linearGradient into SVG for accent-gradient variant', () => {
+    it('injects linearGradient into SVG for AccentGradient', () => {
       renderWithTheme(
-        <SealOutlineButton variant="accent-gradient" icon={Star}>
-          Boost
-        </SealOutlineButton>,
+        <SealOutlineButton.AccentGradient icon={Star}>Boost</SealOutlineButton.AccentGradient>,
       )
       const linearGradient = document.querySelector('linearGradient')
       expect(linearGradient).toBeInTheDocument()
     })
 
-    it('injects linearGradient for custom gradient variant with icon', () => {
+    it('injects linearGradient for Custom gradient with icon', () => {
       renderWithTheme(
-        <SealOutlineButton
-          variant="custom"
-          gradient="linear-gradient(to right, #f00, #00f)"
-          icon={Star}
-        >
+        <SealOutlineButton.Custom gradient="linear-gradient(to right, #f00, #00f)" icon={Star}>
           Custom
-        </SealOutlineButton>,
+        </SealOutlineButton.Custom>,
       )
       const svg = document.querySelector('svg')
       expect(svg).toBeInTheDocument()
     })
 
     it('does not render gradient icon wrapper when no icon provided', () => {
-      renderWithTheme(<SealOutlineButton variant="gradient">Explore</SealOutlineButton>)
+      renderWithTheme(<SealOutlineButton.Gradient>Explore</SealOutlineButton.Gradient>)
       expect(document.querySelector('linearGradient')).not.toBeInTheDocument()
     })
   })

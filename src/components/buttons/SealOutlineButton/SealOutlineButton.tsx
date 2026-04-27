@@ -26,7 +26,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealOutlineButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealOutlineButton`.
+ * Props accepted by `SealOutlineButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -36,12 +36,7 @@ export interface SealOutlineButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand-color border and text — default secondary action.
-   * - `accent`: accent-color border and text.
-   * - `accent-secondary`: secondary-accent border and text.
-   * - `gradient`: primary gradient text and matching gradient border.
-   * - `accent-gradient`: accent gradient text and matching gradient border.
-   * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
+   * Prefer compound sub-components (`SealOutlineButton.Primary`, etc.) over this prop.
    */
   variant?: SealOutlineButtonVariant
   /**
@@ -57,19 +52,17 @@ export interface SealOutlineButtonProps extends Omit<
    *
    * @example
    * import { Share2 } from 'lucide-react'
-   * <SealOutlineButton icon={Share2}>Share</SealOutlineButton>
+   * <SealOutlineButton.Primary icon={Share2}>Share</SealOutlineButton.Primary>
    */
   icon?: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealOutlineButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
+   * CSS gradient string for `SealOutlineButton.Custom`.
    * Applied to both the border and text via CSS gradient techniques.
-   * Ignored for all other variants.
    */
   gradient?: string
 }
@@ -149,29 +142,7 @@ function getSpinnerColor(variant: SealOutlineButtonVariant): string | undefined 
   return undefined
 }
 
-/**
- * Outlined action button with token-driven border/text colors and gradient support.
- *
- * Wraps the shadcn `Button` primitive with Seal UI design tokens. The background
- * matches the surface; the border and text follow the active gradient token.
- * Gradient variants paint both the border and text with the same gradient.
- *
- * @example
- * <SealOutlineButton variant="primary" onClick={handleCancel}>
- *   Cancel
- * </SealOutlineButton>
- *
- * @example
- * <SealOutlineButton variant="gradient" icon={Telescope}>
- *   Explore
- * </SealOutlineButton>
- *
- * @example
- * <SealOutlineButton variant="custom" color="#e53935" onClick={handleRetry}>
- *   Retry
- * </SealOutlineButton>
- */
-export function SealOutlineButton({
+function SealOutlineButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -220,3 +191,69 @@ export function SealOutlineButton({
     </Button>
   )
 }
+
+SealOutlineButtonImpl.displayName = 'SealOutlineButton'
+
+type BaseProps = Omit<SealOutlineButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealOutlineButtonProps, 'variant'>
+
+/** Outline button using the primary brand color. Default secondary action. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealOutlineButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealOutlineButton.Primary'
+
+/** Outline button using the accent color. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealOutlineButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealOutlineButton.Accent'
+
+/** Outline button using the secondary accent color. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealOutlineButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealOutlineButton.AccentSecondary'
+
+/** Outline button with primary gradient border and text. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealOutlineButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealOutlineButton.Gradient'
+
+/** Outline button with accent gradient border and text. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealOutlineButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealOutlineButton.AccentGradient'
+
+/**
+ * Outline button with an arbitrary color or gradient border and text.
+ * Pass `color` for a solid color or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealOutlineButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealOutlineButton.Custom'
+
+/**
+ * Outlined action button with token-driven border/text colors and gradient support.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealOutlineButton.Primary onClick={handleCancel}>Cancel</SealOutlineButton.Primary>
+ * <SealOutlineButton.Gradient icon={Telescope}>Explore</SealOutlineButton.Gradient>
+ * <SealOutlineButton.Custom color="#e53935" onClick={handleRetry}>Retry</SealOutlineButton.Custom>
+ * ```
+ *
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealOutlineButton = Object.assign(SealOutlineButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

@@ -26,7 +26,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealOutlineIconButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealOutlineIconButton`.
+ * Props accepted by `SealOutlineIconButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -36,12 +36,7 @@ export interface SealOutlineIconButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand-color border and icon.
-   * - `accent`: accent-color border and icon.
-   * - `accent-secondary`: secondary-accent border and icon.
-   * - `gradient`: primary gradient icon and matching gradient border.
-   * - `accent-gradient`: accent gradient icon and matching gradient border.
-   * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
+   * Prefer compound sub-components (`SealOutlineIconButton.Primary`, etc.) over this prop.
    */
   variant?: SealOutlineIconButtonVariant
   /**
@@ -57,14 +52,13 @@ export interface SealOutlineIconButtonProps extends Omit<
    */
   icon: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealOutlineIconButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
-   * Applied to both the icon via SVG gradient and the border. Ignored for all other variants.
+   * CSS gradient string for `SealOutlineIconButton.Custom`.
+   * Applied to both the icon via SVG gradient and the border.
    */
   gradient?: string
   /**
@@ -142,23 +136,7 @@ function getSpinnerColor(variant: SealOutlineIconButtonVariant): string | undefi
   return undefined
 }
 
-/**
- * A compact icon-only button with a transparent background and colored border.
- *
- * Use for secondary actions that need visual presence without a filled background.
- * Gradient variants apply the gradient to both the icon via SVG fill and the border.
- * Always provide a `tooltip` or `title` for screen-reader accessibility.
- *
- * @example
- * <SealOutlineIconButton variant="primary" icon={Share2} tooltip="Share" onClick={handleShare} />
- *
- * @example
- * <SealOutlineIconButton variant="gradient" icon={Sparkles} tooltip="Magic" />
- *
- * @example
- * <SealOutlineIconButton variant="custom" color="#e53935" icon={TriangleAlert} tooltip="Warning" />
- */
-export function SealOutlineIconButton({
+function SealOutlineIconButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -207,3 +185,70 @@ export function SealOutlineIconButton({
     </Button>
   )
 }
+
+SealOutlineIconButtonImpl.displayName = 'SealOutlineIconButton'
+
+type BaseProps = Omit<SealOutlineIconButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealOutlineIconButtonProps, 'variant'>
+
+/** Outline icon button using the primary brand color. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealOutlineIconButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealOutlineIconButton.Primary'
+
+/** Outline icon button using the accent color. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealOutlineIconButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealOutlineIconButton.Accent'
+
+/** Outline icon button using the secondary accent color. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealOutlineIconButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealOutlineIconButton.AccentSecondary'
+
+/** Outline icon button with primary gradient icon and matching gradient border. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealOutlineIconButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealOutlineIconButton.Gradient'
+
+/** Outline icon button with accent gradient icon and matching gradient border. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealOutlineIconButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealOutlineIconButton.AccentGradient'
+
+/**
+ * Outline icon button with an arbitrary color or gradient.
+ * Pass `color` for a solid color or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealOutlineIconButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealOutlineIconButton.Custom'
+
+/**
+ * Compact icon-only button with a transparent background and colored border.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealOutlineIconButton.Primary icon={Share2} tooltip="Share" onClick={handleShare} />
+ * <SealOutlineIconButton.Gradient icon={Sparkles} tooltip="Magic" />
+ * <SealOutlineIconButton.Custom color="#e53935" icon={TriangleAlert} tooltip="Warning" />
+ * ```
+ *
+ * Always provide `tooltip` or `title` for screen-reader accessibility.
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealOutlineIconButton = Object.assign(SealOutlineIconButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

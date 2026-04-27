@@ -5,108 +5,122 @@ import { SealOutlineButton } from './SealOutlineButton'
 
 const meta = {
   title: 'Buttons/SealOutlineButton',
-  component: SealOutlineButton,
+  component: SealOutlineButton.Primary,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'accent', 'accent-secondary', 'gradient', 'accent-gradient', 'custom'],
-    },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    color: { control: 'color', if: { arg: 'variant', eq: 'custom' } },
-    gradient: { control: 'text', if: { arg: 'variant', eq: 'custom' } },
   },
-} satisfies Meta<typeof SealOutlineButton>
+} satisfies Meta<typeof SealOutlineButton.Primary>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { children: 'Cancel', variant: 'primary' },
+  args: { children: 'Cancel' },
 }
 
 export const Primary: Story = {
-  args: { children: 'Cancel', variant: 'primary' },
+  render: (args) => <SealOutlineButton.Primary {...args}>Cancel</SealOutlineButton.Primary>,
 }
 
 export const Accent: Story = {
-  args: { children: 'Learn More', variant: 'accent' },
+  render: (args) => <SealOutlineButton.Accent {...args}>Learn More</SealOutlineButton.Accent>,
 }
 
 export const AccentSecondary: Story = {
-  args: { children: 'Details', variant: 'accent-secondary' },
+  render: (args) => (
+    <SealOutlineButton.AccentSecondary {...args}>Details</SealOutlineButton.AccentSecondary>
+  ),
 }
 
 export const Gradient: Story = {
-  args: { children: 'Explore', variant: 'gradient', icon: Telescope },
+  render: (args) => (
+    <SealOutlineButton.Gradient icon={Telescope} {...args}>
+      Explore
+    </SealOutlineButton.Gradient>
+  ),
 }
 
 export const AccentGradient: Story = {
-  args: { children: 'Boost', variant: 'accent-gradient', icon: Star },
+  render: (args) => (
+    <SealOutlineButton.AccentGradient icon={Star} {...args}>
+      Boost
+    </SealOutlineButton.AccentGradient>
+  ),
 }
 
 export const CustomColor: Story = {
-  args: { children: 'Retry', variant: 'custom', color: '#e53935' },
+  render: (args) => (
+    <SealOutlineButton.Custom color="#e53935" {...args}>
+      Retry
+    </SealOutlineButton.Custom>
+  ),
 }
 
 export const CustomGradient: Story = {
-  args: {
-    children: 'Special',
-    variant: 'custom',
-    gradient: 'linear-gradient(to right, #7b2ff7, #f107a3)',
-  },
+  render: (args) => (
+    <SealOutlineButton.Custom gradient="linear-gradient(to right, #7b2ff7, #f107a3)" {...args}>
+      Special
+    </SealOutlineButton.Custom>
+  ),
 }
 
 export const WithIcon: Story = {
-  args: { children: 'Settings', variant: 'primary', icon: Settings },
+  render: (args) => (
+    <SealOutlineButton.Primary icon={Settings} {...args}>
+      Settings
+    </SealOutlineButton.Primary>
+  ),
 }
 
 export const Loading: Story = {
-  args: { children: 'Saving…', variant: 'primary', loading: true },
+  render: (args) => (
+    <SealOutlineButton.Primary loading {...args}>
+      Saving…
+    </SealOutlineButton.Primary>
+  ),
 }
 
 export const LoadingWithIcon: Story = {
-  args: {
-    children: 'Launching',
-    variant: 'gradient',
-    loading: true,
-    icon: Rocket,
-  },
+  render: (args) => (
+    <SealOutlineButton.Gradient loading icon={Rocket} {...args}>
+      Launching
+    </SealOutlineButton.Gradient>
+  ),
 }
 
 export const Disabled: Story = {
-  args: { children: 'Unavailable', variant: 'primary', disabled: true },
+  render: (args) => (
+    <SealOutlineButton.Primary disabled {...args}>
+      Unavailable
+    </SealOutlineButton.Primary>
+  ),
 }
 
 export const AllVariants: Story = {
   args: { loading: false, disabled: false },
   render: ({ loading = false, disabled = false }) => (
     <div className="flex flex-wrap gap-3">
-      <SealOutlineButton variant="primary" loading={loading} disabled={disabled}>
+      <SealOutlineButton.Primary loading={loading} disabled={disabled}>
         Primary
-      </SealOutlineButton>
-      <SealOutlineButton variant="accent" loading={loading} disabled={disabled}>
+      </SealOutlineButton.Primary>
+      <SealOutlineButton.Accent loading={loading} disabled={disabled}>
         Accent
-      </SealOutlineButton>
-      <SealOutlineButton variant="accent-secondary" loading={loading} disabled={disabled}>
+      </SealOutlineButton.Accent>
+      <SealOutlineButton.AccentSecondary loading={loading} disabled={disabled}>
         Accent Secondary
-      </SealOutlineButton>
-      <SealOutlineButton variant="gradient" icon={Telescope} loading={loading} disabled={disabled}>
+      </SealOutlineButton.AccentSecondary>
+      <SealOutlineButton.Gradient icon={Telescope} loading={loading} disabled={disabled}>
         Gradient
-      </SealOutlineButton>
-      <SealOutlineButton
-        variant="accent-gradient"
-        icon={Star}
-        loading={loading}
-        disabled={disabled}
-      >
+      </SealOutlineButton.Gradient>
+      <SealOutlineButton.AccentGradient icon={Star} loading={loading} disabled={disabled}>
         Accent Gradient
-      </SealOutlineButton>
-      <SealOutlineButton variant="custom" color="#e53935" loading={loading} disabled={disabled}>
+      </SealOutlineButton.AccentGradient>
+      <SealOutlineButton.Custom color="#e53935" loading={loading} disabled={disabled}>
         Custom
-      </SealOutlineButton>
+      </SealOutlineButton.Custom>
     </div>
   ),
 }

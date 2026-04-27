@@ -8,129 +8,120 @@ import { SealTextButton } from './SealTextButton'
 describe('SealTextButton', () => {
   describe('rendering', () => {
     it('renders without errors', () => {
-      renderWithTheme(<SealTextButton>Learn more</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary>Learn more</SealTextButton.Primary>)
       expect(screen.getByRole('button', { name: 'Learn more' })).toBeInTheDocument()
     })
 
     it('renders children as the button label', () => {
-      renderWithTheme(<SealTextButton>Discover</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary>Discover</SealTextButton.Primary>)
       expect(screen.getByText('Discover')).toBeInTheDocument()
     })
 
     it('renders the leading icon when provided', () => {
-      renderWithTheme(<SealTextButton icon={ArrowRight}>Skip</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary icon={ArrowRight}>Skip</SealTextButton.Primary>)
       expect(screen.getByText('Skip')).toBeInTheDocument()
       expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
     it('applies custom className', () => {
-      renderWithTheme(<SealTextButton className="my-custom-class">Go</SealTextButton>)
+      renderWithTheme(
+        <SealTextButton.Primary className="my-custom-class">Go</SealTextButton.Primary>,
+      )
       expect(screen.getByRole('button')).toHaveClass('my-custom-class')
     })
   })
 
-  describe('variants', () => {
-    it.each(['primary', 'accent', 'accent-secondary', 'gradient', 'accent-gradient'] as const)(
-      'renders %s variant without errors',
-      (variant) => {
-        renderWithTheme(<SealTextButton variant={variant}>Label</SealTextButton>)
-        expect(screen.getByRole('button')).toBeInTheDocument()
-      },
-    )
+  describe('compound sub-components', () => {
+    it('renders Primary without errors', () => {
+      renderWithTheme(<SealTextButton.Primary>Label</SealTextButton.Primary>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
 
-    it('renders custom variant with a solid color', () => {
-      renderWithTheme(
-        <SealTextButton variant="custom" color="#e53935">
-          Retry
-        </SealTextButton>,
-      )
+    it('renders Accent without errors', () => {
+      renderWithTheme(<SealTextButton.Accent>Label</SealTextButton.Accent>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
+
+    it('renders AccentSecondary without errors', () => {
+      renderWithTheme(<SealTextButton.AccentSecondary>Label</SealTextButton.AccentSecondary>)
+      expect(screen.getByRole('button')).toBeInTheDocument()
+    })
+
+    it('renders Custom with a solid color', () => {
+      renderWithTheme(<SealTextButton.Custom color="#e53935">Retry</SealTextButton.Custom>)
       const btn = screen.getByRole('button')
       expect(btn).toBeInTheDocument()
       expect(btn).toHaveStyle({ color: '#e53935' })
     })
 
-    it('renders custom variant with a gradient', () => {
+    it('renders Custom with a gradient', () => {
       renderWithTheme(
-        <SealTextButton variant="custom" gradient="linear-gradient(to right, #f00, #00f)">
+        <SealTextButton.Custom gradient="linear-gradient(to right, #f00, #00f)">
           Custom
-        </SealTextButton>,
+        </SealTextButton.Custom>,
       )
       expect(screen.getByRole('button')).toBeInTheDocument()
     })
 
-    it('applies primary gradient to the label wrapper span for gradient variant', () => {
-      renderWithTheme(<SealTextButton variant="gradient">Explore</SealTextButton>)
-      const btn = screen.getByRole('button')
-      // The gradient lives on the inner span (background-clip: text), not the button element,
-      // so the button background stays transparent (ghost).
-      const wrapper = btn.querySelector('span:not(.invisible):not(.absolute):not(.relative)')
-      expect(wrapper).toBeInTheDocument()
-    })
-
-    it('applies accent gradient to the label wrapper span for accent-gradient variant', () => {
-      renderWithTheme(<SealTextButton variant="accent-gradient">Boost</SealTextButton>)
+    it('applies primary gradient to the label wrapper span for Gradient', () => {
+      renderWithTheme(<SealTextButton.Gradient>Explore</SealTextButton.Gradient>)
       const btn = screen.getByRole('button')
       const wrapper = btn.querySelector('span:not(.invisible):not(.absolute):not(.relative)')
       expect(wrapper).toBeInTheDocument()
     })
 
-    it('applies foreground active color token for primary variant', () => {
-      renderWithTheme(<SealTextButton variant="primary">Primary</SealTextButton>)
+    it('applies accent gradient to the label wrapper span for AccentGradient', () => {
+      renderWithTheme(<SealTextButton.AccentGradient>Boost</SealTextButton.AccentGradient>)
+      const btn = screen.getByRole('button')
+      const wrapper = btn.querySelector('span:not(.invisible):not(.absolute):not(.relative)')
+      expect(wrapper).toBeInTheDocument()
+    })
+
+    it('applies foreground active color token for Primary', () => {
+      renderWithTheme(<SealTextButton.Primary>Primary</SealTextButton.Primary>)
       expect(screen.getByRole('button')).toHaveStyle({
         color: 'var(--seal-state-foreground-active)',
       })
     })
 
-    it('applies accent color token for accent variant', () => {
-      renderWithTheme(<SealTextButton variant="accent">Accent</SealTextButton>)
-      expect(screen.getByRole('button')).toHaveStyle({
-        color: 'var(--seal-accent-accent)',
-      })
+    it('applies accent color token for Accent', () => {
+      renderWithTheme(<SealTextButton.Accent>Accent</SealTextButton.Accent>)
+      expect(screen.getByRole('button')).toHaveStyle({ color: 'var(--seal-accent-accent)' })
     })
 
-    it('applies accent-secondary color token for accent-secondary variant', () => {
-      renderWithTheme(<SealTextButton variant="accent-secondary">Secondary</SealTextButton>)
+    it('applies accent-secondary color token for AccentSecondary', () => {
+      renderWithTheme(<SealTextButton.AccentSecondary>Secondary</SealTextButton.AccentSecondary>)
       expect(screen.getByRole('button')).toHaveStyle({
         color: 'var(--seal-accent-accent-secondary)',
       })
     })
 
-    it('applies underline text decoration for solid variants', () => {
-      renderWithTheme(<SealTextButton variant="primary">Primary</SealTextButton>)
+    it('applies underline text decoration for solid sub-components', () => {
+      renderWithTheme(<SealTextButton.Primary>Primary</SealTextButton.Primary>)
       expect(screen.getByRole('button')).toHaveStyle({ textDecoration: 'underline' })
     })
   })
 
   describe('gradient underline', () => {
-    it('wraps label in a span for gradient variant', () => {
-      renderWithTheme(<SealTextButton variant="gradient">Explore</SealTextButton>)
-      const btn = screen.getByRole('button')
-      const wrapper = btn.querySelector('span')
-      expect(wrapper).toBeInTheDocument()
-    })
-
-    it('wraps label in a span for accent-gradient variant', () => {
-      renderWithTheme(<SealTextButton variant="accent-gradient">Boost</SealTextButton>)
+    it('wraps label in a span for Gradient', () => {
+      renderWithTheme(<SealTextButton.Gradient>Explore</SealTextButton.Gradient>)
       const btn = screen.getByRole('button')
       expect(btn.querySelector('span')).toBeInTheDocument()
     })
 
-    it('renders gradient icon wrapper for gradient variant with icon', () => {
-      renderWithTheme(
-        <SealTextButton variant="gradient" icon={Telescope}>
-          Explore
-        </SealTextButton>,
-      )
+    it('wraps label in a span for AccentGradient', () => {
+      renderWithTheme(<SealTextButton.AccentGradient>Boost</SealTextButton.AccentGradient>)
+      const btn = screen.getByRole('button')
+      expect(btn.querySelector('span')).toBeInTheDocument()
+    })
+
+    it('renders gradient icon wrapper for Gradient with icon', () => {
+      renderWithTheme(<SealTextButton.Gradient icon={Telescope}>Explore</SealTextButton.Gradient>)
       expect(document.querySelector('linearGradient')).toBeInTheDocument()
     })
 
     it('injects linearGradient with fallback diagonal coords in JSDOM', () => {
-      // CSS custom properties are not resolved in JSDOM, so FALLBACK_COORDS are used.
-      renderWithTheme(
-        <SealTextButton variant="gradient" icon={Telescope}>
-          Explore
-        </SealTextButton>,
-      )
+      renderWithTheme(<SealTextButton.Gradient icon={Telescope}>Explore</SealTextButton.Gradient>)
       const grad = document.querySelector('linearGradient')
       expect(grad).toBeInTheDocument()
       expect(grad?.getAttribute('gradientUnits')).toBe('userSpaceOnUse')
@@ -140,35 +131,24 @@ describe('SealTextButton', () => {
       expect(grad?.getAttribute('y2')).toBe('24')
     })
 
-    it('renders gradient icon for accent-gradient variant', () => {
+    it('renders gradient icon for AccentGradient', () => {
       renderWithTheme(
-        <SealTextButton variant="accent-gradient" icon={Star}>
-          Boost
-        </SealTextButton>,
+        <SealTextButton.AccentGradient icon={Star}>Boost</SealTextButton.AccentGradient>,
       )
       expect(document.querySelector('linearGradient')).toBeInTheDocument()
     })
 
-    it('renders plain icon for non-gradient variants', () => {
-      renderWithTheme(
-        <SealTextButton variant="primary" icon={ArrowRight}>
-          Skip
-        </SealTextButton>,
-      )
-      const grad = document.querySelector('linearGradient')
-      expect(grad).not.toBeInTheDocument()
+    it('renders plain icon for non-gradient sub-components', () => {
+      renderWithTheme(<SealTextButton.Primary icon={ArrowRight}>Skip</SealTextButton.Primary>)
+      expect(document.querySelector('linearGradient')).not.toBeInTheDocument()
       expect(document.querySelector('svg')).toBeInTheDocument()
     })
 
-    it('renders gradient icon for custom gradient variant', () => {
+    it('renders gradient icon for Custom gradient with icon', () => {
       renderWithTheme(
-        <SealTextButton
-          variant="custom"
-          gradient="linear-gradient(to right, #f00, #00f)"
-          icon={Star}
-        >
+        <SealTextButton.Custom gradient="linear-gradient(to right, #f00, #00f)" icon={Star}>
           Custom
-        </SealTextButton>,
+        </SealTextButton.Custom>,
       )
       expect(document.querySelector('linearGradient')).toBeInTheDocument()
     })
@@ -177,7 +157,9 @@ describe('SealTextButton', () => {
   describe('interaction', () => {
     it('calls onClick when clicked', () => {
       const handleClick = vi.fn()
-      renderWithTheme(<SealTextButton onClick={handleClick}>Click me</SealTextButton>)
+      renderWithTheme(
+        <SealTextButton.Primary onClick={handleClick}>Click me</SealTextButton.Primary>,
+      )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
@@ -185,9 +167,9 @@ describe('SealTextButton', () => {
     it('does not call onClick when disabled', () => {
       const handleClick = vi.fn()
       renderWithTheme(
-        <SealTextButton disabled onClick={handleClick}>
+        <SealTextButton.Primary disabled onClick={handleClick}>
           Disabled
-        </SealTextButton>,
+        </SealTextButton.Primary>,
       )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).not.toHaveBeenCalled()
@@ -196,9 +178,9 @@ describe('SealTextButton', () => {
     it('does not call onClick when loading', () => {
       const handleClick = vi.fn()
       renderWithTheme(
-        <SealTextButton loading onClick={handleClick}>
+        <SealTextButton.Primary loading onClick={handleClick}>
           Loading
-        </SealTextButton>,
+        </SealTextButton.Primary>,
       )
       fireEvent.click(screen.getByRole('button'))
       expect(handleClick).not.toHaveBeenCalled()
@@ -207,59 +189,55 @@ describe('SealTextButton', () => {
 
   describe('loading state', () => {
     it('sets aria-busy when loading', () => {
-      renderWithTheme(<SealTextButton loading>Wait</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary loading>Wait</SealTextButton.Primary>)
       expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
     })
 
     it('disables the button when loading', () => {
-      renderWithTheme(<SealTextButton loading>Processing</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary loading>Processing</SealTextButton.Primary>)
       expect(screen.getByRole('button')).toBeDisabled()
     })
 
     it('hides the icon inside an invisible wrapper when loading', () => {
       renderWithTheme(
-        <SealTextButton loading icon={ArrowRight}>
+        <SealTextButton.Primary loading icon={ArrowRight}>
           Wait
-        </SealTextButton>,
+        </SealTextButton.Primary>,
       )
       const svg = document.querySelector('.invisible svg')
       expect(svg).toBeInTheDocument()
     })
 
     it('preserves button dimensions during loading via invisible content overlay', () => {
-      renderWithTheme(<SealTextButton loading>Loading text</SealTextButton>)
-      // The invisible span keeps the label text in the DOM to maintain layout dimensions.
+      renderWithTheme(<SealTextButton.Primary loading>Loading text</SealTextButton.Primary>)
       const invisibleSpan = document.querySelector('.invisible')
       expect(invisibleSpan).toBeInTheDocument()
       expect(invisibleSpan).toHaveTextContent('Loading text')
     })
 
-    it('suppresses underline wrapper during loading for gradient variant', () => {
-      renderWithTheme(
-        <SealTextButton variant="gradient" loading>
-          Explore
-        </SealTextButton>,
-      )
-      // When loading, the spinner branch renders — no label wrapper span is shown outside invisible.
+    it('suppresses underline wrapper during loading for Gradient', () => {
+      renderWithTheme(<SealTextButton.Gradient loading>Explore</SealTextButton.Gradient>)
       expect(screen.getByRole('button')).toBeDisabled()
     })
   })
 
   describe('disabled state', () => {
     it('marks the button as disabled', () => {
-      renderWithTheme(<SealTextButton disabled>Off</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary disabled>Off</SealTextButton.Primary>)
       expect(screen.getByRole('button')).toBeDisabled()
     })
   })
 
   describe('accessibility', () => {
     it('has an accessible name from its text content', () => {
-      renderWithTheme(<SealTextButton>Go back</SealTextButton>)
+      renderWithTheme(<SealTextButton.Primary>Go back</SealTextButton.Primary>)
       expect(screen.getByRole('button', { name: 'Go back' })).toBeInTheDocument()
     })
 
     it('accepts an aria-label override', () => {
-      renderWithTheme(<SealTextButton aria-label="Navigate to home">Home</SealTextButton>)
+      renderWithTheme(
+        <SealTextButton.Primary aria-label="Navigate to home">Home</SealTextButton.Primary>,
+      )
       expect(screen.getByRole('button', { name: 'Navigate to home' })).toBeInTheDocument()
     })
   })

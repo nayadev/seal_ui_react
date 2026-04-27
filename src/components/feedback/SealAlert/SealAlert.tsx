@@ -8,15 +8,12 @@ import { cn } from '@/lib/utils'
 export type SealAlertVariant = 'info' | 'success' | 'warning' | 'error'
 
 /**
- * Props accepted by `SealAlert`.
+ * Props accepted by `SealAlert` and its compound sub-components.
  */
 export interface SealAlertProps {
   /**
    * Semantic meaning of the alert.
-   * - `info`: neutral informational message
-   * - `success`: confirmation of a completed action
-   * - `warning`: non-critical issue requiring attention
-   * - `error`: failure or blocking error
+   * Prefer compound sub-components (`SealAlert.Info`, `SealAlert.Error`, etc.) over this prop.
    */
   variant: SealAlertVariant
   /**
@@ -49,23 +46,7 @@ const VARIANT_ICON: Record<SealAlertVariant, AlertIcon> = {
 
 const ICON_SIZE = 16
 
-/**
- * Inline alert banner for contextual feedback, styled with Seal UI semantic tokens.
- *
- * Renders as a static element inside the layout — stays visible until dismissed
- * by state change. For transient, auto-dismissing notifications use `SealSonner`
- * instead.
- *
- * Background and border opacity follow the Flutter reference constants
- * (8% and 35%), applied via CSS `color-mix` against the semantic token.
- *
- * @example
- * <SealAlert variant="success" title="Profile updated" description="Your changes were saved." />
- *
- * @example
- * <SealAlert variant="error" description="Upload failed. Please try again." />
- */
-export function SealAlert({ variant, title, description, className }: Readonly<SealAlertProps>) {
+function SealAlertImpl({ variant, title, description, className }: Readonly<SealAlertProps>) {
   const accentColor = VARIANT_TOKEN[variant]
   const IconComponent = VARIANT_ICON[variant]
 
@@ -100,3 +81,53 @@ export function SealAlert({ variant, title, description, className }: Readonly<S
     </Alert>
   )
 }
+
+SealAlertImpl.displayName = 'SealAlert'
+
+type BaseProps = Omit<SealAlertProps, 'variant'>
+
+/** Informational alert — neutral message for tips and guidance. */
+function InfoAlert(props: Readonly<BaseProps>) {
+  return <SealAlertImpl variant="info" {...props} />
+}
+InfoAlert.displayName = 'SealAlert.Info'
+
+/** Success alert — confirms a completed action. */
+function Success(props: Readonly<BaseProps>) {
+  return <SealAlertImpl variant="success" {...props} />
+}
+Success.displayName = 'SealAlert.Success'
+
+/** Warning alert — non-critical issue requiring attention. */
+function Warning(props: Readonly<BaseProps>) {
+  return <SealAlertImpl variant="warning" {...props} />
+}
+Warning.displayName = 'SealAlert.Warning'
+
+/** Error alert — failure or blocking error. Uses `aria-live="assertive"` to interrupt screen readers. */
+function ErrorAlert(props: Readonly<BaseProps>) {
+  return <SealAlertImpl variant="error" {...props} />
+}
+ErrorAlert.displayName = 'SealAlert.Error'
+
+/**
+ * Inline alert banner for contextual feedback, styled with Seal UI semantic tokens.
+ *
+ * Use compound sub-components to select the semantic variant:
+ *
+ * ```tsx
+ * <SealAlert.Info title="Heads up!" description="You can add components via the CLI." />
+ * <SealAlert.Success title="Profile updated" description="Your changes were saved." />
+ * <SealAlert.Error description="Upload failed. Please try again." />
+ * ```
+ *
+ * Background and border opacity follow the Flutter reference constants
+ * (8% and 35%), applied via CSS `color-mix` against the semantic token.
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealAlert = Object.assign(SealAlertImpl, {
+  Info: InfoAlert,
+  Success,
+  Warning,
+  Error: ErrorAlert,
+})

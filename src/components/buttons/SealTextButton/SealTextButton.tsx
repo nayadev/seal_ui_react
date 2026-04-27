@@ -25,7 +25,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealTextButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealTextButton`.
+ * Props accepted by `SealTextButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -35,12 +35,7 @@ export interface SealTextButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand-color text — default for low-emphasis actions.
-   * - `accent`: accent-color text.
-   * - `accent-secondary`: secondary-accent text.
-   * - `gradient`: primary gradient text with a matching gradient underline.
-   * - `accent-gradient`: accent gradient text with a matching gradient underline.
-   * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
+   * Prefer compound sub-components (`SealTextButton.Primary`, etc.) over this prop.
    */
   variant?: SealTextButtonVariant
   /**
@@ -57,20 +52,18 @@ export interface SealTextButtonProps extends Omit<
    *
    * @example
    * import { ArrowRight } from 'lucide-react'
-   * <SealTextButton icon={ArrowRight}>Learn more</SealTextButton>
+   * <SealTextButton.Primary icon={ArrowRight}>Learn more</SealTextButton.Primary>
    */
   icon?: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealTextButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
+   * CSS gradient string for `SealTextButton.Custom`.
    * Applied to text via `background-clip: text` and as a gradient underline.
    * Must be a valid CSS gradient string (e.g. `'linear-gradient(to right, #f00, #00f)'`).
-   * Ignored for all other variants.
    */
   gradient?: string
 }
@@ -167,29 +160,7 @@ function getSpinnerColor(variant: SealTextButtonVariant): string | undefined {
   return undefined
 }
 
-/**
- * Borderless, background-less button that highlights with text color and a subtle underline.
- *
- * Maps to shadcn's ghost button. Use for tertiary actions that should not compete
- * visually with filled or outline buttons. The underline is suppressed during
- * loading to avoid visual noise.
- *
- * @example
- * <SealTextButton variant="primary" onClick={handleLearnMore}>
- *   Learn more
- * </SealTextButton>
- *
- * @example
- * <SealTextButton variant="gradient" icon={ArrowRight}>
- *   Discover
- * </SealTextButton>
- *
- * @example
- * <SealTextButton variant="custom" color="#e53935" onClick={handleRetry}>
- *   Retry
- * </SealTextButton>
- */
-export function SealTextButton({
+function SealTextButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -239,3 +210,69 @@ export function SealTextButton({
     </Button>
   )
 }
+
+SealTextButtonImpl.displayName = 'SealTextButton'
+
+type BaseProps = Omit<SealTextButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealTextButtonProps, 'variant'>
+
+/** Text button using the primary brand color. Default for tertiary actions. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealTextButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealTextButton.Primary'
+
+/** Text button using the accent color. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealTextButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealTextButton.Accent'
+
+/** Text button using the secondary accent color. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealTextButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealTextButton.AccentSecondary'
+
+/** Text button with primary gradient text and matching gradient underline. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealTextButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealTextButton.Gradient'
+
+/** Text button with accent gradient text and matching gradient underline. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealTextButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealTextButton.AccentGradient'
+
+/**
+ * Text button with an arbitrary color or gradient.
+ * Pass `color` for a solid color or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealTextButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealTextButton.Custom'
+
+/**
+ * Borderless, background-less button that highlights with text color and a subtle underline.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealTextButton.Primary onClick={handleLearnMore}>Learn more</SealTextButton.Primary>
+ * <SealTextButton.Gradient icon={ArrowRight}>Discover</SealTextButton.Gradient>
+ * <SealTextButton.Custom color="#e53935" onClick={handleRetry}>Retry</SealTextButton.Custom>
+ * ```
+ *
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealTextButton = Object.assign(SealTextButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

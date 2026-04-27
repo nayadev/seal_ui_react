@@ -10,7 +10,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealFilledButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealFilledButton`.
+ * Props accepted by `SealFilledButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -20,12 +20,7 @@ export interface SealFilledButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand color fill — default for most actions.
-   * - `accent`: accent color fill — for secondary calls-to-action.
-   * - `accent-secondary`: softer secondary accent.
-   * - `gradient`: primary gradient background — high visual weight, use sparingly.
-   * - `accent-gradient`: accent gradient background.
-   * - `custom`: arbitrary fill; requires `color` (solid) or `gradient` (CSS gradient string).
+   * Prefer compound sub-components (`SealFilledButton.Primary`, etc.) over this prop.
    */
   variant?: SealFilledButtonVariant
   /**
@@ -41,19 +36,17 @@ export interface SealFilledButtonProps extends Omit<
    *
    * @example
    * import { Rocket } from 'lucide-react'
-   * <SealFilledButton icon={Rocket}>Launch</SealFilledButton>
+   * <SealFilledButton.Gradient icon={Rocket}>Launch</SealFilledButton.Gradient>
    */
   icon?: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealFilledButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
+   * CSS gradient string for `SealFilledButton.Custom`.
    * Must be a valid CSS gradient (e.g. `'linear-gradient(to right, #f00, #00f)'`).
-   * Ignored for all other variants.
    */
   gradient?: string
 }
@@ -97,29 +90,7 @@ function resolveBackground(
   return {}
 }
 
-/**
- * Filled action button with token-driven color fills and gradient support.
- *
- * Wraps the shadcn `Button` primitive with Seal UI design tokens. Use the
- * `variant` prop to select the visual treatment; use `loading` to show an
- * inline spinner while an async action is pending without changing button size.
- *
- * @example
- * <SealFilledButton variant="primary" onClick={handleSubmit}>
- *   Confirm
- * </SealFilledButton>
- *
- * @example
- * <SealFilledButton variant="gradient" loading={isPending} icon={Rocket}>
- *   Launch
- * </SealFilledButton>
- *
- * @example
- * <SealFilledButton variant="custom" color="#e53935" onClick={handleDelete}>
- *   Delete
- * </SealFilledButton>
- */
-export function SealFilledButton({
+function SealFilledButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -153,3 +124,69 @@ export function SealFilledButton({
     </Button>
   )
 }
+
+SealFilledButtonImpl.displayName = 'SealFilledButton'
+
+type BaseProps = Omit<SealFilledButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealFilledButtonProps, 'variant'>
+
+/** Filled button using the primary brand color. Default for most actions. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealFilledButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealFilledButton.Primary'
+
+/** Filled button using the accent color. For secondary calls-to-action. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealFilledButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealFilledButton.Accent'
+
+/** Filled button using the secondary accent color. Softer visual emphasis. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealFilledButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealFilledButton.AccentSecondary'
+
+/** Filled button with primary gradient background. High visual weight — use sparingly. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealFilledButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealFilledButton.Gradient'
+
+/** Filled button with accent gradient background. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealFilledButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealFilledButton.AccentGradient'
+
+/**
+ * Filled button with an arbitrary fill color or gradient.
+ * Pass `color` for a solid fill or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealFilledButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealFilledButton.Custom'
+
+/**
+ * Filled action button with token-driven color fills and gradient support.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealFilledButton.Primary onClick={handleSubmit}>Confirm</SealFilledButton.Primary>
+ * <SealFilledButton.Gradient loading={isPending} icon={Rocket}>Launch</SealFilledButton.Gradient>
+ * <SealFilledButton.Custom color="#e53935" onClick={handleDelete}>Delete</SealFilledButton.Custom>
+ * ```
+ *
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealFilledButton = Object.assign(SealFilledButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

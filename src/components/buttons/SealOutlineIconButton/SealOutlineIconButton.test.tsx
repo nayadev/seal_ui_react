@@ -9,32 +9,63 @@ import { SealOutlineIconButton } from './SealOutlineIconButton'
 
 describe('SealOutlineIconButton', () => {
   it('renders without error with minimal props', () => {
-    renderWithTheme(<SealOutlineIconButton icon={Share2} tooltip="Share" />)
+    renderWithTheme(<SealOutlineIconButton.Primary icon={Share2} tooltip="Share" />)
     const button = screen.getByRole('button', { name: 'Share' })
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('title', 'Share')
   })
 
-  it('renders all variants without crashing', () => {
-    const variants = [
-      'primary',
-      'accent',
-      'accent-secondary',
-      'gradient',
-      'accent-gradient',
-      'custom',
-    ] as const
-    variants.forEach((variant) => {
+  describe('compound sub-components', () => {
+    it('renders Primary without crashing', () => {
       const { unmount } = renderWithTheme(
-        <SealOutlineIconButton variant={variant} icon={Share2} color="#f00" tooltip={variant} />,
+        <SealOutlineIconButton.Primary icon={Share2} tooltip="primary" />,
       )
-      expect(screen.getByRole('button', { name: variant })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: 'primary' })).toBeInTheDocument()
       unmount()
+    })
+
+    it('renders Accent without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealOutlineIconButton.Accent icon={Share2} tooltip="accent" />,
+      )
+      expect(screen.getByRole('button', { name: 'accent' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders AccentSecondary without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealOutlineIconButton.AccentSecondary icon={Share2} tooltip="accent-secondary" />,
+      )
+      expect(screen.getByRole('button', { name: 'accent-secondary' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders Gradient without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealOutlineIconButton.Gradient icon={Sparkles} tooltip="gradient" />,
+      )
+      expect(screen.getByRole('button', { name: 'gradient' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders AccentGradient without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealOutlineIconButton.AccentGradient icon={Sparkles} tooltip="accent-gradient" />,
+      )
+      expect(screen.getByRole('button', { name: 'accent-gradient' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders Custom with solid color', () => {
+      renderWithTheme(
+        <SealOutlineIconButton.Custom icon={TriangleAlert} color="#e53935" tooltip="Warning" />,
+      )
+      expect(screen.getByRole('button', { name: 'Warning' })).toBeInTheDocument()
     })
   })
 
   it('shows loading spinner when loading is true', () => {
-    renderWithTheme(<SealOutlineIconButton icon={Share2} tooltip="Loading" loading />)
+    renderWithTheme(<SealOutlineIconButton.Primary icon={Share2} tooltip="Loading" loading />)
     const button = screen.getByRole('button', { name: 'Loading' })
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute('aria-busy', 'true')
@@ -45,7 +76,7 @@ describe('SealOutlineIconButton', () => {
   it('disables interaction when disabled prop is true', async () => {
     const onClick = vi.fn()
     renderWithTheme(
-      <SealOutlineIconButton icon={Share2} tooltip="Disabled" disabled onClick={onClick} />,
+      <SealOutlineIconButton.Primary icon={Share2} tooltip="Disabled" disabled onClick={onClick} />,
     )
     const button = screen.getByRole('button', { name: 'Disabled' })
     expect(button).toBeDisabled()
@@ -55,7 +86,9 @@ describe('SealOutlineIconButton', () => {
 
   it('calls onClick when interacted with', async () => {
     const onClick = vi.fn()
-    renderWithTheme(<SealOutlineIconButton icon={Share2} tooltip="Action" onClick={onClick} />)
+    renderWithTheme(
+      <SealOutlineIconButton.Primary icon={Share2} tooltip="Action" onClick={onClick} />,
+    )
     const button = screen.getByRole('button', { name: 'Action' })
     await userEvent.click(button)
     expect(onClick).toHaveBeenCalledTimes(1)
@@ -63,44 +96,29 @@ describe('SealOutlineIconButton', () => {
 
   it('respects the title prop over tooltip prop', () => {
     renderWithTheme(
-      <SealOutlineIconButton icon={Share2} title="Title text" tooltip="Tooltip text" />,
+      <SealOutlineIconButton.Primary icon={Share2} title="Title text" tooltip="Tooltip text" />,
     )
     const button = screen.getByRole('button', { name: 'Title text' })
     expect(button).toHaveAttribute('title', 'Title text')
   })
 
-  it('renders gradient variant with gradient icon', () => {
-    renderWithTheme(<SealOutlineIconButton variant="gradient" icon={Sparkles} tooltip="Magic" />)
+  it('renders Gradient with gradient icon', () => {
+    renderWithTheme(<SealOutlineIconButton.Gradient icon={Sparkles} tooltip="Magic" />)
     const button = screen.getByRole('button', { name: 'Magic' })
     const svgGradient = button.querySelector('linearGradient')
     expect(svgGradient).toBeInTheDocument()
   })
 
-  it('renders accent-gradient variant with gradient icon', () => {
-    renderWithTheme(
-      <SealOutlineIconButton variant="accent-gradient" icon={Sparkles} tooltip="Boost" />,
-    )
+  it('renders AccentGradient with gradient icon', () => {
+    renderWithTheme(<SealOutlineIconButton.AccentGradient icon={Sparkles} tooltip="Boost" />)
     const button = screen.getByRole('button', { name: 'Boost' })
     const svgGradient = button.querySelector('linearGradient')
     expect(svgGradient).toBeInTheDocument()
   })
 
-  it('renders custom variant with solid color', () => {
+  it('renders Custom with gradient icon', () => {
     renderWithTheme(
-      <SealOutlineIconButton
-        variant="custom"
-        icon={TriangleAlert}
-        color="#e53935"
-        tooltip="Warning"
-      />,
-    )
-    expect(screen.getByRole('button', { name: 'Warning' })).toBeInTheDocument()
-  })
-
-  it('renders custom variant with gradient icon', () => {
-    renderWithTheme(
-      <SealOutlineIconButton
-        variant="custom"
+      <SealOutlineIconButton.Custom
         icon={SlidersHorizontal}
         gradient="linear-gradient(to right, #00c6ff, #0072ff)"
         tooltip="Filter"
@@ -112,7 +130,7 @@ describe('SealOutlineIconButton', () => {
   })
 
   it('renders without tooltip when neither tooltip nor title is provided', () => {
-    renderWithTheme(<SealOutlineIconButton icon={Bookmark} />)
+    renderWithTheme(<SealOutlineIconButton.Primary icon={Bookmark} />)
     const buttons = screen.getAllByRole('button')
     expect(buttons.length).toBeGreaterThan(0)
   })

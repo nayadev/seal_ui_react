@@ -9,32 +9,62 @@ import { SealIconButton } from './SealIconButton'
 
 describe('SealIconButton', () => {
   it('renders without error with minimal props', () => {
-    renderWithTheme(<SealIconButton icon={Rocket} tooltip="Launch" />)
+    renderWithTheme(<SealIconButton.Primary icon={Rocket} tooltip="Launch" />)
     const button = screen.getByRole('button', { name: 'Launch' })
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('title', 'Launch')
   })
 
-  it('renders all variants without crashing', () => {
-    const variants = [
-      'primary',
-      'accent',
-      'accent-secondary',
-      'gradient',
-      'accent-gradient',
-      'custom',
-    ] as const
-    variants.forEach((variant) => {
+  describe('compound sub-components', () => {
+    it('renders Primary without crashing', () => {
       const { unmount } = renderWithTheme(
-        <SealIconButton variant={variant} icon={Rocket} color="#f00" tooltip={variant} />,
+        <SealIconButton.Primary icon={Rocket} tooltip="primary" />,
       )
-      expect(screen.getByRole('button', { name: variant })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: 'primary' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders Accent without crashing', () => {
+      const { unmount } = renderWithTheme(<SealIconButton.Accent icon={Rocket} tooltip="accent" />)
+      expect(screen.getByRole('button', { name: 'accent' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders AccentSecondary without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealIconButton.AccentSecondary icon={Rocket} tooltip="accent-secondary" />,
+      )
+      expect(screen.getByRole('button', { name: 'accent-secondary' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders Gradient without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealIconButton.Gradient icon={Rocket} tooltip="gradient" />,
+      )
+      expect(screen.getByRole('button', { name: 'gradient' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders AccentGradient without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealIconButton.AccentGradient icon={Rocket} tooltip="accent-gradient" />,
+      )
+      expect(screen.getByRole('button', { name: 'accent-gradient' })).toBeInTheDocument()
+      unmount()
+    })
+
+    it('renders Custom without crashing', () => {
+      const { unmount } = renderWithTheme(
+        <SealIconButton.Custom icon={Rocket} color="#f00" tooltip="custom" />,
+      )
+      expect(screen.getByRole('button', { name: 'custom' })).toBeInTheDocument()
       unmount()
     })
   })
 
   it('shows loading spinner when loading is true', () => {
-    renderWithTheme(<SealIconButton icon={Rocket} tooltip="Loading" loading />)
+    renderWithTheme(<SealIconButton.Primary icon={Rocket} tooltip="Loading" loading />)
     const button = screen.getByRole('button', { name: 'Loading' })
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute('aria-busy', 'true')
@@ -44,27 +74,27 @@ describe('SealIconButton', () => {
 
   it('disables interaction when disabled prop is true', async () => {
     const onClick = vi.fn()
-    renderWithTheme(<SealIconButton icon={Rocket} tooltip="Disabled" disabled onClick={onClick} />)
-
+    renderWithTheme(
+      <SealIconButton.Primary icon={Rocket} tooltip="Disabled" disabled onClick={onClick} />,
+    )
     const button = screen.getByRole('button', { name: 'Disabled' })
     expect(button).toBeDisabled()
-
     await userEvent.click(button)
     expect(onClick).not.toHaveBeenCalled()
   })
 
   it('calls onClick when interacted with', async () => {
     const onClick = vi.fn()
-    renderWithTheme(<SealIconButton icon={Rocket} tooltip="Action" onClick={onClick} />)
-
+    renderWithTheme(<SealIconButton.Primary icon={Rocket} tooltip="Action" onClick={onClick} />)
     const button = screen.getByRole('button', { name: 'Action' })
     await userEvent.click(button)
-
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
   it('respects the title prop over tooltip prop', () => {
-    renderWithTheme(<SealIconButton icon={Rocket} title="Title text" tooltip="Tooltip text" />)
+    renderWithTheme(
+      <SealIconButton.Primary icon={Rocket} title="Title text" tooltip="Tooltip text" />,
+    )
     const button = screen.getByRole('button', { name: 'Title text' })
     expect(button).toHaveAttribute('title', 'Title text')
   })

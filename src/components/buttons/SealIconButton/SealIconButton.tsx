@@ -23,7 +23,7 @@ import type { SealIcon } from '@/types/icon'
 export type SealIconButtonVariant = SealButtonVariant
 
 /**
- * Props accepted by `SealIconButton`.
+ * Props accepted by `SealIconButton` and its compound sub-components.
  *
  * Extends `<button>` attributes — all standard HTML button props are forwarded.
  */
@@ -33,12 +33,7 @@ export interface SealIconButtonProps extends Omit<
 > {
   /**
    * Visual style of the button.
-   * - `primary`: brand-color icon.
-   * - `accent`: accent-color icon.
-   * - `accent-secondary`: secondary-accent icon.
-   * - `gradient`: primary gradient icon.
-   * - `accent-gradient`: accent gradient icon.
-   * - `custom`: arbitrary color or CSS gradient; requires `color` or `gradient`.
+   * Prefer compound sub-components (`SealIconButton.Primary`, etc.) over this prop.
    */
   variant?: SealIconButtonVariant
   /**
@@ -54,15 +49,13 @@ export interface SealIconButtonProps extends Omit<
    */
   icon: SealIcon
   /**
-   * Solid CSS color for the `custom` variant.
+   * Solid CSS color for `SealIconButton.Custom`.
    * Must be a valid CSS color string (e.g. `'#ff0000'`, `'rgb(255,0,0)'`).
-   * Ignored for all other variants.
    */
   color?: string
   /**
-   * CSS gradient string for the `custom` variant.
+   * CSS gradient string for `SealIconButton.Custom`.
    * Must be a valid CSS gradient string (e.g. `'linear-gradient(to right, #f00, #00f)'`).
-   * Ignored for all other variants.
    */
   gradient?: string
   /**
@@ -128,22 +121,7 @@ function getSpinnerColor(variant: SealIconButtonVariant): string | undefined {
   return undefined
 }
 
-/**
- * A compact ghost icon-only button — no background, no border.
- *
- * Built on shadcn's ghost button. Use for low-emphasis actions in toolbars,
- * app bars, and inline contexts. Always provide a `tooltip` or `title` for accessibility.
- *
- * @example
- * <SealIconButton variant="primary" icon={X} tooltip="Close" onClick={handleClose} />
- *
- * @example
- * <SealIconButton variant="gradient" icon={Sparkles} tooltip="Enhance" />
- *
- * @example
- * <SealIconButton variant="custom" color="#e53935" icon={Trash} tooltip="Delete" />
- */
-export function SealIconButton({
+function SealIconButtonImpl({
   variant = 'primary',
   loading = false,
   disabled,
@@ -192,3 +170,70 @@ export function SealIconButton({
     </Button>
   )
 }
+
+SealIconButtonImpl.displayName = 'SealIconButton'
+
+type BaseProps = Omit<SealIconButtonProps, 'variant' | 'color' | 'gradient'>
+type CustomProps = Omit<SealIconButtonProps, 'variant'>
+
+/** Ghost icon button using the primary brand color. Default for toolbar actions. */
+function Primary(props: Readonly<BaseProps>) {
+  return <SealIconButtonImpl variant="primary" {...props} />
+}
+Primary.displayName = 'SealIconButton.Primary'
+
+/** Ghost icon button using the accent color. */
+function Accent(props: Readonly<BaseProps>) {
+  return <SealIconButtonImpl variant="accent" {...props} />
+}
+Accent.displayName = 'SealIconButton.Accent'
+
+/** Ghost icon button using the secondary accent color. */
+function AccentSecondary(props: Readonly<BaseProps>) {
+  return <SealIconButtonImpl variant="accent-secondary" {...props} />
+}
+AccentSecondary.displayName = 'SealIconButton.AccentSecondary'
+
+/** Ghost icon button with primary gradient icon. */
+function Gradient(props: Readonly<BaseProps>) {
+  return <SealIconButtonImpl variant="gradient" {...props} />
+}
+Gradient.displayName = 'SealIconButton.Gradient'
+
+/** Ghost icon button with accent gradient icon. */
+function AccentGradient(props: Readonly<BaseProps>) {
+  return <SealIconButtonImpl variant="accent-gradient" {...props} />
+}
+AccentGradient.displayName = 'SealIconButton.AccentGradient'
+
+/**
+ * Ghost icon button with an arbitrary color or gradient icon.
+ * Pass `color` for a solid color or `gradient` for a CSS gradient string.
+ */
+function Custom(props: Readonly<CustomProps>) {
+  return <SealIconButtonImpl variant="custom" {...props} />
+}
+Custom.displayName = 'SealIconButton.Custom'
+
+/**
+ * Compact ghost icon-only button — no background, no border.
+ *
+ * Use compound sub-components to select the visual treatment:
+ *
+ * ```tsx
+ * <SealIconButton.Primary icon={X} tooltip="Close" onClick={handleClose} />
+ * <SealIconButton.Gradient icon={Sparkles} tooltip="Enhance" />
+ * <SealIconButton.Custom color="#e53935" icon={Trash} tooltip="Delete" />
+ * ```
+ *
+ * Always provide `tooltip` or `title` for screen-reader accessibility.
+ * The root component also accepts a `variant` prop for programmatic selection.
+ */
+export const SealIconButton = Object.assign(SealIconButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})

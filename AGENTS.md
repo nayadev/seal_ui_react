@@ -166,6 +166,206 @@ The `@keyframes seal-bounce-dot` animation is defined globally in `src/index.css
 **SealLoader uses SVG arc with CSS animation**
 `SealLoader` renders a 270° SVG arc (¾ circle, matching Flutter's `_kSweep = math.pi * 1.5`) that spins via the `@keyframes seal-loader-spin` keyframe in `src/index.css`. The animation goes from `rotate(-90deg)` to `rotate(270deg)` so the arc starts at 12 o'clock. Sizes map to Flutter's `SealLoaderSize` enum: `small` = 16 px, `medium` = 24 px, `large` = 40 px. Stroke widths follow Flutter's reference constants (2.5 for small/medium, 3.0 for large). No shadcn primitive is used — the SVG and animation are fully custom.
 
+---
+
+## Compound Component Pattern
+
+All Seal components follow the **Compound Component** pattern using `Object.assign`. This aligns with shadcn/ui and Radix UI conventions, and gives consuming code a clean, discoverable API.
+
+### Standard Implementation
+
+```tsx
+// 1. Root impl function receives all props including `variant`
+function SealFilledButtonImpl({ variant = 'primary', ...props }: SealFilledButtonProps) {
+  // ...
+}
+
+// 2. Sub-components fix the variant
+type BaseProps = Omit<SealFilledButtonProps, 'variant' | 'color' | 'gradient'>
+const Primary = (props: BaseProps) => <SealFilledButtonImpl variant="primary" {...props} />
+Primary.displayName = 'SealFilledButton.Primary'
+
+const Custom = (props: Omit<SealFilledButtonProps, 'variant'>) => (
+  <SealFilledButtonImpl variant="custom" {...props} />
+)
+Custom.displayName = 'SealFilledButton.Custom'
+
+// 3. Export via Object.assign
+export const SealFilledButton = Object.assign(SealFilledButtonImpl, {
+  Primary,
+  Accent,
+  AccentSecondary,
+  Gradient,
+  AccentGradient,
+  Custom,
+})
+```
+
+### Sub-Component Naming
+
+| Variant prop value | Sub-component name | Notes                          |
+| ------------------ | ------------------ | ------------------------------ |
+| `primary`          | `.Primary`         |                                |
+| `accent`           | `.Accent`          |                                |
+| `accent-secondary` | `.AccentSecondary` |                                |
+| `gradient`         | `.Gradient`        |                                |
+| `accent-gradient`  | `.AccentGradient`  |                                |
+| `custom`           | `.Custom`          | Keeps `color`/`gradient` props |
+
+For `SealAlert`, sub-components avoid JS global conflicts:
+
+- Internal function: `InfoAlert` (not `Info` — lucide exports an `Info` icon)
+- Internal function: `ErrorAlert` (not `Error` — conflicts with the JS built-in)
+- Exported as: `SealAlert.Info`, `SealAlert.Error`
+
+### displayName Requirements
+
+Every sub-component must set `displayName` so React DevTools shows the full path:
+
+```tsx
+Primary.displayName = 'SealFilledButton.Primary'
+```
+
+### BaseProps / CustomProps Pattern
+
+Non-`custom` sub-components should strip `variant`, `color`, and `gradient` from their props:
+
+```ts
+type BaseProps = Omit<SealFilledButtonProps, 'variant' | 'color' | 'gradient'>
+```
+
+The `Custom` sub-component keeps `color` and `gradient` but strips `variant`:
+
+```ts
+type CustomProps = Omit<SealFilledButtonProps, 'variant'>
+```
+
+### Consuming the API
+
+```tsx
+// ✅ Preferred — compound sub-component
+<SealFilledButton.Primary onClick={handleClick}>Launch</SealFilledButton.Primary>
+<SealFilledButton.Gradient icon={Rocket}>Launch</SealFilledButton.Gradient>
+<SealFilledButton.Custom color="#e53935">Danger</SealFilledButton.Custom>
+
+// ✅ Also valid — root with explicit variant (programmatic/dynamic use)
+<SealFilledButton variant={activeVariant}>Dynamic</SealFilledButton>
+
+// ❌ Wrong — raw shadcn Button
+<Button variant="outline">Click</Button>
+```
+
+### JSDoc Placement
+
+JSDoc belongs on the exported `const`, not the impl function (which is private):
+
+```tsx
+/**
+ * Token-driven filled button.
+ *
+ * Use sub-components for a clean API: `SealFilledButton.Primary`, `.Accent`, etc.
+ * Use the root with an explicit `variant` prop for programmatic/dynamic rendering.
+ */
+export const SealFilledButton = Object.assign(SealFilledButtonImpl, { ... })
+```
+
+### Story Pattern for Compound Components
+
+When the component in `meta` is a sub-component, every `Story` must include `args` to satisfy TypeScript's required-prop checks. Never hardcode a prop in `render` that is also present in `args` — it causes TS2783.
+
+```tsx
+const meta = {
+  component: SealFilledButton.Primary, // sub-component is the autodocs subject
+} satisfies Meta<typeof SealFilledButton.Primary>
+
+export const Gradient: Story = {
+  args: { children: 'Launch' }, // required props here
+  render: (args) => <SealFilledButton.Gradient {...args} />, // spread only
+}
+```
+
+### Icon Props in Stories — argTypes mapping
+
+Storybook cannot serialize React component references (e.g. forwardRef icons from lucide-react) in `args` — they appear as `{ $$typeof: Symbol(react.forward_ref), ... }` in controls and the source view. This affects both the individual story source view AND the Docs page autodocs preview.
+
+**The only reliable fix**: hide `icon` from controls, hardcode it directly in each `render` function, and keep it in `args` only to satisfy TypeScript's required-prop check. Additionally, every story must declare `parameters.docs.source.code` explicitly — without it, Storybook shows the full story object (with `args` and `render`) instead of just the JSX.
+
+```tsx
+const meta = {
+  component: SealFilledIconButton.Primary,
+  argTypes: {
+    // icon is a component reference — hide from controls to avoid serialization issues
+    icon: { table: { disable: true } },
+    loading: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    tooltip: { control: 'text' },
+  },
+} satisfies Meta<typeof SealFilledIconButton.Primary>
+
+// Variant stories — fully static render; Storybook shows clean JSX
+export const Primary: Story = {
+  args: { icon: Rocket, tooltip: 'Launch' }, // satisfies TypeScript; not used by render
+  parameters: {
+    docs: { source: { code: `<SealFilledIconButton.Primary icon={Rocket} tooltip="Launch" />` } },
+  },
+  render: () => <SealFilledIconButton.Primary icon={Rocket} tooltip="Launch" />,
+}
+
+// State stories — also static
+export const Loading: Story = {
+  args: { icon: Rocket, tooltip: 'Loading', loading: true },
+  parameters: {
+    docs: {
+      source: { code: `<SealFilledIconButton.Primary icon={Rocket} tooltip="Loading" loading />` },
+    },
+  },
+  render: () => <SealFilledIconButton.Primary icon={Rocket} tooltip="Loading" loading />,
+}
+
+// AllVariants — uses destructured args for interactive loading/disabled controls
+export const AllVariants: Story = {
+  args: { icon: Rocket, loading: false, disabled: false },
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealFilledIconButton.Primary icon={Rocket} tooltip="Primary" />
+<SealFilledIconButton.Accent icon={Bookmark} tooltip="Accent" />`,
+      },
+    },
+  },
+  render: ({ loading, disabled }) => (
+    <div className="flex gap-4 items-center">
+      <SealFilledIconButton.Primary
+        icon={Rocket}
+        tooltip="Primary"
+        loading={loading ?? false}
+        disabled={disabled ?? false}
+      />
+      {/* ... */}
+    </div>
+  ),
+}
+```
+
+Key rules:
+
+- **Never put `icon` in `args` and then spread `{...args}` into JSX** — Storybook serializes the resolved component reference regardless of whether a `render` function is present.
+- **`icon: { table: { disable: true } }`** — hides the icon control from the Controls panel.
+- **`parameters.docs.source.code`** — must be set explicitly on every story with icon props; without it, Storybook shows the full story object definition instead of clean JSX.
+- **`loading ?? false` / `disabled ?? false`** — required because `exactOptionalPropertyTypes: true` rejects `boolean | undefined` where `boolean` is expected.
+
+---
+
+### Buttons — Implementation Notes
+
+**Icon props accept a generic component reference, not a library-specific type:**
+
+````tsx
+// ✅ correct — library-agnostic
+icon?: SealIcon // React.ComponentType<{ size?: number; className?: string }>
+
+---
+
 ### Buttons — Implementation Notes
 
 **Icon props accept a generic component reference, not a library-specific type:**
@@ -176,7 +376,7 @@ icon?: SealIcon // React.ComponentType<{ size?: number; className?: string }>
 
 // ❌ wrong — coupled to lucide-react
 icon?: LucideIcon
-```
+````
 
 Lucide React is the default icon library used in stories and examples, but component APIs must never reference it in type signatures.
 
