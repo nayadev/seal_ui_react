@@ -32,6 +32,16 @@
   }
 }
 
+@keyframes seal-loader-spin {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(270deg);
+  }
+}
+
 body {
   margin: 0;
   background-color: var(--seal-surface-background, #0f0f1a);

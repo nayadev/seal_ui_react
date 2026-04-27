@@ -144,6 +144,7 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | `Button` (`src/components/ui/button.tsx`) | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
 | `Alert` (`src/components/ui/alert.tsx`)   | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
+| None (custom SVG animation)               | `SealLoader`                                                                                                                 |
 
 ### Feedback — Implementation Notes
 
@@ -161,6 +162,9 @@ The `VARIANT_ICON` map uses `React.ComponentType<React.SVGAttributes<SVGElement>
 
 **Loading animation keyframe lives in `src/index.css`**
 The `@keyframes seal-bounce-dot` animation is defined globally in `src/index.css`. Any component using the bouncing dots animation relies on this keyframe being present in the stylesheet. Do not move or scope it.
+
+**SealLoader uses SVG arc with CSS animation**
+`SealLoader` renders a 270° SVG arc (¾ circle, matching Flutter's `_kSweep = math.pi * 1.5`) that spins via the `@keyframes seal-loader-spin` keyframe in `src/index.css`. The animation goes from `rotate(-90deg)` to `rotate(270deg)` so the arc starts at 12 o'clock. Sizes map to Flutter's `SealLoaderSize` enum: `small` = 16 px, `medium` = 24 px, `large` = 40 px. Stroke widths follow Flutter's reference constants (2.5 for small/medium, 3.0 for large). No shadcn primitive is used — the SVG and animation are fully custom.
 
 ### Buttons — Implementation Notes
 
