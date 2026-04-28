@@ -31,10 +31,14 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage:ci
 
+      - name: Get package version
+        id: pkg
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v7
         with:
-          args: -Dsonar.projectVersion=$(node -p "require('./package.json').version")
+          args: -Dsonar.projectVersion=${{ steps.pkg.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
