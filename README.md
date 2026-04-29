@@ -198,9 +198,6 @@ Never hardcode token values — always reference a named CSS variable or JS cons
 | `npm run format:check`    | Check formatting without writing |
 | `npm run build`           | Type-check and build             |
 | `npm run build-storybook` | Build Storybook static site      |
-| `npm run changeset`       | Create a new changeset entry     |
-| `npm run version`         | Bump versions from changesets    |
-| `npm run release`         | Publish to npm                   |
 
 ---
 
@@ -256,13 +253,19 @@ Vitest is configured with V8 coverage. Thresholds are enforced at **80%** for li
 
 ### Versioning
 
-[Changesets](https://github.com/changesets/changesets) manages versioning and changelog generation:
+[release-please](https://github.com/googleapis/release-please) automates versioning and changelog generation based on [Conventional Commits](https://www.conventionalcommits.org/).
 
-```bash
-npm run changeset   # describe what changed
-npm run version     # bump versions and update CHANGELOG
-npm run release     # publish to npm
-```
+On every push to `main`, the workflow inspects commits since the last release and opens (or updates) a release PR with the proposed version bump and CHANGELOG entry. The release PR stays open until the maintainer merges it — no release happens automatically.
+
+On merge of the release PR, the git tag and GitHub Release are created automatically.
+
+| Commit type                 | Version bump (pre-1.0) |
+| --------------------------- | ---------------------- |
+| `fix`                       | patch                  |
+| `feat`                      | patch                  |
+| `feat!` / `BREAKING CHANGE` | minor                  |
+
+Workflow: `.github/workflows/release-please.yml` — config in `release-please-config.json`.
 
 ---
 
@@ -315,8 +318,7 @@ seal_ui_react/
 │   ├── main.ts              # Storybook config
 │   ├── preview.tsx          # Global decorators + theme toolbar
 │   └── themes/sealTheme.ts  # Custom Storybook UI theme
-├── .changeset/              # Changeset entries for versioning
-├── .github/workflows/       # chromatic.yml, sonar.yml
+├── .github/workflows/       # chromatic.yml, sonar.yml, release-please.yml
 ├── .husky/                  # pre-commit, commit-msg hooks
 ├── .editorconfig
 ├── .prettierrc
