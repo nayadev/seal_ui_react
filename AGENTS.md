@@ -146,6 +146,7 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
 | None (custom SVG animation)               | `SealLoader`                                                                                                                 |
 | Radix `@radix-ui/react-progress`          | `SealProgress`                                                                                                               |
+| `sonner` (`src/components/ui/sonner.tsx`) | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
 
 ### Feedback — Implementation Notes
 
@@ -172,6 +173,18 @@ The `@keyframes seal-bounce-dot` animation is defined globally in `src/index.css
 
 **SealLoader uses SVG arc with CSS animation**
 `SealLoader` renders a 270° SVG arc (¾ circle, matching Flutter's `_kSweep = math.pi * 1.5`) that spins via the `@keyframes seal-loader-spin` keyframe in `src/index.css`. The animation goes from `rotate(-90deg)` to `rotate(270deg)` so the arc starts at 12 o'clock. Sizes map to Flutter's `SealLoaderSize` enum: `small` = 16 px, `medium` = 24 px, `large` = 40 px. Stroke widths follow Flutter's reference constants (2.5 for small/medium, 3.0 for large). No shadcn primitive is used — the SVG and animation are fully custom.
+
+**SealToast is an imperative API, not a React component**
+`SealToast` is a plain object with static methods (`info`, `success`, `warning`, `error`, `custom`, `dismiss`). It wraps the `sonner` `toast` function with Seal token styles and semantic icons. Because it is not a React component, the Compound Component pattern does not apply — the static method surface (`SealToast.info()`, `SealToast.error()`, etc.) mirrors the intent of sub-component variants. Requires a `<SealSonner>` ancestor to render toasts.
+
+**SealToast custom icon wrapping**
+The `custom` method accepts a `SealIcon` component reference and wraps it in a `<span style={{ color, display: 'contents' }}>` to apply the accent color without widening the `SealIcon` prop contract (which only accepts `size` and `className`). `display: contents` ensures the span does not affect layout.
+
+**SealSonner reads ThemeContext to synchronise sonner theme**
+`SealSonner` uses `React.useContext(ThemeContext)` to read the active SealUI mode (`dark` or `light`) and passes it to sonner's `theme` prop. Falls back to `"dark"` when no `ThemeProvider` ancestor is present, matching the library's primary dark experience.
+
+**SealSonner is a regular function component — no Compound Component pattern**
+`SealSonner` is a container (one variant, no sub-components). The Compound Component pattern is not applied; the API is a single component with `position`, `offset`, and `visibleToasts` props.
 
 ---
 
