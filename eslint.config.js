@@ -137,6 +137,9 @@ export default defineConfig([
       'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
       'sonarjs/cognitive-complexity': ['error', 15],
       'sonarjs/no-identical-functions': 'error',
+      // Catches S7735: prefer positive conditions in ternaries/if-else (flip negated form).
+      // eslint-plugin-sonarjs does not implement S7735; this ESLint core rule is the equivalent.
+      'no-negated-condition': 'error',
     },
   },
 

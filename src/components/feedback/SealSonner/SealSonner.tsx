@@ -70,7 +70,7 @@ export function SealSonner({
       <Toaster
         theme={resolvedTheme}
         position={position}
-        {...(offset !== undefined ? { offset } : {})}
+        {...(offset === undefined ? {} : { offset })}
         visibleToasts={visibleToasts}
         toastOptions={{
           style: {
