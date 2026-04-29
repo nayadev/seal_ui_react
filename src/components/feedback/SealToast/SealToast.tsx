@@ -72,7 +72,9 @@ const VARIANT_FN = {
 function buildStyle(): React.CSSProperties {
   return {
     background: 'var(--seal-surface-surface-alt)',
-    border: '1px solid var(--seal-border-default)',
+    // No border: Flutter's ShadBorder.all(color: colors.border) omits width,
+    // which resolves to BorderSide.none — no visible border rendered.
+    border: 'none',
     color: 'var(--seal-text-primary)',
   }
 }
