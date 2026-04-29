@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/nayadev/seal_ui_react/compare/v0.0.2...v0.0.3) (2026-04-29)
+
+
+### Features
+
+* add SealProgress component ([066e9af](https://github.com/nayadev/seal_ui_react/commit/066e9af0dc20cd1894ba7a4938521430342706a9))
+
 ## [0.0.2](https://github.com/nayadev/seal_ui_react/compare/react-v0.0.1...react-v0.0.2) (2026-04-29)
 
 
