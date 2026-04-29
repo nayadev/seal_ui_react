@@ -145,6 +145,7 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | `Alert` (`src/components/ui/alert.tsx`)   | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
 | None (custom SVG animation)               | `SealLoader`                                                                                                                 |
+| Radix `@radix-ui/react-progress`          | `SealProgress`                                                                                                               |
 
 ### Feedback — Implementation Notes
 
@@ -156,6 +157,12 @@ The `VARIANT_ICON` map uses `React.ComponentType<React.SVGAttributes<SVGElement>
 
 **SealAlert aria-live strategy**
 `error` variant uses `aria-live="assertive"` to interrupt screen reader flow for critical failures. All other variants use `polite` to avoid disrupting ongoing announcements.
+
+**SealProgress uses Radix primitive directly, not the shadcn wrapper**
+The shadcn `Progress` component renders its `Indicator` internally with no way to customize color or add indeterminate animation from outside. `SealProgress` uses `@radix-ui/react-progress` directly for full control. The indeterminate animation uses `position: absolute` on the Indicator with the `@keyframes seal-progress-indeterminate` keyframe defined in `src/index.css`. The indicator is 40% wide and slides from `left: -40%` to `left: 100%`.
+
+**SealProgress indeterminate detection**
+`value === undefined || value === null` → indeterminate mode. Radix Root receives `value={null}` which sets `data-state="indeterminate"` and omits `aria-valuenow`. The determinate Indicator uses `translateX(-(100-value)%)` matching the shadcn reference.
 
 **SealBouncingDots is shared between Feedback and Buttons**
 `SealBouncingDots` lives in `src/components/feedback/` but is imported by `src/components/buttons/shared.tsx` for the button loading state. This cross-category dependency is intentional — it is the single source of truth for the bouncing animation. The internal `bouncing-dots.tsx` file that previously existed in `buttons/` has been removed.

@@ -42,6 +42,16 @@
   }
 }
 
+@keyframes seal-progress-indeterminate {
+  0% {
+    left: -40%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
 body {
   margin: 0;
   background-color: var(--seal-surface-background, #0f0f1a);
