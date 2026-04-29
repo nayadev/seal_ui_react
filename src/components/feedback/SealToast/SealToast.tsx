@@ -78,9 +78,10 @@ const TOAST_STYLE: React.CSSProperties = {
 function buildOptions(params: SealToastParams) {
   const { message, title, duration = 5000, action } = params
   return {
-    ...(title !== undefined ? { description: message } : {}),
+    ...(title === undefined ? {} : { description: message }),
     duration,
-    ...(action !== undefined ? { action: { label: action.label, onClick: action.onClick } } : {}),
+    ...(action === undefined ? {} : { action: { label: action.label, onClick: action.onClick } }),
+
     style: TOAST_STYLE,
     descriptionClassName: 'text-[var(--seal-text-secondary)]',
   }
@@ -147,7 +148,7 @@ export const SealToast = {
       </span>
     ) : undefined
     const toastTitle = params.title ?? params.message
-    return toast(toastTitle, { ...buildOptions(params), ...(icon !== undefined ? { icon } : {}) })
+    return toast(toastTitle, { ...buildOptions(params), ...(icon === undefined ? {} : { icon }) })
   },
 
   /**
