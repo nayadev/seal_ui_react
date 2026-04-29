@@ -69,11 +69,10 @@ const VARIANT_FN = {
   error: toast.error,
 } as const
 
-function buildStyle(accentColor: string): React.CSSProperties {
+function buildStyle(): React.CSSProperties {
   return {
     background: 'var(--seal-surface-surface-alt)',
-    // Border tinted with the variant's accent color, matching Flutter's ShadBorder approach
-    border: `1px solid color-mix(in srgb, ${accentColor} 35%, transparent)`,
+    border: '1px solid var(--seal-border-default)',
     color: 'var(--seal-text-primary)',
   }
 }
@@ -90,7 +89,7 @@ function buildOptions(params: SealToastParams, accentColor: string) {
           // Action button color matches the icon, mirroring Flutter's SealTextButton.custom(color: accentColor)
           actionButtonStyle: { color: accentColor } as React.CSSProperties,
         }),
-    style: buildStyle(accentColor),
+    style: buildStyle(),
     descriptionClassName: 'text-[var(--seal-text-secondary)]',
   }
 }

@@ -121,10 +121,7 @@ describe('SealToast', () => {
       const [, opts] = getCall(MOCK_TOAST.success)
       const style = (opts.style ?? {}) as Record<string, string>
       expect(style.background).toBe('var(--seal-surface-surface-alt)')
-      // Border is tinted with the variant's accent color (matches Flutter's ShadBorder approach)
-      expect(style.border).toBe(
-        '1px solid color-mix(in srgb, var(--seal-semantic-success) 35%, transparent)',
-      )
+      expect(style.border).toBe('1px solid var(--seal-border-default)')
     })
   })
 
