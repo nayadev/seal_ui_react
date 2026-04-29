@@ -109,12 +109,22 @@ describe('SealToast', () => {
       expect(action.onClick).toBe(onClick)
     })
 
+    it('applies accent color to action button style', () => {
+      SealToast.error({ message: 'Failed.', action: { label: 'Retry', onClick: vi.fn() } })
+      const [, opts] = getCall(MOCK_TOAST.error)
+      const style = (opts.actionButtonStyle ?? {}) as Record<string, string>
+      expect(style.color).toBe('var(--seal-semantic-error)')
+    })
+
     it('applies token background and border styles', () => {
       SealToast.success({ message: 'Done' })
       const [, opts] = getCall(MOCK_TOAST.success)
       const style = (opts.style ?? {}) as Record<string, string>
       expect(style.background).toBe('var(--seal-surface-surface-alt)')
-      expect(style.border).toBe('1px solid var(--seal-border-default)')
+      // Border is tinted with the variant's accent color (matches Flutter's ShadBorder approach)
+      expect(style.border).toBe(
+        '1px solid color-mix(in srgb, var(--seal-semantic-success) 35%, transparent)',
+      )
     })
   })
 
