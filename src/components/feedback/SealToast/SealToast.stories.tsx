@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RefreshCw, Rocket } from 'lucide-react'
 
 import { SealFilledButton } from '../../buttons/SealFilledButton'
-import { SealSonner } from '../SealSonner'
 
 import { SealToast } from './SealToast'
 
@@ -17,14 +16,6 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <>
-        <SealSonner position="bottom-right" />
-        <Story />
-      </>
-    ),
-  ],
   tags: ['autodocs'],
 } satisfies Meta
 

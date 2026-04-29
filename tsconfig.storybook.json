@@ -4,7 +4,10 @@
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM"],
     "types": ["node", "vite/client"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [".storybook/**/*.ts", ".storybook/**/*.tsx"]
 }
