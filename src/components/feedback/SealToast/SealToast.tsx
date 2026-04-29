@@ -69,20 +69,28 @@ const VARIANT_FN = {
   error: toast.error,
 } as const
 
-const TOAST_STYLE: React.CSSProperties = {
-  background: 'var(--seal-surface-surface-alt)',
-  border: '1px solid var(--seal-border-default)',
-  color: 'var(--seal-text-primary)',
+function buildStyle(accentColor: string): React.CSSProperties {
+  return {
+    background: 'var(--seal-surface-surface-alt)',
+    // Border tinted with the variant's accent color, matching Flutter's ShadBorder approach
+    border: `1px solid color-mix(in srgb, ${accentColor} 35%, transparent)`,
+    color: 'var(--seal-text-primary)',
+  }
 }
 
-function buildOptions(params: SealToastParams) {
+function buildOptions(params: SealToastParams, accentColor: string) {
   const { message, title, duration = 5000, action } = params
   return {
     ...(title === undefined ? {} : { description: message }),
     duration,
-    ...(action === undefined ? {} : { action: { label: action.label, onClick: action.onClick } }),
-
-    style: TOAST_STYLE,
+    ...(action === undefined
+      ? {}
+      : {
+          action: { label: action.label, onClick: action.onClick },
+          // Action button color matches the icon, mirroring Flutter's SealTextButton.custom(color: accentColor)
+          actionButtonStyle: { color: accentColor } as React.CSSProperties,
+        }),
+    style: buildStyle(accentColor),
     descriptionClassName: 'text-[var(--seal-text-secondary)]',
   }
 }
@@ -92,7 +100,7 @@ function showVariant(variant: SealToastVariant, params: SealToastParams) {
   const IconComp = VARIANT_ICON[variant]
   const icon = <IconComp size={16} style={{ color }} aria-hidden />
   const toastTitle = params.title ?? params.message
-  return VARIANT_FN[variant](toastTitle, { ...buildOptions(params), icon })
+  return VARIANT_FN[variant](toastTitle, { ...buildOptions(params, color), icon })
 }
 
 /**
@@ -148,7 +156,10 @@ export const SealToast = {
       </span>
     ) : undefined
     const toastTitle = params.title ?? params.message
-    return toast(toastTitle, { ...buildOptions(params), ...(icon === undefined ? {} : { icon }) })
+    return toast(toastTitle, {
+      ...buildOptions(params, color),
+      ...(icon === undefined ? {} : { icon }),
+    })
   },
 
   /**
