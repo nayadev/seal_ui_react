@@ -32,43 +32,35 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+// SealSonner stories demonstrate position and configuration.
+// The global preview.tsx already mounts one Toaster for the iframe, so
+// stories render only the trigger button — no extra <SealSonner> per story.
+
 export const Default: Story = {
   args: { position: POSITION_BOTTOM_RIGHT, visibleToasts: 3 },
-  render: (args) => (
-    <>
-      <SealSonner {...args} />
-      <SealFilledButton.Primary
-        onClick={() => SealToast.info({ message: 'Hello from SealSonner!' })}
-      >
-        Show toast
-      </SealFilledButton.Primary>
-    </>
+  render: () => (
+    <SealFilledButton.Primary onClick={() => SealToast.info({ message: 'Hello from SealSonner!' })}>
+      Show toast
+    </SealFilledButton.Primary>
   ),
 }
 
 export const TopCenter: Story = {
   args: { position: 'top-center' },
-  render: (args) => (
-    <>
-      <SealSonner {...args} />
-      <SealFilledButton.Primary
-        onClick={() => SealToast.success({ message: 'Appears at the top!' })}
-      >
-        Top Center
-      </SealFilledButton.Primary>
-    </>
+  render: () => (
+    <SealFilledButton.Primary onClick={() => SealToast.success({ message: 'Appears at the top!' })}>
+      Top Center
+    </SealFilledButton.Primary>
   ),
 }
 
 export const WithChildren: Story = {
   args: { position: POSITION_BOTTOM_RIGHT },
-  render: (args) => (
-    <SealSonner {...args}>
-      <SealFilledButton.Primary
-        onClick={() => SealToast.success({ message: 'Children rendered inside SealSonner.' })}
-      >
-        Wrapped content
-      </SealFilledButton.Primary>
-    </SealSonner>
+  render: () => (
+    <SealFilledButton.Primary
+      onClick={() => SealToast.success({ message: 'Children rendered inside SealSonner.' })}
+    >
+      Wrapped content
+    </SealFilledButton.Primary>
   ),
 }
