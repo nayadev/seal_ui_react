@@ -67,34 +67,34 @@ function SealCalendarDayButton({
 /** Shared styling props available on all SealCalendar variants. */
 export interface SealCalendarSharedProps {
   /** Additional CSS class names for the calendar container. */
-  className?: string | undefined
+  className?: string
   /**
    * Whether days outside the current month are visible.
    * @default true
    */
-  showOutsideDays?: boolean | undefined
+  showOutsideDays?: boolean
   /**
    * Caption layout for the month header.
    * - `label` — static month/year label (default)
    * - `dropdown` — dropdowns for both month and year
    */
-  captionLayout?: 'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years' | undefined
+  captionLayout?: 'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years'
   /** Initial month shown when the calendar first renders. */
-  defaultMonth?: Date | undefined
+  defaultMonth?: Date
   /** Earliest month the user can navigate to. */
-  fromMonth?: Date | undefined
+  fromMonth?: Date
   /** Latest month the user can navigate to. */
-  toMonth?: Date | undefined
+  toMonth?: Date
   /**
    * Number of months displayed side by side.
    * @default 1
    */
-  numberOfMonths?: number | undefined
+  numberOfMonths?: number
   /**
    * Days that cannot be selected. Accepts a date, array of dates, a
    * predicate, or any `Matcher` accepted by `react-day-picker`.
    */
-  disabled?: Matcher | Matcher[] | undefined
+  disabled?: Matcher | Matcher[]
 }
 
 /** Props for `SealCalendar.Single` — single-date selection mode. */
@@ -102,7 +102,7 @@ export interface SealCalendarSingleProps extends SealCalendarSharedProps {
   /** The currently selected date. Pass `undefined` to deselect. */
   selected?: Date | undefined
   /** Called when the user selects or deselects a date. */
-  onSelect?: ((date: Date | undefined) => void) | undefined
+  onSelect?: (date: Date | undefined) => void
 }
 
 /** Props for `SealCalendar.Multiple` — multiple independent date selection. */
@@ -110,11 +110,11 @@ export interface SealCalendarMultipleProps extends SealCalendarSharedProps {
   /** The currently selected dates. */
   selected?: Date[] | undefined
   /** Called when the selection changes. */
-  onSelect?: ((dates: Date[] | undefined) => void) | undefined
+  onSelect?: (dates: Date[] | undefined) => void
   /** Minimum number of days that must be selected. */
-  min?: number | undefined
+  min?: number
   /** Maximum number of days that can be selected. */
-  max?: number | undefined
+  max?: number
 }
 
 /** Props for `SealCalendar.Range` — continuous date range selection. */
@@ -122,11 +122,11 @@ export interface SealCalendarRangeProps extends SealCalendarSharedProps {
   /** The currently selected date range. */
   selected?: DateRange | undefined
   /** Called when the range changes. */
-  onSelect?: ((range: DateRange | undefined) => void) | undefined
+  onSelect?: (range: DateRange | undefined) => void
   /** Minimum number of days that must span the range. */
-  min?: number | undefined
+  min?: number
   /** Maximum number of days that can span the range. */
-  max?: number | undefined
+  max?: number
 }
 
 const NAV_BUTTON_CLASSES = cn(

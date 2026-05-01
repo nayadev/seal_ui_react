@@ -56,7 +56,7 @@ describe('SealCalendar', () => {
         <SealCalendar.Single defaultMonth={new Date(2025, 5, 1)} onSelect={handleSelect} />,
       )
       const dayButtons = screen.getAllByRole('button')
-      const dayButton = dayButtons.find((btn) => btn.getAttribute('data-day') !== null)
+      const dayButton = dayButtons.find((btn) => btn.dataset.day !== undefined)
       if (dayButton) {
         dayButton.click()
         expect(handleSelect).toHaveBeenCalled()
