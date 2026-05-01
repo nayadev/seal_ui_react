@@ -149,6 +149,7 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | `sonner` (`src/components/ui/sonner.tsx`)     | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
 | `Input` (`src/components/ui/input.tsx`)       | `SealTextField`                                                                                                              |
 | `Textarea` (`src/components/ui/textarea.tsx`) | `SealTextarea`                                                                                                               |
+| `Checkbox` (`src/components/ui/checkbox.tsx`) | `SealCheckbox`                                                                                                               |
 
 ### Feedback — Implementation Notes
 
@@ -213,6 +214,18 @@ When `leadingIcon` or `trailingIcon` is present, horizontal padding is widened v
 
 **Toggle button uses `<button type="button">`**
 The visibility toggle is a proper `<button>` element (not a `<span>`) to ensure keyboard accessibility. `type="button"` prevents accidental form submission. The button label is "Show password" when text is hidden, and "Hide password" when text is visible.
+
+**SealCheckbox has no variants — no Compound Component pattern**
+`SealCheckbox` is a single-variant input. The Compound Component pattern is not applied. It is exported as a `React.forwardRef` component with `displayName = 'SealCheckbox'`.
+
+**SealCheckbox narrows the Radix `checked` and `onCheckedChange` types**
+The public props omit `'indeterminate'` from `checked` (accepting only `boolean`) and simplify `onCheckedChange` to `(checked: boolean) => void`, matching the Flutter `ValueChanged<bool>` API. The `'indeterminate'` case is handled internally by the component and swallowed.
+
+**SealCheckbox uses `React.useId()` for label–input association**
+When no external `id` is provided, an internal id from `React.useId()` is generated and shared between `<label htmlFor>` and the Radix Checkbox root `id`. Providing an external `id` overrides the generated one.
+
+**SealCheckbox top-aligns the control with `mt-xxxs`**
+When `sublabel` is present, the checkbox sits next to a multi-line label block. `mt-[var(--seal-dimension-xxxs)]` nudges the control down to optically align with the first line of the label stack rather than centering against the full block height.
 
 ---
 
