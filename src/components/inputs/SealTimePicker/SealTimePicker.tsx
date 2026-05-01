@@ -1,12 +1,6 @@
 import * as React from 'react'
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { SealSelect } from '@/components/inputs/SealSelect/SealSelect'
 import { cn } from '@/lib/utils'
 
 /** A time-of-day value used by `SealTimePicker`. */
@@ -207,44 +201,32 @@ function ColonSeparator() {
   return (
     <span
       aria-hidden="true"
-      className="mt-[1.1rem] select-none text-sm font-semibold text-[var(--seal-text-secondary)]"
+      className="mb-[calc(var(--seal-dimension-md)+var(--seal-dimension-xs)/2-0.5em)] select-none text-sm font-semibold leading-none text-[var(--seal-text-secondary)]"
     >
       :
     </span>
   )
 }
 
+// Period select options — stable reference, not recreated on each render.
+const PERIOD_OPTIONS = [
+  { value: 'am', label: 'AM' },
+  { value: 'pm', label: 'PM' },
+]
+
 function PeriodSelect({ value, disabled, onChange }: Readonly<PeriodSelectProps>) {
   return (
-    <div className="flex flex-col items-center gap-[var(--seal-dimension-xxs)]">
-      <span className="select-none text-xs text-[var(--seal-text-secondary)]">period</span>
-      <Select
-        value={value}
-        onValueChange={(v) => {
-          onChange(v as SealDayPeriod)
-        }}
-        {...(disabled === true && { disabled: true })}
-      >
-        <SelectTrigger
-          aria-label="period"
-          className={cn(
-            'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))] w-auto min-w-[var(--seal-dimension-xxl)]',
-            'rounded-[var(--seal-radius-md)]',
-            'border border-[var(--seal-border-default)]',
-            'bg-[var(--seal-surface-surface)]',
-            'px-[var(--seal-dimension-xs)]',
-            'text-sm font-medium text-[var(--seal-text-primary)]',
-            'focus:ring-1 focus:ring-[var(--seal-brand-primary)] focus:ring-offset-0',
-          )}
-        >
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="am">AM</SelectItem>
-          <SelectItem value="pm">PM</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+    <SealSelect
+      label="period"
+      aria-label="period"
+      options={PERIOD_OPTIONS}
+      value={value}
+      onValueChange={(v) => {
+        onChange(v as SealDayPeriod)
+      }}
+      disabled={disabled === true}
+      className="rounded-[var(--seal-radius-md)]"
+    />
   )
 }
 
@@ -266,7 +248,7 @@ function SealTimePickerImpl({
       data-slot="time-picker"
       data-disabled={disabled ?? undefined}
       className={cn(
-        'inline-flex items-center gap-[var(--seal-dimension-xxs)]',
+        'inline-flex items-end gap-[var(--seal-dimension-xxs)]',
         disabled === true && 'pointer-events-none opacity-[var(--seal-state-disabled-opacity)]',
         className,
       )}
@@ -321,7 +303,7 @@ function SealTimePickerPeriodImpl({
       data-slot="time-picker"
       data-disabled={disabled ?? undefined}
       className={cn(
-        'inline-flex items-center gap-[var(--seal-dimension-xxs)]',
+        'inline-flex items-end gap-[var(--seal-dimension-xxs)]',
         disabled === true && 'pointer-events-none opacity-[var(--seal-state-disabled-opacity)]',
         className,
       )}
