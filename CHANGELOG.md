@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.0.4](https://github.com/nayadev/seal_ui_react/compare/v0.0.3...v0.0.4) (2026-04-29)
+
+
+### Features
+
+* add SealToast and SealSonner components ([3d07fd5](https://github.com/nayadev/seal_ui_react/commit/3d07fd5721d752790ba677011263bb39ee8a7dc6))
+
+
+### Bug Fixes
+
+* enforce no-negated-condition via ESLint and fix violations ([1157e47](https://github.com/nayadev/seal_ui_react/commit/1157e47a932276e7d89a567018866632dc1400db))
+* resolve SonarQube S7735 negated conditions in SealToast ([b8acfa7](https://github.com/nayadev/seal_ui_react/commit/b8acfa77628c2cb6edf514f3baa2f53c8deab35a))
+* **SealToast:** remove border to match Flutter reference ([fcd08d7](https://github.com/nayadev/seal_ui_react/commit/fcd08d7e19c19b9d525de91c87a46ce4e9f8674d))
+* **SealToast:** revert border to --seal-border-default ([921638a](https://github.com/nayadev/seal_ui_react/commit/921638ab9fc2b4d935c56315dbd9b45db0d6794c))
+* **SealToast:** use accent color for border and action button ([4bcef42](https://github.com/nayadev/seal_ui_react/commit/4bcef42da2cda6e619319528c55f4854b7259069))
+* **storybook:** mount SealSonner once globally to prevent multi-toaster firing ([b381c4b](https://github.com/nayadev/seal_ui_react/commit/b381c4b7334c61fee3cc378a3213ab09d263a499))
+
 ## [0.0.3](https://github.com/nayadev/seal_ui_react/compare/v0.0.2...v0.0.3) (2026-04-29)
 
 
