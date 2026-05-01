@@ -11,6 +11,9 @@ export * from './components/buttons/SealOutlineButton'
 export * from './components/buttons/SealOutlineIconButton'
 export * from './components/buttons/SealTextButton'
 
+// Inputs
+export * from './components/inputs/SealTextField'
+
 // Feedback
 export * from './components/feedback/SealAlert'
 export * from './components/feedback/SealBouncingDots'
