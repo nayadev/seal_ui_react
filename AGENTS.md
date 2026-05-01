@@ -85,6 +85,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | Radix `@radix-ui/react-slider`   | `SealSlider`                                                                                                                 |
 | `Switch`                         | `SealSwitch`                                                                                                                 |
 | `Calendar` (react-day-picker)    | `SealCalendar` (`.Single`, `.Multiple`, `.Range`)                                                                            |
+| `Calendar` + `Popover`           | `SealDatePicker` (`.Single`, `.Range`)                                                                                       |
 
 ---
 
