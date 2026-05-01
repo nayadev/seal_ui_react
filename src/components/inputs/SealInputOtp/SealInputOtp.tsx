@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import { cn } from '@/lib/utils'
 
 /**
@@ -102,6 +102,8 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
         'transition-all',
         'first:rounded-l-[var(--seal-radius-md)] first:border-l',
         'last:rounded-r-[var(--seal-radius-md)]',
+        // Override shadcn's ring-ring with the brand primary color when active.
+        'ring-[var(--seal-brand-primary)]',
         className,
       )}
     />
@@ -110,7 +112,7 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
 Slot.displayName = 'SealInputOTP.Slot'
 
 function Separator({ className }: Readonly<{ className?: string }>) {
-  return <InputOTPSeparator className={cn('text-[var(--seal-text-secondary)]', className)} />
+  return <div role="separator" className={cn(className)} />
 }
 Separator.displayName = 'SealInputOTP.Separator'
 
