@@ -70,7 +70,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 ### shadcn → Seal Component Mapping
 
 | shadcn primitive                 | Seal wrapper(s)                                                                                                              |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------------ | ------------ |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `Button`                         | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
 | `Alert`                          | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)      | `SealBouncingDots`                                                                                                           |
@@ -81,7 +81,10 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `Textarea`                       | `SealTextarea`                                                                                                               |
 | `Checkbox`                       | `SealCheckbox`                                                                                                               |
 | `RadioGroup`                     | `SealRadioGroup`                                                                                                             |
-| `Select`                         | `SealSelect`                                                                                                                 |     | Radix `@radix-ui/react-slider` | `SealSlider` |
+| `Select`                         | `SealSelect`                                                                                                                 |
+| Radix `@radix-ui/react-slider`   | `SealSlider`                                                                                                                 |
+| `Switch`                         | `SealSwitch`                                                                                                                 |
+| `Calendar` (react-day-picker)    | `SealCalendar` (`.Single`, `.Multiple`, `.Range`)                                                                            |
 
 ---
 
