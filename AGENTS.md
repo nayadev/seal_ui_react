@@ -86,6 +86,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `Switch`                         | `SealSwitch`                                                                                                                 |
 | `Calendar` (react-day-picker)    | `SealCalendar` (`.Single`, `.Multiple`, `.Range`)                                                                            |
 | `Calendar` + `Popover`           | `SealDatePicker` (`.Single`, `.Range`)                                                                                       |
+| None (custom implementation)     | `SealTimePicker` (24h default), `SealTimePicker.Period` (12h AM/PM)                                                          |
 
 ---
 
