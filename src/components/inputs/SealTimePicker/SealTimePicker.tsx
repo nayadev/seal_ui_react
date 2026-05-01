@@ -1,5 +1,12 @@
 import * as React from 'react'
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 
 /** A time-of-day value used by `SealTimePicker`. */
@@ -24,7 +31,7 @@ interface TimeFieldProps {
   onChange: (value: number) => void
 }
 
-interface PeriodToggleProps {
+interface PeriodSelectProps {
   value: SealDayPeriod
   disabled?: boolean
   onChange: (period: SealDayPeriod) => void
@@ -207,38 +214,36 @@ function ColonSeparator() {
   )
 }
 
-function PeriodToggle({ value, disabled, onChange }: Readonly<PeriodToggleProps>) {
+function PeriodSelect({ value, disabled, onChange }: Readonly<PeriodSelectProps>) {
   return (
-    <div
-      className={cn(
-        'ml-[var(--seal-dimension-xxs)] mt-[1.1rem]',
-        'flex flex-col overflow-hidden',
-        'rounded-[var(--seal-radius-md)]',
-        'border border-[var(--seal-border-default)]',
-      )}
-    >
-      {(['am', 'pm'] as const).map((p) => (
-        <button
-          key={p}
-          type="button"
-          disabled={disabled}
-          aria-pressed={p === value}
-          onClick={() => {
-            onChange(p)
-          }}
+    <div className="flex flex-col items-center gap-[var(--seal-dimension-xxs)]">
+      <span className="select-none text-xs text-[var(--seal-text-secondary)]">period</span>
+      <Select
+        value={value}
+        onValueChange={(v) => {
+          onChange(v as SealDayPeriod)
+        }}
+        {...(disabled === true && { disabled: true })}
+      >
+        <SelectTrigger
+          aria-label="period"
           className={cn(
-            'px-[var(--seal-dimension-xs)] py-[var(--seal-dimension-xxs)]',
-            'text-xs font-semibold uppercase',
-            'transition-colors',
-            'disabled:pointer-events-none',
-            p === value
-              ? 'bg-[var(--seal-brand-primary)] text-[var(--seal-text-on-primary)]'
-              : 'text-[var(--seal-text-secondary)] hover:bg-[var(--seal-surface-surface-alt)]',
+            'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))] w-auto min-w-[var(--seal-dimension-xxl)]',
+            'rounded-[var(--seal-radius-md)]',
+            'border border-[var(--seal-border-default)]',
+            'bg-[var(--seal-surface-surface)]',
+            'px-[var(--seal-dimension-xs)]',
+            'text-sm font-medium text-[var(--seal-text-primary)]',
+            'focus:ring-1 focus:ring-[var(--seal-brand-primary)] focus:ring-offset-0',
           )}
         >
-          {p.toUpperCase()}
-        </button>
-      ))}
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="am">AM</SelectItem>
+          <SelectItem value="pm">PM</SelectItem>
+        </SelectContent>
+      </Select>
     </div>
   )
 }
@@ -336,7 +341,7 @@ function SealTimePickerPeriodImpl({
           />
         </React.Fragment>
       ))}
-      <PeriodToggle
+      <PeriodSelect
         value={activePeriod}
         disabled={disabled === true}
         onChange={handlePeriodChange}
