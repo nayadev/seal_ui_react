@@ -9,12 +9,26 @@ import { cn } from '@/lib/utils'
 
 export type { DateRange } from 'react-day-picker'
 
+function ordinalSuffix(day: number): string {
+  const mod100 = day % 100
+  if (mod100 >= 11 && mod100 <= 13) return 'th'
+  switch (day % 10) {
+    case 1:
+      return 'st'
+    case 2:
+      return 'nd'
+    case 3:
+      return 'rd'
+    default:
+      return 'th'
+  }
+}
+
 function formatDateDefault(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(date)
+  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)
+  const day = date.getDate()
+  const year = date.getFullYear()
+  return `${month} ${String(day)}${ordinalSuffix(day)}, ${String(year)}`
 }
 
 function formatRangeDefault(range: DateRange): string {
@@ -27,13 +41,12 @@ function formatRangeDefault(range: DateRange): string {
 const TRIGGER_CLASSES = cn(
   'flex w-full items-center gap-[var(--seal-dimension-sm)]',
   'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
-  'rounded-[var(--seal-radius-sm)]',
-  'border border-[var(--seal-border-default)]',
-  'bg-[var(--seal-surface-surface-alt)]',
+  'rounded-[var(--seal-radius-md)]',
+  'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
+  'bg-[var(--seal-surface-surface)]',
   'px-[var(--seal-dimension-sm)]',
   'text-[length:var(--seal-constant-small-font-size)] text-left',
   'cursor-pointer transition-colors',
-  'hover:border-[var(--seal-brand-primary)]',
   'focus-visible:outline-none focus-visible:ring-1',
   'focus-visible:ring-[var(--seal-brand-primary)] focus-visible:ring-offset-0',
   'disabled:pointer-events-none disabled:opacity-[var(--seal-state-disabled-opacity)]',

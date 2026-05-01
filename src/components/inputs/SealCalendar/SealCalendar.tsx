@@ -39,7 +39,7 @@ function SealCalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        'flex aspect-square h-auto w-full min-w-[--cell-size] items-center justify-center',
+        'flex aspect-square h-auto w-full min-w-[var(--cell-size)] items-center justify-center',
         'rounded-[var(--seal-radius-sm)] text-sm font-normal',
         'text-[var(--seal-text-primary)]',
         'cursor-pointer transition-colors',
@@ -129,16 +129,34 @@ export interface SealCalendarRangeProps extends SealCalendarSharedProps {
   max?: number | undefined
 }
 
+const NAV_BUTTON_CLASSES = cn(
+  'inline-flex h-[var(--cell-size)] w-[var(--cell-size)] items-center justify-center',
+  'rounded-[var(--seal-radius-sm)] select-none p-0',
+  'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
+  'text-[var(--seal-brand-primary)]',
+  'hover:bg-[var(--seal-surface-surface-alt)]',
+  'aria-disabled:opacity-50',
+)
+
 const SEAL_CALENDAR_CLASSNAMES = {
-  months: 'flex flex-col gap-4 md:flex-row',
-  month: 'flex flex-col gap-4',
-  month_caption: 'text-[var(--seal-text-primary)] font-semibold',
+  months: 'relative flex flex-col gap-4 md:flex-row',
+  month: 'flex w-full flex-col gap-4',
+  month_caption: cn(
+    'flex h-[var(--cell-size)] w-full items-center justify-center px-[var(--cell-size)]',
+    'text-[var(--seal-text-primary)] font-semibold',
+  ),
+  caption_label: 'select-none text-sm font-medium',
+  nav: 'absolute inset-x-0 top-0 flex h-[var(--cell-size)] w-full items-center justify-between gap-1',
+  button_previous: NAV_BUTTON_CLASSES,
+  button_next: NAV_BUTTON_CLASSES,
+  weekdays: 'flex',
   weekday: cn(
     'text-[var(--seal-text-secondary)]',
-    'flex-1 select-none rounded-md text-xs font-normal',
+    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-xs font-normal',
   ),
+  week: 'mt-2 flex w-full',
   day: cn(
-    'group/day relative aspect-square h-full w-full select-none p-0 text-center',
+    'group/day relative aspect-square h-full w-full min-w-[var(--cell-size)] select-none p-0 text-center',
     '[&:first-child[data-selected=true]_button]:rounded-l-[var(--seal-radius-sm)]',
     '[&:last-child[data-selected=true]_button]:rounded-r-[var(--seal-radius-sm)]',
   ),
@@ -154,11 +172,11 @@ const SEAL_CALENDAR_CLASSNAMES = {
 
 function buildCalendarClassName(className?: string) {
   return cn(
-    'border border-[var(--seal-border-default)]',
+    'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
     'rounded-[var(--seal-radius-md)]',
     'bg-[var(--seal-surface-surface)]',
     'p-[var(--seal-dimension-sm)]',
-    '[--cell-size:2rem]',
+    '[--cell-size:2.25rem]',
     className,
   )
 }
@@ -178,6 +196,7 @@ function SealCalendarSingleImpl({
   return (
     <Calendar
       mode="single"
+      weekStartsOn={1}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
@@ -215,6 +234,7 @@ function SealCalendarMultipleImpl({
   return (
     <Calendar
       mode="multiple"
+      weekStartsOn={1}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
@@ -254,6 +274,7 @@ function SealCalendarRangeImpl({
   return (
     <Calendar
       mode="range"
+      weekStartsOn={1}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
