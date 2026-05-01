@@ -161,7 +161,7 @@ export const SealSlider = React.forwardRef<
         className={cn(
           'block rounded-full',
           'h-[var(--seal-dimension-md)] w-[var(--seal-dimension-md)]',
-          'border-[var(--seal-dimension-xxxs)]',
+          'border-2',
           'bg-[var(--seal-surface-background)]',
           'transition-colors',
           'focus-visible:outline-none focus-visible:ring-2',

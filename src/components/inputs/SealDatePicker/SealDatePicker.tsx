@@ -38,11 +38,14 @@ function formatRangeDefault(range: DateRange): string {
   return `${from} – ${to}`
 }
 
+const TEXT_PRIMARY_CLASS = 'text-[var(--seal-text-primary)]'
+const TEXT_SECONDARY_CLASS = 'text-[var(--seal-text-secondary)]'
+
 const TRIGGER_CLASSES = cn(
   'flex w-full items-center gap-[var(--seal-dimension-sm)]',
   'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
   'rounded-[var(--seal-radius-md)]',
-  'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
+  'border border-[var(--seal-border-default)]',
   'bg-[var(--seal-surface-surface)]',
   'px-[var(--seal-dimension-sm)]',
   'text-[length:var(--seal-constant-small-font-size)] text-left',
@@ -153,14 +156,16 @@ function SealDatePickerSingleImpl({
           disabled={disabled}
           className={cn(
             TRIGGER_CLASSES,
-            selected === undefined && 'text-[var(--seal-text-secondary)]',
-            selected !== undefined && 'text-[var(--seal-text-primary)]',
+            selected === undefined ? TEXT_SECONDARY_CLASS : TEXT_PRIMARY_CLASS,
             className,
           )}
         >
           <CalendarIcon
             size={16}
-            className="shrink-0 text-[var(--seal-text-secondary)]"
+            className={cn(
+              'shrink-0',
+              selected === undefined ? TEXT_SECONDARY_CLASS : TEXT_PRIMARY_CLASS,
+            )}
             aria-hidden
           />
           <span className="flex-1 truncate">
@@ -223,14 +228,16 @@ function SealDatePickerRangeImpl({
           disabled={disabled}
           className={cn(
             TRIGGER_CLASSES,
-            selected?.from === undefined && 'text-[var(--seal-text-secondary)]',
-            selected?.from !== undefined && 'text-[var(--seal-text-primary)]',
+            selected?.from === undefined ? TEXT_SECONDARY_CLASS : TEXT_PRIMARY_CLASS,
             className,
           )}
         >
           <CalendarIcon
             size={16}
-            className="shrink-0 text-[var(--seal-text-secondary)]"
+            className={cn(
+              'shrink-0',
+              selected?.from === undefined ? TEXT_SECONDARY_CLASS : TEXT_PRIMARY_CLASS,
+            )}
             aria-hidden
           />
           <span className="flex-1 truncate">{displayText}</span>

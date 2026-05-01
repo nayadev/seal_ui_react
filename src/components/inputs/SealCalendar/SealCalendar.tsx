@@ -132,8 +132,9 @@ export interface SealCalendarRangeProps extends SealCalendarSharedProps {
 const NAV_BUTTON_CLASSES = cn(
   'inline-flex h-[var(--cell-size)] w-[var(--cell-size)] items-center justify-center',
   'rounded-[var(--seal-radius-sm)] select-none p-0',
-  'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
+  'border border-[var(--seal-border-default)]',
   'text-[var(--seal-brand-primary)]',
+  'opacity-50 hover:opacity-100 transition-opacity',
   'hover:bg-[var(--seal-surface-surface-alt)]',
   'aria-disabled:opacity-50',
 )
@@ -172,7 +173,7 @@ const SEAL_CALENDAR_CLASSNAMES = {
 
 function buildCalendarClassName(className?: string) {
   return cn(
-    'border border-[color:color-mix(in_srgb,var(--seal-border-default)_75%,transparent)]',
+    'border border-[var(--seal-border-default)]',
     'rounded-[var(--seal-radius-md)]',
     'bg-[var(--seal-surface-surface)]',
     'p-[var(--seal-dimension-sm)]',
