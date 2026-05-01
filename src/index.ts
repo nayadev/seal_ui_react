@@ -12,6 +12,7 @@ export * from './components/buttons/SealOutlineIconButton'
 export * from './components/buttons/SealTextButton'
 
 // Inputs
+export * from './components/inputs/SealCalendar'
 export * from './components/inputs/SealCheckbox'
 export * from './components/inputs/SealRadioGroup'
 export * from './components/inputs/SealSelect'
