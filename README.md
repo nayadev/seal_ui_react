@@ -2,7 +2,7 @@
 
 > A token-driven React design system built on shadcn/ui — modern, minimal, elegant, slightly futuristic.
 
-[![Version](https://img.shields.io/badge/version-0.0.1-8055e0)](./package.json)
+[![Release](https://img.shields.io/github/v/release/nayadev/seal_ui_react)](https://github.com/nayadev/seal_ui_react/releases)
 [![License](https://img.shields.io/badge/license-MIT-32b88c)](./LICENSE)
 [![React](https://img.shields.io/badge/React-19-61dafb)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6)](https://typescriptlang.org)
