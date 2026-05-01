@@ -303,26 +303,28 @@ function SealTimePickerPeriodImpl({
       data-slot="time-picker"
       data-disabled={disabled ?? undefined}
       className={cn(
-        'inline-flex items-end gap-[var(--seal-dimension-xxs)]',
+        'inline-flex items-end gap-[var(--seal-dimension-xs)]',
         disabled === true && 'pointer-events-none opacity-[var(--seal-state-disabled-opacity)]',
         className,
       )}
     >
-      {visibleFields.map((field, index) => (
-        <React.Fragment key={field.key}>
-          {index > 0 && <ColonSeparator />}
-          <TimeField
-            label={field.label}
-            value={current[field.key]}
-            min={field.min}
-            max={field.max}
-            disabled={disabled === true}
-            onChange={(v) => {
-              handleFieldChange(field.key, v)
-            }}
-          />
-        </React.Fragment>
-      ))}
+      <div className="inline-flex items-end gap-[var(--seal-dimension-xxs)]">
+        {visibleFields.map((field, index) => (
+          <React.Fragment key={field.key}>
+            {index > 0 && <ColonSeparator />}
+            <TimeField
+              label={field.label}
+              value={current[field.key]}
+              min={field.min}
+              max={field.max}
+              disabled={disabled === true}
+              onChange={(v) => {
+                handleFieldChange(field.key, v)
+              }}
+            />
+          </React.Fragment>
+        ))}
+      </div>
       <PeriodSelect
         value={activePeriod}
         disabled={disabled === true}
