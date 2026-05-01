@@ -139,15 +139,16 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 
 ### shadcn → Seal Component Mapping
 
-| shadcn primitive                          | Seal wrappers                                                                                                                |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Button` (`src/components/ui/button.tsx`) | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
-| `Alert` (`src/components/ui/alert.tsx`)   | `SealAlert`                                                                                                                  |
-| None (custom CSS animation)               | `SealBouncingDots`                                                                                                           |
-| None (custom SVG animation)               | `SealLoader`                                                                                                                 |
-| Radix `@radix-ui/react-progress`          | `SealProgress`                                                                                                               |
-| `sonner` (`src/components/ui/sonner.tsx`) | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
-| `Input` (`src/components/ui/input.tsx`)   | `SealTextField`                                                                                                              |
+| shadcn primitive                              | Seal wrappers                                                                                                                |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Button` (`src/components/ui/button.tsx`)     | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
+| `Alert` (`src/components/ui/alert.tsx`)       | `SealAlert`                                                                                                                  |
+| None (custom CSS animation)                   | `SealBouncingDots`                                                                                                           |
+| None (custom SVG animation)                   | `SealLoader`                                                                                                                 |
+| Radix `@radix-ui/react-progress`              | `SealProgress`                                                                                                               |
+| `sonner` (`src/components/ui/sonner.tsx`)     | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
+| `Input` (`src/components/ui/input.tsx`)       | `SealTextField`                                                                                                              |
+| `Textarea` (`src/components/ui/textarea.tsx`) | `SealTextarea`                                                                                                               |
 
 ### Feedback — Implementation Notes
 
