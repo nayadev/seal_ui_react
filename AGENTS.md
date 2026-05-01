@@ -81,6 +81,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `Textarea`                       | `SealTextarea`                                                                                                               |
 | `Checkbox`                       | `SealCheckbox`                                                                                                               |
 | `RadioGroup`                     | `SealRadioGroup`                                                                                                             |
+| `Select`                         | `SealSelect`                                                                                                                 |
 
 ---
 
