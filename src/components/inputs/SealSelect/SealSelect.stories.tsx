@@ -156,39 +156,53 @@ export const AllVariants: Story = {
 <SealSelect options={themeOptions} label="Theme" placeholder="Choose a theme" />
 
 {/* Pre-selected */}
-<SealSelect options={themeOptions} label="Theme" value="arctic" />
+function PreSelected() {
+  const [value, setValue] = React.useState('arctic')
+  return (
+    <SealSelect options={themeOptions} label="Theme" value={value} onValueChange={setValue} />
+  )
+}
 
 {/* Disabled */}
 <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />`,
       },
     },
   },
-  render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-64">
-      <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-          No label
-        </p>
-        <SealSelect options={themeOptions} placeholder={THEME_PLACEHOLDER} />
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [preSelectedValue, setPreSelectedValue] = React.useState('arctic')
+    return (
+      <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-64">
+        <div>
+          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+            No label
+          </p>
+          <SealSelect options={themeOptions} placeholder={THEME_PLACEHOLDER} />
+        </div>
+        <div>
+          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+            With label
+          </p>
+          <SealSelect options={themeOptions} label="Theme" placeholder={THEME_PLACEHOLDER} />
+        </div>
+        <div>
+          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+            Pre-selected
+          </p>
+          <SealSelect
+            options={themeOptions}
+            label="Theme"
+            value={preSelectedValue}
+            onValueChange={setPreSelectedValue}
+          />
+        </div>
+        <div>
+          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+            Disabled
+          </p>
+          <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />
+        </div>
       </div>
-      <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-          With label
-        </p>
-        <SealSelect options={themeOptions} label="Theme" placeholder={THEME_PLACEHOLDER} />
-      </div>
-      <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-          Pre-selected
-        </p>
-        <SealSelect options={themeOptions} label="Theme" value="arctic" />
-      </div>
-      <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-          Disabled
-        </p>
-        <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />
-      </div>
-    </div>
-  ),
+    )
+  },
 }
