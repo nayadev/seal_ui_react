@@ -12,6 +12,7 @@ export * from './components/buttons/SealOutlineIconButton'
 export * from './components/buttons/SealTextButton'
 
 // Inputs
+export * from './components/inputs/SealTextarea'
 export * from './components/inputs/SealTextField'
 
 // Feedback
