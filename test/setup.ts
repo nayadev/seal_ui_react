@@ -22,3 +22,24 @@ Object.defineProperty(globalThis, 'MutationObserver', {
   writable: true,
   configurable: true,
 })
+
+// Radix UI uses ResizeObserver internally (e.g. @radix-ui/react-use-size).
+// JSDOM does not implement ResizeObserver, so we stub it to keep the test
+// environment from throwing and to allow slider / other layout-aware primitives
+// to render without errors.
+class StubResizeObserver {
+  observe(): void {
+    // intentionally empty
+  }
+  unobserve(): void {
+    // intentionally empty
+  }
+  disconnect(): void {
+    // intentionally empty
+  }
+}
+Object.defineProperty(globalThis, 'ResizeObserver', {
+  value: StubResizeObserver,
+  writable: true,
+  configurable: true,
+})
