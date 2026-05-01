@@ -147,6 +147,7 @@ Seal UI components are **thin, token-driven wrappers** over shadcn/ui primitives
 | None (custom SVG animation)               | `SealLoader`                                                                                                                 |
 | Radix `@radix-ui/react-progress`          | `SealProgress`                                                                                                               |
 | `sonner` (`src/components/ui/sonner.tsx`) | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
+| `Input` (`src/components/ui/input.tsx`)   | `SealTextField`                                                                                                              |
 
 ### Feedback — Implementation Notes
 
@@ -185,6 +186,32 @@ The `custom` method accepts a `SealIcon` component reference and wraps it in a `
 
 **SealSonner is a regular function component — no Compound Component pattern**
 `SealSonner` is a container (one variant, no sub-components). The Compound Component pattern is not applied; the API is a single component with `position`, `offset`, and `visibleToasts` props.
+
+### Inputs — Implementation Notes
+
+**SealTextField has no variants — no Compound Component pattern**
+`SealTextField` is a single-variant input with internal state (obscure toggle). Like `SealSonner`, the Compound Component pattern is not applied. It is exported as a `React.forwardRef` component with `displayName = 'SealTextField'`.
+
+**SealTextField uses `React.forwardRef` for form library compatibility**
+The `ref` is forwarded to the underlying `<input>` element so libraries like React Hook Form can attach refs directly. External refs reach the native input, not the wrapper div.
+
+**SealTextField replaces native `onChange` with a string callback**
+The component extends `Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>` and provides `onChange?: (value: string) => void` — mirroring Flutter's `ValueChanged<String>`. The native event is handled internally.
+
+**SealTextField uses `React.useId()` for label–input association**
+When no external `id` is provided, an internal id from `React.useId()` is generated and shared between `<label htmlFor>` and `<input id>`. Providing an external `id` overrides the generated one.
+
+**SealTextField controls `type` when `obscureText` is active**
+The external `type` prop is stripped from `restProps` and only applied when `obscureText` is `false`. When `obscureText` is `true`, the component manages `type` between `"password"` and `"text"` based on internal toggle state. This mirrors Flutter's `_isObscured` state from `didUpdateWidget`.
+
+**Password inputs are not role="textbox" in ARIA**
+`type="password"` inputs are intentionally excluded from the accessible textbox role by ARIA. Tests for password fields must use `screen.getByLabelText(label)` or `document.querySelector('input[type="password"]')` instead of `getByRole('textbox')`.
+
+**Icon-adjusted padding uses CSS `calc()` with token variables**
+When `leadingIcon` or `trailingIcon` is present, horizontal padding is widened via inline `style` using `calc(var(--seal-dimension-sm) + 20px + var(--seal-dimension-xs))`. This is defined as the `ICON_SLOT_PADDING` constant. Inline style takes precedence over Tailwind's `px-3`, so there's no class conflict.
+
+**Toggle button uses `<button type="button">`**
+The visibility toggle is a proper `<button>` element (not a `<span>`) to ensure keyboard accessibility. `type="button"` prevents accidental form submission. The button label is "Show password" when text is hidden, and "Hide password" when text is visible.
 
 ---
 
