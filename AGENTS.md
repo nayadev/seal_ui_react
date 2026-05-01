@@ -70,7 +70,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 ### shadcn → Seal Component Mapping
 
 | shadcn primitive                 | Seal wrapper(s)                                                                                                              |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------------ | ------------ |
 | `Button`                         | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
 | `Alert`                          | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)      | `SealBouncingDots`                                                                                                           |
@@ -81,7 +81,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `Textarea`                       | `SealTextarea`                                                                                                               |
 | `Checkbox`                       | `SealCheckbox`                                                                                                               |
 | `RadioGroup`                     | `SealRadioGroup`                                                                                                             |
-| `Select`                         | `SealSelect`                                                                                                                 |
+| `Select`                         | `SealSelect`                                                                                                                 |     | Radix `@radix-ui/react-slider` | `SealSlider` |
 
 ---
 

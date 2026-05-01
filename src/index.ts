@@ -15,6 +15,7 @@ export * from './components/buttons/SealTextButton'
 export * from './components/inputs/SealCheckbox'
 export * from './components/inputs/SealRadioGroup'
 export * from './components/inputs/SealSelect'
+export * from './components/inputs/SealSlider'
 export * from './components/inputs/SealTextarea'
 export * from './components/inputs/SealTextField'
 
