@@ -3,7 +3,6 @@ import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import {
   Controller,
-  FormProvider,
   useFormContext,
   type ControllerProps,
   type FieldPath,
@@ -75,7 +74,7 @@ export function useFormField() {
  *   </SealForm>
  * )
  */
-export const SealForm = FormProvider
+export { FormProvider as SealForm } from 'react-hook-form'
 
 /**
  * Connects a single field to React Hook Form's `Controller`.
@@ -86,10 +85,11 @@ export const SealForm = FormProvider
 export function SealFormField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->(props: ControllerProps<TFieldValues, TName>) {
+>({ name, ...props }: ControllerProps<TFieldValues, TName>) {
+  const contextValue = React.useMemo(() => ({ name }), [name])
   return (
-    <SealFormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+    <SealFormFieldContext.Provider value={contextValue}>
+      <Controller name={name} {...props} />
     </SealFormFieldContext.Provider>
   )
 }
@@ -103,8 +103,9 @@ export function SealFormField<
 export const SealFormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   function SealFormItem({ className, ...props }, ref) {
     const id = React.useId()
+    const contextValue = React.useMemo(() => ({ id }), [id])
     return (
-      <SealFormItemContext.Provider value={{ id }}>
+      <SealFormItemContext.Provider value={contextValue}>
         <div
           ref={ref}
           className={cn('flex flex-col gap-[var(--seal-dimension-xs)]', className)}

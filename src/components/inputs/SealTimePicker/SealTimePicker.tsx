@@ -170,10 +170,10 @@ function TimeField({ label, value, min, max, disabled, onChange }: Readonly<Time
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const raw = e.target.value.replace(/\D/g, '')
+    const raw = e.target.value.replaceAll(/\D/g, '')
     if (raw === '') return
-    const parsed = parseInt(raw, 10)
-    if (!isNaN(parsed) && parsed >= min && parsed <= max) {
+    const parsed = Number.parseInt(raw, 10)
+    if (!Number.isNaN(parsed) && parsed >= min && parsed <= max) {
       onChange(parsed)
     }
   }

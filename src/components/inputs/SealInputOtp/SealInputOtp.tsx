@@ -112,7 +112,7 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
 Slot.displayName = 'SealInputOTP.Slot'
 
 function Separator({ className }: Readonly<{ className?: string }>) {
-  return <div role="separator" className={cn(className)} />
+  return <hr className={cn(className)} />
 }
 Separator.displayName = 'SealInputOTP.Separator'
 
