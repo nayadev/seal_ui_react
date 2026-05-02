@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react'
 import * as React from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { renderWithTheme } from '../../../../test/utils'
 
@@ -35,6 +35,17 @@ function sixDigitOtp(props?: Partial<React.ComponentProps<typeof SealInputOTP>>)
 }
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
+
+// input-otp schedules internal timers that fire state updates. Without fake
+// timers the callbacks run after jsdom tears down, causing "window is not
+// defined" unhandled errors that make vitest exit with code 1.
+beforeEach(() => {
+  vi.useFakeTimers()
+})
+afterEach(() => {
+  vi.clearAllTimers()
+  vi.useRealTimers()
+})
 
 describe('SealInputOTP', () => {
   it('renders without error', () => {
