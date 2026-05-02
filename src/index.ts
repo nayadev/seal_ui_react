@@ -13,6 +13,7 @@ export * from './components/buttons/SealTextButton'
 
 // Inputs
 export * from './components/inputs/SealCalendar'
+export * from './components/inputs/SealForm'
 export * from './components/inputs/SealInputOtp'
 export * from './components/inputs/SealTimePicker'
 export * from './components/inputs/SealDatePicker'
