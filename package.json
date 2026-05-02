@@ -1,6 +1,6 @@
 {
   "name": "@sealui/react",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "SealUI React — a token-driven design system built on shadcn/ui",
   "type": "module",
   "main": "./dist/index.js",

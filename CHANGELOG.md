@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.0.5](https://github.com/nayadev/seal_ui_react/compare/v0.0.4...v0.0.5) (2026-05-02)
+
+
+### Features
+
+* add copilot instructions for repository guidelines ([cd52f02](https://github.com/nayadev/seal_ui_react/commit/cd52f02df2b9060d2f959e9ce2a8b4cb53a120af))
+* add SealCalendar component ([e28f4ec](https://github.com/nayadev/seal_ui_react/commit/e28f4ec7c65c5b2c280584f99c75c409e7eb7e5c))
+* add SealCheckbox component ([01b4b92](https://github.com/nayadev/seal_ui_react/commit/01b4b92e6fc2db155bdde4f23d6b9566d491fd4e))
+* add SealDatePicker component ([b45d0fc](https://github.com/nayadev/seal_ui_react/commit/b45d0fcbdb801241303b7347ce78b71d2a96fc24))
+* add SealForm component ([38b4b6e](https://github.com/nayadev/seal_ui_react/commit/38b4b6e8517f05cb1776bcd8b2259ea9c1c1ce01))
+* add SealInputOtp component ([72e0658](https://github.com/nayadev/seal_ui_react/commit/72e0658e5ee14864acfaeae4fcc3de69c6ee2b3f))
+* add SealRadioGroup component ([d851b9e](https://github.com/nayadev/seal_ui_react/commit/d851b9ed54341d5c95a89031a60be3bba5c92415))
+* add SealSelect component ([34015e7](https://github.com/nayadev/seal_ui_react/commit/34015e757803725227221cc257a166749e6171ba))
+* add SealSlider component ([d797e55](https://github.com/nayadev/seal_ui_react/commit/d797e55b6aaf97d0d81ba7ad37e4099e624a623b))
+* add SealSwitch component ([15c28a0](https://github.com/nayadev/seal_ui_react/commit/15c28a03136217f3cb67dc394b958219ced9c798))
+* add SealTextarea component ([1197b33](https://github.com/nayadev/seal_ui_react/commit/1197b333f84f922e0c15378dd907bed04eafb66c))
+* add SealTextField component ([c51521b](https://github.com/nayadev/seal_ui_react/commit/c51521b8ebf17b726908bb04a0107c36010439de))
+* add SealTimePicker component ([9dd3008](https://github.com/nayadev/seal_ui_react/commit/9dd300894e64ee93917efae31c8e54ab8aa54505))
+* exclude CHANGELOG.md from Prettier formatting ([ce2230a](https://github.com/nayadev/seal_ui_react/commit/ce2230acf777cc12e7ade8e72f94b7810de288f6))
+* exclude src/components/ui/ from Prettier formatting ([b0a1184](https://github.com/nayadev/seal_ui_react/commit/b0a11841fce9508577421b7697fcc7c5f173d1f9))
+
+
+### Bug Fixes
+
+* align SealCalendar and SealDatePicker visuals with Flutter ([06a6be6](https://github.com/nayadev/seal_ui_react/commit/06a6be6948b49c5adf81c9a8c574200dac4c8c38))
+* **README:** update version badge to release badge for consistency ([f886293](https://github.com/nayadev/seal_ui_react/commit/f88629339578689d4a8b261b4512cb618eed73ff))
+* resolve sonarcloud issues in project foundation ([d68c5b2](https://github.com/nayadev/seal_ui_react/commit/d68c5b25b331bb5d2cb69f1856e8a953cbe0bebc))
+* **SealInputOtp:** prevent input-otp timer from firing after jsdom teardown ([a675ae4](https://github.com/nayadev/seal_ui_react/commit/a675ae42678056e7866393f781d757611edc18b0))
+* **SealInputOtp:** use brand primary focus ring and remove dot separator ([986a819](https://github.com/nayadev/seal_ui_react/commit/986a81914e0c6acd35cac7d21cf2e708db6e96c3))
+* **SealTimePicker:** derive PeriodSelect from SealSelect and align spacing ([07ab312](https://github.com/nayadev/seal_ui_react/commit/07ab3121470cd55cb1efa3e8797b7d563bf9d495))
+* **SealTimePicker:** increase spacing between time fields and period select ([7ae5325](https://github.com/nayadev/seal_ui_react/commit/7ae53256386201857eaa9ebb84a76615272ee961))
+* **SealTimePicker:** replace AM/PM toggle with dropdown select ([0b80411](https://github.com/nayadev/seal_ui_react/commit/0b80411bbae872fbabe273eb851af50ae15cb1fc))
+* update border styles in SealCalendar, SealDatePicker, and SealSlider components ([5911231](https://github.com/nayadev/seal_ui_react/commit/5911231d82e958ba255225c675c722e3e08a1051))
+* update PreSelected variant to SealSelect stories with controlled state ([787487c](https://github.com/nayadev/seal_ui_react/commit/787487c4dc613d96dcf4a0bc6d02bdfbdd60cc9b))
+* update SealCalendarDayButton props to remove unnecessary undefined types ([7b1b34a](https://github.com/nayadev/seal_ui_react/commit/7b1b34aa4f25bf6fc28de54e211648e653f91c4d))
+
 ## [0.0.4](https://github.com/nayadev/seal_ui_react/compare/v0.0.3...v0.0.4) (2026-04-29)
 
 
