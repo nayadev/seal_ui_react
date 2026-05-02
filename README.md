@@ -337,6 +337,12 @@ seal_ui_react/
 
 ---
 
+## Architecture Decisions
+
+Architectural decisions are documented as ADRs in [`docs/adr/`](./docs/adr/).
+
+---
+
 ## Related Packages
 
 | Package                                                         | Description                                                                          |
