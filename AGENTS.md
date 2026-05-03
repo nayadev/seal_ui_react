@@ -89,6 +89,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | None (custom implementation)     | `SealTimePicker` (24h default), `SealTimePicker.Period` (12h AM/PM)                                                          |
 | `input-otp`                      | `SealInputOtp` (`.Group`, `.Slot`, `.Separator`)                                                                             |
 | `form` (react-hook-form wrapper) | `SealForm`, `SealFormField`, `SealFormItem`, `SealFormLabel`, `SealFormControl`, `SealFormDescription`, `SealFormMessage`    |
+| `Tooltip` (Radix)                | `SealTooltip`                                                                                                                |
 
 ---
 
