@@ -1,0 +1,17 @@
+/*
+ * Force Storybook's docs page containers to use the active Seal theme colors.
+ *
+ * ThemeProvider (from the story decorator) applies the theme class to <html>,
+ * so these CSS variables resolve correctly and update reactively on mode/theme
+ * switches without any JavaScript event subscriptions.
+ *
+ * The fallback values match the default nebula-dark palette so the page never
+ * flashes white before ThemeProvider mounts.
+ */
+
+#storybook-docs,
+.sbdocs-wrapper,
+.sbdocs-content {
+  background-color: var(--seal-surface-background, #0f0f1a) !important;
+  color: var(--seal-text-primary, #f0ecf9) !important;
+}

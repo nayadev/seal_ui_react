@@ -1,10 +1,19 @@
+import {
+  DocsContainer as BaseDocsContainer,
+  type DocsContainerProps,
+} from '@storybook/addon-docs/blocks'
 import type { Preview } from '@storybook/react-vite'
+import { useEffect, useState, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { addons } from 'storybook/preview-api'
 
 import '../src/index.css'
+import './docs-theme.css'
 import { SealSonner, type SealSonnerPosition } from '../src/components/feedback/SealSonner'
 import { ThemeProvider } from '../src/theme/ThemeProvider'
 import type { ThemeMode, ThemeName } from '../src/theme/ThemeProvider'
+
+import { sealDefaultDocsTheme, sealDocsThemes } from './themes/sealTheme'
 
 // Mount ONE Toaster for the entire Storybook iframe.
 // Sonner uses a global event bus — multiple Toaster instances all subscribe to it
@@ -19,6 +28,57 @@ function mountToaster(position: SealSonnerPosition = 'bottom-right') {
 }
 
 mountToaster()
+
+// Cache globals at module level so SealDocsContainer reads the correct initial
+// state even when setGlobals fires before the component mounts.
+const cachedGlobals = { sealTheme: 'nebula', sealMode: 'dark' }
+try {
+  const ch = addons.getChannel()
+  const syncGlobals = (payload: { globals: Record<string, unknown> }) => {
+    if (typeof payload.globals['sealTheme'] === 'string')
+      cachedGlobals.sealTheme = payload.globals['sealTheme']
+    if (typeof payload.globals['sealMode'] === 'string')
+      cachedGlobals.sealMode = payload.globals['sealMode']
+  }
+  ch.on('globalsUpdated', syncGlobals)
+  ch.on('setGlobals', syncGlobals)
+} catch {
+  // channel unavailable outside Storybook preview context
+}
+
+// Reads the Storybook channel for globals updates and applies the matching Seal
+// docs theme. useGlobals from storybook/preview-api is not available in
+// parameters.docs.container — we use standard React hooks + addons.getChannel().
+// BaseDocsContainer applies its theme prop once at initialization and does NOT
+// re-apply when the prop changes, so key={theme-mode} forces a remount on switch.
+function SealDocsContainer(props: DocsContainerProps & { children?: ReactNode }) {
+  const [sealTheme, setSealTheme] = useState(cachedGlobals.sealTheme)
+  const [sealMode, setSealMode] = useState(cachedGlobals.sealMode)
+
+  useEffect(() => {
+    const channel = addons.getChannel()
+
+    const handler = (payload: { globals: Record<string, unknown> }) => {
+      const { globals } = payload
+      if (typeof globals['sealTheme'] === 'string') setSealTheme(globals['sealTheme'])
+      if (typeof globals['sealMode'] === 'string') setSealMode(globals['sealMode'])
+    }
+
+    // globalsUpdated — fired when toolbar changes a global
+    // setGlobals — fired during initialization with persisted/URL globals
+    channel.on('globalsUpdated', handler)
+    channel.on('setGlobals', handler)
+
+    return () => {
+      channel.off('globalsUpdated', handler)
+      channel.off('setGlobals', handler)
+    }
+  }, [])
+
+  const docsTheme = sealDocsThemes[`${sealTheme}-${sealMode}`] ?? sealDefaultDocsTheme
+
+  return <BaseDocsContainer key={`${sealTheme}-${sealMode}`} {...props} theme={docsTheme} />
+}
 
 const preview: Preview = {
   globalTypes: {
@@ -88,6 +148,9 @@ const preview: Preview = {
     },
     a11y: {
       test: 'todo',
+    },
+    docs: {
+      container: SealDocsContainer,
     },
   },
 }
