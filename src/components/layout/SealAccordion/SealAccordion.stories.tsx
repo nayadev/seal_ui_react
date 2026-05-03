@@ -70,6 +70,30 @@ export const NotCollapsible: Story = {
   args: { items: faqItems, defaultValue: 'q1', collapsible: false },
 }
 
+export const WithDisabledItem: Story = {
+  name: 'With Disabled Item',
+  args: {
+    items: [
+      {
+        value: 'q1',
+        title: 'What is Seal UI?',
+        content: 'A token-driven React design system built on top of shadcn/ui.',
+      },
+      {
+        value: 'q2',
+        title: 'How do I install it?',
+        content: 'Add @sealui/react to your project dependencies.',
+        disabled: true,
+      },
+      {
+        value: 'q3',
+        title: 'Does it support dark mode?',
+        content: 'Yes — dark mode is the primary experience, with full light theme support.',
+      },
+    ],
+  },
+}
+
 export const MultipleMode: Story = {
   name: 'Multiple (multi-open)',
   args: { items: designItems },

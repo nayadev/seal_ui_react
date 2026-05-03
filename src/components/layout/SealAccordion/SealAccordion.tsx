@@ -76,7 +76,7 @@ function buildItems(items: SealAccordionItemData[]) {
           'flex flex-1 items-center justify-between gap-[var(--seal-dimension-sm)]',
           'py-[var(--seal-dimension-md)] text-left',
           'font-style-small font-medium text-[var(--seal-text-primary)]',
-          'hover:no-underline',
+          'hover:underline',
           '[&[data-state=open]>svg]:rotate-180',
           '[&>svg]:text-[var(--seal-text-secondary)] [&>svg]:shrink-0',
           'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
