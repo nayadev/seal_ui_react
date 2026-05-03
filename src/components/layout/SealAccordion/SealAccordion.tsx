@@ -79,7 +79,7 @@ function buildItems(items: SealAccordionItemData[]) {
           'hover:underline',
           '[&[data-state=open]>svg]:rotate-180',
           '[&>svg]:text-[var(--seal-text-secondary)] [&>svg]:shrink-0',
-          'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
+          'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[disabled]:hover:no-underline',
           'transition-none',
         )}
       >
