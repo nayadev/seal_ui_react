@@ -90,6 +90,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `input-otp`                      | `SealInputOtp` (`.Group`, `.Slot`, `.Separator`)                                                                             |
 | `form` (react-hook-form wrapper) | `SealForm`, `SealFormField`, `SealFormItem`, `SealFormLabel`, `SealFormControl`, `SealFormDescription`, `SealFormMessage`    |
 | `Tooltip` (Radix)                | `SealTooltip`                                                                                                                |
+| `Accordion`                      | `SealAccordion` (single-open), `SealAccordion.Multiple` (multi-open)                                                         |
 
 ---
 

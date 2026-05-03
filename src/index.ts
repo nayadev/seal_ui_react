@@ -28,6 +28,9 @@ export * from './components/inputs/SealTextField'
 // Interaction
 export * from './components/interaction/SealTooltip/SealTooltip'
 
+// Layout
+export * from './components/layout/SealAccordion/SealAccordion'
+
 // Feedback
 export * from './components/feedback/SealAlert'
 export * from './components/feedback/SealBouncingDots'
