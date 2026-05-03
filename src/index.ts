@@ -25,6 +25,9 @@ export * from './components/inputs/SealSwitch'
 export * from './components/inputs/SealTextarea'
 export * from './components/inputs/SealTextField'
 
+// Interaction
+export * from './components/interaction/SealTooltip/SealTooltip'
+
 // Feedback
 export * from './components/feedback/SealAlert'
 export * from './components/feedback/SealBouncingDots'
