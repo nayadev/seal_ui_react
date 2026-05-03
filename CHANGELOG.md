@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.6](https://github.com/nayadev/seal_ui_react/compare/v0.0.5...v0.0.6) (2026-05-03)
+
+
+### Features
+
+* add SealTooltip component ([8d85a77](https://github.com/nayadev/seal_ui_react/commit/8d85a770da639a44a6188ead8c8f3f4a1090d3ad))
+* **storybook:** sync docs page background with active Seal theme ([9c665f1](https://github.com/nayadev/seal_ui_react/commit/9c665f16572f11118ab2a3cb9f5353f16dbaafbc))
+
 ## [0.0.5](https://github.com/nayadev/seal_ui_react/compare/v0.0.4...v0.0.5) (2026-05-02)
 
 
