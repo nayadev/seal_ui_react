@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.7](https://github.com/nayadev/seal_ui_react/compare/v0.0.6...v0.0.7) (2026-05-04)
+
+
+### Features
+
+* add SealAccordion component ([e98cc7d](https://github.com/nayadev/seal_ui_react/commit/e98cc7d3d5fc76faa1b0baedbd1756964d147746))
+
+
+### Bug Fixes
+
+* **accordion:** restore hover underline and add disabled item story ([9aa2cba](https://github.com/nayadev/seal_ui_react/commit/9aa2cbae1f9fb23f9603c7ef14b18d48aaa047a5))
+* **accordion:** suppress hover underline on disabled items ([e4a85c4](https://github.com/nayadev/seal_ui_react/commit/e4a85c48fc4952d3853f487d2597f41271f3e7bb))
+
 ## [0.0.6](https://github.com/nayadev/seal_ui_react/compare/v0.0.5...v0.0.6) (2026-05-03)
 
 
