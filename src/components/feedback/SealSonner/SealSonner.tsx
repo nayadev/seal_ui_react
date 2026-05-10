@@ -83,7 +83,7 @@ export function SealSonner({
             description: 'text-[var(--seal-text-secondary)]',
             actionButton:
               'bg-transparent! text-[var(--seal-brand-primary)] hover:opacity-[0.85] border-none! underline p-0! h-auto!',
-            title: 'text-[var(--seal-text-primary)] font-semibold text-sm',
+            title: 'text-[var(--seal-text-primary)] font-style-heading text-style-small',
           },
         }}
       />

@@ -185,13 +185,13 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-[var(--seal-dimension-xl)]">
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-[var(--seal-dimension-xs)] text-style-small text-[var(--seal-text-secondary)]">
           Vertical (default)
         </p>
         <SealRadioGroup items={themeItems} value="dark" />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-[var(--seal-dimension-xs)] text-style-small text-[var(--seal-text-secondary)]">
           Horizontal
         </p>
         <SealRadioGroup
@@ -206,13 +206,13 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-[var(--seal-dimension-xs)] text-style-small text-[var(--seal-text-secondary)]">
           Disabled
         </p>
         <SealRadioGroup items={themeItems} disabled value="dark" />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-[var(--seal-dimension-xs)] text-style-small text-[var(--seal-text-secondary)]">
           Partially disabled
         </p>
         <SealRadioGroup

@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 
 const TEXT_PRIMARY = 'text-[var(--seal-text-primary)]'
-const ROUNDED_SM = 'rounded-[var(--seal-radius-sm)]'
+const ROUNDED_SM = 'rounded-sm'
 const BORDER_DEFAULT = 'border-[var(--seal-border-default)]'
 
 /**
@@ -99,7 +99,7 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
         <label
           htmlFor={triggerId}
           className={cn(
-            'text-[length:var(--seal-constant-small-font-size)] font-[var(--seal-style-small-font-weight)] leading-none text-[var(--seal-text-secondary)]',
+            'text-constant-small-font-size font-[var(--seal-style-small-font-weight)] leading-none text-[var(--seal-text-secondary)]',
             disabled && 'cursor-not-allowed opacity-[var(--seal-state-disabled-opacity)]',
           )}
         >
@@ -123,7 +123,7 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
             BORDER_DEFAULT,
             'bg-[var(--seal-surface-surface)]',
             'px-[var(--seal-dimension-sm)]',
-            'text-[length:var(--seal-constant-small-font-size)]',
+            'text-constant-small-font-size',
             TEXT_PRIMARY,
             'ring-offset-transparent',
             'placeholder:text-[var(--seal-text-secondary)]',
@@ -153,9 +153,9 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
               value={option.value}
               disabled={option.disabled ?? false}
               className={cn(
-                'text-[length:var(--seal-constant-small-font-size)]',
+                'text-constant-small-font-size',
                 TEXT_PRIMARY,
-                'rounded-[var(--seal-radius-xs)]',
+                'rounded-xs',
                 'focus:bg-[var(--seal-surface-surface-alt)]',
                 'focus:text-[var(--seal-text-primary)]',
               )}

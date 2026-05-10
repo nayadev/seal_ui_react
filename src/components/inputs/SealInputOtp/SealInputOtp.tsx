@@ -85,20 +85,22 @@ function SealInputOTPImpl({
   )
 }
 
+/** Wraps OTP slot groups into segments separated by {@link SealInputOTP.Separator}. */
 function Group({ children, className }: Readonly<SealInputOTPGroupProps>) {
   return <InputOTPGroup className={cn('flex items-center', className)}>{children}</InputOTPGroup>
 }
 Group.displayName = 'SealInputOTP.Group'
 
+/** Renders a single OTP character input slot. */
 function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
   return (
     <InputOTPSlot
       index={index}
       className={cn(
-        'relative flex h-10 w-10 items-center justify-center',
+        'relative flex h-[calc(var(--seal-dimension-xl)+var(--seal-dimension-xs))] w-[calc(var(--seal-dimension-xl)+var(--seal-dimension-xs))] items-center justify-center',
         'border-y border-r border-[var(--seal-border-default)]',
         'bg-[var(--seal-surface-surface)]',
-        'text-sm font-medium text-[var(--seal-text-primary)]',
+        'text-style-small font-style-small text-[var(--seal-text-primary)]',
         'transition-all',
         'first:rounded-l-[var(--seal-radius-md)] first:border-l',
         'last:rounded-r-[var(--seal-radius-md)]',
@@ -111,6 +113,7 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
 }
 Slot.displayName = 'SealInputOTP.Slot'
 
+/** Renders a visual separator between OTP groups. */
 function Separator({ className }: Readonly<{ className?: string }>) {
   return <hr className={cn(className)} />
 }

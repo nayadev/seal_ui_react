@@ -40,7 +40,7 @@ function SealCalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         'flex aspect-square h-auto w-full min-w-[var(--cell-size)] items-center justify-center',
-        'rounded-[var(--seal-radius-sm)] text-sm font-normal',
+        'rounded-[var(--seal-radius-sm)] text-style-small font-style-caption',
         'text-[var(--seal-text-primary)]',
         'cursor-pointer transition-colors',
         'hover:bg-[var(--seal-surface-surface-alt)]',
@@ -55,7 +55,7 @@ function SealCalendarDayButton({
           'text-[var(--seal-text-primary)] hover:bg-[var(--seal-surface-surface-alt)]',
         modifiers.today === true &&
           !modifiers.selected &&
-          'bg-[var(--seal-surface-surface-alt)] font-semibold',
+          'bg-[var(--seal-surface-surface-alt)] font-style-heading',
         modifiers.outside === true && 'opacity-30',
         className,
       )}
@@ -144,16 +144,16 @@ const SEAL_CALENDAR_CLASSNAMES = {
   month: 'flex w-full flex-col gap-4',
   month_caption: cn(
     'flex h-[var(--cell-size)] w-full items-center justify-center px-[var(--cell-size)]',
-    'text-[var(--seal-text-primary)] font-semibold',
+    'text-[var(--seal-text-primary)] font-style-heading',
   ),
-  caption_label: 'select-none text-sm font-medium',
+  caption_label: 'select-none text-style-small font-style-small',
   nav: 'absolute inset-x-0 top-0 flex h-[var(--cell-size)] w-full items-center justify-between gap-1',
   button_previous: NAV_BUTTON_CLASSES,
   button_next: NAV_BUTTON_CLASSES,
   weekdays: 'flex',
   weekday: cn(
     'text-[var(--seal-text-secondary)]',
-    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-xs font-normal',
+    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-style-caption font-style-caption',
   ),
   week: 'mt-2 flex w-full',
   day: cn(

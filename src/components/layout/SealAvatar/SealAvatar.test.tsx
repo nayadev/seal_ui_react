@@ -35,19 +35,28 @@ describe('SealAvatar', () => {
     it('renders at 40px by default', () => {
       const { container } = renderWithTheme(<SealAvatar fallback="MD" />)
       const root = container.firstChild as HTMLElement
-      expect(root).toHaveStyle({ width: '40px', height: '40px' })
+      expect(root).toHaveStyle({
+        width: 'calc(var(--seal-dimension-xl) + var(--seal-dimension-xs))',
+        height: 'calc(var(--seal-dimension-xl) + var(--seal-dimension-xs))',
+      })
     })
 
     it('SealAvatar.Small renders at 28px', () => {
       const { container } = renderWithTheme(<SealAvatar.Small fallback="SM" />)
       const root = container.firstChild as HTMLElement
-      expect(root).toHaveStyle({ width: '28px', height: '28px' })
+      expect(root).toHaveStyle({
+        width: 'calc(var(--seal-dimension-lg) + var(--seal-dimension-xxs))',
+        height: 'calc(var(--seal-dimension-lg) + var(--seal-dimension-xxs))',
+      })
     })
 
     it('SealAvatar.Large renders at 56px', () => {
       const { container } = renderWithTheme(<SealAvatar.Large fallback="LG" />)
       const root = container.firstChild as HTMLElement
-      expect(root).toHaveStyle({ width: '56px', height: '56px' })
+      expect(root).toHaveStyle({
+        width: 'calc(var(--seal-dimension-xxl) + var(--seal-dimension-xs))',
+        height: 'calc(var(--seal-dimension-xxl) + var(--seal-dimension-xs))',
+      })
     })
   })
 

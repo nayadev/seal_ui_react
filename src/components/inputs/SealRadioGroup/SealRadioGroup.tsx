@@ -113,7 +113,7 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
                 className={cn(
                   'mt-[var(--seal-dimension-xxxs)]',
                   'h-[var(--seal-dimension-md)] w-[var(--seal-dimension-md)]',
-                  'rounded-[var(--seal-radius-full)]',
+                  'rounded-full',
                   'border-[var(--seal-border-default)]',
                   'text-[var(--seal-brand-primary)]',
                   'focus-visible:ring-[var(--seal-brand-primary)]',
@@ -128,7 +128,7 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
                     <label
                       htmlFor={itemId}
                       className={cn(
-                        'cursor-pointer select-none text-[length:var(--seal-constant-small-font-size)] leading-none text-[var(--seal-text-primary)]',
+                        'cursor-pointer select-none text-constant-small-font-size leading-none text-[var(--seal-text-primary)]',
                         isDisabled &&
                           'cursor-not-allowed opacity-[var(--seal-state-disabled-opacity)]',
                       )}
@@ -139,7 +139,7 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
                   {item.sublabel != null && (
                     <span
                       className={cn(
-                        'text-[length:var(--seal-style-caption-font-size)] text-[var(--seal-text-secondary)]',
+                        'text-style-caption text-[var(--seal-text-secondary)]',
                         isDisabled && 'opacity-[var(--seal-state-disabled-opacity)]',
                       )}
                     >
