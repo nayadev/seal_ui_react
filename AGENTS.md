@@ -91,6 +91,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `form` (react-hook-form wrapper) | `SealForm`, `SealFormField`, `SealFormItem`, `SealFormLabel`, `SealFormControl`, `SealFormDescription`, `SealFormMessage`    |
 | `Tooltip` (Radix)                | `SealTooltip`                                                                                                                |
 | `Accordion`                      | `SealAccordion` (single-open), `SealAccordion.Multiple` (multi-open)                                                         |
+| `Avatar`                         | `SealAvatar` (40 px default), `SealAvatar.Small` (28 px), `SealAvatar.Large` (56 px)                                         |
 
 ---
 
