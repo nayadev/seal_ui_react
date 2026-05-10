@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.0.7](https://github.com/nayadev/seal_ui_react/compare/v0.0.6...v0.0.7) (2026-05-10)
+
+
+### Features
+
+* add SealAccordion component ([e98cc7d](https://github.com/nayadev/seal_ui_react/commit/e98cc7d3d5fc76faa1b0baedbd1756964d147746))
+* add SealAvatar component ([eb6edd2](https://github.com/nayadev/seal_ui_react/commit/eb6edd2d9ffe0db5d6df4e367f39cb7e8f3a2a4f))
+
+
+### Bug Fixes
+
+* **accordion:** restore hover underline and add disabled item story ([9aa2cba](https://github.com/nayadev/seal_ui_react/commit/9aa2cbae1f9fb23f9603c7ef14b18d48aaa047a5))
+* **accordion:** suppress hover underline on disabled items ([e4a85c4](https://github.com/nayadev/seal_ui_react/commit/e4a85c48fc4952d3853f487d2597f41271f3e7bb))
+* bring existing components into full compliance with project rules ([6718f03](https://github.com/nayadev/seal_ui_react/commit/6718f03be3d7a8cd0d789b78df4835a69820bc11))
+* **deps:** update dependency lucide-react to ^0.577.0 ([#21](https://github.com/nayadev/seal_ui_react/issues/21)) ([4318965](https://github.com/nayadev/seal_ui_react/commit/4318965e94ed727c2fa403614bfb54838e3967eb))
+
 ## [0.0.6](https://github.com/nayadev/seal_ui_react/compare/v0.0.5...v0.0.6) (2026-05-03)
 
 
