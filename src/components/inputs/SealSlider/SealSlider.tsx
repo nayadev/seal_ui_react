@@ -166,10 +166,10 @@ export const SealSlider = React.forwardRef<
           'transition-colors',
           'focus-visible:outline-none focus-visible:ring-2',
           'focus-visible:ring-[var(--seal-brand-primary)]',
-          'focus-visible:ring-offset-dimension-xxxs',
+          'focus-visible:ring-offset-2',
           'focus-visible:ring-offset-[var(--seal-surface-background)]',
           disabled
-            ? 'border-[var(--seal-state-fill-disabled)] pointer-events-none opacity-[var(--seal-state-disabled-opacity)]'
+            ? 'border-[var(--seal-state-fill-disabled)] pointer-events-none opacity-50'
             : 'border-[var(--seal-brand-primary)]',
         )}
       />

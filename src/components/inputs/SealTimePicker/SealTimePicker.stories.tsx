@@ -128,7 +128,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-lg)' }}>
+        code: `<div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
   <SealTimePicker />
   <SealTimePicker showSeconds={false} />
   <SealTimePicker.Period />
@@ -140,7 +140,7 @@ export const AllVariants: Story = {
     },
   },
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-lg)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <SealTimePicker />
       <SealTimePicker showSeconds={false} />
       <SealTimePicker.Period />

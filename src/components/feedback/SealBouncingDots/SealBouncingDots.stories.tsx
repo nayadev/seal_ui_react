@@ -49,7 +49,7 @@ export const WithAccessibility: Story = {
 
 export const AllSizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-dimension-lg items-center">
+    <div className="flex flex-col gap-6 items-center">
       <SealBouncingDots size={4} spacing={3} color="var(--seal-brand-primary)" />
       <SealBouncingDots size={6} spacing={4} color="var(--seal-brand-primary)" />
       <SealBouncingDots size={8} spacing={5} color="var(--seal-brand-primary)" />
@@ -60,7 +60,7 @@ export const AllSizes: Story = {
 
 export const AllTokenColors: Story = {
   render: () => (
-    <div className="flex gap-dimension-lg items-center">
+    <div className="flex gap-6 items-center">
       <SealBouncingDots color="var(--seal-brand-primary)" />
       <SealBouncingDots color="var(--seal-accent-accent)" />
       <SealBouncingDots color="var(--seal-accent-accent-secondary)" />

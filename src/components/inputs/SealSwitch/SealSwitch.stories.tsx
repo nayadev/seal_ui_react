@@ -117,7 +117,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-md)' }}>
+        code: `<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
   <SealSwitch label="Off state" checked={false} />
   <SealSwitch label="On state" checked />
   <SealSwitch label="Disabled off" checked={false} disabled />
@@ -132,7 +132,7 @@ export const AllVariants: Story = {
     },
   },
   render: ({ disabled }) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-md)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <SealSwitch label="Off state" checked={false} disabled={disabled ?? false} />
       <SealSwitch label="On state" checked disabled={disabled ?? false} />
       <SealSwitch label="Disabled off" checked={false} disabled />

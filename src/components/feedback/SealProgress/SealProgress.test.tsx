@@ -77,7 +77,7 @@ describe('SealProgress', () => {
     it('applies rounded-full token to the track', () => {
       renderWithTheme(<SealProgress.Primary value={40} />)
       const bar = screen.getByRole(PROGRESSBAR_ROLE)
-      expect(bar.className).toContain('rounded-full')
+      expect(bar.className).toContain('rounded-[var(--seal-radius-full)]')
     })
 
     it('accepts additional className', () => {

@@ -136,7 +136,7 @@ describe('SealTooltip', () => {
         </SealTooltip>,
       )
       const container = getStyledContainer()
-      expect(container?.getAttribute('class')).toContain('rounded-sm')
+      expect(container?.getAttribute('class')).toContain('rounded-[var(--seal-radius-sm)]')
     })
 
     it('forwards additional className to tooltip container', () => {

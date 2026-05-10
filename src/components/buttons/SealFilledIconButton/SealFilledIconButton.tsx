@@ -118,7 +118,7 @@ function SealFilledIconButtonImpl({
       aria-label={finalTitle}
       className={cn(
         // Icon buttons are sized tightly around their content
-        'h-auto w-auto p-dimension-sm rounded-sm',
+        'h-auto w-auto p-[var(--seal-dimension-sm)] rounded-[var(--seal-radius-sm)]',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         getVariantClass(variant),
         className,

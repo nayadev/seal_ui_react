@@ -84,7 +84,7 @@ export const SealTextarea = React.forwardRef<HTMLTextAreaElement, SealTextareaPr
           disabled={disabled}
           onChange={handleChange}
           className={cn(
-            'rounded-sm',
+            'rounded-[var(--seal-radius-sm)]',
             'bg-[var(--seal-surface-surface-alt)]',
             'border-[var(--seal-border-default)]',
             'text-[var(--seal-text-primary)]',
