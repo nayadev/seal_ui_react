@@ -17,8 +17,6 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-  // SealToast is an imperative API — it has no component props to control via argTypes.
-  argTypes: {},
 } satisfies Meta
 
 export default meta
@@ -118,7 +116,7 @@ export const WithAction: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-dimension-sm">
+    <div className="flex flex-wrap gap-[var(--seal-dimension-sm)]">
       <SealFilledButton.Primary
         onClick={() => SealToast.info({ message: 'Informational message.' })}
       >

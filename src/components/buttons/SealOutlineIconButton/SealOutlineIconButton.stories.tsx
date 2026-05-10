@@ -156,7 +156,7 @@ export const AllVariants: Story = {
     },
   },
   render: ({ loading, disabled }) => (
-    <div className="flex gap-dimension-md items-center">
+    <div className="flex gap-4 items-center">
       <SealOutlineIconButton.Primary
         icon={Share2}
         tooltip="Primary"

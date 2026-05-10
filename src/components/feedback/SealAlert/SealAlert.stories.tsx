@@ -58,7 +58,7 @@ export const WithoutTitle: Story = {
 export const AllVariants: Story = {
   args: { description: 'See all variants below.' },
   render: () => (
-    <div className="flex flex-col gap-dimension-md w-[420px]">
+    <div className="flex flex-col gap-[var(--seal-dimension-md)] w-[420px]">
       <SealAlert.Info title="Heads up!" description="You can add components using the CLI." />
       <SealAlert.Success
         title="Profile updated"

@@ -48,7 +48,6 @@ export const SingleControlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [date, setDate] = React.useState<Date | undefined>()
     return (
@@ -80,7 +79,6 @@ export const MultipleControlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [dates, setDates] = React.useState<Date[] | undefined>()
     return (
@@ -112,7 +110,6 @@ export const RangeControlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
@@ -173,24 +170,14 @@ export const AllVariants: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [date, setDate] = React.useState<Date | undefined>()
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
-      <div style={{ display: 'flex', gap: 'var(--seal-dimension-md)', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
         <div>
-          <p
-            style={{
-              marginBottom: 'var(--seal-dimension-xs)',
-              fontSize: 'var(--seal-constant-small-font-size)',
-              opacity: 0.6,
-            }}
-          >
-            Single
-          </p>
+          <p style={{ marginBottom: '8px', fontSize: '12px', opacity: 0.6 }}>Single</p>
           <SealCalendar.Single
             selected={date}
             onSelect={(d) => {
@@ -199,15 +186,7 @@ export const AllVariants: Story = {
           />
         </div>
         <div>
-          <p
-            style={{
-              marginBottom: 'var(--seal-dimension-xs)',
-              fontSize: 'var(--seal-constant-small-font-size)',
-              opacity: 0.6,
-            }}
-          >
-            Range
-          </p>
+          <p style={{ marginBottom: '8px', fontSize: '12px', opacity: 0.6 }}>Range</p>
           <SealCalendar.Range
             selected={range}
             onSelect={(r) => {

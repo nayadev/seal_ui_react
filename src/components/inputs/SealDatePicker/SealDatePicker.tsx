@@ -48,7 +48,7 @@ const TRIGGER_CLASSES = cn(
   'border border-[var(--seal-border-default)]',
   'bg-[var(--seal-surface-surface)]',
   'px-[var(--seal-dimension-sm)]',
-  'text-constant-small-font-size text-left',
+  'text-[length:var(--seal-constant-small-font-size)] text-left',
   'cursor-pointer transition-colors',
   'focus-visible:outline-none focus-visible:ring-1',
   'focus-visible:ring-[var(--seal-brand-primary)] focus-visible:ring-offset-0',

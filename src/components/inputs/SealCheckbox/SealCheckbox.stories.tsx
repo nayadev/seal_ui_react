@@ -91,7 +91,6 @@ export const Controlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [checked, setChecked] = React.useState(false)
     return (

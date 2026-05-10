@@ -124,7 +124,7 @@ export function SealLoader({
   return (
     <output
       aria-label={ariaLabel}
-      className={cn('inline-flex flex-col items-center gap-dimension-sm', className)}
+      className={cn('inline-flex flex-col items-center gap-[var(--seal-dimension-sm)]', className)}
       style={style}
       {...props}
     >

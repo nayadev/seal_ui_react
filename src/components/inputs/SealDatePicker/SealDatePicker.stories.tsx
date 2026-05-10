@@ -51,7 +51,6 @@ export const SingleControlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [date, setDate] = React.useState<Date | undefined>()
     return (
@@ -85,7 +84,6 @@ export const RangeControlled: Story = {
     },
   },
   render: () => {
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
@@ -158,28 +156,14 @@ export const AllVariants: Story = {
     },
   },
   render: () => {
-    const labelStyle: React.CSSProperties = {
-      marginBottom: 'var(--seal-dimension-xxs)',
-      fontSize: 'var(--seal-constant-small-font-size)',
-      opacity: 0.6,
-    }
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [date, setDate] = React.useState<Date | undefined>()
-    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--seal-dimension-sm)',
-          width: '300px',
-        }}
-      >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
         <div>
-          <p style={labelStyle}>Single</p>
+          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Single</p>
           <SealDatePicker.Single
             selected={date}
             onSelect={(d) => {
@@ -188,7 +172,7 @@ export const AllVariants: Story = {
           />
         </div>
         <div>
-          <p style={labelStyle}>Range</p>
+          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Range</p>
           <SealDatePicker.Range
             selected={range}
             onSelect={(r) => {
@@ -197,7 +181,7 @@ export const AllVariants: Story = {
           />
         </div>
         <div>
-          <p style={labelStyle}>Disabled</p>
+          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Disabled</p>
           <SealDatePicker.Single disabled />
         </div>
       </div>

@@ -75,7 +75,7 @@ function buildItems(items: SealAccordionItemData[]) {
         className={cn(
           'flex flex-1 items-center justify-between gap-[var(--seal-dimension-sm)]',
           'py-[var(--seal-dimension-md)] text-left',
-          'font-style-small text-[var(--seal-text-primary)]',
+          'font-style-small font-medium text-[var(--seal-text-primary)]',
           'hover:underline',
           '[&[data-state=open]>svg]:rotate-180',
           '[&>svg]:text-[var(--seal-text-secondary)] [&>svg]:shrink-0',

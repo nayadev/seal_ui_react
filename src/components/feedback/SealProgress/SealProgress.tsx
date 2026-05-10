@@ -56,7 +56,7 @@ function SealProgressImpl({
       max={100}
       aria-label={ariaLabel}
       className={cn(
-        'relative h-dimension-xs w-full overflow-hidden rounded-full',
+        'relative h-[8px] w-full overflow-hidden rounded-[var(--seal-radius-full)]',
         'bg-[var(--seal-border-default)]',
         className,
       )}
@@ -64,7 +64,7 @@ function SealProgressImpl({
     >
       <ProgressPrimitive.Indicator
         className={cn(
-          'h-full rounded-full',
+          'h-full rounded-[var(--seal-radius-full)]',
           isIndeterminate
             ? 'absolute inset-y-0 w-[40%]'
             : 'w-full transition-transform duration-300 ease-in-out',
