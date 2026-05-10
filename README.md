@@ -275,7 +275,7 @@ Workflow: `.github/workflows/release-please.yml` — config in `release-please-c
 
 Component stories are published automatically to [Chromatic](https://www.chromatic.com/) on every push to `main` and on pull requests.
 
-**Live Storybook:** https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/
+**Live Storybook:** https://main--69e814d684c5fea63427bc0d.chromatic.com
 
 Workflow: `.github/workflows/chromatic.yml` — uses `CHROMATIC_PROJECT_TOKEN` repository secret.
 
@@ -295,10 +295,10 @@ Workflow: `.github/workflows/sonar.yml` — uses `SONAR_TOKEN` repository secret
 
 [`@storybook/addon-mcp`](https://storybook.js.org/addons/@storybook/addon-mcp) exposes Storybook as an MCP server so AI tools can read component stories and docs.
 
-| Environment | URL                                                             |
-| ----------- | --------------------------------------------------------------- |
-| Local       | `http://localhost:6006/mcp`                                     |
-| Published   | `https://69e814d684c5fea63427bc0d-txjsgwacii.chromatic.com/mcp` |
+| Environment | URL                                                        |
+| ----------- | ---------------------------------------------------------- |
+| Local       | `http://localhost:6006/mcp`                                |
+| Published   | `https://main--69e814d684c5fea63427bc0d.chromatic.com/mcp` |
 
 ---
 
