@@ -63,7 +63,7 @@ export const CustomColor: Story = {
 export const AllSizes: Story = {
   args: {},
   render: () => (
-    <div className="flex items-center gap-[var(--seal-dimension-xl)]">
+    <div className="flex items-center gap-dimension-xl">
       <SealLoader size="small" aria-label="Small loader" />
       <SealLoader size="medium" aria-label="Medium loader" />
       <SealLoader size="large" aria-label="Large loader" />
@@ -74,7 +74,7 @@ export const AllSizes: Story = {
 export const AllSizesWithLabels: Story = {
   args: {},
   render: () => (
-    <div className="flex items-end gap-[var(--seal-dimension-xl)]">
+    <div className="flex items-end gap-dimension-xl">
       <SealLoader size="small" label="Small" />
       <SealLoader size="medium" label="Medium" />
       <SealLoader size="large" label="Large" />

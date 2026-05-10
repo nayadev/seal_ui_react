@@ -9,6 +9,7 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
+    icon: { table: { disable: true } },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -102,7 +103,7 @@ export const Disabled: Story = {
 export const AllVariants: Story = {
   args: { loading: false, disabled: false },
   render: ({ loading = false, disabled = false }) => (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-dimension-sm">
       <SealFilledButton.Primary loading={loading} disabled={disabled}>
         Primary
       </SealFilledButton.Primary>

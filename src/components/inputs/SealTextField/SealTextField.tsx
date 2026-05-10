@@ -135,7 +135,7 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
             disabled={disabled}
             onChange={handleChange}
             className={cn(
-              'rounded-[var(--seal-radius-sm)]',
+              'rounded-sm',
               'bg-[var(--seal-surface-surface-alt)]',
               'border-[var(--seal-border-default)]',
               'text-[var(--seal-text-primary)]',
@@ -161,7 +161,7 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
                 setIsObscured((v) => !v)
               }}
               aria-label={isObscured ? 'Show password' : 'Hide password'}
-              className="absolute right-[var(--seal-dimension-sm)] top-1/2 -translate-y-1/2 flex items-center bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--seal-brand-primary)] rounded-[var(--seal-radius-xs)]"
+              className="absolute right-[var(--seal-dimension-sm)] top-1/2 -translate-y-1/2 flex items-center bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--seal-brand-primary)] rounded-xs"
               style={{ color: SECONDARY_COLOR }}
             >
               <VisibilityIcon size={ICON_SIZE} aria-hidden="true" />

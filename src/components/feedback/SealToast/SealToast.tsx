@@ -120,7 +120,7 @@ function showVariant(variant: SealToastVariant, params: SealToastParams) {
  *   action: { label: 'Retry', onClick: handleRetry },
  * })
  *
- * SealToast.custom({ message: 'Synced.', icon: RefreshCw, color: '#00BCD4' })
+ * SealToast.custom({ message: 'Synced.', icon: RefreshCw, color: 'var(--seal-brand-primary)' })
  * ```
  *
  * Each method returns the toast ID, which can be passed to `SealToast.dismiss`

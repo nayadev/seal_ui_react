@@ -85,8 +85,8 @@ export function SealTooltip({
           sideOffset={sideOffset}
           className={cn(
             'bg-[var(--seal-surface-surface)] border border-[var(--seal-border-default)]',
-            'rounded-[var(--seal-radius-sm)]',
-            'px-[var(--seal-dimension-sm)] py-[var(--seal-dimension-xxs)]',
+            'rounded-sm',
+            'px-dimension-sm py-dimension-xxs',
             'text-[var(--seal-text-primary)] font-style-small',
             'shadow-none',
             className,

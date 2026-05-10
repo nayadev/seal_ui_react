@@ -148,7 +148,7 @@ export const AllVariants: Story = {
     },
   },
   render: ({ loading, disabled }) => (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-dimension-md items-center">
       <SealIconButton.Primary
         icon={Rocket}
         tooltip="Primary"

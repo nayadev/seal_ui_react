@@ -3,14 +3,23 @@ import * as React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 
-// Diameter constants from Flutter reference (SealAvatar._kSmallSize / _kDefaultSize / _kLargeSize).
-const AVATAR_SIZE_PX = {
-  sm: 28,
-  md: 40,
-  lg: 56,
+// Diameter expressions using design tokens (SealAvatar._kSmallSize / _kDefaultSize / _kLargeSize).
+// sm=28px: dimension-lg(24) + dimension-xxs(4)
+// md=40px: dimension-xl(32) + dimension-xs(8)
+// lg=56px: dimension-xxl(48) + dimension-xs(8)
+const AVATAR_SIZE_EXPR = {
+  sm: 'calc(var(--seal-dimension-lg) + var(--seal-dimension-xxs))',
+  md: 'calc(var(--seal-dimension-xl) + var(--seal-dimension-xs))',
+  lg: 'calc(var(--seal-dimension-xxl) + var(--seal-dimension-xs))',
 } as const
 
-type AvatarSize = keyof typeof AVATAR_SIZE_PX
+const AVATAR_FONT_SIZE_EXPR = {
+  sm: 'calc((var(--seal-dimension-lg) + var(--seal-dimension-xxs)) * 0.375)',
+  md: 'calc((var(--seal-dimension-xl) + var(--seal-dimension-xs)) * 0.375)',
+  lg: 'calc((var(--seal-dimension-xxl) + var(--seal-dimension-xs)) * 0.375)',
+} as const
+
+type AvatarSize = keyof typeof AVATAR_SIZE_EXPR
 
 /**
  * Props accepted by `SealAvatar`.
@@ -39,16 +48,16 @@ function SealAvatarImpl({
   size = 'md',
   className,
 }: Readonly<SealAvatarImplProps>) {
-  const px = AVATAR_SIZE_PX[size]
+  const sizeExpr = AVATAR_SIZE_EXPR[size]
   // Font size scales proportionally with avatar diameter, matching Flutter's _kFontSizeRatio.
-  const fallbackFontSize = Math.round(px * 0.375)
+  const fontSizeExpr = AVATAR_FONT_SIZE_EXPR[size]
 
   return (
-    <Avatar style={{ width: px, height: px }} className={cn('shrink-0', className)}>
+    <Avatar style={{ width: sizeExpr, height: sizeExpr }} className={cn('shrink-0', className)}>
       {src && <AvatarImage src={src} alt={alt} />}
       <AvatarFallback
-        className="bg-[var(--seal-surface-surface-alt)] text-[var(--seal-text-primary)] font-medium"
-        style={{ fontSize: fallbackFontSize }}
+        className="bg-[var(--seal-surface-surface-alt)] text-[var(--seal-text-primary)] font-style-small"
+        style={{ fontSize: fontSizeExpr }}
       >
         {fallback}
       </AvatarFallback>

@@ -93,10 +93,11 @@ export const FourDigit: Story = {
 export const Controlled: Story = {
   args: { maxLength: 6 },
   render: (args) => {
+    // Storybook render functions run inside a React component context; hook usage is valid here.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('')
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-dimension-md">
         <SealInputOTP
           {...args}
           value={value}
