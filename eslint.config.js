@@ -1,7 +1,7 @@
 import js from '@eslint/js'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import prettier from 'eslint-config-prettier'
-import importPlugin from 'eslint-plugin-import'
+import importPlugin from 'eslint-plugin-import-x'
 import jsdoc from 'eslint-plugin-jsdoc'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import reactPlugin from 'eslint-plugin-react'
@@ -35,7 +35,7 @@ export default defineConfig([
     },
     settings: {
       react: {
-        version: 'detect',
+        version: '19',
       },
     },
     rules: {
@@ -97,7 +97,7 @@ export default defineConfig([
       },
     },
     settings: {
-      react: { version: 'detect' },
+      react: { version: '19' },
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
