@@ -146,7 +146,6 @@ const SEAL_CALENDAR_CLASSNAMES = {
     'flex h-[var(--cell-size)] w-full items-center justify-center px-[var(--cell-size)]',
     'text-[var(--seal-text-primary)] font-semibold',
   ),
-  caption_label: 'select-none text-sm font-medium',
   nav: 'absolute inset-x-0 top-0 flex h-[var(--cell-size)] w-full items-center justify-between gap-1',
   button_previous: NAV_BUTTON_CLASSES,
   button_next: NAV_BUTTON_CLASSES,
