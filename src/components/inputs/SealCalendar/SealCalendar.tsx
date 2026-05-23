@@ -197,7 +197,7 @@ function SealCalendarSingleImpl({
   return (
     <Calendar
       mode="single"
-      weekStartsOn={1}
+      weekStartsOn={0}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
@@ -235,7 +235,7 @@ function SealCalendarMultipleImpl({
   return (
     <Calendar
       mode="multiple"
-      weekStartsOn={1}
+      weekStartsOn={0}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
@@ -275,7 +275,7 @@ function SealCalendarRangeImpl({
   return (
     <Calendar
       mode="range"
-      weekStartsOn={1}
+      weekStartsOn={0}
       showOutsideDays={showOutsideDays}
       className={buildCalendarClassName(className)}
       classNames={SEAL_CALENDAR_CLASSNAMES}
