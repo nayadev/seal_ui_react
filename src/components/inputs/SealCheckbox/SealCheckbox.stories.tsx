@@ -71,6 +71,18 @@ export const DisabledChecked: Story = {
   render: (args) => <SealCheckbox {...args} />,
 }
 
+function ControlledExample() {
+  const [checked, setChecked] = React.useState(false)
+  return (
+    <SealCheckbox
+      checked={checked}
+      onCheckedChange={setChecked}
+      label="Toggle me"
+      sublabel={checked ? 'Checked!' : 'Click to check'}
+    />
+  )
+}
+
 export const Controlled: Story = {
   args: {},
   parameters: {
@@ -90,18 +102,7 @@ export const Controlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [checked, setChecked] = React.useState(false)
-    return (
-      <SealCheckbox
-        checked={checked}
-        onCheckedChange={setChecked}
-        label="Toggle me"
-        sublabel={checked ? 'Checked!' : 'Click to check'}
-      />
-    )
-  },
+  render: () => <ControlledExample />,
 }
 
 export const AllVariants: Story = {
