@@ -6,7 +6,7 @@ import { renderWithTheme } from '../../../../test/utils'
 import { SealCard } from './SealCard'
 
 const ROLE_BUTTON = 'button'
-const SELECTOR_SEPARATOR = '[role="separator"]'
+const SELECTOR_SEPARATOR = '[data-orientation="horizontal"]'
 
 describe('SealCard', () => {
   describe('rendering', () => {
@@ -46,8 +46,10 @@ describe('SealCard', () => {
 
   describe('divider', () => {
     it('shows a separator between header and body', () => {
-      renderWithTheme(<SealCard header={<span>H</span>} body={<span>B</span>} />)
-      expect(screen.getByRole('separator', { hidden: true })).toBeInTheDocument()
+      const { container } = renderWithTheme(
+        <SealCard header={<span>H</span>} body={<span>B</span>} />,
+      )
+      expect(container.querySelector(SELECTOR_SEPARATOR)).toBeInTheDocument()
     })
 
     it('does not show a separator with only body', () => {

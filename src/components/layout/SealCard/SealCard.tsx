@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { SealSeparator } from '@/components/layout/SealSeparator/SealSeparator'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
@@ -105,14 +106,7 @@ function SealCardImpl({
     >
       <div className="p-[var(--seal-dimension-lg)]">
         {hasHeader && <div>{header}</div>}
-        {hasDivider && (
-          <div
-            className="my-[var(--seal-dimension-sm)]"
-            style={{ borderTop: '1px solid var(--seal-border-default)' }}
-            role="separator"
-            aria-hidden="true"
-          />
-        )}
+        {hasDivider && <SealSeparator className="my-[var(--seal-dimension-sm)]" />}
         {hasBody && <div>{body}</div>}
         {footer !== undefined && <div className="mt-[var(--seal-dimension-md)]">{footer}</div>}
       </div>
