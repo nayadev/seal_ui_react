@@ -24,7 +24,6 @@ describe('SealCheckbox', () => {
 
     it('does not render label or sublabel when omitted', () => {
       renderWithTheme(<SealCheckbox />)
-      // No label element — only the checkbox role
       expect(screen.queryByRole('group')).not.toBeInTheDocument()
     })
 
