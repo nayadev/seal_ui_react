@@ -39,6 +39,7 @@ export * from './components/layout/SealMenubar/SealMenubar'
 export * from './components/layout/SealResizable/SealResizable'
 export * from './components/layout/SealSeparator/SealSeparator'
 export * from './components/layout/SealTable/SealTable'
+export * from './components/layout/SealTabs/SealTabs'
 
 // Feedback
 export * from './components/feedback/SealAlert'
