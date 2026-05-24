@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.10](https://github.com/nayadev/seal_ui_react/compare/v0.0.9...v0.0.10) (2026-05-24)
+
+
+### Features
+
+* add SealContextMenu component ([5ddaeef](https://github.com/nayadev/seal_ui_react/commit/5ddaeef2f9e2d66f4761c7fb8f257fdfcb69a1fe))
+* add SealDialog component ([40f4662](https://github.com/nayadev/seal_ui_react/commit/40f4662423f6859fed044e639e1ad215983fa373))
+* add SealPopover component ([541e082](https://github.com/nayadev/seal_ui_react/commit/541e082bac634256472a8fb2c70ec5b57835e8d5))
+* add SealSheet component ([b3b67e4](https://github.com/nayadev/seal_ui_react/commit/b3b67e4598289fffb8a42b30e2e13e4e8dfabd0c))
+
 ## [0.0.9](https://github.com/nayadev/seal_ui_react/compare/v0.0.8...v0.0.9) (2026-05-24)
 
 
