@@ -9,6 +9,7 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
+    icon: { table: { disable: true } },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -36,6 +37,13 @@ export const AccentSecondary: Story = {
 }
 
 export const Gradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealFilledButton.Gradient icon={Rocket}>Launch</SealFilledButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealFilledButton.Gradient icon={Rocket} {...args}>
       Launch
@@ -44,6 +52,13 @@ export const Gradient: Story = {
 }
 
 export const AccentGradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealFilledButton.AccentGradient icon={Star}>Boost</SealFilledButton.AccentGradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealFilledButton.AccentGradient icon={Star} {...args}>
       Boost
@@ -68,6 +83,13 @@ export const CustomGradient: Story = {
 }
 
 export const WithIcon: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealFilledButton.Primary icon={Settings}>Settings</SealFilledButton.Primary>`,
+      },
+    },
+  },
   render: (args) => (
     <SealFilledButton.Primary icon={Settings} {...args}>
       Settings
@@ -84,6 +106,13 @@ export const Loading: Story = {
 }
 
 export const LoadingWithIcon: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealFilledButton.Gradient loading icon={Rocket}>Launching</SealFilledButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealFilledButton.Gradient loading icon={Rocket} {...args}>
       Launching
