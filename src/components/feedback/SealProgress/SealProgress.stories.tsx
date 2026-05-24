@@ -57,19 +57,27 @@ export const AllVariants: Story = {
     return (
       <div className="flex flex-col gap-[var(--seal-dimension-lg)] w-[400px]">
         <div className="flex flex-col gap-[var(--seal-dimension-xs)]">
-          <span className="text-[var(--seal-text-secondary)] text-sm">Primary — determinate</span>
+          <span className="text-[var(--seal-text-secondary)] text-style-small">
+            Primary — determinate
+          </span>
           <SealProgress.Primary value={progress} />
         </div>
         <div className="flex flex-col gap-[var(--seal-dimension-xs)]">
-          <span className="text-[var(--seal-text-secondary)] text-sm">Accent — determinate</span>
+          <span className="text-[var(--seal-text-secondary)] text-style-small">
+            Accent — determinate
+          </span>
           <SealProgress.Accent value={progress} />
         </div>
         <div className="flex flex-col gap-[var(--seal-dimension-xs)]">
-          <span className="text-[var(--seal-text-secondary)] text-sm">Primary — indeterminate</span>
+          <span className="text-[var(--seal-text-secondary)] text-style-small">
+            Primary — indeterminate
+          </span>
           <SealProgress.Primary />
         </div>
         <div className="flex flex-col gap-[var(--seal-dimension-xs)]">
-          <span className="text-[var(--seal-text-secondary)] text-sm">Accent — indeterminate</span>
+          <span className="text-[var(--seal-text-secondary)] text-style-small">
+            Accent — indeterminate
+          </span>
           <SealProgress.Accent />
         </div>
       </div>
