@@ -164,7 +164,7 @@ function AllVariantsExample() {
   const [date, setDate] = React.useState<Date | undefined>()
   const [range, setRange] = React.useState<DateRange | undefined>()
   return (
-    <div className="flex flex-wrap" style={{ gap: 'var(--seal-dimension-xl)' }}>
+    <div className="flex flex-wrap gap-dimension-xl">
       <div>
         <p className="mb-dimension-xs text-style-caption opacity-60">Single</p>
         <SealCalendar.Single

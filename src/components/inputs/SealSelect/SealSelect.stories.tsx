@@ -146,21 +146,21 @@ export const Disabled: Story = {
 function AllVariantsExample() {
   const [preSelectedValue, setPreSelectedValue] = React.useState('arctic')
   return (
-    <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-64">
+    <div className="flex flex-col gap-dimension-xl w-64">
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           No label
         </p>
         <SealSelect options={themeOptions} placeholder={THEME_PLACEHOLDER} />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           With label
         </p>
         <SealSelect options={themeOptions} label="Theme" placeholder={THEME_PLACEHOLDER} />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           Pre-selected
         </p>
         <SealSelect
@@ -171,7 +171,7 @@ function AllVariantsExample() {
         />
       </div>
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           Disabled
         </p>
         <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />

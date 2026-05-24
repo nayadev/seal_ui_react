@@ -124,7 +124,7 @@ export const AllVariants: Story = {
     },
   },
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-72">
+    <div className="flex flex-col gap-dimension-xl w-72">
       <SealSlider defaultValue={50} aria-label="Default" />
       <SealSlider defaultValue={40} step={10} aria-label="With step" />
       <SealSlider defaultValue={0} min={-100} max={100} aria-label="Custom range" />
