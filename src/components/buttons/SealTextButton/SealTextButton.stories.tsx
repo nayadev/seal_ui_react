@@ -9,6 +9,7 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
+    icon: { table: { disable: true } },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -36,6 +37,13 @@ export const AccentSecondary: Story = {
 }
 
 export const Gradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealTextButton.Gradient icon={Telescope}>Discover</SealTextButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealTextButton.Gradient icon={Telescope} {...args}>
       Discover
@@ -44,6 +52,13 @@ export const Gradient: Story = {
 }
 
 export const AccentGradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealTextButton.AccentGradient icon={Star}>Explore</SealTextButton.AccentGradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealTextButton.AccentGradient icon={Star} {...args}>
       Explore
@@ -68,6 +83,11 @@ export const CustomGradient: Story = {
 }
 
 export const WithIcon: Story = {
+  parameters: {
+    docs: {
+      source: { code: `<SealTextButton.Primary icon={ArrowRight}>Skip</SealTextButton.Primary>` },
+    },
+  },
   render: (args) => (
     <SealTextButton.Primary icon={ArrowRight} {...args}>
       Skip
@@ -84,6 +104,13 @@ export const Loading: Story = {
 }
 
 export const LoadingWithIcon: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealTextButton.Gradient loading icon={Rocket}>Launching</SealTextButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealTextButton.Gradient loading icon={Rocket} {...args}>
       Launching
@@ -126,6 +153,16 @@ export const AllVariants: Story = {
 }
 
 export const AllVariantsWithIcons: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealTextButton.Primary icon={ArrowRight}>Primary</SealTextButton.Primary>
+<SealTextButton.Accent icon={Settings}>Accent</SealTextButton.Accent>
+<SealTextButton.Gradient icon={Telescope}>Gradient</SealTextButton.Gradient>
+<SealTextButton.AccentGradient icon={Star}>Accent Gradient</SealTextButton.AccentGradient>`,
+      },
+    },
+  },
   args: { loading: false, disabled: false },
   render: ({ loading = false, disabled = false }) => (
     <div className="flex flex-wrap gap-3">
