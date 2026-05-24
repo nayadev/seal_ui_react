@@ -24,7 +24,6 @@ describe('SealLoader', () => {
 
     it('does not render a label element when label is omitted', () => {
       renderWithTheme(<SealLoader />)
-      // Only the SVG child should be present inside the status container
       const status = screen.getByRole('status')
       expect(status.querySelectorAll('span')).toHaveLength(0)
     })
