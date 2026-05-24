@@ -95,6 +95,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `Avatar`                         | `SealAvatar` (40 px default), `SealAvatar.Small` (28 px), `SealAvatar.Large` (56 px)                                         |
 | `Breadcrumb`                     | `SealBreadcrumb` (`.Item`, `.Link`, `.Page`, `.Separator`, `.Ellipsis`, `.Dropdown`, `.DropMenuItem`)                        |
 | `Card`                           | `SealCard` (`.Default`, `.Gradient`)                                                                                         |
+| None (custom div + tokens)       | `SealContainer`                                                                                                              |
 
 ---
 
