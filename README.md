@@ -127,7 +127,7 @@ function ThemePicker() {
 | `SealTable`             | Layout      | ✅     |
 | `SealTabs`              | Layout      | ✅     |
 | `SealDialog`            | Overlay     | ✅     |
-| `SealSheet`             | Overlay     | 🔜     |
+| `SealSheet`             | Overlay     | ✅     |
 | `SealPopover`           | Overlay     | 🔜     |
 | `SealContextMenu`       | Overlay     | 🔜     |
 

@@ -43,6 +43,7 @@ export * from './components/layout/SealTabs/SealTabs'
 
 // Overlay
 export * from './components/overlay/SealDialog/SealDialog'
+export * from './components/overlay/SealSheet/SealSheet'
 
 // Feedback
 export * from './components/feedback/SealAlert'
