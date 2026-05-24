@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.9](https://github.com/nayadev/seal_ui_react/compare/v0.0.8...v0.0.9) (2026-05-24)
+
+
+### Features
+
+* add SealBadge component ([7ce0f42](https://github.com/nayadev/seal_ui_react/commit/7ce0f422e0ad96385268da6019c73fc218cccc6e))
+* add SealBreadcrumb component ([c62902c](https://github.com/nayadev/seal_ui_react/commit/c62902c452293d69ad831d0af92adf12e3d5d482))
+* add SealCard component ([91eae0d](https://github.com/nayadev/seal_ui_react/commit/91eae0dac1509b92ae2926527f3670298b0d8ae3))
+* add SealContainer component ([9151875](https://github.com/nayadev/seal_ui_react/commit/9151875c972c1c4fa5421e8c369a91f74d5d4526))
+* add SealMenubar component ([4cefb59](https://github.com/nayadev/seal_ui_react/commit/4cefb59e497d303b2d975a1906be0c5baf16bdda))
+* add SealResizable component ([29d84f0](https://github.com/nayadev/seal_ui_react/commit/29d84f0119976d5550bac0d9b5e2322831667e5f))
+* add SealSeparator component ([5de9ac9](https://github.com/nayadev/seal_ui_react/commit/5de9ac9c7a88471fed3a0ac339b7dbcd329d9d1b))
+* add SealTable component ([0f6b365](https://github.com/nayadev/seal_ui_react/commit/0f6b3652321b20c61af4b779db49de3d6507ee66))
+
+
+### Bug Fixes
+
+* rename deprecated 'table' classname key to 'month_grid' in calendar primitive ([80f5e3f](https://github.com/nayadev/seal_ui_react/commit/80f5e3f426d64c66db09ace970932ad7070e095c))
+* use SealTextButton and SealFilledButton in SealCard story footer ([6a3e26e](https://github.com/nayadev/seal_ui_react/commit/6a3e26e43105414bcca5e6e7523872c5e9ea09e7))
+
 ## [0.0.8](https://github.com/nayadev/seal_ui_react/compare/v0.0.7...v0.0.8) (2026-05-24)
 
 
