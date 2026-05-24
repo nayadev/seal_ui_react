@@ -71,6 +71,11 @@ export const WithLabel: Story = {
   render: (args) => <SealSelect {...args} />,
 }
 
+function ControlledExample() {
+  const [value, setValue] = React.useState('nebula')
+  return <SealSelect options={themeOptions} label="Theme" value={value} onValueChange={setValue} />
+}
+
 export const Controlled: Story = {
   args: { options: themeOptions, label: 'Theme' },
   parameters: {
@@ -90,13 +95,7 @@ export const Controlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = React.useState('nebula')
-    return (
-      <SealSelect options={themeOptions} label="Theme" value={value} onValueChange={setValue} />
-    )
-  },
+  render: () => <ControlledExample />,
 }
 
 export const WithDisabledOption: Story = {
@@ -144,6 +143,43 @@ export const Disabled: Story = {
   render: (args) => <SealSelect {...args} />,
 }
 
+function AllVariantsExample() {
+  const [preSelectedValue, setPreSelectedValue] = React.useState('arctic')
+  return (
+    <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-64">
+      <div>
+        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+          No label
+        </p>
+        <SealSelect options={themeOptions} placeholder={THEME_PLACEHOLDER} />
+      </div>
+      <div>
+        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+          With label
+        </p>
+        <SealSelect options={themeOptions} label="Theme" placeholder={THEME_PLACEHOLDER} />
+      </div>
+      <div>
+        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+          Pre-selected
+        </p>
+        <SealSelect
+          options={themeOptions}
+          label="Theme"
+          value={preSelectedValue}
+          onValueChange={setPreSelectedValue}
+        />
+      </div>
+      <div>
+        <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
+          Disabled
+        </p>
+        <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />
+      </div>
+    </div>
+  )
+}
+
 export const AllVariants: Story = {
   args: { options: themeOptions },
   parameters: {
@@ -168,41 +204,5 @@ function PreSelected() {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [preSelectedValue, setPreSelectedValue] = React.useState('arctic')
-    return (
-      <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-64">
-        <div>
-          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-            No label
-          </p>
-          <SealSelect options={themeOptions} placeholder={THEME_PLACEHOLDER} />
-        </div>
-        <div>
-          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-            With label
-          </p>
-          <SealSelect options={themeOptions} label="Theme" placeholder={THEME_PLACEHOLDER} />
-        </div>
-        <div>
-          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-            Pre-selected
-          </p>
-          <SealSelect
-            options={themeOptions}
-            label="Theme"
-            value={preSelectedValue}
-            onValueChange={setPreSelectedValue}
-          />
-        </div>
-        <div>
-          <p className="mb-[var(--seal-dimension-xs)] text-sm text-[var(--seal-text-secondary)]">
-            Disabled
-          </p>
-          <SealSelect options={themeOptions} label="Theme" value="nebula" disabled />
-        </div>
-      </div>
-    )
-  },
+  render: () => <AllVariantsExample />,
 }

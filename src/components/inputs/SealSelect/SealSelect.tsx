@@ -168,3 +168,5 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
     </div>
   )
 })
+
+SealSelect.displayName = 'SealSelect'
