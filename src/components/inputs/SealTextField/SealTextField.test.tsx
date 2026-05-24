@@ -41,7 +41,6 @@ describe('SealTextField', () => {
 
     it('does not render trailing icon when obscureText is true', () => {
       renderWithTheme(<SealTextField trailingIcon={Lock} obscureText aria-label="password" />)
-      // The toggle button should be present instead of the static trailing icon
       expect(
         screen.getByRole('button', { name: /show password|hide password/i }),
       ).toBeInTheDocument()
