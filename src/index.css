@@ -12,6 +12,49 @@
 
 @theme {
   --font-sans: var(--seal-font-family-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing → gap-dimension-*, p-dimension-*, m-dimension-*, w-dimension-*, h-dimension-* */
+  --spacing-dimension-xxxs: var(--seal-dimension-xxxs);
+  --spacing-dimension-xxs: var(--seal-dimension-xxs);
+  --spacing-dimension-xs: var(--seal-dimension-xs);
+  --spacing-dimension-sm: var(--seal-dimension-sm);
+  --spacing-dimension-md: var(--seal-dimension-md);
+  --spacing-dimension-lg: var(--seal-dimension-lg);
+  --spacing-dimension-xl: var(--seal-dimension-xl);
+  --spacing-dimension-xxl: var(--seal-dimension-xxl);
+  --spacing-dimension-xxxl: var(--seal-dimension-xxxl);
+
+  /* Border radius → rounded-xs, rounded-sm, rounded-md, rounded-lg, rounded-xl, rounded-full */
+  --radius-xs: var(--seal-radius-xs);
+  --radius-sm: var(--seal-radius-sm);
+  --radius-md: var(--seal-radius-md);
+  --radius-lg: var(--seal-radius-lg);
+  --radius-xl: var(--seal-radius-xl);
+  --radius-full: var(--seal-radius-full);
+
+  /* Font sizes → text-style-* */
+  --text-style-display: var(--seal-style-display-font-size);
+  --text-style-headline: var(--seal-style-headline-font-size);
+  --text-style-heading: var(--seal-style-heading-font-size);
+  --text-style-title: var(--seal-style-title-font-size);
+  --text-style-subtitle: var(--seal-style-subtitle-font-size);
+  --text-style-body-large: var(--seal-style-body-large-font-size);
+  --text-style-lead: var(--seal-style-lead-font-size);
+  --text-style-body: var(--seal-style-body-font-size);
+  --text-style-small: var(--seal-style-small-font-size);
+  --text-style-caption: var(--seal-style-caption-font-size);
+
+  /* Font weights → font-style-* */
+  --font-weight-style-display: var(--seal-style-display-font-weight);
+  --font-weight-style-headline: var(--seal-style-headline-font-weight);
+  --font-weight-style-heading: var(--seal-style-heading-font-weight);
+  --font-weight-style-title: var(--seal-style-title-font-weight);
+  --font-weight-style-subtitle: var(--seal-style-subtitle-font-weight);
+  --font-weight-style-body-large: var(--seal-style-body-large-font-weight);
+  --font-weight-style-lead: var(--seal-style-lead-font-weight);
+  --font-weight-style-body: var(--seal-style-body-font-weight);
+  --font-weight-style-small: var(--seal-style-small-font-weight);
+  --font-weight-style-caption: var(--seal-style-caption-font-weight);
 }
 
 *,
