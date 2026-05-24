@@ -27,7 +27,7 @@ export const Default: Story = {
     docs: { source: { code: `<SealDatePicker.Single />` } },
   },
   render: (args) => (
-    <div style={{ width: '280px' }}>
+    <div className="w-[280px]">
       <SealDatePicker.Single {...args} />
     </div>
   ),
@@ -54,7 +54,7 @@ export const SingleControlled: Story = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [date, setDate] = React.useState<Date | undefined>()
     return (
-      <div style={{ width: '280px' }}>
+      <div className="w-[280px]">
         <SealDatePicker.Single
           selected={date}
           onSelect={(d) => {
@@ -87,7 +87,7 @@ export const RangeControlled: Story = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
-      <div style={{ width: '320px' }}>
+      <div className="w-[320px]">
         <SealDatePicker.Range
           selected={range}
           onSelect={(r) => {
@@ -105,7 +105,7 @@ export const WithPlaceholder: Story = {
     docs: { source: { code: `<SealDatePicker.Single placeholder="Choose a date..." />` } },
   },
   render: (args) => (
-    <div style={{ width: '280px' }}>
+    <div className="w-[280px]">
       <SealDatePicker.Single {...args} />
     </div>
   ),
@@ -121,7 +121,7 @@ export const Disabled: Story = {
     },
   },
   render: (args) => (
-    <div style={{ width: '280px' }}>
+    <div className="w-[280px]">
       <SealDatePicker.Single {...args} />
     </div>
   ),
@@ -137,7 +137,7 @@ export const TwoMonths: Story = {
     },
   },
   render: (args) => (
-    <div style={{ width: '280px' }}>
+    <div className="w-[280px]">
       <SealDatePicker.Single {...args} />
     </div>
   ),
@@ -161,9 +161,9 @@ export const AllVariants: Story = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [range, setRange] = React.useState<DateRange | undefined>()
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
+      <div className="flex flex-col gap-dimension-sm w-[300px]">
         <div>
-          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Single</p>
+          <p className="mb-dimension-xs text-style-caption opacity-60">Single</p>
           <SealDatePicker.Single
             selected={date}
             onSelect={(d) => {
@@ -172,7 +172,7 @@ export const AllVariants: Story = {
           />
         </div>
         <div>
-          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Range</p>
+          <p className="mb-dimension-xs text-style-caption opacity-60">Range</p>
           <SealDatePicker.Range
             selected={range}
             onSelect={(r) => {
@@ -181,7 +181,7 @@ export const AllVariants: Story = {
           />
         </div>
         <div>
-          <p style={{ marginBottom: '6px', fontSize: '11px', opacity: 0.6 }}>Disabled</p>
+          <p className="mb-dimension-xs text-style-caption opacity-60">Disabled</p>
           <SealDatePicker.Single disabled />
         </div>
       </div>
