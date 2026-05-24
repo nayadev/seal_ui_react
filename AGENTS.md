@@ -101,6 +101,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | `separator` (Radix)                  | `SealSeparator` (`.Horizontal`, `.Vertical`) — defaults to horizontal; vertical requires a defined height on the parent                                                                                |
 | `table` (shadcn)                     | `SealTable` (`.Header`, `.Body`, `.Footer`, `.Row`, `.Head`, `.Cell`, `.Caption`) — compose semantic HTML sections; all borders, colors, and spacing via Seal tokens                                   |
 | `tabs` (shadcn)                      | `SealTabs` (`.List`, `.Trigger`, `.Content`) — wrapper over Radix Tabs; inactive panels are unmounted by default; use `forceMount` on `SealTabs.Content` if you need them in the DOM when inactive     |
+| `dialog` (shadcn)                    | `SealDialog` (`.Default`, `.Alert`) — `.Default` left-aligns the header for forms/info; `.Alert` centers it for confirmations and destructive actions; use `SealDialogClose` for custom close buttons  |
 
 ---
 

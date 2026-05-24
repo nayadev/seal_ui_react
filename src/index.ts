@@ -41,6 +41,9 @@ export * from './components/layout/SealSeparator/SealSeparator'
 export * from './components/layout/SealTable/SealTable'
 export * from './components/layout/SealTabs/SealTabs'
 
+// Overlay
+export * from './components/overlay/SealDialog/SealDialog'
+
 // Feedback
 export * from './components/feedback/SealAlert'
 export * from './components/feedback/SealBouncingDots'
