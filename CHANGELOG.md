@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.8](https://github.com/nayadev/seal_ui_react/compare/v0.0.7...v0.0.8) (2026-05-24)
+
+
+### Bug Fixes
+
+* **calendar:** align dropdown arrow inline with month/year label ([fcf2f08](https://github.com/nayadev/seal_ui_react/commit/fcf2f088415a6fdb345aa427b0a153cd0d93abeb))
+* **calendar:** change week start from Monday to Sunday ([6a48ee7](https://github.com/nayadev/seal_ui_react/commit/6a48ee7f8dd428c73501709b2db896137b9ec37d))
+* **deps:** update dependency lucide-react to v1 ([#30](https://github.com/nayadev/seal_ui_react/issues/30)) ([fdd24c5](https://github.com/nayadev/seal_ui_react/commit/fdd24c5212cf70551bed14fe5ced34a7c4550c7e))
+* **deps:** update dependency react-day-picker to v10 ([#31](https://github.com/nayadev/seal_ui_react/issues/31)) ([3cc79ac](https://github.com/nayadev/seal_ui_react/commit/3cc79acd16897f679244f55e9408b9162fea0901))
+* **deps:** update dependency tailwind-merge to v3 ([#32](https://github.com/nayadev/seal_ui_react/issues/32)) ([c3ffcbd](https://github.com/nayadev/seal_ui_react/commit/c3ffcbdbf5c957b9f5060467e07fc3d4aae902c1))
+
 ## [0.0.7](https://github.com/nayadev/seal_ui_react/compare/v0.0.6...v0.0.7) (2026-05-10)
 
 
