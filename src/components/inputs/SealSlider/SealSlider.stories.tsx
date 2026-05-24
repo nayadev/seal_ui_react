@@ -81,11 +81,9 @@ export const CustomRange: Story = {
 function ControlledExample() {
   const [gain, setGain] = React.useState(50)
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-dimension-sm">
       <SealSlider value={gain} onValueChange={setGain} min={0} max={100} aria-label="Gain" />
-      <span className="text-sm" style={{ color: 'var(--seal-text-secondary)' }}>
-        Gain: {gain}
-      </span>
+      <span className="text-style-small text-[var(--seal-text-secondary)]">Gain: {gain}</span>
     </div>
   )
 }
