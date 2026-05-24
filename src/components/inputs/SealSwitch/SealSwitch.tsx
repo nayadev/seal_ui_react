@@ -119,27 +119,16 @@ export const SealSwitch = React.forwardRef<
               htmlFor={switchId}
               className={cn(
                 'cursor-pointer select-none leading-none',
+                'text-style-small font-style-small text-[var(--seal-text-primary)]',
                 disabled === true &&
                   'cursor-not-allowed opacity-[var(--seal-state-disabled-opacity)]',
               )}
-              style={{
-                fontSize: 'var(--seal-style-small-font-size)',
-                fontWeight: 'var(--seal-style-small-font-weight)',
-                color: 'var(--seal-text-primary)',
-              }}
             >
               {label}
             </label>
           )}
           {hasSublabel && (
-            <p
-              style={{
-                fontSize: 'var(--seal-style-caption-font-size)',
-                fontWeight: 'var(--seal-style-caption-font-weight)',
-                lineHeight: 'var(--seal-style-caption-line-height)',
-                color: 'var(--seal-text-secondary)',
-              }}
-            >
+            <p className="text-style-caption font-style-caption leading-[var(--seal-style-caption-line-height)] text-[var(--seal-text-secondary)]">
               {sublabel}
             </p>
           )}
