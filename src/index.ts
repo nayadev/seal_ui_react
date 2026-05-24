@@ -36,6 +36,7 @@ export * from './components/layout/SealBreadcrumb/SealBreadcrumb'
 export * from './components/layout/SealCard/SealCard'
 export * from './components/layout/SealContainer/SealContainer'
 export * from './components/layout/SealMenubar/SealMenubar'
+export * from './components/layout/SealResizable/SealResizable'
 
 // Feedback
 export * from './components/feedback/SealAlert'
