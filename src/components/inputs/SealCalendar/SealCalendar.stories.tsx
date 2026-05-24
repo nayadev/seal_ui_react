@@ -30,6 +30,18 @@ export const Default: Story = {
   render: (args) => <SealCalendar.Single {...args} />,
 }
 
+function SingleControlledExample() {
+  const [date, setDate] = React.useState<Date | undefined>()
+  return (
+    <SealCalendar.Single
+      selected={date}
+      onSelect={(d) => {
+        setDate(d)
+      }}
+    />
+  )
+}
+
 export const SingleControlled: Story = {
   args: {},
   parameters: {
@@ -47,18 +59,19 @@ export const SingleControlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [date, setDate] = React.useState<Date | undefined>()
-    return (
-      <SealCalendar.Single
-        selected={date}
-        onSelect={(d) => {
-          setDate(d)
-        }}
-      />
-    )
-  },
+  render: () => <SingleControlledExample />,
+}
+
+function MultipleControlledExample() {
+  const [dates, setDates] = React.useState<Date[] | undefined>()
+  return (
+    <SealCalendar.Multiple
+      selected={dates}
+      onSelect={(ds) => {
+        setDates(ds)
+      }}
+    />
+  )
 }
 
 export const MultipleControlled: Story = {
@@ -78,18 +91,19 @@ export const MultipleControlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [dates, setDates] = React.useState<Date[] | undefined>()
-    return (
-      <SealCalendar.Multiple
-        selected={dates}
-        onSelect={(ds) => {
-          setDates(ds)
-        }}
-      />
-    )
-  },
+  render: () => <MultipleControlledExample />,
+}
+
+function RangeControlledExample() {
+  const [range, setRange] = React.useState<DateRange | undefined>()
+  return (
+    <SealCalendar.Range
+      selected={range}
+      onSelect={(r) => {
+        setRange(r)
+      }}
+    />
+  )
 }
 
 export const RangeControlled: Story = {
@@ -109,18 +123,7 @@ export const RangeControlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [range, setRange] = React.useState<DateRange | undefined>()
-    return (
-      <SealCalendar.Range
-        selected={range}
-        onSelect={(r) => {
-          setRange(r)
-        }}
-      />
-    )
-  },
+  render: () => <RangeControlledExample />,
 }
 
 export const TwoMonths: Story = {
@@ -157,6 +160,33 @@ export const WithDisabledDays: Story = {
   render: () => <SealCalendar.Single disabled={{ dayOfWeek: [0, 6] }} />,
 }
 
+function AllVariantsExample() {
+  const [date, setDate] = React.useState<Date | undefined>()
+  const [range, setRange] = React.useState<DateRange | undefined>()
+  return (
+    <div className="flex flex-wrap" style={{ gap: 'var(--seal-dimension-xl)' }}>
+      <div>
+        <p className="mb-dimension-xs text-style-caption opacity-60">Single</p>
+        <SealCalendar.Single
+          selected={date}
+          onSelect={(d) => {
+            setDate(d)
+          }}
+        />
+      </div>
+      <div>
+        <p className="mb-dimension-xs text-style-caption opacity-60">Range</p>
+        <SealCalendar.Range
+          selected={range}
+          onSelect={(r) => {
+            setRange(r)
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
 export const AllVariants: Story = {
   args: {},
   parameters: {
@@ -169,32 +199,5 @@ export const AllVariants: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [date, setDate] = React.useState<Date | undefined>()
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [range, setRange] = React.useState<DateRange | undefined>()
-    return (
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-        <div>
-          <p style={{ marginBottom: '8px', fontSize: '12px', opacity: 0.6 }}>Single</p>
-          <SealCalendar.Single
-            selected={date}
-            onSelect={(d) => {
-              setDate(d)
-            }}
-          />
-        </div>
-        <div>
-          <p style={{ marginBottom: '8px', fontSize: '12px', opacity: 0.6 }}>Range</p>
-          <SealCalendar.Range
-            selected={range}
-            onSelect={(r) => {
-              setRange(r)
-            }}
-          />
-        </div>
-      </div>
-    )
-  },
+  render: () => <AllVariantsExample />,
 }

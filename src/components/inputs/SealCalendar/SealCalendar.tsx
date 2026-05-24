@@ -6,13 +6,8 @@ import { cn } from '@/lib/utils'
 
 export type { DateRange } from 'react-day-picker'
 
-/**
- * Custom day button that applies Seal design tokens for all selection states.
- *
- * Replaces the shadcn CalendarDayButton to remove its dependency on
- * `bg-primary` Tailwind utilities (which are not mapped in the Seal token
- * system) and instead use `--seal-brand-primary` CSS variables directly.
- */
+// Replaces shadcn CalendarDayButton: removes bg-primary dependency (not in Seal token system)
+// and applies --seal-brand-primary CSS variables for all selection states.
 function SealCalendarDayButton({
   className,
   day,
@@ -40,7 +35,7 @@ function SealCalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         'flex aspect-square h-auto w-full min-w-[var(--cell-size)] items-center justify-center',
-        'rounded-[var(--seal-radius-sm)] text-sm font-normal',
+        'rounded-[var(--seal-radius-sm)] text-style-small font-normal',
         'text-[var(--seal-text-primary)]',
         'cursor-pointer transition-colors',
         'hover:bg-[var(--seal-surface-surface-alt)]',
@@ -55,7 +50,7 @@ function SealCalendarDayButton({
           'text-[var(--seal-text-primary)] hover:bg-[var(--seal-surface-surface-alt)]',
         modifiers.today === true &&
           !modifiers.selected &&
-          'bg-[var(--seal-surface-surface-alt)] font-semibold',
+          'bg-[var(--seal-surface-surface-alt)] font-style-title',
         modifiers.outside === true && 'opacity-30',
         className,
       )}
@@ -140,21 +135,21 @@ const NAV_BUTTON_CLASSES = cn(
 )
 
 const SEAL_CALENDAR_CLASSNAMES = {
-  months: 'relative flex flex-col gap-4 md:flex-row',
-  month: 'flex w-full flex-col gap-4',
+  months: 'relative flex flex-col gap-dimension-md md:flex-row',
+  month: 'flex w-full flex-col gap-dimension-md',
   month_caption: cn(
     'flex h-[var(--cell-size)] w-full items-center justify-center px-[var(--cell-size)]',
-    'text-[var(--seal-text-primary)] font-semibold',
+    'text-[var(--seal-text-primary)] font-style-title',
   ),
-  nav: 'absolute inset-x-0 top-0 flex h-[var(--cell-size)] w-full items-center justify-between gap-1',
+  nav: 'absolute inset-x-0 top-0 flex h-[var(--cell-size)] w-full items-center justify-between gap-dimension-xxs',
   button_previous: NAV_BUTTON_CLASSES,
   button_next: NAV_BUTTON_CLASSES,
   weekdays: 'flex',
   weekday: cn(
     'text-[var(--seal-text-secondary)]',
-    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-xs font-normal',
+    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-style-caption font-normal',
   ),
-  week: 'mt-2 flex w-full',
+  week: 'mt-dimension-xs flex w-full',
   day: cn(
     'group/day relative aspect-square h-full w-full min-w-[var(--cell-size)] select-none p-0 text-center',
     '[&:first-child[data-selected=true]_button]:rounded-l-[var(--seal-radius-sm)]',
