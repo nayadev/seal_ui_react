@@ -69,33 +69,34 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 
 ### shadcn → Seal Component Mapping
 
-| shadcn primitive                 | Seal wrapper(s)                                                                                                              |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Button`                         | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
-| `Badge`                          | `SealBadge`                                                                                                                  |
-| `Alert`                          | `SealAlert`                                                                                                                  |
-| None (custom CSS animation)      | `SealBouncingDots`                                                                                                           |
-| None (custom SVG animation)      | `SealLoader`                                                                                                                 |
-| Radix `@radix-ui/react-progress` | `SealProgress`                                                                                                               |
-| `sonner`                         | `SealSonner` (container), `SealToast` (imperative API)                                                                       |
-| `Input`                          | `SealTextField`                                                                                                              |
-| `Textarea`                       | `SealTextarea`                                                                                                               |
-| `Checkbox`                       | `SealCheckbox`                                                                                                               |
-| `RadioGroup`                     | `SealRadioGroup`                                                                                                             |
-| `Select`                         | `SealSelect`                                                                                                                 |
-| Radix `@radix-ui/react-slider`   | `SealSlider`                                                                                                                 |
-| `Switch`                         | `SealSwitch`                                                                                                                 |
-| `Calendar` (react-day-picker)    | `SealCalendar` (`.Single`, `.Multiple`, `.Range`)                                                                            |
-| `Calendar` + `Popover`           | `SealDatePicker` (`.Single`, `.Range`)                                                                                       |
-| None (custom implementation)     | `SealTimePicker` (24h default), `SealTimePicker.Period` (12h AM/PM)                                                          |
-| `input-otp`                      | `SealInputOtp` (`.Group`, `.Slot`, `.Separator`)                                                                             |
-| `form` (react-hook-form wrapper) | `SealForm`, `SealFormField`, `SealFormItem`, `SealFormLabel`, `SealFormControl`, `SealFormDescription`, `SealFormMessage`    |
-| `Tooltip` (Radix)                | `SealTooltip`                                                                                                                |
-| `Accordion`                      | `SealAccordion` (single-open), `SealAccordion.Multiple` (multi-open)                                                         |
-| `Avatar`                         | `SealAvatar` (40 px default), `SealAvatar.Small` (28 px), `SealAvatar.Large` (56 px)                                         |
-| `Breadcrumb`                     | `SealBreadcrumb` (`.Item`, `.Link`, `.Page`, `.Separator`, `.Ellipsis`, `.Dropdown`, `.DropMenuItem`)                        |
-| `Card`                           | `SealCard` (`.Default`, `.Gradient`)                                                                                         |
-| None (custom div + tokens)       | `SealContainer`                                                                                                              |
+| shadcn primitive                 | Seal wrapper(s)                                                                                                                                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Button`                         | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton`                                                                           |
+| `Badge`                          | `SealBadge`                                                                                                                                                                                            |
+| `Alert`                          | `SealAlert`                                                                                                                                                                                            |
+| None (custom CSS animation)      | `SealBouncingDots`                                                                                                                                                                                     |
+| None (custom SVG animation)      | `SealLoader`                                                                                                                                                                                           |
+| Radix `@radix-ui/react-progress` | `SealProgress`                                                                                                                                                                                         |
+| `sonner`                         | `SealSonner` (container), `SealToast` (imperative API)                                                                                                                                                 |
+| `Input`                          | `SealTextField`                                                                                                                                                                                        |
+| `Textarea`                       | `SealTextarea`                                                                                                                                                                                         |
+| `Checkbox`                       | `SealCheckbox`                                                                                                                                                                                         |
+| `RadioGroup`                     | `SealRadioGroup`                                                                                                                                                                                       |
+| `Select`                         | `SealSelect`                                                                                                                                                                                           |
+| Radix `@radix-ui/react-slider`   | `SealSlider`                                                                                                                                                                                           |
+| `Switch`                         | `SealSwitch`                                                                                                                                                                                           |
+| `Calendar` (react-day-picker)    | `SealCalendar` (`.Single`, `.Multiple`, `.Range`)                                                                                                                                                      |
+| `Calendar` + `Popover`           | `SealDatePicker` (`.Single`, `.Range`)                                                                                                                                                                 |
+| None (custom implementation)     | `SealTimePicker` (24h default), `SealTimePicker.Period` (12h AM/PM)                                                                                                                                    |
+| `input-otp`                      | `SealInputOtp` (`.Group`, `.Slot`, `.Separator`)                                                                                                                                                       |
+| `form` (react-hook-form wrapper) | `SealForm`, `SealFormField`, `SealFormItem`, `SealFormLabel`, `SealFormControl`, `SealFormDescription`, `SealFormMessage`                                                                              |
+| `Tooltip` (Radix)                | `SealTooltip`                                                                                                                                                                                          |
+| `Accordion`                      | `SealAccordion` (single-open), `SealAccordion.Multiple` (multi-open)                                                                                                                                   |
+| `Avatar`                         | `SealAvatar` (40 px default), `SealAvatar.Small` (28 px), `SealAvatar.Large` (56 px)                                                                                                                   |
+| `Breadcrumb`                     | `SealBreadcrumb` (`.Item`, `.Link`, `.Page`, `.Separator`, `.Ellipsis`, `.Dropdown`, `.DropMenuItem`)                                                                                                  |
+| `Card`                           | `SealCard` (`.Default`, `.Gradient`)                                                                                                                                                                   |
+| None (custom div + tokens)       | `SealContainer`                                                                                                                                                                                        |
+| `Menubar`                        | `SealMenubar` (`.Menu`, `.Trigger`, `.Content`, `.Item`, `.Separator`, `.Label`, `.CheckboxItem`, `.RadioGroup`, `.RadioItem`, `.Sub`, `.SubTrigger`, `.SubContent`, `.Shortcut`, `.Group`, `.Portal`) |
 
 ---
 
