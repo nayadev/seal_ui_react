@@ -98,6 +98,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | None (custom div + tokens)           | `SealContainer`                                                                                                                                                                                        |
 | `Menubar`                            | `SealMenubar` (`.Menu`, `.Trigger`, `.Content`, `.Item`, `.Separator`, `.Label`, `.CheckboxItem`, `.RadioGroup`, `.RadioItem`, `.Sub`, `.SubTrigger`, `.SubContent`, `.Shortcut`, `.Group`, `.Portal`) |
 | `resizable` (react-resizable-panels) | `SealResizable` (`.Panel`, `.Handle`) — panel sizes are 0–100 (percentage), unlike Flutter's 0–1 proportion                                                                                            |
+| `separator` (Radix)                  | `SealSeparator` (`.Horizontal`, `.Vertical`) — defaults to horizontal; vertical requires a defined height on the parent                                                                                |
 
 ---
 
