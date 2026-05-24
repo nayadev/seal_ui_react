@@ -169,10 +169,12 @@ export const SealSlider = React.forwardRef<
           'focus-visible:ring-offset-2',
           'focus-visible:ring-offset-[var(--seal-surface-background)]',
           disabled
-            ? 'border-[var(--seal-state-fill-disabled)] pointer-events-none opacity-50'
+            ? 'border-[var(--seal-state-fill-disabled)] pointer-events-none opacity-[var(--seal-state-disabled-opacity)]'
             : 'border-[var(--seal-brand-primary)]',
         )}
       />
     </SliderPrimitive.Root>
   )
 })
+
+SealSlider.displayName = 'SealSlider'

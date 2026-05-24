@@ -110,3 +110,25 @@ export const Controlled: Story = {
   },
   render: () => <ControlledExample />,
 }
+
+export const AllVariants: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealSlider defaultValue={50} aria-label="Default" />
+<SealSlider defaultValue={40} step={10} aria-label="With step" />
+<SealSlider defaultValue={0} min={-100} max={100} aria-label="Custom range" />
+<SealSlider defaultValue={30} disabled aria-label="Disabled" />`,
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-[var(--seal-dimension-xl)] w-72">
+      <SealSlider defaultValue={50} aria-label="Default" />
+      <SealSlider defaultValue={40} step={10} aria-label="With step" />
+      <SealSlider defaultValue={0} min={-100} max={100} aria-label="Custom range" />
+      <SealSlider defaultValue={30} disabled aria-label="Disabled" />
+    </div>
+  ),
+}
