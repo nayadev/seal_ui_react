@@ -142,7 +142,7 @@ const FIELD_CLASSES = cn(
   'rounded-[var(--seal-radius-md)]',
   'border border-[var(--seal-border-default)]',
   'bg-[var(--seal-surface-surface)]',
-  'text-center text-sm font-medium',
+  'text-center text-style-small font-style-small',
   'text-[var(--seal-text-primary)]',
   'transition-colors',
   'focus:outline-none focus:ring-1 focus:ring-[var(--seal-brand-primary)]',
@@ -201,7 +201,7 @@ function ColonSeparator() {
   return (
     <span
       aria-hidden="true"
-      className="mb-[calc(var(--seal-dimension-md)+var(--seal-dimension-xs)/2-0.5em)] select-none text-sm font-semibold leading-none text-[var(--seal-text-secondary)]"
+      className="mb-[calc(var(--seal-dimension-md)+var(--seal-dimension-xs)/2-0.5em)] select-none text-style-small font-semibold leading-none text-[var(--seal-text-secondary)]"
     >
       :
     </span>

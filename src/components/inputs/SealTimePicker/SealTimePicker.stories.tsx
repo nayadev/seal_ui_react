@@ -140,7 +140,7 @@ export const AllVariants: Story = {
     },
   },
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div className="flex flex-col gap-dimension-lg">
       <SealTimePicker />
       <SealTimePicker showSeconds={false} />
       <SealTimePicker.Period />
