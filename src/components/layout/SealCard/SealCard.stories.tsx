@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { SealFilledButton } from '../../buttons/SealFilledButton/SealFilledButton'
+import { SealTextButton } from '../../buttons/SealTextButton/SealTextButton'
+
 import { SealCard } from './SealCard'
 
 const HEADER = <p style={{ fontWeight: 600, fontSize: '1.25rem', margin: 0 }}>Card Title</p>
@@ -10,30 +13,8 @@ const BODY = (
 )
 const FOOTER = (
   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--seal-dimension-xs)' }}>
-    <button
-      type="button"
-      style={{
-        color: 'var(--seal-text-secondary)',
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-      }}
-    >
-      Cancel
-    </button>
-    <button
-      type="button"
-      style={{
-        background: 'var(--seal-brand-primary)',
-        color: 'var(--seal-text-on-primary)',
-        border: 'none',
-        borderRadius: 'var(--seal-radius-sm)',
-        padding: '6px 16px',
-        cursor: 'pointer',
-      }}
-    >
-      Confirm
-    </button>
+    <SealTextButton.Primary onClick={() => undefined}>Cancel</SealTextButton.Primary>
+    <SealFilledButton.Primary onClick={() => undefined}>Confirm</SealFilledButton.Primary>
   </div>
 )
 
@@ -65,7 +46,12 @@ export const Default: Story = {
         code: `<SealCard.Default
   header={<h3>Card Title</h3>}
   body={<p>This is the card body with some descriptive content.</p>}
-  footer={<div>…footer actions…</div>}
+  footer={
+    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--seal-dimension-xs)' }}>
+      <SealTextButton.Primary onClick={handleCancel}>Cancel</SealTextButton.Primary>
+      <SealFilledButton.Primary onClick={handleConfirm}>Confirm</SealFilledButton.Primary>
+    </div>
+  }
 />`,
       },
     },
