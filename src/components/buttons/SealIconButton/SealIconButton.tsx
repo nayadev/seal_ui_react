@@ -66,7 +66,6 @@ export interface SealIconButtonProps extends Omit<
   tooltip?: string
 }
 
-// CSS variable for the per-variant hover background color.
 const IB_HOVER = '--seal-ib-hover'
 
 interface IconVariantStyle {
@@ -86,7 +85,6 @@ function buildSolidStyle(fg: string): IconVariantStyle {
 
 function buildGradientVariantStyle(): IconVariantStyle {
   return {
-    // White overlay with 8% opacity for hover interaction feedback.
     className: 'hover:bg-primitive-white/[0.08] active:opacity-[0.75]',
     buttonStyle: {
       color: TOKEN_PRIMITIVE_WHITE,
