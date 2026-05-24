@@ -56,7 +56,7 @@ function SealProgressImpl({
       max={100}
       aria-label={ariaLabel}
       className={cn(
-        'relative h-[8px] w-full overflow-hidden rounded-[var(--seal-radius-full)]',
+        'relative h-dimension-xs w-full overflow-hidden rounded-[var(--seal-radius-full)]',
         'bg-[var(--seal-border-default)]',
         className,
       )}
@@ -84,11 +84,13 @@ SealProgressImpl.displayName = 'SealProgress'
 
 type BaseProps = Omit<SealProgressProps, 'variant'>
 
+/** Progress bar using the primary brand color. Default variant. */
 function Primary(props: Readonly<BaseProps>) {
   return <SealProgressImpl variant="primary" {...props} />
 }
 Primary.displayName = 'SealProgress.Primary'
 
+/** Progress bar using the accent color. */
 function Accent(props: Readonly<BaseProps>) {
   return <SealProgressImpl variant="accent" {...props} />
 }
