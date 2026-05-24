@@ -111,7 +111,6 @@ describe('SealCalendar', () => {
     it('applies brand primary token to selected day button', () => {
       const date = new Date(2025, 5, 15)
       renderWithTheme(<SealCalendar defaultMonth={date} selected={date} />)
-      // Selected day button should have the brand primary class
       const selectedButton = document.querySelector('[data-selected-single="true"]')
       if (selectedButton) {
         expect(selectedButton.className).toMatch(/seal-brand-primary/)
