@@ -45,6 +45,11 @@ export const Default: Story = {
   render: (args) => <SealRadioGroup {...args} />,
 }
 
+function ControlledExample() {
+  const [value, setValue] = React.useState('dark')
+  return <SealRadioGroup items={themeItems} value={value} onValueChange={setValue} />
+}
+
 export const Controlled: Story = {
   args: { items: themeItems },
   parameters: {
@@ -67,11 +72,7 @@ export const Controlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = React.useState('dark')
-    return <SealRadioGroup items={themeItems} value={value} onValueChange={setValue} />
-  },
+  render: () => <ControlledExample />,
 }
 
 export const Horizontal: Story = {

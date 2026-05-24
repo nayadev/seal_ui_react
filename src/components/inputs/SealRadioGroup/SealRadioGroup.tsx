@@ -155,3 +155,5 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
     )
   },
 )
+
+SealRadioGroup.displayName = 'SealRadioGroup'
