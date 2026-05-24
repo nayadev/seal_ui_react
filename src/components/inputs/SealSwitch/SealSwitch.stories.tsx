@@ -79,6 +79,18 @@ export const DisabledChecked: Story = {
   render: (args) => <SealSwitch {...args} />,
 }
 
+function ControlledExample() {
+  const [enabled, setEnabled] = React.useState(false)
+  return (
+    <SealSwitch
+      checked={enabled}
+      onCheckedChange={setEnabled}
+      label="Enable feature"
+      sublabel={enabled ? 'Feature is active' : 'Feature is inactive'}
+    />
+  )
+}
+
 export const Controlled: Story = {
   args: {},
   parameters: {
@@ -98,18 +110,7 @@ export const Controlled: Story = {
       },
     },
   },
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [enabled, setEnabled] = React.useState(false)
-    return (
-      <SealSwitch
-        checked={enabled}
-        onCheckedChange={setEnabled}
-        label="Enable feature"
-        sublabel={enabled ? 'Feature is active' : 'Feature is inactive'}
-      />
-    )
-  },
+  render: () => <ControlledExample />,
 }
 
 export const AllVariants: Story = {
@@ -117,7 +118,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       source: {
-        code: `<div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        code: `<div className="flex flex-col gap-dimension-md">
   <SealSwitch label="Off state" checked={false} />
   <SealSwitch label="On state" checked />
   <SealSwitch label="Disabled off" checked={false} disabled />
@@ -132,7 +133,7 @@ export const AllVariants: Story = {
     },
   },
   render: ({ disabled }) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div className="flex flex-col gap-dimension-md">
       <SealSwitch label="Off state" checked={false} disabled={disabled ?? false} />
       <SealSwitch label="On state" checked disabled={disabled ?? false} />
       <SealSwitch label="Disabled off" checked={false} disabled />
