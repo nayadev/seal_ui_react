@@ -129,7 +129,7 @@ export const Disabled: Story = {
 export const AllVariants: Story = {
   args: { loading: false, disabled: false },
   render: ({ loading = false, disabled = false }) => (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-dimension-sm">
       <SealTextButton.Primary loading={loading} disabled={disabled}>
         Primary
       </SealTextButton.Primary>
@@ -165,7 +165,7 @@ export const AllVariantsWithIcons: Story = {
   },
   args: { loading: false, disabled: false },
   render: ({ loading = false, disabled = false }) => (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-dimension-sm">
       <SealTextButton.Primary icon={ArrowRight} loading={loading} disabled={disabled}>
         Primary
       </SealTextButton.Primary>
