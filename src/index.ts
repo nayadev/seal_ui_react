@@ -42,6 +42,7 @@ export * from './components/layout/SealTable/SealTable'
 export * from './components/layout/SealTabs/SealTabs'
 
 // Overlay
+export * from './components/overlay/SealContextMenu/SealContextMenu'
 export * from './components/overlay/SealDialog/SealDialog'
 export * from './components/overlay/SealPopover/SealPopover'
 export * from './components/overlay/SealSheet/SealSheet'
