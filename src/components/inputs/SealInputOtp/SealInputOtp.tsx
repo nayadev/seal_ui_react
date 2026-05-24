@@ -98,7 +98,7 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
         'relative flex h-10 w-10 items-center justify-center',
         'border-y border-r border-[var(--seal-border-default)]',
         'bg-[var(--seal-surface-surface)]',
-        'text-sm font-medium text-[var(--seal-text-primary)]',
+        'text-style-small font-style-small text-[var(--seal-text-primary)]',
         'transition-all',
         'first:rounded-l-[var(--seal-radius-md)] first:border-l',
         'last:rounded-r-[var(--seal-radius-md)]',

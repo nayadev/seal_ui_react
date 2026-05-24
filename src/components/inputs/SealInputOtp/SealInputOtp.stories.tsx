@@ -96,7 +96,7 @@ export const Controlled: Story = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('')
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-dimension-md">
         <SealInputOTP
           {...args}
           value={value}
@@ -117,14 +117,7 @@ export const Controlled: Story = {
             <SealInputOTP.Slot index={5} />
           </SealInputOTP.Group>
         </SealInputOTP>
-        <p
-          style={{
-            color: 'var(--seal-text-secondary)',
-            fontSize: 'var(--seal-constant-small-font-size)',
-          }}
-        >
-          Value: {value || '—'}
-        </p>
+        <p className="text-style-small text-[var(--seal-text-secondary)]">Value: {value || '—'}</p>
       </div>
     )
   },

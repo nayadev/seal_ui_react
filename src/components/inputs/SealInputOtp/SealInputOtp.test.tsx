@@ -125,7 +125,6 @@ describe('SealInputOTP.Group', () => {
       </SealInputOTP>,
     )
     const group = container.querySelector('.three-slot-group')
-    // 3 slot divs inside the group
     expect(group?.children.length).toBe(3)
   })
 })
