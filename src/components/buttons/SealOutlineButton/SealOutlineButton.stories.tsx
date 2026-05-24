@@ -9,6 +9,7 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
+    icon: { table: { disable: true } },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -36,6 +37,13 @@ export const AccentSecondary: Story = {
 }
 
 export const Gradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineButton.Gradient icon={Telescope}>Explore</SealOutlineButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealOutlineButton.Gradient icon={Telescope} {...args}>
       Explore
@@ -44,6 +52,13 @@ export const Gradient: Story = {
 }
 
 export const AccentGradient: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineButton.AccentGradient icon={Star}>Boost</SealOutlineButton.AccentGradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealOutlineButton.AccentGradient icon={Star} {...args}>
       Boost
@@ -68,6 +83,13 @@ export const CustomGradient: Story = {
 }
 
 export const WithIcon: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineButton.Primary icon={Settings}>Settings</SealOutlineButton.Primary>`,
+      },
+    },
+  },
   render: (args) => (
     <SealOutlineButton.Primary icon={Settings} {...args}>
       Settings
@@ -84,6 +106,13 @@ export const Loading: Story = {
 }
 
 export const LoadingWithIcon: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `<SealOutlineButton.Gradient loading icon={Rocket}>Launching</SealOutlineButton.Gradient>`,
+      },
+    },
+  },
   render: (args) => (
     <SealOutlineButton.Gradient loading icon={Rocket} {...args}>
       Launching
