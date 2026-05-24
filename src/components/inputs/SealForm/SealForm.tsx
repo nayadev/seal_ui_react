@@ -134,13 +134,12 @@ export const SealFormLabel = React.forwardRef<
     <LabelPrimitive.Root
       ref={ref}
       htmlFor={formItemId}
-      className={cn('leading-none', className)}
-      style={{
-        fontSize: 'var(--seal-style-small-font-size)',
-        fontWeight: 'var(--seal-style-small-font-weight)',
-        color: error ? 'var(--seal-semantic-error)' : 'var(--seal-text-secondary)',
-        ...style,
-      }}
+      className={cn(
+        'leading-none text-style-small font-style-small',
+        error ? 'text-[var(--seal-semantic-error)]' : 'text-[var(--seal-text-secondary)]',
+        className,
+      )}
+      style={style}
       {...props}
     />
   )
@@ -187,14 +186,11 @@ export const SealFormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn(className)}
-      style={{
-        fontSize: 'var(--seal-style-caption-font-size)',
-        fontWeight: 'var(--seal-style-caption-font-weight)',
-        lineHeight: 'var(--seal-style-caption-line-height)',
-        color: 'var(--seal-text-secondary)',
-        ...style,
-      }}
+      className={cn(
+        'text-style-caption font-style-caption leading-[var(--seal-style-caption-line-height)] text-[var(--seal-text-secondary)]',
+        className,
+      )}
+      style={style}
       {...props}
     />
   )
@@ -222,14 +218,11 @@ export const SealFormMessage = React.forwardRef<
       ref={ref}
       id={formMessageId}
       role="alert"
-      className={cn(className)}
-      style={{
-        fontSize: 'var(--seal-style-caption-font-size)',
-        fontWeight: 'var(--seal-style-caption-font-weight)',
-        lineHeight: 'var(--seal-style-caption-line-height)',
-        color: 'var(--seal-semantic-error)',
-        ...style,
-      }}
+      className={cn(
+        'text-style-caption font-style-caption leading-[var(--seal-style-caption-line-height)] text-[var(--seal-semantic-error)]',
+        className,
+      )}
+      style={style}
       {...props}
     >
       {body}

@@ -100,13 +100,7 @@ function LoginForm() {
           />
           <SealFilledButton.Primary type="submit">Sign in</SealFilledButton.Primary>
           {submitted !== null && (
-            <p
-              style={{
-                fontSize: 'var(--seal-style-caption-font-size)',
-                color: 'var(--seal-text-secondary)',
-                textAlign: 'center',
-              }}
-            >
+            <p className="text-style-caption text-[var(--seal-text-secondary)] text-center">
               Signed in as {submitted}
             </p>
           )}
@@ -317,13 +311,7 @@ function TermsForm() {
           />
           <SealFilledButton.Primary type="submit">Register</SealFilledButton.Primary>
           {submitted && (
-            <p
-              style={{
-                fontSize: 'var(--seal-style-caption-font-size)',
-                color: 'var(--seal-text-secondary)',
-                textAlign: 'center',
-              }}
-            >
+            <p className="text-style-caption text-[var(--seal-text-secondary)] text-center">
               Registered successfully!
             </p>
           )}
