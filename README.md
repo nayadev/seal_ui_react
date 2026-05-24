@@ -128,7 +128,7 @@ function ThemePicker() {
 | `SealTabs`              | Layout      | ✅     |
 | `SealDialog`            | Overlay     | ✅     |
 | `SealSheet`             | Overlay     | ✅     |
-| `SealPopover`           | Overlay     | 🔜     |
+| `SealPopover`           | Overlay     | ✅     |
 | `SealContextMenu`       | Overlay     | 🔜     |
 
 ### Using Components — Compound Component API
