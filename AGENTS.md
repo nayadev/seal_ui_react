@@ -72,6 +72,7 @@ Use `useTheme()` hook for `{ theme, mode, setTheme, setMode }`. Never read `data
 | shadcn primitive                 | Seal wrapper(s)                                                                                                              |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `Button`                         | `SealFilledButton`, `SealOutlineButton`, `SealTextButton`, `SealIconButton`, `SealFilledIconButton`, `SealOutlineIconButton` |
+| `Badge`                          | `SealBadge`                                                                                                                  |
 | `Alert`                          | `SealAlert`                                                                                                                  |
 | None (custom CSS animation)      | `SealBouncingDots`                                                                                                           |
 | None (custom SVG animation)      | `SealLoader`                                                                                                                 |
