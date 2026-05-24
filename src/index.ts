@@ -32,6 +32,7 @@ export * from './components/interaction/SealTooltip/SealTooltip'
 export * from './components/layout/SealAccordion/SealAccordion'
 export * from './components/layout/SealAvatar/SealAvatar'
 export * from './components/layout/SealBadge/SealBadge'
+export * from './components/layout/SealBreadcrumb/SealBreadcrumb'
 
 // Feedback
 export * from './components/feedback/SealAlert'
