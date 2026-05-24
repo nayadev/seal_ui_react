@@ -60,14 +60,11 @@ function SealAlertImpl({ variant, title, description, className }: Readonly<Seal
         borderColor: `color-mix(in srgb, ${accentColor} 35%, transparent)`,
       }}
     >
-      <IconComponent
-        size={ICON_SIZE}
-        className="text-[var(--seal-semantic-inherit)]"
-        style={{ color: accentColor }}
-        aria-hidden
-      />
+      <IconComponent size={ICON_SIZE} style={{ color: accentColor }} aria-hidden />
       {title !== undefined && (
-        <AlertTitle className="text-[var(--seal-text-primary)] font-semibold">{title}</AlertTitle>
+        <AlertTitle className="text-[var(--seal-text-primary)] font-style-title">
+          {title}
+        </AlertTitle>
       )}
       <AlertDescription
         className={cn(
