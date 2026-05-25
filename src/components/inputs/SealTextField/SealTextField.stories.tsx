@@ -178,7 +178,7 @@ export const AllConfigurations: Story = {
     },
   },
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-md)] w-[320px]">
+    <div className="flex flex-col gap-dimension-md w-[320px]">
       <SealTextField placeholder="Plain input" />
       <SealTextField label="With label" placeholder={EMAIL_PLACEHOLDER} />
       <SealTextField label="Leading icon" placeholder={EMAIL_PLACEHOLDER} leadingIcon={Mail} />

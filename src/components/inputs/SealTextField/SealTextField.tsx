@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 import type { SealIcon } from '@/types/icon'
 
 const ICON_SIZE = 20
-const SECONDARY_COLOR = 'var(--seal-text-secondary)'
 // Padding that accommodates the icon width (20px) plus gaps on each side.
 const ICON_SLOT_PADDING = 'calc(var(--seal-dimension-sm) + 20px + var(--seal-dimension-xs))'
 
@@ -104,16 +103,11 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
     const VisibilityIcon = isObscured ? EyeOff : Eye
 
     return (
-      <div className="flex flex-col w-full" style={{ gap: 'var(--seal-dimension-xxs)' }}>
+      <div className="flex flex-col w-full gap-dimension-xxs">
         {label !== undefined && (
           <label
             htmlFor={inputId}
-            style={{
-              fontSize: 'var(--seal-style-small-font-size)',
-              fontWeight: 'var(--seal-style-small-font-weight)',
-              lineHeight: 'var(--seal-style-small-line-height)',
-              color: SECONDARY_COLOR,
-            }}
+            className="text-style-small font-style-small text-[var(--seal-text-secondary)]"
           >
             {label}
           </label>
@@ -121,9 +115,8 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
         <div className="relative w-full">
           {LeadingIcon !== undefined && (
             <span
-              className="absolute left-[var(--seal-dimension-sm)] top-1/2 -translate-y-1/2 pointer-events-none"
+              className="absolute left-dimension-sm top-1/2 -translate-y-1/2 pointer-events-none text-[var(--seal-text-secondary)]"
               aria-hidden="true"
-              style={{ color: SECONDARY_COLOR }}
             >
               <LeadingIcon size={ICON_SIZE} />
             </span>
@@ -135,7 +128,7 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
             disabled={disabled}
             onChange={handleChange}
             className={cn(
-              'rounded-[var(--seal-radius-sm)]',
+              'rounded-sm',
               'bg-[var(--seal-surface-surface-alt)]',
               'border-[var(--seal-border-default)]',
               'text-[var(--seal-text-primary)]',
@@ -161,17 +154,15 @@ export const SealTextField = React.forwardRef<HTMLInputElement, SealTextFieldPro
                 setIsObscured((v) => !v)
               }}
               aria-label={isObscured ? 'Show password' : 'Hide password'}
-              className="absolute right-[var(--seal-dimension-sm)] top-1/2 -translate-y-1/2 flex items-center bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--seal-brand-primary)] rounded-[var(--seal-radius-xs)]"
-              style={{ color: SECONDARY_COLOR }}
+              className="absolute right-dimension-sm top-1/2 -translate-y-1/2 flex items-center bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--seal-brand-primary)] rounded-xs text-[var(--seal-text-secondary)]"
             >
               <VisibilityIcon size={ICON_SIZE} aria-hidden="true" />
             </button>
           )}
           {!obscureText && TrailingIcon !== undefined && (
             <span
-              className="absolute right-[var(--seal-dimension-sm)] top-1/2 -translate-y-1/2 pointer-events-none"
+              className="absolute right-dimension-sm top-1/2 -translate-y-1/2 pointer-events-none text-[var(--seal-text-secondary)]"
               aria-hidden="true"
-              style={{ color: SECONDARY_COLOR }}
             >
               <TrailingIcon size={ICON_SIZE} />
             </span>
