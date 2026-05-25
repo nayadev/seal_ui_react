@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { SealContainer } from './SealContainer'
 
 const CONTENT = (
-  <p style={{ color: 'var(--seal-text-primary)', margin: 0 }}>
+  <p className="text-[var(--seal-text-primary)] m-0">
     This is a Seal UI container with token-driven surface styling.
   </p>
 )
@@ -118,7 +118,7 @@ export const AllVariants: Story = {
   name: 'All Variants',
   args: defaultArgs,
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-lg)' }}>
+    <div className="flex flex-col gap-dimension-lg">
       <SealContainer>{CONTENT}</SealContainer>
       <SealContainer gradient="var(--seal-gradient-surface)" showBorder={false}>
         {CONTENT}
