@@ -64,16 +64,11 @@ export const SealTextarea = React.forwardRef<HTMLTextAreaElement, SealTextareaPr
     }
 
     return (
-      <div className="flex flex-col w-full" style={{ gap: 'var(--seal-dimension-xxs)' }}>
+      <div className="flex flex-col w-full gap-dimension-xxs">
         {label !== undefined && (
           <label
             htmlFor={textareaId}
-            style={{
-              fontSize: 'var(--seal-style-small-font-size)',
-              fontWeight: 'var(--seal-style-small-font-weight)',
-              lineHeight: 'var(--seal-style-small-line-height)',
-              color: 'var(--seal-text-secondary)',
-            }}
+            className="text-style-small font-style-small text-[var(--seal-text-secondary)]"
           >
             {label}
           </label>
@@ -84,7 +79,7 @@ export const SealTextarea = React.forwardRef<HTMLTextAreaElement, SealTextareaPr
           disabled={disabled}
           onChange={handleChange}
           className={cn(
-            'rounded-[var(--seal-radius-sm)]',
+            'rounded-sm',
             'bg-[var(--seal-surface-surface-alt)]',
             'border-[var(--seal-border-default)]',
             'text-[var(--seal-text-primary)]',

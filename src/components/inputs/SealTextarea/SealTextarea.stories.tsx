@@ -117,7 +117,7 @@ export const AllConfigurations: Story = {
     },
   },
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-md)] w-[400px]">
+    <div className="flex flex-col gap-dimension-md w-[400px]">
       <SealTextarea placeholder="Plain textarea" />
       <SealTextarea label="With label" placeholder="Enter a description…" />
       <SealTextarea label="Taller" placeholder="Write your message…" rows={6} />
