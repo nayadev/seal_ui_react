@@ -2,12 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { SealSeparator } from './SealSeparator'
 
-const TOKEN_PAD_MD = 'var(--seal-dimension-md)'
-const TOKEN_PAD_SM = 'var(--seal-dimension-sm)'
-const TOKEN_PAD_XL = 'var(--seal-dimension-xl)'
-const TOKEN_TEXT_PRIMARY = 'var(--seal-text-primary)'
-const TOKEN_TEXT_SECONDARY = 'var(--seal-text-secondary)'
-
 const meta = {
   title: 'Layout/SealSeparator',
   component: SealSeparator.Horizontal,
@@ -24,10 +18,10 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
-    <div style={{ padding: TOKEN_PAD_MD }}>
-      <p style={{ color: TOKEN_TEXT_PRIMARY, margin: `0 0 ${TOKEN_PAD_SM}` }}>Section A</p>
+    <div className="p-dimension-md">
+      <p className="text-[var(--seal-text-primary)] mt-0 mb-dimension-sm">Section A</p>
       <SealSeparator />
-      <p style={{ color: TOKEN_TEXT_PRIMARY, margin: `${TOKEN_PAD_SM} 0 0` }}>Section B</p>
+      <p className="text-[var(--seal-text-primary)] mt-dimension-sm mb-0">Section B</p>
     </div>
   ),
   parameters: {
@@ -41,10 +35,10 @@ export const Default: Story = {
 
 export const Horizontal: Story = {
   render: () => (
-    <div style={{ padding: TOKEN_PAD_MD }}>
-      <p style={{ color: TOKEN_TEXT_PRIMARY, margin: `0 0 ${TOKEN_PAD_SM}` }}>Above</p>
+    <div className="p-dimension-md">
+      <p className="text-[var(--seal-text-primary)] mt-0 mb-dimension-sm">Above</p>
       <SealSeparator.Horizontal />
-      <p style={{ color: TOKEN_TEXT_PRIMARY, margin: `${TOKEN_PAD_SM} 0 0` }}>Below</p>
+      <p className="text-[var(--seal-text-primary)] mt-dimension-sm mb-0">Below</p>
     </div>
   ),
   parameters: {
@@ -58,18 +52,10 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: TOKEN_PAD_MD,
-        padding: TOKEN_PAD_MD,
-        height: '40px',
-      }}
-    >
-      <span style={{ color: TOKEN_TEXT_PRIMARY }}>Left</span>
+    <div className="flex items-center gap-dimension-md p-dimension-md" style={{ height: '40px' }}>
+      <span className="text-[var(--seal-text-primary)]">Left</span>
       <SealSeparator.Vertical className="h-full" />
-      <span style={{ color: TOKEN_TEXT_PRIMARY }}>Right</span>
+      <span className="text-[var(--seal-text-primary)]">Right</span>
     </div>
   ),
   parameters: {
@@ -88,22 +74,22 @@ export const Vertical: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: TOKEN_PAD_XL }}>
+    <div className="flex flex-col gap-dimension-xl">
       <div>
-        <p style={{ color: TOKEN_TEXT_SECONDARY, margin: `0 0 ${TOKEN_PAD_SM}`, fontSize: '12px' }}>
+        <p className="text-[var(--seal-text-secondary)] mt-0 mb-dimension-sm text-style-small">
           Horizontal
         </p>
         <SealSeparator.Horizontal />
       </div>
 
       <div>
-        <p style={{ color: TOKEN_TEXT_SECONDARY, margin: `0 0 ${TOKEN_PAD_SM}`, fontSize: '12px' }}>
+        <p className="text-[var(--seal-text-secondary)] mt-0 mb-dimension-sm text-style-small">
           Vertical (inside flex row)
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: TOKEN_PAD_MD, height: '32px' }}>
-          <span style={{ color: TOKEN_TEXT_PRIMARY }}>Left</span>
+        <div className="flex items-center gap-dimension-md h-dimension-xl">
+          <span className="text-[var(--seal-text-primary)]">Left</span>
           <SealSeparator.Vertical className="h-full" />
-          <span style={{ color: TOKEN_TEXT_PRIMARY }}>Right</span>
+          <span className="text-[var(--seal-text-primary)]">Right</span>
         </div>
       </div>
     </div>
