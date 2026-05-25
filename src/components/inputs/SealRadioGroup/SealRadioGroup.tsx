@@ -95,8 +95,8 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
         aria-labelledby={ariaLabelledby}
         className={cn(
           orientation === 'horizontal'
-            ? 'flex flex-row flex-wrap gap-[var(--seal-dimension-md)]'
-            : 'flex flex-col gap-[var(--seal-dimension-xs)]',
+            ? 'flex flex-row flex-wrap gap-dimension-md'
+            : 'flex flex-col gap-dimension-xs',
           className,
         )}
       >
@@ -105,15 +105,15 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
           const itemId = `radio-${item.value}`
 
           return (
-            <div key={item.value} className="flex items-start gap-[var(--seal-dimension-xs)]">
+            <div key={item.value} className="flex items-start gap-dimension-xs">
               <RadioGroupItem
                 id={itemId}
                 value={item.value}
                 disabled={isDisabled}
                 className={cn(
-                  'mt-[var(--seal-dimension-xxxs)]',
-                  'h-[var(--seal-dimension-md)] w-[var(--seal-dimension-md)]',
-                  'rounded-[var(--seal-radius-full)]',
+                  'mt-dimension-xxxs',
+                  'h-dimension-md w-dimension-md',
+                  'rounded-full',
                   'border-[var(--seal-border-default)]',
                   'text-[var(--seal-brand-primary)]',
                   'focus-visible:ring-[var(--seal-brand-primary)]',
@@ -123,7 +123,7 @@ export const SealRadioGroup = React.forwardRef<HTMLDivElement, SealRadioGroupPro
                 )}
               />
               {(item.label != null || item.sublabel != null) && (
-                <div className="flex flex-col gap-[var(--seal-dimension-xxxs)]">
+                <div className="flex flex-col gap-dimension-xxxs">
                   {item.label != null && (
                     <label
                       htmlFor={itemId}
