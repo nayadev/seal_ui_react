@@ -88,7 +88,7 @@ export const Interactive: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div className="flex flex-wrap gap-[var(--seal-dimension-xs)]">
+    <div className="flex flex-wrap gap-dimension-xs">
       <SealBadge.Primary>Primary</SealBadge.Primary>
       <SealBadge.Accent>Accent</SealBadge.Accent>
       <SealBadge.Secondary>Secondary</SealBadge.Secondary>

@@ -75,9 +75,9 @@ const VARIANT_STYLE: Record<SealBadgeVariant, React.CSSProperties> = {
 }
 
 const BASE_CLASS =
-  'inline-flex items-center border rounded-[var(--seal-radius-full)] ' +
-  'px-[var(--seal-dimension-xs)] py-[var(--seal-dimension-xxxs)] ' +
-  'text-xs font-semibold select-none'
+  'inline-flex items-center border rounded-full ' +
+  'px-dimension-xs py-dimension-xxxs ' +
+  'text-style-small font-style-small select-none'
 
 const INTERACTIVE_CLASS =
   'cursor-pointer transition-opacity hover:opacity-[0.85] active:opacity-[0.75]'
