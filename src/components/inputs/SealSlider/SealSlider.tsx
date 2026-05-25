@@ -135,7 +135,7 @@ export const SealSlider = React.forwardRef<
       })}
       className={cn(
         'relative flex w-full touch-none select-none items-center',
-        'h-[var(--seal-dimension-md)]',
+        'h-dimension-md',
         disabled && 'cursor-not-allowed',
         className,
       )}
@@ -143,7 +143,7 @@ export const SealSlider = React.forwardRef<
       <SliderPrimitive.Track
         className={cn(
           'relative grow overflow-hidden rounded-full',
-          'h-[var(--seal-dimension-xs)]',
+          'h-dimension-xs',
           'bg-[var(--seal-border-default)]',
         )}
       >
@@ -160,7 +160,7 @@ export const SealSlider = React.forwardRef<
         aria-valuetext={ariaValueText}
         className={cn(
           'block rounded-full',
-          'h-[var(--seal-dimension-md)] w-[var(--seal-dimension-md)]',
+          'h-dimension-md w-dimension-md',
           'border-2',
           'bg-[var(--seal-surface-background)]',
           'transition-colors',
