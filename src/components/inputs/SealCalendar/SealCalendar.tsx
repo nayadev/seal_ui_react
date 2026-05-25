@@ -35,7 +35,7 @@ function SealCalendarDayButton({
       data-range-middle={modifiers.range_middle}
       className={cn(
         'flex aspect-square h-auto w-full min-w-[var(--cell-size)] items-center justify-center',
-        'rounded-[var(--seal-radius-sm)] text-style-small font-normal',
+        'rounded-sm text-style-small font-style-caption',
         'text-[var(--seal-text-primary)]',
         'cursor-pointer transition-colors',
         'hover:bg-[var(--seal-surface-surface-alt)]',
@@ -126,7 +126,7 @@ export interface SealCalendarRangeProps extends SealCalendarSharedProps {
 
 const NAV_BUTTON_CLASSES = cn(
   'inline-flex h-[var(--cell-size)] w-[var(--cell-size)] items-center justify-center',
-  'rounded-[var(--seal-radius-sm)] select-none p-0',
+  'rounded-sm select-none p-0',
   'border border-[var(--seal-border-default)]',
   'text-[var(--seal-brand-primary)]',
   'opacity-50 hover:opacity-100 transition-opacity',
@@ -147,19 +147,17 @@ const SEAL_CALENDAR_CLASSNAMES = {
   weekdays: 'flex',
   weekday: cn(
     'text-[var(--seal-text-secondary)]',
-    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-style-caption font-normal',
+    'flex-1 min-w-[var(--cell-size)] select-none rounded-md text-style-caption font-style-caption',
   ),
   week: 'mt-dimension-xs flex w-full',
   day: cn(
     'group/day relative aspect-square h-full w-full min-w-[var(--cell-size)] select-none p-0 text-center',
-    '[&:first-child[data-selected=true]_button]:rounded-l-[var(--seal-radius-sm)]',
-    '[&:last-child[data-selected=true]_button]:rounded-r-[var(--seal-radius-sm)]',
+    '[&:first-child[data-selected=true]_button]:rounded-l-sm',
+    '[&:last-child[data-selected=true]_button]:rounded-r-sm',
   ),
-  range_start:
-    'bg-[color-mix(in_srgb,var(--seal-brand-primary)_15%,transparent)] rounded-l-[var(--seal-radius-sm)]',
+  range_start: 'bg-[color-mix(in_srgb,var(--seal-brand-primary)_15%,transparent)] rounded-l-sm',
   range_middle: 'bg-[color-mix(in_srgb,var(--seal-brand-primary)_15%,transparent)] rounded-none',
-  range_end:
-    'bg-[color-mix(in_srgb,var(--seal-brand-primary)_15%,transparent)] rounded-r-[var(--seal-radius-sm)]',
+  range_end: 'bg-[color-mix(in_srgb,var(--seal-brand-primary)_15%,transparent)] rounded-r-sm',
   outside: 'text-[var(--seal-text-secondary)]',
   disabled: 'opacity-[var(--seal-state-disabled-opacity)]',
   hidden: 'invisible',
@@ -168,9 +166,9 @@ const SEAL_CALENDAR_CLASSNAMES = {
 function buildCalendarClassName(className?: string) {
   return cn(
     'border border-[var(--seal-border-default)]',
-    'rounded-[var(--seal-radius-md)]',
+    'rounded-md',
     'bg-[var(--seal-surface-surface)]',
-    'p-[var(--seal-dimension-sm)]',
+    'p-dimension-sm',
     '[--cell-size:2.25rem]',
     className,
   )
