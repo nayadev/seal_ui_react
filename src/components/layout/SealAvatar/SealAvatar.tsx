@@ -47,7 +47,7 @@ function SealAvatarImpl({
     <Avatar style={{ width: px, height: px }} className={cn('shrink-0', className)}>
       {src && <AvatarImage src={src} alt={alt} />}
       <AvatarFallback
-        className="bg-[var(--seal-surface-surface-alt)] text-[var(--seal-text-primary)] font-medium"
+        className="bg-[var(--seal-surface-surface-alt)] text-[var(--seal-text-primary)] font-style-small"
         style={{ fontSize: fallbackFontSize }}
       >
         {fallback}

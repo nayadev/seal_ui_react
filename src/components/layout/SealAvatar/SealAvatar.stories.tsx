@@ -51,16 +51,16 @@ export const Large: Story = {
 export const AllVariants: Story = {
   name: 'All Sizes',
   render: () => (
-    <div className="flex items-center gap-[var(--seal-dimension-xl)]">
-      <div className="flex flex-col items-center gap-[var(--seal-dimension-xs)]">
+    <div className="flex items-center gap-dimension-xl">
+      <div className="flex flex-col items-center gap-dimension-xs">
         <SealAvatar.Small fallback="S" />
         <span className="text-[var(--seal-text-secondary)] font-style-small">Small · 28 px</span>
       </div>
-      <div className="flex flex-col items-center gap-[var(--seal-dimension-xs)]">
+      <div className="flex flex-col items-center gap-dimension-xs">
         <SealAvatar fallback="M" />
         <span className="text-[var(--seal-text-secondary)] font-style-small">Default · 40 px</span>
       </div>
-      <div className="flex flex-col items-center gap-[var(--seal-dimension-xs)]">
+      <div className="flex flex-col items-center gap-dimension-xs">
         <SealAvatar.Large fallback="L" />
         <span className="text-[var(--seal-text-secondary)] font-style-small">Large · 56 px</span>
       </div>
