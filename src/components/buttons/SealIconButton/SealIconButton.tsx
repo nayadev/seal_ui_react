@@ -143,13 +143,13 @@ function SealIconButtonImpl({
   return (
     <Button
       variant="ghost"
+      size="icon"
       disabled={(disabled ?? false) || loading}
       aria-busy={loading || undefined}
       title={finalTitle}
       aria-label={finalTitle}
       className={cn(
-        // Icon buttons are sized tightly around their content
-        'h-auto w-auto p-dimension-sm rounded-sm',
+        'rounded-sm',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         variantClass,
         className,
