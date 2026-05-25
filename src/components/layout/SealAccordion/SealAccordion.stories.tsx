@@ -106,15 +106,15 @@ export const AllVariants: Story = {
   name: 'All Variants',
   args: { items: faqItems },
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-xxl)]">
+    <div className="flex flex-col gap-dimension-xxl">
       <div>
-        <p className="text-[var(--seal-text-secondary)] font-style-small mb-[var(--seal-dimension-md)]">
+        <p className="text-[var(--seal-text-secondary)] font-style-small mb-dimension-md">
           Single (default)
         </p>
         <SealAccordion items={faqItems} />
       </div>
       <div>
-        <p className="text-[var(--seal-text-secondary)] font-style-small mb-[var(--seal-dimension-md)]">
+        <p className="text-[var(--seal-text-secondary)] font-style-small mb-dimension-md">
           Multiple
         </p>
         <SealAccordion.Multiple items={designItems} defaultValue={['typography']} />

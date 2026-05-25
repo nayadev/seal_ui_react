@@ -73,8 +73,8 @@ function buildItems(items: SealAccordionItemData[]) {
     >
       <AccordionTrigger
         className={cn(
-          'flex flex-1 items-center justify-between gap-[var(--seal-dimension-sm)]',
-          'py-[var(--seal-dimension-md)] text-left',
+          'flex flex-1 items-center justify-between gap-dimension-sm',
+          'py-dimension-md text-left',
           'font-style-small text-[var(--seal-text-primary)]',
           'hover:underline',
           '[&[data-state=open]>svg]:rotate-180',
@@ -86,10 +86,7 @@ function buildItems(items: SealAccordionItemData[]) {
         {item.title}
       </AccordionTrigger>
       <AccordionContent
-        className={cn(
-          'text-[var(--seal-text-secondary)] font-style-small',
-          'pb-[var(--seal-dimension-md)] pt-0',
-        )}
+        className={cn('text-[var(--seal-text-secondary)] font-style-small', 'pb-dimension-md pt-0')}
       >
         {item.content}
       </AccordionContent>
