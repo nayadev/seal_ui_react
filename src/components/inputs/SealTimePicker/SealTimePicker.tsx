@@ -138,8 +138,8 @@ function buildVisibleFields(
 }
 
 const FIELD_CLASSES = cn(
-  'w-[var(--seal-dimension-xxl)] h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
-  'rounded-[var(--seal-radius-md)]',
+  'w-dimension-xxl h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
+  'rounded-md',
   'border border-[var(--seal-border-default)]',
   'bg-[var(--seal-surface-surface)]',
   'text-center text-style-small font-style-small',
@@ -179,8 +179,10 @@ function TimeField({ label, value, min, max, disabled, onChange }: Readonly<Time
   }
 
   return (
-    <div className="flex flex-col items-center gap-[var(--seal-dimension-xxs)]">
-      <span className="select-none text-xs text-[var(--seal-text-secondary)]">{label}</span>
+    <div className="flex flex-col items-center gap-dimension-xxs">
+      <span className="select-none text-style-small text-[var(--seal-text-secondary)]">
+        {label}
+      </span>
       <input
         type="number"
         inputMode="numeric"
@@ -201,7 +203,7 @@ function ColonSeparator() {
   return (
     <span
       aria-hidden="true"
-      className="mb-[calc(var(--seal-dimension-md)+var(--seal-dimension-xs)/2-0.5em)] select-none text-style-small font-semibold leading-none text-[var(--seal-text-secondary)]"
+      className="mb-[calc(var(--seal-dimension-md)+var(--seal-dimension-xs)/2-0.5em)] select-none text-style-small font-style-small leading-none text-[var(--seal-text-secondary)]"
     >
       :
     </span>
@@ -225,7 +227,7 @@ function PeriodSelect({ value, disabled, onChange }: Readonly<PeriodSelectProps>
         onChange(v as SealDayPeriod)
       }}
       disabled={disabled === true}
-      className="rounded-[var(--seal-radius-md)]"
+      className="rounded-md"
     />
   )
 }
@@ -248,7 +250,7 @@ function SealTimePickerImpl({
       data-slot="time-picker"
       data-disabled={disabled ?? undefined}
       className={cn(
-        'inline-flex items-end gap-[var(--seal-dimension-xxs)]',
+        'inline-flex items-end gap-dimension-xxs',
         disabled === true && 'pointer-events-none opacity-[var(--seal-state-disabled-opacity)]',
         className,
       )}
@@ -303,12 +305,12 @@ function SealTimePickerPeriodImpl({
       data-slot="time-picker"
       data-disabled={disabled ?? undefined}
       className={cn(
-        'inline-flex items-end gap-[var(--seal-dimension-xs)]',
+        'inline-flex items-end gap-dimension-xs',
         disabled === true && 'pointer-events-none opacity-[var(--seal-state-disabled-opacity)]',
         className,
       )}
     >
-      <div className="inline-flex items-end gap-[var(--seal-dimension-xxs)]">
+      <div className="inline-flex items-end gap-dimension-xxs">
         {visibleFields.map((field, index) => (
           <React.Fragment key={field.key}>
             {index > 0 && <ColonSeparator />}
