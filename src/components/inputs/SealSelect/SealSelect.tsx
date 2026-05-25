@@ -10,7 +10,6 @@ import {
 import { cn } from '@/lib/utils'
 
 const TEXT_PRIMARY = 'text-[var(--seal-text-primary)]'
-const ROUNDED_SM = 'rounded-[var(--seal-radius-sm)]'
 const BORDER_DEFAULT = 'border-[var(--seal-border-default)]'
 
 /**
@@ -94,7 +93,7 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
   const triggerId = generatedId
 
   return (
-    <div className="flex flex-col gap-[var(--seal-dimension-xs)]">
+    <div className="flex flex-col gap-dimension-xs">
       {label != null && (
         <label
           htmlFor={triggerId}
@@ -119,10 +118,10 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
           aria-label={ariaLabel}
           className={cn(
             'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
-            ROUNDED_SM,
+            'rounded-sm',
             BORDER_DEFAULT,
             'bg-[var(--seal-surface-surface)]',
-            'px-[var(--seal-dimension-sm)]',
+            'px-dimension-sm',
             'text-[length:var(--seal-constant-small-font-size)]',
             TEXT_PRIMARY,
             'ring-offset-transparent',
@@ -141,7 +140,7 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
         </SelectTrigger>
         <SelectContent
           className={cn(
-            ROUNDED_SM,
+            'rounded-sm',
             BORDER_DEFAULT,
             'bg-[var(--seal-surface-surface)]',
             TEXT_PRIMARY,
@@ -155,7 +154,7 @@ export const SealSelect = React.forwardRef<HTMLButtonElement, SealSelectProps>(f
               className={cn(
                 'text-[length:var(--seal-constant-small-font-size)]',
                 TEXT_PRIMARY,
-                'rounded-[var(--seal-radius-xs)]',
+                'rounded-xs',
                 'focus:bg-[var(--seal-surface-surface-alt)]',
                 'focus:text-[var(--seal-text-primary)]',
               )}
