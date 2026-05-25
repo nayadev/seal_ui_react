@@ -119,7 +119,7 @@ export const AllVariants: Story = {
     },
   },
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-md)]">
+    <div className="flex flex-col gap-dimension-md">
       <SealCheckbox label="Unchecked" />
       <SealCheckbox label="Checked" checked />
       <SealCheckbox label="With sublabel" sublabel="Additional description" />

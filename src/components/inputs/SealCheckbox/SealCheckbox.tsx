@@ -68,7 +68,7 @@ export const SealCheckbox = React.forwardRef<
   const hasSublabel = sublabel != null
 
   return (
-    <div className="flex items-start gap-[var(--seal-dimension-xs)]">
+    <div className="flex items-start gap-dimension-xs">
       <Checkbox
         ref={ref}
         id={checkboxId}
@@ -76,8 +76,8 @@ export const SealCheckbox = React.forwardRef<
         onCheckedChange={handleCheckedChange}
         disabled={disabled}
         className={cn(
-          'mt-[var(--seal-dimension-xxxs)]',
-          'rounded-[var(--seal-radius-xs)]',
+          'mt-dimension-xxxs',
+          'rounded-xs',
           'border-[var(--seal-border-default)]',
           'data-[state=checked]:bg-[var(--seal-brand-primary)]',
           'data-[state=checked]:border-[var(--seal-brand-primary)]',
@@ -90,33 +90,21 @@ export const SealCheckbox = React.forwardRef<
         {...restProps}
       />
       {(hasLabel || hasSublabel) && (
-        <div className="flex flex-col gap-[var(--seal-dimension-xxxs)]">
+        <div className="flex flex-col gap-dimension-xxxs">
           {hasLabel && (
             <label
               htmlFor={checkboxId}
               className={cn(
-                'cursor-pointer select-none leading-none',
+                'cursor-pointer select-none leading-none text-style-small font-style-small text-[var(--seal-text-primary)]',
                 disabled === true &&
                   'cursor-not-allowed opacity-[var(--seal-state-disabled-opacity)]',
               )}
-              style={{
-                fontSize: 'var(--seal-style-small-font-size)',
-                fontWeight: 'var(--seal-style-small-font-weight)',
-                color: 'var(--seal-text-primary)',
-              }}
             >
               {label}
             </label>
           )}
           {hasSublabel && (
-            <p
-              style={{
-                fontSize: 'var(--seal-style-caption-font-size)',
-                fontWeight: 'var(--seal-style-caption-font-weight)',
-                lineHeight: 'var(--seal-style-caption-line-height)',
-                color: 'var(--seal-text-secondary)',
-              }}
-            >
+            <p className="text-style-caption font-style-caption text-[var(--seal-text-secondary)]">
               {sublabel}
             </p>
           )}
