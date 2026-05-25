@@ -33,10 +33,10 @@ function List({ className, ...props }: Readonly<SealTabsListProps>) {
     <TabsList
       className={cn(
         'inline-flex items-center justify-start',
-        'rounded-[var(--seal-radius-md)]',
+        'rounded-md',
         'bg-[var(--seal-surface-surface-alt)]',
-        'p-[var(--seal-dimension-xxs)]',
-        'gap-[var(--seal-dimension-xxs)]',
+        'p-dimension-xxs',
+        'gap-dimension-xxs',
         className,
       )}
       {...props}
@@ -61,9 +61,9 @@ function Trigger({ className, ...props }: Readonly<SealTabsTriggerProps>) {
     <TabsTrigger
       className={cn(
         'inline-flex items-center justify-center whitespace-nowrap',
-        'rounded-[var(--seal-radius-sm)]',
-        'px-[var(--seal-dimension-md)] py-[var(--seal-dimension-xs)]',
-        'text-sm font-medium',
+        'rounded-sm',
+        'px-dimension-md py-dimension-xs',
+        'text-style-small font-style-small',
         'text-[var(--seal-text-secondary)]',
         'transition-all',
         'focus-visible:outline-none focus-visible:ring-2',
@@ -97,7 +97,7 @@ function Content({ className, ...props }: Readonly<SealTabsContentProps>) {
   return (
     <TabsContent
       className={cn(
-        'mt-[var(--seal-dimension-md)]',
+        'mt-dimension-md',
         'text-[var(--seal-text-primary)]',
         'focus-visible:outline-none focus-visible:ring-2',
         'focus-visible:ring-[var(--seal-brand-primary)]',

@@ -2,13 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { SealTabs } from './SealTabs'
 
-const TOKEN_PAD_MD = 'var(--seal-dimension-md)'
-const TOKEN_PAD_XL = 'var(--seal-dimension-xl)'
-const TOKEN_TEXT_PRIMARY = 'var(--seal-text-primary)'
-const TOKEN_TEXT_SECONDARY = 'var(--seal-text-secondary)'
-const TOKEN_SURFACE_ALT = 'var(--seal-surface-surface-alt)'
-const TOKEN_RADIUS_SM = 'var(--seal-radius-sm)'
-
 const meta = {
   title: 'Layout/SealTabs',
   component: SealTabs,
@@ -36,38 +29,17 @@ export const Default: Story = {
         <SealTabs.Trigger value="notifications">Notifications</SealTabs.Trigger>
       </SealTabs.List>
       <SealTabs.Content value="account">
-        <div
-          style={{
-            padding: TOKEN_PAD_MD,
-            background: TOKEN_SURFACE_ALT,
-            borderRadius: TOKEN_RADIUS_SM,
-            color: TOKEN_TEXT_PRIMARY,
-          }}
-        >
+        <div className="p-dimension-md bg-[var(--seal-surface-surface-alt)] rounded-sm text-[var(--seal-text-primary)]">
           Account settings content
         </div>
       </SealTabs.Content>
       <SealTabs.Content value="security">
-        <div
-          style={{
-            padding: TOKEN_PAD_MD,
-            background: TOKEN_SURFACE_ALT,
-            borderRadius: TOKEN_RADIUS_SM,
-            color: TOKEN_TEXT_PRIMARY,
-          }}
-        >
+        <div className="p-dimension-md bg-[var(--seal-surface-surface-alt)] rounded-sm text-[var(--seal-text-primary)]">
           Security settings content
         </div>
       </SealTabs.Content>
       <SealTabs.Content value="notifications">
-        <div
-          style={{
-            padding: TOKEN_PAD_MD,
-            background: TOKEN_SURFACE_ALT,
-            borderRadius: TOKEN_RADIUS_SM,
-            color: TOKEN_TEXT_PRIMARY,
-          }}
-        >
+        <div className="p-dimension-md bg-[var(--seal-surface-surface-alt)] rounded-sm text-[var(--seal-text-primary)]">
           Notification preferences content
         </div>
       </SealTabs.Content>
@@ -102,13 +74,13 @@ export const WithDisabledTab: Story = {
         <SealTabs.Trigger value="another">Another</SealTabs.Trigger>
       </SealTabs.List>
       <SealTabs.Content value="active">
-        <p style={{ color: TOKEN_TEXT_PRIMARY }}>This tab is active and reachable.</p>
+        <p className="text-[var(--seal-text-primary)]">This tab is active and reachable.</p>
       </SealTabs.Content>
       <SealTabs.Content value="disabled">
-        <p style={{ color: TOKEN_TEXT_PRIMARY }}>Disabled tab content (unreachable).</p>
+        <p className="text-[var(--seal-text-primary)]">Disabled tab content (unreachable).</p>
       </SealTabs.Content>
       <SealTabs.Content value="another">
-        <p style={{ color: TOKEN_TEXT_PRIMARY }}>Another tab content.</p>
+        <p className="text-[var(--seal-text-primary)]">Another tab content.</p>
       </SealTabs.Content>
     </SealTabs>
   ),
@@ -141,7 +113,7 @@ export const ManyTabs: Story = {
       </SealTabs.List>
       {['tab1', 'tab2', 'tab3', 'tab4', 'tab5'].map((tab, i) => (
         <SealTabs.Content key={tab} value={tab}>
-          <p style={{ color: TOKEN_TEXT_PRIMARY }}>Content for Tab {i + 1}</p>
+          <p className="text-[var(--seal-text-primary)]">Content for Tab {i + 1}</p>
         </SealTabs.Content>
       ))}
     </SealTabs>
@@ -167,15 +139,9 @@ export const ManyTabs: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: TOKEN_PAD_XL }}>
+    <div className="flex flex-col gap-dimension-xl">
       <div>
-        <p
-          style={{
-            color: TOKEN_TEXT_SECONDARY,
-            marginBottom: TOKEN_PAD_MD,
-            fontSize: '12px',
-          }}
-        >
+        <p className="text-[var(--seal-text-secondary)] mb-dimension-md text-style-small">
           Default — uncontrolled with defaultValue
         </p>
         <SealTabs defaultValue="a">
@@ -185,25 +151,19 @@ export const AllVariants: Story = {
             <SealTabs.Trigger value="c">History</SealTabs.Trigger>
           </SealTabs.List>
           <SealTabs.Content value="a">
-            <p style={{ color: TOKEN_TEXT_PRIMARY }}>Overview content</p>
+            <p className="text-[var(--seal-text-primary)]">Overview content</p>
           </SealTabs.Content>
           <SealTabs.Content value="b">
-            <p style={{ color: TOKEN_TEXT_PRIMARY }}>Details content</p>
+            <p className="text-[var(--seal-text-primary)]">Details content</p>
           </SealTabs.Content>
           <SealTabs.Content value="c">
-            <p style={{ color: TOKEN_TEXT_PRIMARY }}>History content</p>
+            <p className="text-[var(--seal-text-primary)]">History content</p>
           </SealTabs.Content>
         </SealTabs>
       </div>
 
       <div>
-        <p
-          style={{
-            color: TOKEN_TEXT_SECONDARY,
-            marginBottom: TOKEN_PAD_MD,
-            fontSize: '12px',
-          }}
-        >
+        <p className="text-[var(--seal-text-secondary)] mb-dimension-md text-style-small">
           With a disabled tab
         </p>
         <SealTabs defaultValue="x">
@@ -215,10 +175,10 @@ export const AllVariants: Story = {
             <SealTabs.Trigger value="z">Also Enabled</SealTabs.Trigger>
           </SealTabs.List>
           <SealTabs.Content value="x">
-            <p style={{ color: TOKEN_TEXT_PRIMARY }}>Enabled tab content</p>
+            <p className="text-[var(--seal-text-primary)]">Enabled tab content</p>
           </SealTabs.Content>
           <SealTabs.Content value="z">
-            <p style={{ color: TOKEN_TEXT_PRIMARY }}>Also enabled tab content</p>
+            <p className="text-[var(--seal-text-primary)]">Also enabled tab content</p>
           </SealTabs.Content>
         </SealTabs>
       </div>
