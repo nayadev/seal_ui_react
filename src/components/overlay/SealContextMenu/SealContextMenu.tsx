@@ -293,8 +293,8 @@ function SubContent({ className, ...props }: Readonly<SealContextMenuSubContentP
     <ContextMenuSubContent
       className={cn(
         'z-50 min-w-[8rem] overflow-hidden',
-        'rounded-[var(--seal-radius-md)] border border-[var(--seal-border-default)]',
-        'bg-[var(--seal-surface-surface)] p-[var(--seal-dimension-xxs)]',
+        'rounded-md border border-[var(--seal-border-default)]',
+        'bg-[var(--seal-surface-surface)] p-dimension-xxs',
         'text-[var(--seal-text-primary)] shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
