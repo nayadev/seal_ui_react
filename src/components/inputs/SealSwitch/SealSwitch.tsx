@@ -78,7 +78,7 @@ export const SealSwitch = React.forwardRef<
   const hasSublabel = sublabel != null
 
   return (
-    <div className="flex items-start gap-[var(--seal-dimension-xs)]">
+    <div className="flex items-start gap-dimension-xs">
       <SwitchPrimitive.Root
         ref={ref}
         id={switchId}
@@ -113,7 +113,7 @@ export const SealSwitch = React.forwardRef<
       </SwitchPrimitive.Root>
 
       {(hasLabel || hasSublabel) && (
-        <div className="flex flex-col gap-[var(--seal-dimension-xxxs)]">
+        <div className="flex flex-col gap-dimension-xxxs">
           {hasLabel && (
             <label
               htmlFor={switchId}
