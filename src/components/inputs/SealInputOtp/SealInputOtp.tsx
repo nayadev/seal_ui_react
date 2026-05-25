@@ -78,7 +78,7 @@ function SealInputOTPImpl({
       {...(onChange !== undefined && { onChange })}
       {...(disabled === true && { disabled: true })}
       {...(pattern !== undefined && { pattern })}
-      containerClassName={cn('flex items-center gap-[var(--seal-dimension-xs)]', className)}
+      containerClassName={cn('flex items-center gap-dimension-xs', className)}
     >
       {children}
     </InputOTP>
@@ -100,8 +100,8 @@ function Slot({ index, className }: Readonly<SealInputOTPSlotProps>) {
         'bg-[var(--seal-surface-surface)]',
         'text-style-small font-style-small text-[var(--seal-text-primary)]',
         'transition-all',
-        'first:rounded-l-[var(--seal-radius-md)] first:border-l',
-        'last:rounded-r-[var(--seal-radius-md)]',
+        'first:rounded-l-md first:border-l',
+        'last:rounded-r-md',
         // Override shadcn's ring-ring with the brand primary color when active.
         'ring-[var(--seal-brand-primary)]',
         className,
