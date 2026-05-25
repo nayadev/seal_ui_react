@@ -118,7 +118,7 @@ function SealFilledIconButtonImpl({
       title={finalTitle}
       aria-label={finalTitle}
       className={cn(
-        'rounded-md',
+        'rounded-sm',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         getVariantClass(variant),
         className,

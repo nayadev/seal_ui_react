@@ -166,7 +166,7 @@ function SealOutlineIconButtonImpl({
       title={finalTitle}
       aria-label={finalTitle}
       className={cn(
-        'rounded-md',
+        'rounded-sm',
         'disabled:opacity-[var(--seal-state-disabled-opacity)]',
         variantClass,
         className,
