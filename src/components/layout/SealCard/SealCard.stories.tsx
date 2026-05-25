@@ -5,14 +5,14 @@ import { SealTextButton } from '../../buttons/SealTextButton/SealTextButton'
 
 import { SealCard } from './SealCard'
 
-const HEADER = <p style={{ fontWeight: 600, fontSize: '1.25rem', margin: 0 }}>Card Title</p>
+const HEADER = <p className="text-style-subtitle font-style-subtitle m-0">Card Title</p>
 const BODY = (
-  <p style={{ color: 'var(--seal-text-secondary)', margin: 0 }}>
+  <p className="text-[var(--seal-text-secondary)] m-0">
     This is the card body with some descriptive content.
   </p>
 )
 const FOOTER = (
-  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--seal-dimension-xs)' }}>
+  <div className="flex justify-end gap-dimension-xs">
     <SealTextButton.Primary onClick={() => undefined}>Cancel</SealTextButton.Primary>
     <SealFilledButton.Primary onClick={() => undefined}>Confirm</SealFilledButton.Primary>
   </div>
@@ -133,13 +133,7 @@ export const BodyOnly: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: 'var(--seal-dimension-lg)',
-      }}
-    >
+    <div className="grid grid-cols-2 gap-dimension-lg">
       <SealCard.Default header={HEADER} body={BODY} footer={FOOTER} />
       <SealCard.Gradient header={HEADER} body={BODY} />
       <SealCard.Default body={BODY} onClick={() => undefined} />

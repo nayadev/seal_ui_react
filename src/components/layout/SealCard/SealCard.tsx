@@ -96,7 +96,7 @@ function SealCardImpl({
           : undefined
       }
       className={cn(
-        'rounded-[var(--seal-radius-lg)] text-[var(--seal-text-primary)]',
+        'rounded-lg text-[var(--seal-text-primary)]',
         shadowClass,
         onClick &&
           'cursor-pointer transition-opacity hover:opacity-90 active:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--seal-brand-primary)] focus-visible:ring-offset-2',
@@ -104,11 +104,11 @@ function SealCardImpl({
       )}
       style={style}
     >
-      <div className="p-[var(--seal-dimension-lg)]">
+      <div className="p-dimension-lg">
         {hasHeader && <div>{header}</div>}
-        {hasDivider && <SealSeparator className="my-[var(--seal-dimension-sm)]" />}
+        {hasDivider && <SealSeparator className="my-dimension-sm" />}
         {hasBody && <div>{body}</div>}
-        {footer !== undefined && <div className="mt-[var(--seal-dimension-md)]">{footer}</div>}
+        {footer !== undefined && <div className="mt-dimension-md">{footer}</div>}
       </div>
     </Card>
   )
