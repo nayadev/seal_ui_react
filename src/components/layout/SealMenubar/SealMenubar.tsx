@@ -22,9 +22,9 @@ import { cn } from '@/lib/utils'
 
 // Shared class fragments reused across dropdown item sub-components.
 const ITEM_BASE = 'relative flex cursor-pointer select-none items-center'
-const ITEM_RADIUS = 'rounded-[var(--seal-radius-sm)]'
-const ITEM_PADDING = 'px-[var(--seal-dimension-sm)] py-[var(--seal-dimension-xxs)]'
-const ITEM_TEXT = 'text-sm text-[var(--seal-text-primary)] outline-none'
+const ITEM_RADIUS = 'rounded-sm'
+const ITEM_PADDING = 'px-dimension-sm py-dimension-xxs'
+const ITEM_TEXT = 'text-style-small text-[var(--seal-text-primary)] outline-none'
 const ITEM_FOCUS = 'focus:bg-[var(--seal-surface-surface-alt)]'
 const ITEM_DISABLED = 'data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
 
@@ -39,9 +39,9 @@ function SealMenubarImpl({ className, ...props }: Readonly<SealMenubarProps>) {
   return (
     <Menubar
       className={cn(
-        'h-auto items-center gap-0 space-x-0 rounded-[var(--seal-radius-md)]',
+        'h-auto items-center gap-0 space-x-0 rounded-md',
         'border border-[var(--seal-border-default)] bg-[var(--seal-surface-surface)]',
-        'p-[var(--seal-dimension-xxs)]',
+        'p-dimension-xxs',
         className,
       )}
       {...props}
@@ -77,7 +77,7 @@ function Trigger({ className, ...props }: Readonly<SealMenubarTriggerProps>) {
       className={cn(
         `cursor-pointer select-none ${ITEM_RADIUS}`,
         ITEM_PADDING,
-        'text-sm font-medium text-[var(--seal-text-primary)]',
+        'text-style-small font-style-small text-[var(--seal-text-primary)]',
         'outline-none',
         `hover:bg-[var(--seal-surface-surface-alt)] ${ITEM_FOCUS}`,
         'data-[state=open]:bg-[var(--seal-surface-surface-alt)]',
@@ -111,8 +111,8 @@ function Content({
       sideOffset={sideOffset}
       className={cn(
         'z-50 min-w-[12rem] overflow-hidden',
-        'rounded-[var(--seal-radius-md)] border border-[var(--seal-border-default)]',
-        'bg-[var(--seal-surface-surface)] p-[var(--seal-dimension-xxs)]',
+        'rounded-md border border-[var(--seal-border-default)]',
+        'bg-[var(--seal-surface-surface)] p-dimension-xxs',
         'text-[var(--seal-text-primary)] shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:fade-out-0',
         'data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95',
@@ -173,10 +173,7 @@ export type SealMenubarSeparatorProps = React.ComponentPropsWithoutRef<typeof Me
 function Separator({ className, ...props }: Readonly<SealMenubarSeparatorProps>) {
   return (
     <MenubarSeparator
-      className={cn(
-        '-mx-1 my-[var(--seal-dimension-xxs)] h-px bg-[var(--seal-border-default)]',
-        className,
-      )}
+      className={cn('-mx-1 my-dimension-xxs h-px bg-[var(--seal-border-default)]', className)}
       {...props}
     />
   )
@@ -200,7 +197,7 @@ function Label({ className, inset, ...props }: Readonly<SealMenubarLabelProps>) 
       {...(inset === undefined ? {} : { inset })}
       className={cn(
         ITEM_PADDING,
-        'text-xs font-semibold text-[var(--seal-text-secondary)]',
+        'text-style-small font-style-small text-[var(--seal-text-secondary)]',
         inset === true && 'pl-8',
         className,
       )}
@@ -225,7 +222,7 @@ function CheckboxItem({ className, children, ...props }: Readonly<SealMenubarChe
     <MenubarCheckboxItem
       className={cn(
         `${ITEM_BASE} ${ITEM_RADIUS}`,
-        `py-[var(--seal-dimension-xxs)] pl-8 pr-[var(--seal-dimension-sm)]`,
+        `py-dimension-xxs pl-8 pr-dimension-sm`,
         ITEM_TEXT,
         ITEM_FOCUS,
         ITEM_DISABLED,
@@ -265,7 +262,7 @@ function RadioItem({ className, children, ...props }: Readonly<SealMenubarRadioI
     <MenubarRadioItem
       className={cn(
         `${ITEM_BASE} ${ITEM_RADIUS}`,
-        `py-[var(--seal-dimension-xxs)] pl-8 pr-[var(--seal-dimension-sm)]`,
+        `py-dimension-xxs pl-8 pr-dimension-sm`,
         ITEM_TEXT,
         ITEM_FOCUS,
         ITEM_DISABLED,
@@ -344,8 +341,8 @@ function SubContent({ className, ...props }: Readonly<SealMenubarSubContentProps
     <MenubarSubContent
       className={cn(
         'z-50 min-w-[8rem] overflow-hidden',
-        'rounded-[var(--seal-radius-md)] border border-[var(--seal-border-default)]',
-        'bg-[var(--seal-surface-surface)] p-[var(--seal-dimension-xxs)]',
+        'rounded-md border border-[var(--seal-border-default)]',
+        'bg-[var(--seal-surface-surface)] p-dimension-xxs',
         'text-[var(--seal-text-primary)] shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
@@ -372,7 +369,10 @@ export type SealMenubarShortcutProps = React.HTMLAttributes<HTMLSpanElement>
 function Shortcut({ className, ...props }: Readonly<SealMenubarShortcutProps>) {
   return (
     <MenubarShortcut
-      className={cn('ml-auto text-xs tracking-widest text-[var(--seal-text-secondary)]', className)}
+      className={cn(
+        'ml-auto text-style-small tracking-widest text-[var(--seal-text-secondary)]',
+        className,
+      )}
       {...props}
     />
   )
