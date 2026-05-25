@@ -7,17 +7,11 @@ import { SealFilledButton } from '@/components/buttons/SealFilledButton/SealFill
 import { SealOutlineButton } from '@/components/buttons/SealOutlineButton/SealOutlineButton'
 
 // ---------------------------------------------------------------------------
-// Shared style constant for trigger buttons (native element — asChild-safe)
+// Shared class for trigger buttons (native element — asChild-safe)
 // ---------------------------------------------------------------------------
 
-const triggerStyle: React.CSSProperties = {
-  padding: '8px 20px',
-  border: '1px solid var(--seal-border-default)',
-  borderRadius: 'var(--seal-radius-sm)',
-  background: 'var(--seal-surface-surface)',
-  color: 'var(--seal-text-primary)',
-  cursor: 'pointer',
-}
+const TRIGGER_CLASS =
+  'py-dimension-xs px-dimension-md border border-[var(--seal-border-default)] rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] cursor-pointer'
 
 // ---------------------------------------------------------------------------
 // Meta
@@ -40,7 +34,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <SealDialog.Default
-      trigger={<button style={triggerStyle}>Edit profile</button>}
+      trigger={<button className={TRIGGER_CLASS}>Edit profile</button>}
       title="Edit profile"
       description="Make changes to your profile here. Click save when you're done."
       actions={
@@ -78,7 +72,7 @@ export const Default: Story = {
 export const WithChildren: Story = {
   render: () => (
     <SealDialog.Default
-      trigger={<button style={triggerStyle}>Open with content</button>}
+      trigger={<button className={TRIGGER_CLASS}>Open with content</button>}
       title="Profile details"
       description="Your current account information."
       actions={
@@ -87,15 +81,7 @@ export const WithChildren: Story = {
         </SealDialogClose>
       }
     >
-      <div
-        style={{
-          padding: 'var(--seal-dimension-md)',
-          background: 'var(--seal-surface-background)',
-          borderRadius: 'var(--seal-radius-sm)',
-          color: 'var(--seal-text-secondary)',
-          fontSize: '0.875rem',
-        }}
-      >
+      <div className="p-dimension-md bg-[var(--seal-surface-background)] rounded-sm text-[var(--seal-text-secondary)] text-style-small">
         Name: Jane Doe
         <br />
         Email: jane@example.com
@@ -126,7 +112,7 @@ export const WithChildren: Story = {
 export const AlertVariant: Story = {
   render: () => (
     <SealDialog.Alert
-      trigger={<button style={triggerStyle}>Delete account</button>}
+      trigger={<button className={TRIGGER_CLASS}>Delete account</button>}
       title="Are you sure?"
       description="This action cannot be undone. Your account and all associated data will be permanently deleted."
       actions={
@@ -171,7 +157,7 @@ function ControlledDemo() {
   return (
     <>
       <button
-        style={triggerStyle}
+        className={TRIGGER_CLASS}
         onClick={() => {
           setOpen(true)
         }}

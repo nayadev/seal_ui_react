@@ -78,9 +78,9 @@ function SealDialogImpl({
             'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]',
             'border border-[var(--seal-border-default)]',
             'bg-[var(--seal-surface-surface)]',
-            'rounded-[var(--seal-radius-lg)]',
-            'p-[var(--seal-dimension-lg)]',
-            'gap-[var(--seal-dimension-md)]',
+            'rounded-lg',
+            'p-dimension-lg',
+            'gap-dimension-md',
             'shadow-lg',
             'duration-200',
             'data-[state=open]:animate-in data-[state=closed]:animate-out',
@@ -97,14 +97,14 @@ function SealDialogImpl({
                 <DialogTitle
                   className={cn(
                     'text-[var(--seal-text-primary)]',
-                    'text-base font-semibold leading-snug',
+                    'text-style-subtitle font-style-subtitle',
                   )}
                 >
                   {title}
                 </DialogTitle>
               )}
               {description != null && (
-                <DialogDescription className="text-[var(--seal-text-secondary)] text-sm">
+                <DialogDescription className="text-[var(--seal-text-secondary)] text-style-small">
                   {description}
                 </DialogDescription>
               )}
@@ -112,18 +112,16 @@ function SealDialogImpl({
           )}
 
           {children != null && (
-            <div className="text-[var(--seal-text-primary)] text-sm">{children}</div>
+            <div className="text-[var(--seal-text-primary)] text-style-small">{children}</div>
           )}
 
-          {actions != null && (
-            <DialogFooter className="gap-[var(--seal-dimension-xs)]">{actions}</DialogFooter>
-          )}
+          {actions != null && <DialogFooter className="gap-dimension-xs">{actions}</DialogFooter>}
 
           <DialogClose asChild>
             <SealIconButton.Primary
               icon={X}
               tooltip="Close"
-              className="absolute right-[var(--seal-dimension-sm)] top-[var(--seal-dimension-sm)]"
+              className="absolute right-dimension-sm top-dimension-sm"
             />
           </DialogClose>
         </DialogPrimitive.Content>
