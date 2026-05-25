@@ -9,12 +9,14 @@ import {
   TOKEN_ACCENT,
   TOKEN_ACCENT_SECONDARY,
   TOKEN_BRAND_PRIMARY,
+  TOKEN_BRAND_SHADE,
   TOKEN_PRIMITIVE_WHITE,
   VARIANT_ACCENT_GRADIENT,
   VARIANT_CUSTOM,
   VARIANT_GRADIENT,
 } from '../shared'
 
+import { parseGradientStopColors } from '@/components/buttons/gradientIcon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { SealIcon } from '@/types/icon'
@@ -83,12 +85,13 @@ function buildSolidStyle(fg: string): IconVariantStyle {
   }
 }
 
-function buildGradientVariantStyle(): IconVariantStyle {
+function buildGradientVariantStyle(firstColor: string): IconVariantStyle {
   return {
-    className: 'hover:bg-primitive-white/[0.08] active:opacity-[0.75]',
+    className: 'hover:bg-[var(--seal-ib-hover)] active:opacity-[0.75]',
     buttonStyle: {
       color: TOKEN_PRIMITIVE_WHITE,
-    },
+      [IB_HOVER]: `color-mix(in srgb, ${firstColor} 8%, transparent)`,
+    } as React.CSSProperties,
   }
 }
 
@@ -105,10 +108,14 @@ function getVariantStyle(
     case 'accent-secondary':
       return buildSolidStyle(TOKEN_ACCENT_SECONDARY)
     case VARIANT_GRADIENT:
+      return buildGradientVariantStyle(TOKEN_BRAND_PRIMARY)
     case VARIANT_ACCENT_GRADIENT:
-      return buildGradientVariantStyle()
+      return buildGradientVariantStyle(TOKEN_BRAND_SHADE)
     case VARIANT_CUSTOM:
-      if (gradient) return buildGradientVariantStyle()
+      if (gradient) {
+        const [firstStop] = parseGradientStopColors(gradient)
+        return buildGradientVariantStyle(firstStop)
+      }
       return buildSolidStyle(color ?? CURRENT_COLOR)
   }
 }
