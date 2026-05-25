@@ -10,9 +10,6 @@ import { SealOutlineButton } from '@/components/buttons/SealOutlineButton/SealOu
 // Meta
 // ---------------------------------------------------------------------------
 
-const TEXT_PRIMARY = 'var(--seal-text-primary)'
-const TEXT_SECONDARY = 'var(--seal-text-secondary)'
-
 const meta = {
   title: 'Overlay/SealPopover',
   component: SealPopover,
@@ -40,9 +37,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: () => (
     <SealPopover trigger={<SealFilledButton.Primary>Open popover</SealFilledButton.Primary>}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-xs)' }}>
-        <p style={{ margin: 0, fontWeight: 600, color: TEXT_PRIMARY }}>More information</p>
-        <p style={{ margin: 0, color: TEXT_SECONDARY }}> anchored to its trigger.</p>
+      <div className="flex flex-col gap-dimension-xs">
+        <p className="m-0 font-style-subtitle text-[var(--seal-text-primary)]">More information</p>
+        <p className="m-0 text-[var(--seal-text-secondary)]"> anchored to its trigger.</p>
       </div>
     </SealPopover>
   ),
@@ -51,8 +48,8 @@ export const Default: Story = {
 export const WithCloseButton: Story = {
   render: () => (
     <SealPopover trigger={<SealFilledButton.Primary>Open</SealFilledButton.Primary>}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-sm)' }}>
-        <p style={{ margin: 0, color: TEXT_PRIMARY }}>Click the button below to close.</p>
+      <div className="flex flex-col gap-dimension-sm">
+        <p className="m-0 text-[var(--seal-text-primary)]">Click the button below to close.</p>
         <SealPopoverClose asChild>
           <SealOutlineButton.Primary>Dismiss</SealOutlineButton.Primary>
         </SealPopoverClose>
@@ -67,7 +64,7 @@ export const TopSide: Story = {
       side="top"
       trigger={<SealFilledButton.Primary>Open above</SealFilledButton.Primary>}
     >
-      <p style={{ margin: 0, color: TEXT_PRIMARY }}>Opens above the trigger.</p>
+      <p className="m-0 text-[var(--seal-text-primary)]">Opens above the trigger.</p>
     </SealPopover>
   ),
 }
@@ -85,9 +82,9 @@ function ControlledDemo() {
       onOpenChange={setOpen}
       trigger={<SealFilledButton.Primary>Toggle popover</SealFilledButton.Primary>}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-xs)' }}>
-        <p style={{ margin: 0, color: TEXT_PRIMARY }}>Controlled popover</p>
-        <p style={{ margin: 0, color: TEXT_SECONDARY, fontSize: '0.75rem' }}>
+      <div className="flex flex-col gap-dimension-xs">
+        <p className="m-0 text-[var(--seal-text-primary)]">Controlled popover</p>
+        <p className="m-0 text-[var(--seal-text-secondary)] text-style-small">
           State is managed externally.
         </p>
       </div>
