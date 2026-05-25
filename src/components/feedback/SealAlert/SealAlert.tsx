@@ -54,7 +54,7 @@ function SealAlertImpl({ variant, title, description, className }: Readonly<Seal
     <Alert
       role="alert"
       aria-live={variant === 'error' ? 'assertive' : 'polite'}
-      className={cn('rounded-[var(--seal-radius-sm)] border font-style-small', className)}
+      className={cn('rounded-sm border font-style-small', className)}
       style={{
         background: `color-mix(in srgb, ${accentColor} 8%, transparent)`,
         borderColor: `color-mix(in srgb, ${accentColor} 35%, transparent)`,
