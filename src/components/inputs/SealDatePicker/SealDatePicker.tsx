@@ -42,12 +42,12 @@ const TEXT_PRIMARY_CLASS = 'text-[var(--seal-text-primary)]'
 const TEXT_SECONDARY_CLASS = 'text-[var(--seal-text-secondary)]'
 
 const TRIGGER_CLASSES = cn(
-  'flex w-full items-center gap-[var(--seal-dimension-sm)]',
+  'flex w-full items-center gap-dimension-sm',
   'h-[calc(var(--seal-dimension-md)*2+var(--seal-dimension-xs))]',
-  'rounded-[var(--seal-radius-md)]',
+  'rounded-md',
   'border border-[var(--seal-border-default)]',
   'bg-[var(--seal-surface-surface)]',
-  'px-[var(--seal-dimension-sm)]',
+  'px-dimension-sm',
   'text-[length:var(--seal-constant-small-font-size)] text-left',
   'cursor-pointer transition-colors',
   'focus-visible:outline-none focus-visible:ring-1',
