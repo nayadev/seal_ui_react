@@ -30,18 +30,8 @@ type Story = StoryObj<typeof meta>
 // Shared trigger area style
 // ---------------------------------------------------------------------------
 
-const triggerAreaStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: 240,
-  height: 120,
-  border: '2px dashed var(--seal-border-default)',
-  borderRadius: 'var(--seal-radius-md)',
-  color: 'var(--seal-text-secondary)',
-  fontSize: '0.875rem',
-  userSelect: 'none',
-}
+const TRIGGER_AREA_CLASS =
+  'flex items-center justify-center w-60 h-[120px] border-2 border-dashed border-[var(--seal-border-default)] rounded-md text-[var(--seal-text-secondary)] text-style-small select-none'
 
 // ---------------------------------------------------------------------------
 // Stories
@@ -49,7 +39,7 @@ const triggerAreaStyle: React.CSSProperties = {
 
 export const Default: Story = {
   render: () => (
-    <SealContextMenu trigger={<div style={triggerAreaStyle}>Right-click anywhere here</div>}>
+    <SealContextMenu trigger={<div className={TRIGGER_AREA_CLASS}>Right-click anywhere here</div>}>
       <SealContextMenu.Item onSelect={noop}>
         Copy <SealContextMenu.Shortcut>⌘C</SealContextMenu.Shortcut>
       </SealContextMenu.Item>
@@ -67,7 +57,7 @@ export const Default: Story = {
 
 export const WithLabel: Story = {
   render: () => (
-    <SealContextMenu trigger={<div style={triggerAreaStyle}>Right-click anywhere here</div>}>
+    <SealContextMenu trigger={<div className={TRIGGER_AREA_CLASS}>Right-click anywhere here</div>}>
       <SealContextMenu.Label>Edit</SealContextMenu.Label>
       <SealContextMenu.Item onSelect={noop}>
         Copy <SealContextMenu.Shortcut>⌘C</SealContextMenu.Shortcut>
@@ -85,7 +75,7 @@ export const WithLabel: Story = {
 
 export const WithSubmenu: Story = {
   render: () => (
-    <SealContextMenu trigger={<div style={triggerAreaStyle}>Right-click anywhere here</div>}>
+    <SealContextMenu trigger={<div className={TRIGGER_AREA_CLASS}>Right-click anywhere here</div>}>
       <SealContextMenu.Item onSelect={noop}>Copy</SealContextMenu.Item>
       <SealContextMenu.Item onSelect={noop}>Paste</SealContextMenu.Item>
       <SealContextMenu.Separator />
@@ -111,7 +101,7 @@ function CheckboxRadioDemo() {
   const [theme, setTheme] = React.useState('dark')
 
   return (
-    <SealContextMenu trigger={<div style={triggerAreaStyle}>Right-click anywhere here</div>}>
+    <SealContextMenu trigger={<div className={TRIGGER_AREA_CLASS}>Right-click anywhere here</div>}>
       <SealContextMenu.Label>View options</SealContextMenu.Label>
       <SealContextMenu.CheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
         Show grid
