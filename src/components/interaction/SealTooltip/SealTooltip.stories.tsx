@@ -24,7 +24,7 @@ export const Default: Story = {
   args: {
     content: 'Delete item',
     children: (
-      <button className="px-dimension-md py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+      <button className="px-dimension-md py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
         Hover me
       </button>
     ),
@@ -37,7 +37,7 @@ export const SideBottom: Story = {
     content: 'Appears below',
     side: 'bottom',
     children: (
-      <button className="px-dimension-md py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+      <button className="px-dimension-md py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
         Hover me
       </button>
     ),
@@ -50,7 +50,7 @@ export const SideLeft: Story = {
     content: 'Appears to the left',
     side: 'left',
     children: (
-      <button className="px-dimension-md py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+      <button className="px-dimension-md py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
         Hover me
       </button>
     ),
@@ -63,7 +63,7 @@ export const SideRight: Story = {
     content: 'Appears to the right',
     side: 'right',
     children: (
-      <button className="px-dimension-md py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+      <button className="px-dimension-md py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
         Hover me
       </button>
     ),
@@ -84,7 +84,7 @@ export const WithCustomContent: Story = {
     children: (
       <button
         aria-label="Open command palette"
-        className="flex items-center gap-[var(--seal-dimension-xxs)] px-dimension-sm py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]"
+        className="flex items-center gap-dimension-xxs px-dimension-sm py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]"
       >
         <Info size={16} />
         Open palette
@@ -99,7 +99,7 @@ export const InstantDelay: Story = {
     content: 'Appears instantly',
     delayDuration: 0,
     children: (
-      <button className="px-dimension-md py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+      <button className="px-dimension-md py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
         Hover me
       </button>
     ),
@@ -112,30 +112,30 @@ export const AllSides: Story = {
     children: <button>Hover</button>,
   },
   render: () => (
-    <div className="grid grid-cols-3 place-items-center gap-[var(--seal-dimension-xxl)] p-[var(--seal-dimension-xxl)]">
+    <div className="grid grid-cols-3 place-items-center gap-dimension-xxl p-dimension-xxl">
       <div />
       <SealTooltip content="Top" side="top">
-        <button className="px-dimension-sm py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+        <button className="px-dimension-sm py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
           Top
         </button>
       </SealTooltip>
       <div />
 
       <SealTooltip content="Left" side="left">
-        <button className="px-dimension-sm py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+        <button className="px-dimension-sm py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
           Left
         </button>
       </SealTooltip>
-      <div className="w-12 h-12 rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface-alt)] border border-[var(--seal-border-default)]" />
+      <div className="w-12 h-12 rounded-sm bg-[var(--seal-surface-surface-alt)] border border-[var(--seal-border-default)]" />
       <SealTooltip content="Right" side="right">
-        <button className="px-dimension-sm py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+        <button className="px-dimension-sm py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
           Right
         </button>
       </SealTooltip>
 
       <div />
       <SealTooltip content="Bottom" side="bottom">
-        <button className="px-dimension-sm py-dimension-xs rounded-[var(--seal-radius-sm)] bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
+        <button className="px-dimension-sm py-dimension-xs rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] text-style-small border border-[var(--seal-border-default)]">
           Bottom
         </button>
       </SealTooltip>
