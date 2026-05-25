@@ -80,10 +80,7 @@ function SealBreadcrumbImpl({ children, className, ...props }: Readonly<SealBrea
   return (
     <Breadcrumb {...props}>
       <BreadcrumbList
-        className={cn(
-          'flex flex-wrap items-center gap-[var(--seal-dimension-xs)] text-sm',
-          className,
-        )}
+        className={cn('flex flex-wrap items-center gap-dimension-xs text-style-small', className)}
       >
         {children}
       </BreadcrumbList>
@@ -100,7 +97,7 @@ SealBreadcrumbImpl.displayName = 'SealBreadcrumb'
 function Item({ children, className, ...props }: Readonly<SealBreadcrumbItemProps>) {
   return (
     <BreadcrumbItem
-      className={cn('inline-flex items-center gap-[var(--seal-dimension-xs)]', className)}
+      className={cn('inline-flex items-center gap-dimension-xs', className)}
       {...props}
     >
       {children}
@@ -138,7 +135,7 @@ Link.displayName = 'SealBreadcrumb.Link'
 function Page({ children, className, ...props }: Readonly<SealBreadcrumbPageProps>) {
   return (
     <BreadcrumbPage
-      className={cn('font-normal text-[var(--seal-text-primary)]', className)}
+      className={cn('font-style-body text-[var(--seal-text-primary)]', className)}
       {...props}
     >
       {children}
@@ -199,8 +196,8 @@ function Dropdown({ children }: Readonly<SealBreadcrumbDropdownProps>) {
         align="start"
         sideOffset={4}
         className={cn(
-          'w-auto min-w-[10rem] p-[var(--seal-dimension-xxs)]',
-          'rounded-[var(--seal-radius-md)] border border-[var(--seal-border-default)]',
+          'w-auto min-w-[10rem] p-dimension-xxs',
+          'rounded-md border border-[var(--seal-border-default)]',
           'bg-[var(--seal-surface-surface)] shadow-md',
         )}
       >
@@ -222,8 +219,8 @@ function DropMenuItem({ children, onClick, className }: Readonly<SealBreadcrumbD
       type="button"
       onClick={onClick}
       className={cn(
-        'w-full rounded-[var(--seal-radius-xs)] px-[var(--seal-dimension-md)] py-[var(--seal-dimension-xs)]',
-        'text-left text-sm text-[var(--seal-text-primary)]',
+        'w-full rounded-xs px-dimension-md py-dimension-xs',
+        'text-left text-style-small text-[var(--seal-text-primary)]',
         'transition-colors hover:bg-[var(--seal-surface-surface-alt)]',
         className,
       )}

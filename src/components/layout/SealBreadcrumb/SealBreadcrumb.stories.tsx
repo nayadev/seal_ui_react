@@ -162,9 +162,9 @@ export const SingleItem: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div className="flex flex-col gap-[var(--seal-dimension-lg)]">
+    <div className="flex flex-col gap-dimension-lg">
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-xs text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           Default (chevron separator)
         </p>
         <SealBreadcrumb>
@@ -183,7 +183,7 @@ export const AllVariants: Story = {
       </div>
 
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-xs text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           With dropdown (collapsed levels)
         </p>
         <SealBreadcrumb>
@@ -209,7 +209,7 @@ export const AllVariants: Story = {
       </div>
 
       <div>
-        <p className="mb-[var(--seal-dimension-xs)] text-xs text-[var(--seal-text-secondary)]">
+        <p className="mb-dimension-xs text-style-small text-[var(--seal-text-secondary)]">
           Custom separator
         </p>
         <SealBreadcrumb>
