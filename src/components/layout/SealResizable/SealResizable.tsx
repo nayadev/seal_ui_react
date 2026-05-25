@@ -69,8 +69,8 @@ function SealResizableHandleImpl({
             // Absolutely centered on the separator line regardless of orientation
             'absolute left-1/2 top-1/2 z-10',
             '-translate-x-1/2 -translate-y-1/2',
-            'flex h-6 w-[18px] items-center justify-center',
-            'rounded-[var(--seal-radius-sm)]',
+            'flex h-dimension-lg w-constant-button-icon-size items-center justify-center',
+            'rounded-sm',
             'border border-[var(--seal-border-default)]',
             'bg-[var(--seal-surface-surface-alt)]',
           )}

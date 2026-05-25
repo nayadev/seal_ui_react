@@ -3,21 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { SealResizable } from './SealResizable'
 
 // Panel placeholder — fills the available panel space with a centered label.
-// Uses flex:1 so it grows inside the Panel (which has flex-col via the component default).
+// Uses flex-1 so it grows inside the Panel (which has flex-col via the component default).
 function PanelContent({ label }: Readonly<{ label: string }>) {
   return (
-    <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--seal-text-secondary)',
-        fontSize: '14px',
-        fontWeight: 500,
-        background: 'var(--seal-surface-surface)',
-      }}
-    >
+    <div className="flex flex-1 items-center justify-center text-[var(--seal-text-secondary)] text-style-small font-style-small bg-[var(--seal-surface-surface)]">
       {label}
     </div>
   )
@@ -25,13 +14,9 @@ function PanelContent({ label }: Readonly<{ label: string }>) {
 
 // Outer container — provides border, rounded corners, and a darker background
 // so the surface-colored panels and the 1px separator line contrast clearly.
-const outerStyle = (height: number): React.CSSProperties => ({
-  height,
-  border: '1px solid var(--seal-border-default)',
-  borderRadius: 'var(--seal-radius-md)',
-  overflow: 'hidden',
-  background: 'var(--seal-surface-background)',
-})
+const OUTER_CLASS =
+  'rounded-md overflow-hidden border border-[var(--seal-border-default)] bg-[var(--seal-surface-background)]'
+const outerHeight = (height: number) => ({ height })
 
 const meta = {
   title: 'Layout/SealResizable',
@@ -50,7 +35,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   name: 'Horizontal',
   render: () => (
-    <div style={outerStyle(200)}>
+    <div className={OUTER_CLASS} style={outerHeight(200)}>
       <SealResizable orientation="horizontal">
         <SealResizable.Panel defaultSize={30} minSize={20}>
           <PanelContent label="Sidebar" />
@@ -78,7 +63,7 @@ export const Default: Story = {
 export const Vertical: Story = {
   name: 'Vertical',
   render: () => (
-    <div style={outerStyle(300)}>
+    <div className={OUTER_CLASS} style={outerHeight(300)}>
       <SealResizable orientation="vertical">
         <SealResizable.Panel defaultSize={50} minSize={20}>
           <PanelContent label="Top" />
@@ -106,7 +91,7 @@ export const Vertical: Story = {
 export const ThreePanels: Story = {
   name: 'Three Panels',
   render: () => (
-    <div style={outerStyle(200)}>
+    <div className={OUTER_CLASS} style={outerHeight(200)}>
       <SealResizable orientation="horizontal">
         <SealResizable.Panel defaultSize={25} minSize={15}>
           <PanelContent label="Left" />
@@ -140,7 +125,7 @@ export const ThreePanels: Story = {
 export const WithoutHandle: Story = {
   name: 'Without Handle Icon',
   render: () => (
-    <div style={outerStyle(200)}>
+    <div className={OUTER_CLASS} style={outerHeight(200)}>
       <SealResizable orientation="horizontal">
         <SealResizable.Panel defaultSize={50} minSize={20}>
           <PanelContent label="Left" />
@@ -169,8 +154,8 @@ export const WithoutHandle: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-lg)' }}>
-      <div style={outerStyle(160)}>
+    <div className="flex flex-col gap-dimension-lg">
+      <div className={OUTER_CLASS} style={outerHeight(160)}>
         <SealResizable orientation="horizontal">
           <SealResizable.Panel defaultSize={30} minSize={20}>
             <PanelContent label="Sidebar" />
@@ -182,7 +167,7 @@ export const AllVariants: Story = {
         </SealResizable>
       </div>
 
-      <div style={outerStyle(200)}>
+      <div className={OUTER_CLASS} style={outerHeight(200)}>
         <SealResizable orientation="vertical">
           <SealResizable.Panel defaultSize={50} minSize={20}>
             <PanelContent label="Top" />
@@ -194,7 +179,7 @@ export const AllVariants: Story = {
         </SealResizable>
       </div>
 
-      <div style={outerStyle(160)}>
+      <div className={OUTER_CLASS} style={outerHeight(160)}>
         <SealResizable orientation="horizontal">
           <SealResizable.Panel defaultSize={25} minSize={15}>
             <PanelContent label="Left" />
@@ -210,7 +195,7 @@ export const AllVariants: Story = {
         </SealResizable>
       </div>
 
-      <div style={outerStyle(160)}>
+      <div className={OUTER_CLASS} style={outerHeight(160)}>
         <SealResizable orientation="horizontal">
           <SealResizable.Panel defaultSize={50} minSize={20}>
             <PanelContent label="Left" />
