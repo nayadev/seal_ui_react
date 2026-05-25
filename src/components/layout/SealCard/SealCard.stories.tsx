@@ -47,7 +47,7 @@ export const Default: Story = {
   header={<h3>Card Title</h3>}
   body={<p>This is the card body with some descriptive content.</p>}
   footer={
-    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--seal-dimension-xs)' }}>
+    <div className="flex justify-end gap-dimension-xs">
       <SealTextButton.Primary onClick={handleCancel}>Cancel</SealTextButton.Primary>
       <SealFilledButton.Primary onClick={handleConfirm}>Confirm</SealFilledButton.Primary>
     </div>
