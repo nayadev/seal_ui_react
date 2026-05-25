@@ -55,7 +55,7 @@ function LoginForm() {
             })(e)
           }}
           noValidate
-          className="flex flex-col gap-[var(--seal-dimension-md)]"
+          className="flex flex-col gap-dimension-md"
         >
           <SealFormField
             control={form.control}
@@ -185,7 +185,7 @@ function ProfileFormWithErrors() {
   return (
     <div className="w-[360px]">
       <SealForm {...form}>
-        <form noValidate className="flex flex-col gap-[var(--seal-dimension-md)]">
+        <form noValidate className="flex flex-col gap-dimension-md">
           <SealFormField
             control={form.control}
             name="username"
@@ -272,7 +272,7 @@ function TermsForm() {
             })(e)
           }}
           noValidate
-          className="flex flex-col gap-[var(--seal-dimension-md)]"
+          className="flex flex-col gap-dimension-md"
         >
           <SealFormField
             control={form.control}

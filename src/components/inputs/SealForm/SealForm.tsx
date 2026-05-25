@@ -106,11 +106,7 @@ export const SealFormItem = React.forwardRef<HTMLDivElement, React.HTMLAttribute
     const contextValue = React.useMemo(() => ({ id }), [id])
     return (
       <SealFormItemContext.Provider value={contextValue}>
-        <div
-          ref={ref}
-          className={cn('flex flex-col gap-[var(--seal-dimension-xs)]', className)}
-          {...props}
-        />
+        <div ref={ref} className={cn('flex flex-col gap-dimension-xs', className)} {...props} />
       </SealFormItemContext.Provider>
     )
   },
