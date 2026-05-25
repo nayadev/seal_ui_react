@@ -51,12 +51,12 @@ export interface SealSheetProps {
 // ---------------------------------------------------------------------------
 
 const SIDE_CLASSES: Record<SealSheetSide, string> = {
-  top: 'inset-x-0 top-0 rounded-b-[var(--seal-radius-lg)] data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+  top: 'inset-x-0 top-0 rounded-b-lg data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
   bottom:
-    'inset-x-0 bottom-0 rounded-t-[var(--seal-radius-lg)] data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
-  left: 'inset-y-0 left-0 h-full w-3/4 sm:max-w-sm rounded-r-[var(--seal-radius-lg)] data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left',
+    'inset-x-0 bottom-0 rounded-t-lg data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+  left: 'inset-y-0 left-0 h-full w-3/4 sm:max-w-sm rounded-r-lg data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left',
   right:
-    'inset-y-0 right-0 h-full w-3/4 sm:max-w-sm rounded-l-[var(--seal-radius-lg)] data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right',
+    'inset-y-0 right-0 h-full w-3/4 sm:max-w-sm rounded-l-lg data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right',
 }
 
 /**
@@ -114,8 +114,8 @@ export function SealSheet({
             'fixed z-50 flex flex-col',
             'bg-[var(--seal-surface-surface)]',
             'border border-[var(--seal-border-default)]',
-            'p-[var(--seal-dimension-lg)]',
-            'gap-[var(--seal-dimension-md)]',
+            'p-dimension-lg',
+            'gap-dimension-md',
             'shadow-lg',
             'transition ease-in-out',
             'data-[state=open]:animate-in data-[state=closed]:animate-out',
@@ -127,12 +127,12 @@ export function SealSheet({
           {(title != null || description != null) && (
             <SheetHeader className="text-left">
               {title != null && (
-                <SheetTitle className="text-[var(--seal-text-primary)] text-base font-semibold leading-snug">
+                <SheetTitle className="text-[var(--seal-text-primary)] text-style-subtitle font-style-subtitle">
                   {title}
                 </SheetTitle>
               )}
               {description != null && (
-                <SheetDescription className="text-[var(--seal-text-secondary)] text-sm">
+                <SheetDescription className="text-[var(--seal-text-secondary)] text-style-small">
                   {description}
                 </SheetDescription>
               )}
@@ -140,20 +140,18 @@ export function SealSheet({
           )}
 
           {children != null && (
-            <div className="flex-1 overflow-auto text-[var(--seal-text-primary)] text-sm">
+            <div className="flex-1 overflow-auto text-[var(--seal-text-primary)] text-style-small">
               {children}
             </div>
           )}
 
-          {actions != null && (
-            <SheetFooter className="gap-[var(--seal-dimension-xs)]">{actions}</SheetFooter>
-          )}
+          {actions != null && <SheetFooter className="gap-dimension-xs">{actions}</SheetFooter>}
 
           <SheetClose asChild>
             <SealIconButton.Primary
               icon={X}
               tooltip="Close"
-              className="absolute right-[var(--seal-dimension-sm)] top-[var(--seal-dimension-sm)]"
+              className="absolute right-dimension-sm top-dimension-sm"
             />
           </SheetClose>
         </SheetPrimitive.Content>

@@ -7,19 +7,11 @@ import { SealFilledButton } from '@/components/buttons/SealFilledButton/SealFill
 import { SealOutlineButton } from '@/components/buttons/SealOutlineButton/SealOutlineButton'
 
 // ---------------------------------------------------------------------------
-// Shared style constant for trigger buttons (native element — asChild-safe)
+// Shared class for trigger buttons (native element — asChild-safe)
 // ---------------------------------------------------------------------------
 
-const TEXT_PRIMARY = 'var(--seal-text-primary)'
-
-const triggerStyle: React.CSSProperties = {
-  padding: '8px 20px',
-  border: '1px solid var(--seal-border-default)',
-  borderRadius: 'var(--seal-radius-sm)',
-  background: 'var(--seal-surface-surface)',
-  color: TEXT_PRIMARY,
-  cursor: 'pointer',
-}
+const TRIGGER_CLASS =
+  'py-dimension-xs px-dimension-md border border-[var(--seal-border-default)] rounded-sm bg-[var(--seal-surface-surface)] text-[var(--seal-text-primary)] cursor-pointer'
 
 // ---------------------------------------------------------------------------
 // Meta
@@ -49,7 +41,7 @@ export const Default: Story = {
   render: () => (
     <SealSheet
       side="right"
-      trigger={<button style={triggerStyle}>Open settings</button>}
+      trigger={<button className={TRIGGER_CLASS}>Open settings</button>}
       title="Settings"
       description="Adjust your account preferences."
       actions={
@@ -68,7 +60,7 @@ export const LeftSide: Story = {
   render: () => (
     <SealSheet
       side="left"
-      trigger={<button style={triggerStyle}>Open from left</button>}
+      trigger={<button className={TRIGGER_CLASS}>Open from left</button>}
       title="Navigation"
       description="Browse sections."
       actions={
@@ -77,10 +69,10 @@ export const LeftSide: Story = {
         </SealSheetClose>
       }
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--seal-dimension-sm)' }}>
-        <p style={{ color: TEXT_PRIMARY, margin: 0 }}>Dashboard</p>
-        <p style={{ color: TEXT_PRIMARY, margin: 0 }}>Profile</p>
-        <p style={{ color: TEXT_PRIMARY, margin: 0 }}>Settings</p>
+      <div className="flex flex-col gap-dimension-sm">
+        <p className="text-[var(--seal-text-primary)] m-0">Dashboard</p>
+        <p className="text-[var(--seal-text-primary)] m-0">Profile</p>
+        <p className="text-[var(--seal-text-primary)] m-0">Settings</p>
       </div>
     </SealSheet>
   ),
@@ -90,7 +82,7 @@ export const BottomSheet: Story = {
   render: () => (
     <SealSheet
       side="bottom"
-      trigger={<button style={triggerStyle}>Open from bottom</button>}
+      trigger={<button className={TRIGGER_CLASS}>Open from bottom</button>}
       title="Choose an option"
       description="Select one of the available actions."
       actions={
@@ -109,7 +101,7 @@ export const WithChildren: Story = {
   render: () => (
     <SealSheet
       side="right"
-      trigger={<button style={triggerStyle}>Open with content</button>}
+      trigger={<button className={TRIGGER_CLASS}>Open with content</button>}
       title="Account details"
       description="Your current account information."
       actions={
@@ -118,15 +110,7 @@ export const WithChildren: Story = {
         </SealSheetClose>
       }
     >
-      <div
-        style={{
-          padding: 'var(--seal-dimension-md)',
-          background: 'var(--seal-surface-surface-alt)',
-          borderRadius: 'var(--seal-radius-sm)',
-          color: 'var(--seal-text-secondary)',
-          fontSize: '0.875rem',
-        }}
-      >
+      <div className="p-dimension-md bg-[var(--seal-surface-surface-alt)] rounded-sm text-[var(--seal-text-secondary)] text-style-small">
         Name: Jane Doe
         <br />
         Email: jane@example.com
@@ -145,7 +129,7 @@ function ControlledDemo() {
   return (
     <>
       <button
-        style={triggerStyle}
+        className={TRIGGER_CLASS}
         onClick={() => {
           setOpen(true)
         }}
