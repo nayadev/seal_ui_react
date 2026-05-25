@@ -2,10 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { SealTable } from './SealTable'
 
-const TOKEN_PAD_MD = 'var(--seal-dimension-md)'
-const TOKEN_PAD_XL = 'var(--seal-dimension-xl)'
-const TOKEN_TEXT_SECONDARY = 'var(--seal-text-secondary)'
-
 const meta = {
   title: 'Layout/SealTable',
   component: SealTable,
@@ -179,9 +175,9 @@ export const WithCaption: Story = {
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: TOKEN_PAD_XL }}>
+    <div className="flex flex-col gap-dimension-xl">
       <div>
-        <p style={{ color: TOKEN_TEXT_SECONDARY, marginBottom: TOKEN_PAD_MD, fontSize: '12px' }}>
+        <p className="text-[var(--seal-text-secondary)] mb-dimension-md text-style-small">
           Basic table (header + body)
         </p>
         <SealTable>
@@ -208,7 +204,7 @@ export const AllVariants: Story = {
       </div>
 
       <div>
-        <p style={{ color: TOKEN_TEXT_SECONDARY, marginBottom: TOKEN_PAD_MD, fontSize: '12px' }}>
+        <p className="text-[var(--seal-text-secondary)] mb-dimension-md text-style-small">
           With footer
         </p>
         <SealTable>
@@ -241,7 +237,7 @@ export const AllVariants: Story = {
       </div>
 
       <div>
-        <p style={{ color: TOKEN_TEXT_SECONDARY, marginBottom: TOKEN_PAD_MD, fontSize: '12px' }}>
+        <p className="text-[var(--seal-text-secondary)] mb-dimension-md text-style-small">
           With caption
         </p>
         <SealTable>

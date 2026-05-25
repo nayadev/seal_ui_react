@@ -78,7 +78,7 @@ function Footer({ className, ...props }: Readonly<SealTableFooterProps>) {
     <TableFooter
       className={cn(
         'border-t border-[var(--seal-border-default)] bg-[var(--seal-surface-surface-alt)]',
-        'font-medium text-[var(--seal-text-secondary)]',
+        'font-style-small text-[var(--seal-text-secondary)]',
         '[&>tr]:last:border-b-0',
         className,
       )}
@@ -127,8 +127,8 @@ function Head({ className, ...props }: Readonly<SealTableHeadProps>) {
   return (
     <TableHead
       className={cn(
-        'h-[var(--seal-dimension-xxl)] px-[var(--seal-dimension-md)]',
-        'text-left align-middle text-sm font-medium',
+        'h-dimension-xxl px-dimension-md',
+        'text-left align-middle text-style-small font-style-small',
         'text-[var(--seal-text-secondary)]',
         '[&:has([role=checkbox])]:pr-0',
         className,
@@ -153,8 +153,8 @@ function Cell({ className, ...props }: Readonly<SealTableCellProps>) {
   return (
     <TableCell
       className={cn(
-        'px-[var(--seal-dimension-md)] py-[var(--seal-dimension-sm)]',
-        'align-middle text-sm text-[var(--seal-text-primary)]',
+        'px-dimension-md py-dimension-sm',
+        'align-middle text-style-small text-[var(--seal-text-primary)]',
         '[&:has([role=checkbox])]:pr-0',
         className,
       )}
@@ -178,7 +178,7 @@ function Caption({ className, ...props }: Readonly<SealTableCaptionProps>) {
   return (
     <TableCaption
       className={cn(
-        'mt-[var(--seal-dimension-md)] text-sm text-[var(--seal-text-secondary)]',
+        'mt-dimension-md text-style-small text-[var(--seal-text-secondary)]',
         className,
       )}
       {...props}
