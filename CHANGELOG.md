@@ -1,5 +1,52 @@
 # Changelog
 
+## [0.0.12](https://github.com/nayadev/seal_ui_react/compare/v0.0.11...v0.0.12) (2026-05-25)
+
+
+### Bug Fixes
+
+* **buttons:** replace rounded/p arbitrary token vars with token classes in all button wrappers ([86c0b2a](https://github.com/nayadev/seal_ui_react/commit/86c0b2a12f662672dc4dcef0b9c1f22cfa4a3ea2))
+* **buttons:** revert rounded-md to rounded-sm for filled/outline icon buttons ([ec2c058](https://github.com/nayadev/seal_ui_react/commit/ec2c058c81e5c1fb3f4054c7b5430f5798d7fa27))
+* **buttons:** use size=icon for square icon buttons; rounded-md for filled/outline ([d619e24](https://github.com/nayadev/seal_ui_react/commit/d619e2452e6a15e78988fed5aa9a35efdd5250d2))
+* **SealAccordion:** remove redundant font-medium; use disabled-opacity token ([592ec12](https://github.com/nayadev/seal_ui_react/commit/592ec1218ba33860944ce12bb18e21b3210e203c))
+* **SealAccordion:** replace arbitrary token vars with token classes in Trigger, Content and stories ([d36e81a](https://github.com/nayadev/seal_ui_react/commit/d36e81a1924b57dbb91157f8ba9ab11efbfe40fa))
+* **SealAlert:** replace rounded arbitrary token var with token class in component and stories ([562e251](https://github.com/nayadev/seal_ui_react/commit/562e2512e1f864aa665dc6a29f3f8efb907766cb))
+* **SealAvatar:** replace font-medium and gap-[var(...)] with token classes ([230e535](https://github.com/nayadev/seal_ui_react/commit/230e5356842918f23a72938559233b0838015d03))
+* **SealBadge:** replace arbitrary token vars and hardcoded typography with token classes ([e2fc46c](https://github.com/nayadev/seal_ui_react/commit/e2fc46c7fa3a2e295782da8b5a032b59c8fcdb65))
+* **SealBreadcrumb:** replace arbitrary token vars and hardcoded utilities with token classes ([01839b9](https://github.com/nayadev/seal_ui_react/commit/01839b9fc8a600aa77d1448f35fea513de64e8fb))
+* **SealCalendar:** replace arbitrary token vars and font-normal with token classes ([ceab404](https://github.com/nayadev/seal_ui_react/commit/ceab4045606d07315064539d933f90d11494439a))
+* **SealCard:** replace arbitrary token vars and inline styles with token classes ([d03baeb](https://github.com/nayadev/seal_ui_react/commit/d03baebc42124f527c7ae350c7504668714d08e5))
+* **SealCard:** replace inline style with token classes in story doc source ([8d4f99b](https://github.com/nayadev/seal_ui_react/commit/8d4f99bcb1a1d4c8744f373613a876989022ee47))
+* **SealCheckbox:** replace arbitrary token vars and inline styles with token classes ([cc6a4bd](https://github.com/nayadev/seal_ui_react/commit/cc6a4bdb9846dd9e090921ace7388bc5904f0e2e))
+* **SealContainer:** replace inline styles in stories with token classes ([a91b691](https://github.com/nayadev/seal_ui_react/commit/a91b6917f0072245c58187b6192e0b716fe2133b))
+* **SealContextMenu:** replace arbitrary token vars and hardcoded utilities with token classes ([aef984c](https://github.com/nayadev/seal_ui_react/commit/aef984c772cc35808efb391ae2d95e1cbfa3eb20))
+* **SealContextMenu:** replace remaining arbitrary vars in SubContent with token classes ([ca59837](https://github.com/nayadev/seal_ui_react/commit/ca5983797d8b17e1d28f254e767c7a53a6d106bf))
+* **SealDatePicker:** replace arbitrary token vars with token classes ([182316b](https://github.com/nayadev/seal_ui_react/commit/182316b5d46efb858dac6cb2ecdf081a90bc73ba))
+* **SealDialog:** replace arbitrary token vars and hardcoded utilities with token classes ([38b730b](https://github.com/nayadev/seal_ui_react/commit/38b730bc59b9ee3753d546520f6cbbe9f5eb576c))
+* **SealForm:** replace arbitrary token vars with token classes ([a184542](https://github.com/nayadev/seal_ui_react/commit/a1845422838075e88c40cfaf54b3c71af064e748))
+* **SealForm:** replace inline styles with token classes in Label, Description and Message ([d71df4b](https://github.com/nayadev/seal_ui_react/commit/d71df4b024463e97b38310128db1097da2c11628))
+* **SealIconButton:** use first gradient stop color for hover on gradient variants ([9c1486f](https://github.com/nayadev/seal_ui_react/commit/9c1486f8659626cd3329d2c0c8afa0513a35b2d8))
+* **SealInputOtp:** replace arbitrary token vars with token classes ([f3028a2](https://github.com/nayadev/seal_ui_react/commit/f3028a24a844ce033c3a13415695f47ad4974c00))
+* **SealLoader:** replace arbitrary token vars with token classes in component and stories ([95bc655](https://github.com/nayadev/seal_ui_react/commit/95bc65508195ca47f534bc744250391601a5b116))
+* **SealMenubar:** replace arbitrary token vars and hardcoded typography with token classes ([9029e65](https://github.com/nayadev/seal_ui_react/commit/9029e65d14947dbb98ce01df519b3896a4075a42))
+* **SealPopover:** replace arbitrary token vars and hardcoded utilities with token classes ([e8dad2b](https://github.com/nayadev/seal_ui_react/commit/e8dad2be7b5bad8bdf1306f3b1f6209e995ca834))
+* **SealProgress:** replace rounded/gap arbitrary token vars with token classes ([694936e](https://github.com/nayadev/seal_ui_react/commit/694936ee2837965baa7b2d69a5b1d3f192397fcc))
+* **SealRadioGroup:** replace arbitrary token vars with token classes ([53caa21](https://github.com/nayadev/seal_ui_react/commit/53caa2150a487e51675a8329e88e9a51cfc3bceb))
+* **SealResizable:** replace arbitrary token vars and inline styles with token classes ([99e1a10](https://github.com/nayadev/seal_ui_react/commit/99e1a10dfaaa4439da0e7ca8af61642942ace711))
+* **SealSelect:** remove ROUNDED_SM constant and replace arbitrary token vars with token classes ([190bc32](https://github.com/nayadev/seal_ui_react/commit/190bc32a278837e52d8961216b50c0bcd4b89d31))
+* **SealSeparator:** replace inline styles and TOKEN_* constants in stories with token classes ([e2249c2](https://github.com/nayadev/seal_ui_react/commit/e2249c27630fe0f1efe34b7e72cdf00ad297b5da))
+* **SealSheet:** replace arbitrary token vars and hardcoded utilities with token classes ([a245db7](https://github.com/nayadev/seal_ui_react/commit/a245db796ee99d7cef4e0f130db649537498f619))
+* **SealSlider:** replace arbitrary token vars with token classes ([3cc0abb](https://github.com/nayadev/seal_ui_react/commit/3cc0abb1e751e4175da753b559e3cba38f84cea7))
+* **SealSwitch:** replace arbitrary token vars with token classes ([e338303](https://github.com/nayadev/seal_ui_react/commit/e338303df56aab50979b4f2c796d3a2aa6bfb4a7))
+* **SealTable:** replace arbitrary token vars and hardcoded utilities with token classes ([33a99ae](https://github.com/nayadev/seal_ui_react/commit/33a99ae9925ec3b74d8fc05eb0c29fec7b29f768))
+* **SealTabs:** replace arbitrary token vars and hardcoded utilities with token classes ([dba8900](https://github.com/nayadev/seal_ui_react/commit/dba89003ef4efa2b49886d7d68c543c280bf5d6a))
+* **SealTextarea:** replace arbitrary token vars and inline styles with token classes ([5ce7877](https://github.com/nayadev/seal_ui_react/commit/5ce787767b78e0eb5c4a86bc99d1a8d865d7a032))
+* **SealTextField:** replace arbitrary token vars and inline styles with token classes ([13d41b6](https://github.com/nayadev/seal_ui_react/commit/13d41b6ad9db5d3ceb521daac6f3d622dc03cb57))
+* **SealTimePicker:** replace arbitrary token vars and typography utilities with token classes ([0fee051](https://github.com/nayadev/seal_ui_react/commit/0fee0512ae78f44eafaa1b8ea941f12f40bb4d8d))
+* **SealToast:** replace gap arbitrary token var with token class in stories ([60bb276](https://github.com/nayadev/seal_ui_react/commit/60bb276aa8736936841d347e058c8c10500ebb50))
+* **SealTooltip:** replace rounded/px/py/gap arbitrary token vars with token classes ([32560d9](https://github.com/nayadev/seal_ui_react/commit/32560d9ade11aff73f4dcff3f68f9debe40b5fa7))
+* **SealTooltip:** replace text-sm, px/py hardcoded utilities with token classes in stories ([4b3bbe5](https://github.com/nayadev/seal_ui_react/commit/4b3bbe553e3e9df871d9ed4c4fb929adb05fcc16))
+
 ## [0.0.11](https://github.com/nayadev/seal_ui_react/compare/v0.0.10...v0.0.11) (2026-05-24)
 
 
