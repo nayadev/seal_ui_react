@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.14](https://github.com/nayadev/seal_ui_react/compare/v0.0.13...v0.0.14) (2026-07-26)
+
+
+### Bug Fixes
+
+* mark the bundled library output as a client boundary ([64683e1](https://github.com/nayadev/seal_ui_react/commit/64683e1a33acf2f7c1bec6597fd96e80c998e859))
+
 ## [0.0.13](https://github.com/nayadev/seal_ui_react/compare/v0.0.12...v0.0.13) (2026-07-26)
 
 
