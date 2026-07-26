@@ -58,7 +58,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@sealui/tokens": "github:nayadev/seal_ui_tokens#main",
+    "@sealui/tokens": "github:nayadev/seal_ui_tokens#v0.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.3.0",
