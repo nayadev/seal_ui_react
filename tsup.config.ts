@@ -14,6 +14,13 @@ export default defineConfig({
   minify: false,
   tsconfig: 'tsconfig.app.json',
   external: ['react', 'react-dom', 'react/jsx-runtime'],
+  // None of the component source files declare "use client" individually,
+  // and splitting is disabled, so the whole bundle is a single module —
+  // this banner marks it as a client boundary for Next.js App Router
+  // consumers instead of annotating every source file.
+  banner: {
+    js: "'use client';",
+  },
   outExtension({ format }) {
     return { js: format === 'esm' ? '.mjs' : '.cjs' }
   },
