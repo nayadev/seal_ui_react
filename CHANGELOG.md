@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.15](https://github.com/nayadev/seal_ui_react/compare/v0.0.14...v0.0.15) (2026-07-26)
+
+
+### Bug Fixes
+
+* publish the CSS the gradient outline buttons depend on ([fcc2153](https://github.com/nayadev/seal_ui_react/commit/fcc2153d6fc254ede7e4a732e6b9385da2aa12b5))
+
 ## [0.0.14](https://github.com/nayadev/seal_ui_react/compare/v0.0.13...v0.0.14) (2026-07-26)
 
 
