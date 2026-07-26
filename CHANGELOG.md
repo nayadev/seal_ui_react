@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.13](https://github.com/nayadev/seal_ui_react/compare/v0.0.12...v0.0.13) (2026-07-26)
+
+
+### Bug Fixes
+
+* add tsup library build so the package is actually installable ([f8499eb](https://github.com/nayadev/seal_ui_react/commit/f8499eb8c81b3184abb61cd05e2ca0179d73c531))
+* include dist/ in the published package files ([4cd5220](https://github.com/nayadev/seal_ui_react/commit/4cd52200065d523301f30021e7a5a7278d1fbfb9))
+
 ## [0.0.12](https://github.com/nayadev/seal_ui_react/compare/v0.0.11...v0.0.12) (2026-05-25)
 
 
