@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    // tsup injects an implicit `baseUrl` to resolve the `paths` below when
+    // generating the .d.ts for the library build (build:lib) — TS 6 flags
+    // baseUrl as deprecated by default; silenced only for that check.
+    "ignoreDeprecations": "6.0",
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
