@@ -1,0 +1,26 @@
+/* Estilos exigidos funcionalmente por componentes (não apenas tema/demo) —
+   consumidores devem importar este arquivo, ex.: @import '@sealui/react/styles.css'; */
+
+/* Gradient border ring with a truly transparent interior.
+ * Set --seal-gb-gradient on the element to control the gradient.
+ * Uses mask-composite to reveal only the 1 px border ring from the ::before layer. */
+.seal-gradient-border {
+  position: relative;
+  z-index: 0;
+}
+
+.seal-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--seal-gb-gradient);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}

@@ -1,3 +1,5 @@
+import { copyFileSync } from 'node:fs'
+
 import { defineConfig } from 'tsup'
 
 // Library build for @sealui/react — separate from the default `vite build`,
@@ -23,5 +25,11 @@ export default defineConfig({
   },
   outExtension({ format }) {
     return { js: format === 'esm' ? '.mjs' : '.cjs' }
+  },
+  // tsup só processa JS/TS — CSS exigida funcionalmente por componentes
+  // (ex.: borda em gradiente do SealOutlineButton) precisa ser copiada à
+  // parte para o pacote publicado. Ver src/styles.css.
+  onSuccess: async () => {
+    copyFileSync('src/styles.css', 'dist/styles.css')
   },
 })
