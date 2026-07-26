@@ -3,6 +3,9 @@
   "version": "0.0.12",
   "description": "SealUI React — a token-driven design system built on shadcn/ui",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
